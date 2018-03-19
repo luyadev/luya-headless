@@ -20,10 +20,8 @@ class ClientTest extends HeadlessTestCase
     
     public function testExampleLocalhost()
     {
-        // example localhost token
-        $client = new Client('559c2463503749662f7003bbaa48a86291e198a8832bf748a6af7e55acf953d7ep1Kw7B4ELGYu2KM7Tu8E6OZKV_sLdUE', 'http://localhost/luya-env-dev/public_html/en/admin');
+        $request = $this->getDummyClientRequest('foobar', true);
         
-        $request = $client->getRequest();
         $request->setEndpoint('api-admin-user');
         $request->get();
         
@@ -35,7 +33,8 @@ class ClientTest extends HeadlessTestCase
     public function testActiveQueryApiAdminUser()
     {
         // example localhost token
-        $client = new Client('559c2463503749662f7003bbaa48a86291e198a8832bf748a6af7e55acf953d7ep1Kw7B4ELGYu2KM7Tu8E6OZKV_sLdUE', 'http://localhost/luya-env-dev/public_html/en/admin');
+        $client = $this->getClient();
+        $client->setRequest($this->getDummyRequest($client, '[{"id":1}]', true));
         
         $query = ApiAdminUser::find()->all($client);
         
