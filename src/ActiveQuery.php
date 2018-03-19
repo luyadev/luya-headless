@@ -2,8 +2,6 @@
 
 namespace luya\headless;
 
-use luya\headless\endpoints\BaseEndpoint;
-
 class ActiveQuery
 {
     protected $endpoint;
@@ -15,10 +13,10 @@ class ActiveQuery
     
     public function all(Client $client)
     {
-        $request = new Request($client);
+        $request = $client->getRequest();
+        $request->setEndpoint($this->endpoint->getEndpointName());
+        $request->get();
         
-        $curl = $request->get($this->endpoint->endpointName());
-
-        return $request->parseResponse($curl);
+        return $request->getParsedResponse();
     }
 }

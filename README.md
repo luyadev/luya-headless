@@ -14,7 +14,9 @@ use luya\headless\Client;
 
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
 
-$request = $client->request()->get('admin/api-admin-lang');
+$request = $client->getRequest();
+$request->setEndpoint('api-admin-lang');
+$request->get();
 
 if ($request->isSuccess()) {
     $array = json_decode($request->content);
