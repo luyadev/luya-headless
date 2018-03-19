@@ -1,0 +1,27 @@
+{
+    "name" : "luyadev/luya-headless",
+    "description" : "LUYA headless API client",
+    "type" : "luya-core",
+    "keywords" : ["php", "yii2", "luya", "headless"],
+    "license": "MIT",
+    "homepage" : "https://luya.io",
+    "authors" : [
+        {
+            "name" : "Basil Suter",
+            "email" : "git@nadar.io",
+            "homepage" : "https://github.com/nadar"
+        }
+    ],
+    "require" : {
+         "curl/curl": "~1.0"
+    },
+    "require-dev" : {
+       "luyadev/luya-testsuite" : "~1.0.0"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "luya\\headless\\" : "src/",
+            "luya\\headless\\tests\\" : "tests/"
+        }
+    }
+}
