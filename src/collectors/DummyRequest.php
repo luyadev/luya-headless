@@ -11,34 +11,47 @@ class DummyRequest extends BaseRequest
     public $success = true;
     
     /**
+     * Get request
      *
-     * @param string $endpoint
      * @param array $data
-     * @return \Curl\Curl
+     * @retunr BaseRequest
      */
     public function get(array $data = [])
     {
-        
+        return $this;   
     }
     
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     public function post(array $data = [])
     {
-        
+        return $this;
     }
     
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     public function put(array $data = [])
     {
-        
+        return $this;
     }
     
-    public function patch(array $data = [])
-    {
-        
-    }
-    
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     public function delete(array $data = [])
     {
-        
+        return $this;
     }
     
     public function isSuccess()

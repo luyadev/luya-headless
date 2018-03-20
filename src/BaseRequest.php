@@ -2,16 +2,43 @@
 
 namespace luya\headless;
 
+/**
+ * Base Request is used to make the Request to the API.
+ *
+ * @since 1.0.0
+ */
 abstract class BaseRequest
 {
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     abstract public function get(array $data = []);
     
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     abstract public function post(array $data = []);
     
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     abstract public function put(array $data = []);
     
-    abstract public function patch(array $data = []);
-    
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     abstract public function delete(array $data = []);
     
     abstract public function isSuccess();

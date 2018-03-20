@@ -4,6 +4,11 @@ namespace luya\headless;
 
 use luya\headless\collectors\CurlRequest;
 
+/**
+ * Client provides Auth and Connection informations.
+ * 
+ * @since 1.0.0
+ */
 class Client
 {
     public $accessToken;

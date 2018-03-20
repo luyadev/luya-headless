@@ -2,6 +2,11 @@
 
 namespace luya\headless;
 
+/**
+ * ActiveQuery represents a Query Builder for Handling the response Data.
+ * 
+ * @since 1.0.0
+ */
 class ActiveQuery
 {
     protected $endpoint;

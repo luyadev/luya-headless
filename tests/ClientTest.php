@@ -30,6 +30,13 @@ class ClientTest extends HeadlessTestCase
         //var_dump($request->getParsedResponse());
     }
     
+    public function testExampleRequestChain()
+    {
+        $request = $this->getDummyClientRequest('[{"id":1}]', true);
+        
+        $this->assertSame([['id' => 1]], $request->get()->getParsedResponse());
+    }
+    
     public function testActiveQueryApiAdminUser()
     {
         // example localhost token

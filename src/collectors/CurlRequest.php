@@ -24,34 +24,55 @@ class CurlRequest extends BaseRequest
     }
     
     /**
+     * Get request
      *
-     * @param string $endpoint
      * @param array $data
-     * @return \Curl\Curl
+     * @retunr BaseRequest
      */
     public function get(array $data = [])
     {
         $this->curl = $this->getCurl()->get($this->requestUrl, $data);
+        
+        return $this;
     }
     
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     public function post(array $data = [])
     {
         $this->curl = $this->getCurl()->post($this->requestUrl, $data);
+        
+        return $this;
     }
     
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     public function put(array $data = [])
     {
         $this->curl = $this->getCurl()->put($this->requestUrl, $data);
+        
+        return $this;
     }
     
-    public function patch(array $data = [])
-    {
-        $this->curl = $this->getCurl()->patch($this->requestUrl, $data);
-    }
-    
+    /**
+     * Get request
+     *
+     * @param array $data
+     * @retunr BaseRequest
+     */
     public function delete(array $data = [])
     {
         $this->curl = $this->getCurl()->delete($this->requestUrl, $data);
+        
+        return $this;
     }
     
     public function isSuccess()
