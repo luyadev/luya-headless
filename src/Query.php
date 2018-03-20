@@ -3,12 +3,12 @@
 namespace luya\headless;
 
 /**
- * ActiveQuery represents a Query Builder for Handling the response Data.
+ * Query represents a Query Builder for Handling the response Data.
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ActiveQuery
+class Query
 {
     protected $endpoint;
     

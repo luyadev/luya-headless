@@ -5,7 +5,7 @@ namespace luya\headless\endpoints;
 use luya\headless\BaseEndpoint;
 
 /**
- * Endpoint `api-admin-user` ActiveQuery.
+ * Endpoint `api-admin-user` Query.
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

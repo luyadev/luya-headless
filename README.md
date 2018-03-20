@@ -54,3 +54,7 @@ foreach (ApiAdminLang::find()->all($client) as $item) {
     var_dump($item);
 }
 ```
+
+## Todos
+
++ https://www.php-fig.org/psr/psr-6/

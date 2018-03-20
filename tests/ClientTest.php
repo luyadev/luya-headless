@@ -26,8 +26,6 @@ class ClientTest extends HeadlessTestCase
         $request->get();
         
         $this->assertTrue($request->isSuccess());
-        
-        //var_dump($request->getParsedResponse());
     }
     
     public function testExampleRequestChain()
@@ -37,7 +35,7 @@ class ClientTest extends HeadlessTestCase
         $this->assertSame([['id' => 1]], $request->get()->getParsedResponse());
     }
     
-    public function testActiveQueryApiAdminUser()
+    public function testQueryApiAdminUser()
     {
         // example localhost token
         $client = $this->getClient();

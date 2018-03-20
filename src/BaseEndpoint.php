@@ -14,6 +14,6 @@ abstract class BaseEndpoint
     
     public static function find()
     {
-        return new ActiveQuery(new static);
+        return new Query(new static);
     }
 }
