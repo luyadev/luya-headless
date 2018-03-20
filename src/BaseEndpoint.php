@@ -11,6 +11,16 @@ namespace luya\headless;
 abstract class BaseEndpoint
 {
     abstract public function getEndpointName();
+
+    public function getRequiredArguments()
+    {
+        return [];
+    }
+
+    public function getAttributes()
+    {
+        return [];
+    }
     
     public static function find()
     {

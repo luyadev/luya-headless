@@ -45,4 +45,15 @@ class ClientTest extends HeadlessTestCase
         
         $this->assertTrue(is_array($query));
     }
+
+    public function testGetCmsMenuContainers()
+    {
+        $client = new Client('34a40fd61a860231462386268e15bd80849c4ba84fc3bab3e52fc17f67ffbe84jLHCAOp7dLnCDcGTErBc068xibbM8KTW', 'http://localhost:8080/admin');
+
+        $content = $client->getRequest()->setEndpoint('api-cms-menu/items')->get(['langId' => 1, 'containerId' => 1])->getResponseContent();
+
+        var_dump($content);
+
+
+    }
 }

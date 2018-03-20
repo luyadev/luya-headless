@@ -24,7 +24,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     abstract public function get(array $data = []);
     
@@ -79,6 +79,8 @@ abstract class BaseRequest
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
+
+        return $this;
     }
     
     /**
