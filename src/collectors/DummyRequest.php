@@ -4,6 +4,12 @@ namespace luya\headless\collectors;
 
 use luya\headless\BaseRequest;
 
+/**
+ * Dummy Request for UnitTests
+ *
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class DummyRequest extends BaseRequest
 {
     public $response;

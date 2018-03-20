@@ -5,6 +5,12 @@ namespace luya\headless\collectors;
 use luya\headless\BaseRequest;
 use Curl\Curl;
 
+/**
+ * Request Object via Curl.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class CurlRequest extends BaseRequest
 {
     /**
@@ -31,7 +37,7 @@ class CurlRequest extends BaseRequest
      */
     public function get(array $data = [])
     {
-        $this->curl = $this->getCurl()->get($this->requestUrl, $data);
+        $this->curl = $this->getCurl()->get($this->getRequestUrl(), $data);
         
         return $this;
     }
@@ -44,7 +50,7 @@ class CurlRequest extends BaseRequest
      */
     public function post(array $data = [])
     {
-        $this->curl = $this->getCurl()->post($this->requestUrl, $data);
+        $this->curl = $this->getCurl()->post($this->getRequestUrl(), $data);
         
         return $this;
     }
@@ -57,7 +63,7 @@ class CurlRequest extends BaseRequest
      */
     public function put(array $data = [])
     {
-        $this->curl = $this->getCurl()->put($this->requestUrl, $data);
+        $this->curl = $this->getCurl()->put($this->getRequestUrl(), $data);
         
         return $this;
     }
@@ -70,7 +76,7 @@ class CurlRequest extends BaseRequest
      */
     public function delete(array $data = [])
     {
-        $this->curl = $this->getCurl()->delete($this->requestUrl, $data);
+        $this->curl = $this->getCurl()->delete($this->getRequestUrl(), $data);
         
         return $this;
     }

@@ -46,8 +46,10 @@ Using API wrappers (above example as short hand wrapper):
 use luya\headless\Client;
 use luya\headless\endpoints\ApiAdminLang;
 
+// bild client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
 
+// run the pre-built ActivQuery for the `api-admin-lang` endpoint
 foreach (ApiAdminLang::find()->all($client) as $item) {
     var_dump($item);
 }

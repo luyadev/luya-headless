@@ -7,6 +7,7 @@ use luya\headless\collectors\CurlRequest;
 /**
  * Client provides Auth and Connection informations.
  * 
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class Client

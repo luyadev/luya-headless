@@ -5,10 +5,21 @@ namespace luya\headless;
 /**
  * Base Request is used to make the Request to the API.
  *
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 abstract class BaseRequest
 {
+    /**
+     * @var \luya\headless\Client
+     */
+    protected $client;
+    
+    /**
+     * @var string The endpoint to request.
+     */
+    protected $endpoint;
+    
     /**
      * Get request
      *
@@ -41,27 +52,49 @@ abstract class BaseRequest
      */
     abstract public function delete(array $data = []);
     
+    /**
+     * Whether current request is sucessfull or not.
+     */
     abstract public function isSuccess();
     
+    /**
+     * Returns the RAW response content from the API.
+     */
     abstract public function getResponseContent();
     
     /**
-     * @var \luya\headless\Client
+     * 
+     * @param Client $client
      */
-    protected $client;
-    
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
     
-    protected $requestUrl;
-    
+    /**
+     * Setter method for endpoint.
+     * 
+     * @param string $endpoint
+     */
     public function setEndpoint($endpoint)
     {
-        $this->requestUrl = rtrim($this->client->serverUrl, '/') . '/' . ltrim($endpoint, '/');
+        $this->endpoint = $endpoint;
     }
     
+    /**
+     * Returns the full qualified request url from client serverUrl and endpoint.
+     * @return string
+     */
+    public function getRequestUrl()
+    {
+        return rtrim($this->client->serverUrl, '/') . '/' . ltrim($this->endpoint, '/');
+    }
+    
+    /**
+     * Parse and return the RAW content from {{getResponseContent()}} into an array structure.
+     * 
+     * @return array
+     */
     public function getParsedResponse()
     {
         return json_decode($this->getResponseContent(), true);
