@@ -26,7 +26,7 @@ Make request with Client library:
 ```php
 use luya\headless\Client;
 
-// bild client object with token and server infos
+// build client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
 
 // create get request for `api-admin-lang` endpoint
@@ -46,7 +46,7 @@ Using API wrappers (above example as short hand wrapper):
 use luya\headless\Client;
 use luya\headless\endpoints\ApiAdminLang;
 
-// bild client object with token and server infos
+// build client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
 
 // run the pre-built ActivQuery for the `api-admin-lang` endpoint
