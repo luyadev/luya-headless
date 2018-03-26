@@ -32,7 +32,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     abstract public function post(array $data = []);
     
@@ -40,7 +40,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     abstract public function put(array $data = []);
     
@@ -48,7 +48,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     abstract public function delete(array $data = []);
     

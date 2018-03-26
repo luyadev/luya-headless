@@ -33,7 +33,7 @@ class CurlRequest extends BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     public function get(array $data = [])
     {
@@ -46,7 +46,7 @@ class CurlRequest extends BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     public function post(array $data = [])
     {
@@ -59,7 +59,7 @@ class CurlRequest extends BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     public function put(array $data = [])
     {
@@ -72,7 +72,7 @@ class CurlRequest extends BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr BaseRequest
+     * @retunr \luya\headless\BaseRequest
      */
     public function delete(array $data = [])
     {
