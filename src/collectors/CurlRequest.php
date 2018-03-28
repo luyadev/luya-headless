@@ -86,7 +86,12 @@ class CurlRequest extends BaseRequest
         return $this->curl->isSuccess();
     }
     
-    public function getResponseContent()
+    public function getResponseStatusCode()
+    {
+        return $this->curl->http_status_code;
+    }
+    
+    public function getResponseRawContent()
     {
         return $this->curl->response;
     }

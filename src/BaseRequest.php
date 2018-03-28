@@ -64,7 +64,14 @@ abstract class BaseRequest
      * 
      * @return string
      */
-    abstract public function getResponseContent();
+    abstract public function getResponseRawContent();
+    
+    /**
+     * Returns the status code of the current parsed response.
+     * 
+     * @return integer
+     */
+    abstract public function getResponseStatusCode();
     
     /**
      * 
@@ -97,12 +104,12 @@ abstract class BaseRequest
     }
     
     /**
-     * Parse and return the RAW content from {{getResponseContent()}} into an array structure.
+     * Parse and return the RAW content from {{getResponseRawContent()}} into an array structure.
      * 
      * @return array
      */
     public function getParsedResponse()
     {
-        return json_decode($this->getResponseContent(), true);
+        return json_decode($this->getResponseRawContent(), true);
     }
 }

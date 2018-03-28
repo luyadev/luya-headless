@@ -65,7 +65,12 @@ class DummyRequest extends BaseRequest
         return $this->success;
     }
     
-    public function getResponseContent()
+    public function getResponseStatusCode()
+    {
+        return $this->success ? 200 : 500;
+    }
+    
+    public function getResponseRawContent()
     {
         return $this->response;
     }   
