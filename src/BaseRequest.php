@@ -24,7 +24,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @return \luya\headless\BaseRequest
      */
     abstract public function get(array $data = []);
     
@@ -32,7 +32,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @return \luya\headless\BaseRequest
      */
     abstract public function post(array $data = []);
     
@@ -40,7 +40,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @return \luya\headless\BaseRequest
      */
     abstract public function put(array $data = []);
     
@@ -48,17 +48,21 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @return \luya\headless\BaseRequest
      */
     abstract public function delete(array $data = []);
     
     /**
      * Whether current request is sucessfull or not.
+     * 
+     * @return boolean
      */
     abstract public function isSuccess();
     
     /**
      * Returns the RAW response content from the API.
+     * 
+     * @return string
      */
     abstract public function getResponseContent();
     
