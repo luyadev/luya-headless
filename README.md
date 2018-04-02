@@ -16,7 +16,7 @@ A client library to access content from the LUYA APIs.
 Add the LUYA headless client library to your composer.json:
 
 ```sh
-composer require luyadev/luya-headless
+composer require luyadev/luya-headless:^1.0@dev
 ```
 
 ## Usage
