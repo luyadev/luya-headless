@@ -14,6 +14,6 @@ class ApiAdminUser extends BaseEndpoint
 {
     public function getEndpointName()
     {
-        return 'api-admin-user';
+        return 'admin/api-admin-user';
     }
 }

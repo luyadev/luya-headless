@@ -16,10 +16,13 @@ class Client
     
     public $serverUrl;
     
-    public function __construct($accessToken, $serverUrl)
+    public $language;
+    
+    public function __construct($accessToken, $serverUrl, $language = null)
     {
         $this->accessToken = $accessToken;
         $this->serverUrl = $serverUrl;
+        $this->language = $language;
     }
     
     private $_request;

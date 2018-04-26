@@ -100,7 +100,10 @@ abstract class BaseRequest
      */
     public function getRequestUrl()
     {
-        return rtrim($this->client->serverUrl, '/') . '/' . ltrim($this->endpoint, '/');
+        $parts = [rtrim($this->client->serverUrl, '/'), $this->client->language, ltrim($this->endpoint, '/')];
+        $parts = array_filter($parts);
+        
+        return implode("/", $parts);
     }
     
     /**

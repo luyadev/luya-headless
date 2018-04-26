@@ -15,6 +15,6 @@ class ApiCmsMenuItems extends BaseEndpoint
 
     public function getEndpointName()
     {
-        return 'api-cms-menu/items';
+        return 'admin/api-cms-menu/items';
     }
 }

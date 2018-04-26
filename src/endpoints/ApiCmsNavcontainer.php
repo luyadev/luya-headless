@@ -14,6 +14,6 @@ class ApiCmsNavcontainer extends BaseEndpoint
 {
     public function getEndpointName()
     {
-        return 'api-cms-navcontainer';
+        return 'admin/api-cms-navcontainer';
     }
 }

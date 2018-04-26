@@ -27,10 +27,10 @@ Make request with Client library:
 use luya\headless\Client;
 
 // build client object with token and server infos
-$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
+$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
-// create get request for `api-admin-lang` endpoint
-$request = $client->getRequest()->setEndpoint('api-admin-lang')->get();
+// create get request for `admin/api-admin-lang` endpoint
+$request = $client->getRequest()->setEndpoint('admin/api-admin-lang')->get();
 
 // if successfull request, iterate over language items from `api-admin-lang` endpoint
 if ($request->isSuccess()) {
@@ -47,9 +47,9 @@ use luya\headless\Client;
 use luya\headless\endpoints\ApiAdminLang;
 
 // build client object with token and server infos
-$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html/admin');
+$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
-// run the pre-built ActivQuery for the `api-admin-lang` endpoint
+// run the pre-built ActivQuery for the `admin/api-admin-lang` endpoint
 foreach (ApiAdminLang::find()->all($client) as $item) {
     var_dump($item);
 }
