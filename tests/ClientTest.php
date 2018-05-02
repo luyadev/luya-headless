@@ -68,9 +68,9 @@ class ClientTest extends HeadlessTestCase
     /*
     public function testGetCmsMenuContainers()
     {
-        $client = new Client('34a40fd61a860231462386268e15bd80849c4ba84fc3bab3e52fc17f67ffbe84jLHCAOp7dLnCDcGTErBc068xibbM8KTW', 'http://localhost:8080/admin');
+        $client = new Client('6238c3462600a2a14b8f952aee6e42f2f0e96fc875107529edec4fcaa1fe2ebf8a-ME-f6lOoK5_bGKF5rOgq5KueVSROV', 'http://localhost/luya-env-dev/public_html');
 
-        $content = $client->getRequest()->setEndpoint('api-cms-menu/items')->get(['langId' => 1, 'containerId' => 1])->getResponseRawContent();
+        $content = $client->getRequest()->setEndpoint('admin/api-cms-menu/items')->get(['langId' => 1, 'containerId' => 1])->getResponseRawContent();
 
         var_dump($content);
 
