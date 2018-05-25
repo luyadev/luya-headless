@@ -106,23 +106,6 @@ class CurlRequest extends BaseRequest
     
     protected function getHasJsonCruftLength()
     {
-        return $this->getResponseHeader('x-cruft-length');
-    }
-    
-    protected function getResponseHeader($headerKey)
-    {
-        $headers = [];
-        $headerKey = strtolower($headerKey);
-        
-        foreach ($this->curl->response_headers as $header) {
-            $parts = explode(":", $header, 2);
-            
-            $key = isset($parts[0]) ? $parts[0] : null;
-            $value = isset($parts[1]) ? $parts[1] : null;
-            
-            $headers[trim(strtolower($key))] = trim($value);
-        }
-        
-        return isset($headers[$headerKey]) ? $headers[$headerKey] : false;
+        return $this->curl->getResponseHeaders('x-cruft-length');
     }
 }
