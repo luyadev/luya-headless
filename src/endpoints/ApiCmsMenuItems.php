@@ -12,7 +12,11 @@ use luya\headless\BaseEndpoint;
  */
 class ApiCmsMenuItems extends BaseEndpoint
 {
-
+    public function requiredArguments()
+    {
+        return ['langId', 'containerId'];
+    }
+    
     public function getEndpointName()
     {
         return 'admin/api-cms-menu/items';
