@@ -60,7 +60,7 @@ class ClientTest extends HeadlessTestCase
         $client = $this->getClient();
         $client->setRequest($this->getDummyRequest($client, '[{"id":1}]', true));
         
-        $query = ApiAdminUser::find()->all($client);
+        $query = ApiAdminUser::find()->response($client);
         
         $this->assertTrue(is_array($query));
     }

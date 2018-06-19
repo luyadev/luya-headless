@@ -5,14 +5,20 @@ namespace luya\headless\cms;
 use luya\headless\endpoints\ApiCmsMenuItems;
 use luya\headless\Client;
 
+/**
+ * Generate menus trough the cms module.
+ * 
+ * @since 1.0.0
+ * @author Basil Suter <basil@nadar.io>
+ */
 class Menu
 {
+    public $client;
+
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
-    
-    public $client;
     
     public static function find($client)
     {
@@ -48,7 +54,7 @@ class Menu
     protected function getData()
     {
         if ($this->_data === null) {
-            $this->_data = ApiCmsMenuItems::find()->args(['langId' => $this->_langId, 'containerId' => $this->_containerId])->all($this->client);
+            $this->_data = ApiCmsMenuItems::find()->args(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($this->client);
         }
         
         return $this->_data;

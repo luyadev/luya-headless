@@ -50,7 +50,7 @@ use luya\headless\endpoints\ApiAdminLang;
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
 // run the pre-built ActivQuery for the `admin/api-admin-lang` endpoint
-foreach (ApiAdminLang::find()->all($client) as $item) {
+foreach (ApiAdminLang::find()->response($client) as $item) {
     var_dump($item);
 }
 ```

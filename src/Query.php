@@ -51,7 +51,7 @@ class Query
      * @param Client $client
      * @return array|mixed
      */
-    public function all(Client $client)
+    public function response(Client $client)
     {
         $request = $client->getRequest();
         $request->setEndpoint($this->endpoint->getEndpointName());
