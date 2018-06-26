@@ -4,6 +4,8 @@ namespace luya\headless\cms;
 
 use luya\headless\endpoints\ApiCmsMenuItems;
 use luya\headless\Client;
+use luya\headless\base\BaseIterator;
+use luya\headless\cms\models\Nav;
 
 /**
  * Generate menus trough the cms module.
@@ -13,16 +15,9 @@ use luya\headless\Client;
  */
 class Menu
 {
-    public $client;
-
-    public function __construct(Client $client)
+    public static function find()
     {
-        $this->client = $client;
-    }
-    
-    public static function find($client)
-    {
-        return new static($client);
+        return new static();
     }
     
     private $_containerId;
@@ -51,17 +46,24 @@ class Menu
     
     private $_data;
     
-    protected function getData()
+    protected function getData(Client $client)
     {
         if ($this->_data === null) {
-            $this->_data = ApiCmsMenuItems::find()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($this->client)->getContent();
+            $this->_data = ApiCmsMenuItems::find()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($client)->getContent();
         }
         
         return $this->_data;
     }
     
-    public function all()
+    /**
+     * 
+     * @param Client $client
+     * @return \luya\headless\cms\models\Nav
+     */
+    public function response(Client $client)
     {
-        return $this->getData()[$this->_parentNavId];
+        $items = $this->getData($client)[$this->_parentNavId];
+        
+        return BaseIterator::create(Nav::class, $items, 'id');
     }
 }

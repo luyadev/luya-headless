@@ -10,16 +10,9 @@ use luya\headless\Client;
  */
 class Page
 {
-    public $client;
-
-    public function __construct(Client $client)
+    public static function find($langId, $navId)
     {
-        $this->client = $client;
-    }
-
-    public static function find($client, $langId, $navId)
-    {
-        return (new static($client))->language($langId)->nav($navId);
+        return (new static())->language($langId)->nav($navId);
     }
 
     private $_langId;
@@ -38,8 +31,8 @@ class Page
         return $this;
     }
 
-    public function one()
+    public function response(Client $client)
     {
-        return ApiCmsNavitemNavLangItem::find()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($this->client)->getContent();
+        return ApiCmsNavitemNavLangItem::find()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($client)->getContent();
     }
 }
