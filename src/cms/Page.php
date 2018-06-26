@@ -10,6 +10,9 @@ use luya\headless\Client;
  */
 class Page
 {
+    /**
+     * @return self
+     */
     public static function find($langId, $navId)
     {
         return (new static())->language($langId)->nav($navId);

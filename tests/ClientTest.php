@@ -62,7 +62,9 @@ class ClientTest extends HeadlessTestCase
         
         $query = ApiAdminUser::find()->response($client);
         
-        $this->assertTrue(is_array($query));
+        $this->assertSame([
+            ['id' => 1]
+        ], $query->getContent());
     }
 
     /*

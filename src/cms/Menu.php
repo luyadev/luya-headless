@@ -15,6 +15,9 @@ use luya\headless\cms\models\Nav;
  */
 class Menu
 {
+    /**
+     * @return self
+     */
     public static function find()
     {
         return new static();
