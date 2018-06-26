@@ -2,7 +2,7 @@
 
 namespace luya\headless\endpoints;
 
-use luya\headless\BaseEndpoint;
+use luya\headless\base\AbstractEndpoint;
 
 /**
  * Endpoint `api-cms-menu/items` Query.
@@ -10,7 +10,7 @@ use luya\headless\BaseEndpoint;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ApiCmsMenuItems extends BaseEndpoint
+class ApiCmsMenuItems extends AbstractEndpoint
 {
     public function requiredArguments()
     {

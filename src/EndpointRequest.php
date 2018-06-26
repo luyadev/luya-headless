@@ -6,12 +6,12 @@ use Exception;
 use luya\headless\base\AbstractEndpoint;
 
 /**
- * Query represents a Query Builder for Handling the response Data.
+ * EndpointRequest represents a request to a class with a response object in response().
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class EndpointQuery
+class EndpointRequest
 {
     /**
      * @var AbstractEndpoint
@@ -28,6 +28,10 @@ class EndpointQuery
         $this->ensureRequiredArguments();
     }
     
+    /**
+     * Ensure whether the required args are provided or not.
+     * @throws Exception
+     */
     protected function ensureRequiredArguments()
     {
         $required = $this->endpoint->requiredArgs();
@@ -39,12 +43,38 @@ class EndpointQuery
         }
     }
     
-    private $_args;
+    private $_args = [];
     
+    /**
+     * Setter method for arguments: paremters
+     * 
+     * @param array $args
+     * @return EndpointRequest
+     */
     public function args(array $args)
     {
-        $this->_args = $args;
+        $this->_args = array_merge($this->_args, $args);
         return $this;
+    }
+    
+    /**
+     * 
+     * @param integer $id
+     * @return \luya\headless\EndpointRequest
+     */
+    public function page($id)
+    {
+        return $this->args(['page' => $id]);
+    }
+
+    /**
+     * 
+     * @param integer $rows
+     * @return \luya\headless\EndpointRequest
+     */
+    public function perPage($rows)
+    {
+        return $this->args(['per-page' => $rows]);
     }
     
     /**
@@ -58,9 +88,6 @@ class EndpointQuery
         $request->setEndpoint($this->endpoint->getEndpointName());
         $request->get($this->_args ?: []);
         
-        var_dump($request);
-        exit;
-        
-        return $request->getParsedResponse();
+        return (new EndpointResponse($request));
     }
 }

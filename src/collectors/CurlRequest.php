@@ -2,8 +2,8 @@
 
 namespace luya\headless\collectors;
 
-use luya\headless\BaseRequest;
 use Curl\Curl;
+use luya\headless\base\AbstractRequest;
 
 /**
  * Request Object via Curl.
@@ -11,7 +11,7 @@ use Curl\Curl;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class CurlRequest extends BaseRequest
+class CurlRequest extends AbstractRequest
 {
     /**
      * @var \Curl\Curl
@@ -30,10 +30,7 @@ class CurlRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @inheritdoc
      */
     public function get(array $data = [])
     {
@@ -43,10 +40,7 @@ class CurlRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @inheritdoc
      */
     public function post(array $data = [])
     {
@@ -56,10 +50,7 @@ class CurlRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @inheritdoc
      */
     public function put(array $data = [])
     {
@@ -69,10 +60,7 @@ class CurlRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr \luya\headless\BaseRequest
+     * @inheritdoc
      */
     public function delete(array $data = [])
     {
@@ -81,18 +69,33 @@ class CurlRequest extends BaseRequest
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function getResponseHeader($key)
+    {
+        return $this->curl->getResponseHeaders($key);
+    }
     
-    
+    /**
+     * @inheritdoc
+     */
     public function isSuccess()
     {
         return $this->curl->isSuccess();
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getResponseStatusCode()
     {
         return $this->curl->http_status_code;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getResponseRawContent()
     {
         $response = $this->curl->response;

@@ -2,7 +2,7 @@
 
 namespace luya\headless\base;
 
-use luya\headless\EndpointQuery;
+use luya\headless\EndpointRequest;
 
 /**
  * Base Endpoint represents the implementation of given admin api endpoint defintion.
@@ -21,6 +21,6 @@ abstract class AbstractEndpoint
     
     public static function find()
     {
-        return new EndpointQuery(new static);
+        return new EndpointRequest(new static);
     }
 }

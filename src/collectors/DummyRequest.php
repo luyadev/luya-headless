@@ -2,7 +2,7 @@
 
 namespace luya\headless\collectors;
 
-use luya\headless\BaseRequest;
+use luya\headless\base\AbstractRequest;
 
 /**
  * Dummy Request for UnitTests
@@ -10,17 +10,14 @@ use luya\headless\BaseRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class DummyRequest extends BaseRequest
+class DummyRequest extends AbstractRequest
 {
     public $response;
     
     public $success = true;
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr BaseRequest
+     * @inheritdoc
      */
     public function get(array $data = [])
     {
@@ -28,10 +25,7 @@ class DummyRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr BaseRequest
+     * @inheritdoc
      */
     public function post(array $data = [])
     {
@@ -39,10 +33,7 @@ class DummyRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr BaseRequest
+     * @inheritdoc
      */
     public function put(array $data = [])
     {
@@ -50,28 +41,42 @@ class DummyRequest extends BaseRequest
     }
     
     /**
-     * Get request
-     *
-     * @param array $data
-     * @retunr BaseRequest
+     * @inheritdoc
      */
     public function delete(array $data = [])
     {
         return $this;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function isSuccess()
     {
         return $this->success;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getResponseStatusCode()
     {
         return $this->success ? 200 : 500;
     }
     
+    /**
+     * @inheritdoc
+     */
     public function getResponseRawContent()
     {
         return $this->response;
     }   
+    
+    /**
+     * @inheritdoc
+     */
+    public function getResponseHeader($key)
+    {
+        return $key;
+    }
 }

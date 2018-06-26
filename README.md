@@ -21,27 +21,6 @@ composer require luyadev/luya-headless:^1.0@dev
 
 ## Usage
 
-Make request with Client library:
-
-```php
-use luya\headless\Client;
-
-// build client object with token and server infos
-$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
-
-// create get request for `admin/api-admin-lang` endpoint
-$request = $client->getRequest()->setEndpoint('admin/api-admin-lang')->get();
-
-// if successfull request, iterate over language items from `api-admin-lang` endpoint
-if ($request->isSuccess()) {
-    foreach ($request->getParsedResponse() as $item) {
-        var_dump($item);
-    }
-}
-```
-
-Using API wrappers (above example as short hand wrapper):
-
 ```php
 use luya\headless\Client;
 use luya\headless\endpoints\ApiAdminLang;
@@ -49,10 +28,19 @@ use luya\headless\endpoints\ApiAdminLang;
 // build client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
-// run the pre-built ActivQuery for the `admin/api-admin-lang` endpoint
-foreach (ApiAdminLang::find()->response($client) as $item) {
+// run the pre-built EndpointRequest for the `admin/api-admin-lang` endpoint:
+$response = ApiAdminLang::find()->response($client);
+
+// get the parsed content (will parse json into array)
+foreach ($reponse->getContent() as $item) {
     var_dump($item);
 }
+
+// get informations about pagination of this crud:
+
+echo $response->getTotalCount(); // number of total items in this crud
+echo $response->getCurrentPage(); // the current page
+echo $response->getPageCount(); // the number of pages
 ```
 
 ## Todos

@@ -76,6 +76,13 @@ abstract class AbstractRequest
     abstract public function getResponseStatusCode();
     
     /**
+     * Return the value for a given response header.
+     * 
+     * @param string $key
+     */
+    abstract public function getResponseHeader($key);
+    
+    /**
      * 
      * @param Client $client
      */
