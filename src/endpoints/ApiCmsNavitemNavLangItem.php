@@ -19,6 +19,6 @@ class ApiCmsNavitemNavLangItem extends BaseEndpoint
     
     public function getEndpointName()
     {
-        return 'admin/api-cms-navitem/nav-lang-item?';
+        return 'admin/api-cms-navitem/nav-lang-item';
     }
 }

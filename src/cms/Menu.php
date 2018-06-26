@@ -41,7 +41,7 @@ class Menu
         return $this;
     }
     
-    private $_parentNavId;
+    private $_parentNavId = 0;
     
     public function root()
     {

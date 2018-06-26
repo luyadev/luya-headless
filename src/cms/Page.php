@@ -1,9 +1,9 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\cms;
 
-use luya\headless\Client;
 use luya\headless\endpoints\ApiCmsNavitemNavLangItem;
+use luya\headless\Client;
 
 /**
  * Get the content of a page.
