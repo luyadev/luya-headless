@@ -1,25 +1,27 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\base;
 
 use Exception;
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\Client;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class EndpointRequest
+abstract class AbstractEndpointRequest
 {
+    abstract public function response(Client $client);
+    
     /**
      * @var AbstractEndpoint
      */
     protected $endpoint;
     
     /**
-     * 
+     *
      * @param AbstractEndpoint $endpoint
      */
     public function __construct(AbstractEndpoint $endpoint)
@@ -47,11 +49,11 @@ class EndpointRequest
     
     /**
      * Setter method for arguments: paremters
-     * 
+     *
      * @param array $args
-     * @return EndpointRequest
+     * @return self
      */
-    public function args(array $args)
+    public function setArgs(array $args)
     {
         $this->_args = array_merge($this->_args, $args);
         return $this;
@@ -59,35 +61,39 @@ class EndpointRequest
     
     /**
      * 
-     * @param integer $id
-     * @return \luya\headless\EndpointRequest
+     * @return array
      */
-    public function page($id)
+    public function getArgs()
     {
-        return $this->args(['page' => $id]);
+        return $this->_args;
     }
-
+    
     /**
      * 
-     * @param integer $rows
-     * @return \luya\headless\EndpointRequest
+     * @param array $extraFields
      */
-    public function perPage($rows)
+    public function setExpand(array $extraFields)
     {
-        return $this->args(['per-page' => $rows]);
+        return $this->setArgs(['expand' => implode(",", $extraFields)]);
     }
     
     /**
      *
-     * @param Client $client
-     * @return array|mixed
+     * @param integer $id
+     * @return self
      */
-    public function response(Client $client)
+    public function setPage($id)
     {
-        $request = $client->getRequest();
-        $request->setEndpoint($this->endpoint->getEndpointName());
-        $request->get($this->_args ?: []);
-        
-        return (new EndpointResponse($request));
+        return $this->setArgs(['page' => $id]);
+    }
+    
+    /**
+     *
+     * @param integer $rows
+     * @return self
+     */
+    public function setPerPage($rows)
+    {
+        return $this->setArgs(['per-page' => $rows]);
     }
 }

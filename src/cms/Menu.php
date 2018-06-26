@@ -54,7 +54,7 @@ class Menu
     protected function getData()
     {
         if ($this->_data === null) {
-            $this->_data = ApiCmsMenuItems::find()->args(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($this->client)->getContent();
+            $this->_data = ApiCmsMenuItems::find()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($this->client)->getContent();
         }
         
         return $this->_data;

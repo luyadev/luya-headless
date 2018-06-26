@@ -40,6 +40,6 @@ class Page
 
     public function one()
     {
-        return ApiCmsNavitemNavLangItem::find()->args(['langId' => $this->_langId, 'navId' => $this->_navId])->response($this->client)->getContent();
+        return ApiCmsNavitemNavLangItem::find()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($this->client)->getContent();
     }
 }
