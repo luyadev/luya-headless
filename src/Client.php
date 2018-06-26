@@ -3,6 +3,7 @@
 namespace luya\headless;
 
 use luya\headless\collectors\CurlRequest;
+use luya\headless\base\AbstractRequest;
 
 /**
  * Client provides Auth and Connection informations.
@@ -28,7 +29,7 @@ class Client
     private $_request;
     
     /**
-     * @return \luya\headless\BaseRequest
+     * @return \luya\headless\base\AbstractRequest
      */
     public function getRequest()
     {
@@ -39,7 +40,7 @@ class Client
         return $this->_request;
     }
     
-    public function setRequest(BaseRequest $request)
+    public function setRequest(AbstractRequest $request)
     {
         $this->_request = $request;
     }

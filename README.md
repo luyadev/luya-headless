@@ -58,3 +58,7 @@ foreach (ApiAdminLang::find()->response($client) as $item) {
 ## Todos
 
 + https://www.php-fig.org/psr/psr-6/
+
+## Library rules
+
++ https://www.php-fig.org/bylaws/psr-naming-conventions/

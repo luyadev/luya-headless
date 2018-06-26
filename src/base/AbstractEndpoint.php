@@ -1,6 +1,8 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\base;
+
+use luya\headless\EndpointQuery;
 
 /**
  * Base Endpoint represents the implementation of given admin api endpoint defintion.
@@ -8,7 +10,7 @@ namespace luya\headless;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class BaseEndpoint
+abstract class AbstractEndpoint
 {
     abstract public function getEndpointName();
     
@@ -19,6 +21,6 @@ abstract class BaseEndpoint
     
     public static function find()
     {
-        return new Query(new static);
+        return new EndpointQuery(new static);
     }
 }

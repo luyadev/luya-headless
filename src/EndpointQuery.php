@@ -3,6 +3,7 @@
 namespace luya\headless;
 
 use Exception;
+use luya\headless\base\AbstractEndpoint;
 
 /**
  * Query represents a Query Builder for Handling the response Data.
@@ -10,18 +11,18 @@ use Exception;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class Query
+class EndpointQuery
 {
     /**
-     * @var BaseEndpoint
+     * @var AbstractEndpoint
      */
     protected $endpoint;
     
     /**
      * 
-     * @param BaseEndpoint $endpoint
+     * @param AbstractEndpoint $endpoint
      */
-    public function __construct(BaseEndpoint $endpoint)
+    public function __construct(AbstractEndpoint $endpoint)
     {
         $this->endpoint = $endpoint;
         $this->ensureRequiredArguments();
@@ -56,6 +57,9 @@ class Query
         $request = $client->getRequest();
         $request->setEndpoint($this->endpoint->getEndpointName());
         $request->get($this->_args ?: []);
+        
+        var_dump($request);
+        exit;
         
         return $request->getParsedResponse();
     }

@@ -1,6 +1,8 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\base;
+
+use luya\headless\Client;
 
 /**
  * Base Request is used to make the Request to the API.
@@ -8,7 +10,7 @@ namespace luya\headless;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class BaseRequest
+abstract class AbstractRequest
 {
     /**
      * @var \luya\headless\Client
@@ -24,7 +26,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\BaseRequest
+     * @return \luya\headless\base\AbstractRequest
      */
     abstract public function get(array $data = []);
     
@@ -32,7 +34,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\BaseRequest
+     * @return \luya\headless\base\AbstractRequest
      */
     abstract public function post(array $data = []);
     
@@ -40,7 +42,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\BaseRequest
+     * @return \luya\headless\base\AbstractRequest
      */
     abstract public function put(array $data = []);
     
@@ -48,7 +50,7 @@ abstract class BaseRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\BaseRequest
+     * @return \luya\headless\base\AbstractRequest
      */
     abstract public function delete(array $data = []);
     
