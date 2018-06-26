@@ -31,8 +31,15 @@ class Page
         return $this;
     }
 
+    /**
+     * 
+     * @param Client $client
+     * @return \luya\headless\cms\PageResponse
+     */
     public function response(Client $client)
     {
-        return ApiCmsNavitemNavLangItem::find()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($client)->getContent();
+        $response = ApiCmsNavitemNavLangItem::find()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($client)->getContent();
+        
+        return new PageResponse($response);
     }
 }
