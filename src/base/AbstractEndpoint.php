@@ -13,7 +13,7 @@ use luya\headless\DeleteEndpointRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class AbstractEndpoint
+abstract class AbstractEndpoint extends BaseModel
 {
     abstract public function getEndpointName();
     
