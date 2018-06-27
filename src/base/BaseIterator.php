@@ -8,7 +8,7 @@ class BaseIterator implements \Iterator, \Countable
     
     protected $data = [];
     
-    public static function create($modelClass, array $items, $keyColumn)
+    public static function create($modelClass, array $items, $keyColumn = null)
     {
         $object = new self();
         $object->modelClass = $modelClass;
@@ -18,8 +18,8 @@ class BaseIterator implements \Iterator, \Countable
     
     public function addItems(array $items, $keyColumn)
     {
-        foreach ($items as $item) {
-            $this->addItem($item, $item[$keyColumn]);
+        foreach ($items as $key => $item) {
+            $this->addItem($item, is_null($keyColumn) ? $key : $item[$keyColumn]);
         }
     }
     
