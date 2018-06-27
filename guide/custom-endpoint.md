@@ -26,8 +26,39 @@ class ApiMymoduleUser extends AbstractEndpoint
 The above example assumes you have an endpoint `admin/api-mymodule-user/login` where the post attributes email and password must be sent. Now you can easy use this in your Application like:
 
 ```php
+$resposne = ApiMymoduleUser::login('basil@nadar.io', '12345678')->response($client);
 
-$response = ApiMymoduleUser::login('basil@nadar.io', '12345678');
+if ($resposne->isSuccess()) {
+    // now you can log in the user ...
+} else {
+    // display the errors from the validation
+    var_dump($login->getContent());
+}
+```
 
-var_dump($response);
+The implementation on API side could look like this:
+
+```php
+class UserController extends \luya\admin\ngrest\base\Api
+{
+    /**
+     * @var string The path to the model which is the provider for the rules and fields.
+     */
+    public $modelClass = 'app\modules\mymodule\models\User';
+
+    /**
+     * Validate user
+     */
+    public function actionLogin()
+    {
+        $model = new UserLoginModel();
+        $model->attributes = Yii::$app->request->post();
+        
+        if ($model->validate()) {
+            return $model->user;
+        }
+        
+        return $this->sendModelError($model);
+    }
+}
 ```
