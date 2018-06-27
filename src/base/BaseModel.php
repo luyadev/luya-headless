@@ -5,17 +5,35 @@ namespace luya\headless\base;
 use luya\headless\Exception;
 
 /**
- * Base Model
+ * Base Model.
+ * 
+ * Getter/Setter methods logic from Yii Framework BaseObject.
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class BaseModel
 {
-    public function __construct(array $data)
+    /**
+     * Initial the 
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        $this->load($data);
+    }
+    
+    /**
+     * Load the attribute data into the model, where array key is the property of the class object.
+     * 
+     * @param array $data The data where key is the object property and the value, the value to assign.
+     */
+    public function load(array $data)
     {
         foreach ($data as $attribute => $value) {
-            $this->{$attribute} = $value;
+            if ($this->canSetProperty($attribute)) {
+                $this->{$attribute} = $value;
+            }
         }
     }
     

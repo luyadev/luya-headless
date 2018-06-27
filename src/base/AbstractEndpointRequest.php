@@ -13,6 +13,12 @@ use luya\headless\Client;
  */
 abstract class AbstractEndpointRequest
 {
+    /**
+     * Create a response.
+     * 
+     * @param Client $client
+     * @return \luya\headless\EndpointResponse
+     */
     abstract public function response(Client $client);
     
     /**
