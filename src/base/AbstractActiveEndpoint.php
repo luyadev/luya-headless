@@ -53,7 +53,7 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
             return false;
         }
         
-        return new self($response->getContent());
+        return new static($response->getContent());
     }
     
     /**
@@ -67,7 +67,7 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
         $response = self::find()->response($client);
         
         if ($response->isError()) {
-            return false;
+            return [];
         }
         
         return BaseIterator::create(get_called_class(), $response->getContent());

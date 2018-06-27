@@ -2,4 +2,5 @@
 
 + [Parse CMS Page content](cms.md)
 + [Handle CRUD responses](crud.md)
-+ [Custom endpoint handlers](custom-endpoint.md)
++ [Custom endpoint handlers](endpoint.md)
++ [Active endpoints](active-endpoint.md)
