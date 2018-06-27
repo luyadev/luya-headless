@@ -42,10 +42,8 @@ See the [full Documentation](guide/README.md) in order to see how to make put, d
 
 [View the full Documentation](guide/README.md)
 
-## Todos
+## Development and Contribution
 
-+ https://www.php-fig.org/psr/psr-6/
-
-## Library rules
-
-+ https://www.php-fig.org/bylaws/psr-naming-conventions/
++ PSR Naming convention: https://www.php-fig.org/bylaws/psr-naming-conventions/
++ Cache component require: https://www.php-fig.org/psr/psr-16/
++ Unit tests `composer install` and run `./vendor/bin/phpunit tests`

@@ -1,6 +1,8 @@
 # LUYA Headless Documentation
 
-+ [Parse CMS Page content](cms.md)
-+ [Handle CRUD responses](crud.md)
-+ [Custom endpoint handlers](endpoint.md)
-+ [Active endpoints](active-endpoint.md)
+Table of contents
+
++ [CMS page content](cms.md)
++ [Working with CRUD response content](crud.md)
++ [Create a client Endpoint](endpoint.md)
++ [Active Endpoint behavior](active-endpoint.md)
