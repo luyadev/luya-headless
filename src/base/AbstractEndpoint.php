@@ -2,10 +2,8 @@
 
 namespace luya\headless\base;
 
-
-
-use luya\headless\FindEndpointRequest;
-use luya\headless\ViewEndpointRequest;
+use luya\headless\GetEndpointRequest;
+use luya\headless\PostEndpointRequest;
 
 /**
  * Base Endpoint represents the implementation of given admin api endpoint defintion.
@@ -24,25 +22,25 @@ abstract class AbstractEndpoint
     
     public static function find()
     {
-        return new FindEndpointRequest(new static);
+        return new GetEndpointRequest(new static);
     }
     
     public static function view($id)
     {
-        return (new ViewEndpointRequest(new static))->setId($id);
+        return (new GetEndpointRequest(new static))->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+    }
+    
+    public static function post(array $values)
+    {
+        return (new PostEndpointRequest(new static));   
     }
 
-    public static function update($id)
+    public static function put($id)
     {
         
     }
     
     public static function delete($id)
-    {
-        
-    }
-    
-    public static function put($id)
     {
         
     }

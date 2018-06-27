@@ -10,7 +10,7 @@ use luya\headless\base\AbstractEndpointRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class FindEndpointRequest extends AbstractEndpointRequest
+class PostEndpointRequest extends AbstractEndpointRequest
 {
     /**
      *
@@ -19,9 +19,8 @@ class FindEndpointRequest extends AbstractEndpointRequest
      */
     public function response(Client $client)
     {
-        $request = $client->getRequest();
-        $request->setEndpoint($this->endpoint->getEndpointName());
-        $request->get($this->getArgs() ?: []);
+        $request = $this->generateRequest($client);
+        $request->post($this->getArgs() ?: []);
         
         return (new EndpointResponse($request));
     }
