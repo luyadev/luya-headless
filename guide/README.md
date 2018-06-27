@@ -1,5 +1,5 @@
-## LUYA Headless Documentation
+# LUYA Headless Documentation
 
-+ [cms.md](Parse CMS Page content)
-+ [crud.md](Handle CRUD responses)
-+ [custom-endpoint.md](Custom endpoint handlers)
++ [Parse CMS Page content](admin/api-mymodule-user)
++ [Handle CRUD responses](crud.md)
++ [Custom endpoint handlers](custom-endpoint.md)
