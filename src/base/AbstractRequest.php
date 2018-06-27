@@ -124,7 +124,6 @@ abstract class AbstractRequest
         return json_decode($this->getResponseRawContent(), true);
     }
     
-    
     /**
      * Generate a cache key.
      *

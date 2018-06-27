@@ -63,4 +63,19 @@ class EndpointResponse
     {
         return $this->request->getParsedResponse();
     }
+    
+    public function isSuccess()
+    {
+        return $this->request->isSuccess();
+    }
+    
+    public function isError()
+    {
+        return !$this->isSuccess();
+    }
+    
+    public function getStatusCode()
+    {
+        return $this->request->getResponseStatusCode();
+    }
 }
