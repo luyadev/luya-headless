@@ -19,28 +19,29 @@ Add the LUYA headless client library to your composer.json:
 composer require luyadev/luya-headless:^1.0@dev
 ```
 
-## Usage
+## Intro
+
+Quick intro about how to use the headless library with existing built in endpoints.
 
 ```php
-use luya\headless\Client;
-use luya\headless\endpoints\ApiAdminLang;
-
 // build client object with token and server infos
-$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
+$client = new \luya\headless\Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
-// run the pre-built EndpointRequest for the `admin/api-admin-lang` endpoint:
-$response = ApiAdminLang::find()->response($client);
+// run the pre-built EndpointRequest for the `admin/api-admin-lang` endpoint with the created client config.
+$response = \luya\headless\endpoints\ApiAdminLang::find()->response($client);
 
-// get the parsed content (will parse json into array)
+// foreach trough the parsed json content from the api and dump the content.
 foreach ($reponse->getContent() as $item) {
     var_dump($item);
 }
+```
 
-// get informations about pagination of this crud:
+See the [full Documentation](guide/README.md) in order to see how to make put, delete or post request, handle pagination or access the cms blocks.
 
-echo $response->getTotalCount(); // number of total items in this crud
-echo $response->getCurrentPage(); // the current page
-echo $response->getPageCount(); // the number of pages
+## Documentation
+
+[View the full Documentation](guide/README.md)
+
 ```
 
 ## Todos
