@@ -42,8 +42,6 @@ See the [full Documentation](guide/README.md) in order to see how to make put, d
 
 [View the full Documentation](guide/README.md)
 
-```
-
 ## Todos
 
 + https://www.php-fig.org/psr/psr-6/

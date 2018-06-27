@@ -34,7 +34,9 @@ class CurlRequest extends AbstractRequest
      */
     public function get(array $data = [])
     {
-        $this->curl = $this->getCurl()->get($this->getRequestUrl(), $data);
+        $this->curl = $this->getOrSetCache($this->generateCacheKey($this->getRequestUrl(), $data), 3600, function() use ($data) {
+            return $this->getCurl()->get($this->getRequestUrl(), $data);
+        });
         
         return $this;
     }
@@ -99,7 +101,6 @@ class CurlRequest extends AbstractRequest
     public function getResponseRawContent()
     {
         $response = $this->curl->response;
-        
         if ($this->getHasJsonCruftLength()) {
             $response = substr($response, $this->getHasJsonCruftLength());
         }

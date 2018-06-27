@@ -4,6 +4,7 @@ namespace luya\headless;
 
 use luya\headless\collectors\CurlRequest;
 use luya\headless\base\AbstractRequest;
+use Psr\SimpleCache\CacheInterface;
 
 /**
  * Client provides Auth and Connection informations.
@@ -19,6 +20,12 @@ class Client
     
     public $language;
     
+    /**
+     * 
+     * @param string $accessToken
+     * @param string $serverUrl Path to the webserver WITHOUT `admin`. Assuming your admin is accessable under `https://luya.io/admin` then the serverUrl would be `https://luya.io`.
+     * @param string $language
+     */
     public function __construct($accessToken, $serverUrl, $language = null)
     {
         $this->accessToken = $accessToken;
@@ -40,8 +47,32 @@ class Client
         return $this->_request;
     }
     
+    /**
+     * 
+     * @param AbstractRequest $request
+     */
     public function setRequest(AbstractRequest $request)
     {
         $this->_request = $request;
+    }
+    
+    private $_cache;
+    
+    /**
+     * 
+     * @param CacheInterface $cache
+     */
+    public function setCache(CacheInterface $cache)
+    {
+        $this->_cache = $cache;
+    }
+    
+    /**
+     * 
+     * @return \Psr\SimpleCache\CacheInterface
+     */
+    public function getCache()
+    {
+        return $this->_cache;
     }
 }

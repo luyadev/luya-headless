@@ -123,4 +123,47 @@ abstract class AbstractRequest
     {
         return json_decode($this->getResponseRawContent(), true);
     }
+    
+    
+    /**
+     * Generate a cache key.
+     *
+     * @param string $url
+     * @param array $params
+     * @return string
+     */
+    protected function generateCacheKey($url, array $params)
+    {
+        $params[] = __CLASS__;
+        $params[] = $url;
+        
+        return implode("-", $params);
+    }
+    
+    /**
+     * Method to cache callable response content.
+     *
+     * @param string $key
+     * @param string $ttl
+     * @param callable $fn
+     * @return mixed
+     */
+    protected function getOrSetCache($key, $ttl, callable $fn)
+    {
+        $cache = $this->client->getCache();
+        
+        if (!$cache) {
+            return call_user_func($fn);
+        }
+        
+        if ($cache->has($key)) {
+            return $cache->get($key);
+        }
+        
+        $content = call_user_func($fn);
+        
+        $cache->set($key, $content, $ttl);
+        
+        return $content;
+    }
 }
