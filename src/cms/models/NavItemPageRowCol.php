@@ -19,7 +19,10 @@ class NavItemPageRowCol extends BaseModel
         return $this->cols;   
     }
     
-    public function getItems()
+    /**
+     * @return NavItemPageBlock
+     */
+    public function getBlocks()
     {
         return BaseIterator::create(NavItemPageBlock::class, $this->__nav_item_page_block_items, 'id');
     }

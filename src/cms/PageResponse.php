@@ -74,6 +74,11 @@ class PageResponse extends BaseModel
         return BaseIterator::create(NavItemPage::class, $this->_typeData, 'id');
     }
     
+    /**
+     * Get the current active page version.
+     * 
+     * @return NavItemPage
+     */
     public function getCurrentPageVersion()
     {
         $currentPageVersion = $this->_typeData[$this->item->nav_item_type_id];

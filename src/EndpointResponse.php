@@ -14,6 +14,9 @@ class EndpointResponse
 {
     public $request;
     
+    /**
+     * Create new endpoint response from an {{AbstratRequest}}.
+     */
     public function __construct(AbstractRequest $request)
     {
         $this->request = $request;
@@ -59,6 +62,11 @@ class EndpointResponse
         return $this->isFirstPage() ? $this->getCurrentPage() : $this->getCurrentPage() -1;
     }
     
+    /**
+     * Returns the json parsed content as array.
+     * 
+     * @return array Returns the parsed json content as array.
+     */
     public function getContent()
     {
         return $this->request->getParsedResponse();

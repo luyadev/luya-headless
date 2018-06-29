@@ -15,6 +15,9 @@ class NavItemPage extends BaseModel
     public $version_alias;
     public $contentAsArray;
     
+    /**
+     * @return NavItemPageRow
+     */
     public function getRows()
     {
         $models = [];

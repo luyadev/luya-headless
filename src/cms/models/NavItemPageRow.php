@@ -16,6 +16,10 @@ class NavItemPageRow extends BaseModel
         $this->_cols = $cols;    
     }
     
+    /**
+     * 
+     * @return NavItemPageRowCol
+     */
     public function getCols()
     {
         return BaseIterator::create(NavItemPageRowCol::class, $this->_cols);
