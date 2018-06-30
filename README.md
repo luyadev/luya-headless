@@ -7,6 +7,7 @@
 A client library to access content from the LUYA APIs.
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
+[![Build Status](https://travis-ci.org/luyadev/luya-headless.svg?branch=master)](https://travis-ci.org/luyadev/luya-headless)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-headless/v/stable)](https://packagist.org/packages/luyadev/luya-headless)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-headless/downloads)](https://packagist.org/packages/luyadev/luya-headless)
 [![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
