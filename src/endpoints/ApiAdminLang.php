@@ -12,6 +12,11 @@ use luya\headless\base\AbstractActiveEndpoint;
  */
 class ApiAdminLang extends AbstractActiveEndpoint
 {
+    public $id;
+    public $name;
+    public $short_code;
+    public $is_default;
+    
     public function getEndpointName()
     {
         return 'admin/api-admin-lang';
