@@ -2,9 +2,9 @@
 
 namespace luya\headless\endpoints;
 
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\base\AbstractActiveEndpoint;
 
-class ApiCmsNavcontainer extends AbstractEndpoint
+class ApiCmsNavcontainer extends AbstractActiveEndpoint
 {
     public function getEndpointName()
     {

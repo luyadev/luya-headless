@@ -8,7 +8,10 @@ use luya\headless\PutEndpointRequest;
 use luya\headless\DeleteEndpointRequest;
 
 /**
- * Base Endpoint represents the implementation of given admin api endpoint defintion.
+ * Abstract Endpoint provides access to one endpoints based on the same endpoint node.
+ * 
+ * The Abstract Endpoint implementation requires to define the base endpoint trough {{getEndpointName()}}. From
+ * this endpoint node you can also create multiple accessable endpoints. 
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -16,11 +19,6 @@ use luya\headless\DeleteEndpointRequest;
 abstract class AbstractEndpoint extends BaseModel
 {
     abstract public function getEndpointName();
-    
-    public function requiredArgs()
-    {
-        return [];
-    }
     
     /**
      * Represents the CRUD find request.

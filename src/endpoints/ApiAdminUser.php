@@ -2,7 +2,7 @@
 
 namespace luya\headless\endpoints;
 
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\base\AbstractActiveEndpoint;
 
 /**
  * Endpoint `api-admin-user` Query.
@@ -10,7 +10,7 @@ use luya\headless\base\AbstractEndpoint;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ApiAdminUser extends AbstractEndpoint
+class ApiAdminUser extends AbstractActiveEndpoint
 {
     public function getEndpointName()
     {

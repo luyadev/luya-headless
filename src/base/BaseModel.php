@@ -7,7 +7,8 @@ use luya\headless\Exception;
 /**
  * Base Model.
  * 
- * Getter/Setter methods logic from Yii Framework BaseObject.
+ * Getter/Setter methods logic from Yii Framework BaseObject. In addition you can load data into
+ * the class property in order to have a model similar behavior.
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0

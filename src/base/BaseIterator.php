@@ -2,12 +2,23 @@
 
 namespace luya\headless\base;
 
+/**
+ * Generate an iterator object for a given model an array with data.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class BaseIterator implements \Iterator, \Countable
 {
-    public $modelClass;
+    protected $modelClass;
     
     protected $data = [];
     
+    /**
+     * @param string $modelClass The model class to create for the item.
+     * @param array $items Iterate over the array with the items and generate an object for every entry.
+     * @param string $keyColumn The column from the items array which should be token to generate the index column value.
+     */
     public static function create($modelClass, array $items, $keyColumn = null)
     {
         $object = new self();

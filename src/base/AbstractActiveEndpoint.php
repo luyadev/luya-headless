@@ -34,6 +34,10 @@ use luya\headless\Client;
  * }
  * ```
  * 
+ * > When you have multiple endpoint implementions like finding on news but with enpoints for `latest` `trending` and
+ * so on, the AbstractActiveEndpoint always assumes that you have the same response data model. Otherwise you have to
+ * create a new abstract active endpoint response.
+ * 
  * @author Basil Suter <basil@nadar.io>
  */
 abstract class AbstractActiveEndpoint extends AbstractEndpoint

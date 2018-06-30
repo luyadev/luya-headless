@@ -24,15 +24,15 @@ abstract class AbstractEndpointRequest
     /**
      * @var AbstractEndpoint
      */
-    protected $endpoint;
+    protected $endpointObject;
     
     /**
      *
      * @param AbstractEndpoint $endpoint
      */
-    public function __construct(AbstractEndpoint $endpoint)
+    public function __construct(AbstractEndpoint $endpointObject)
     {
-        $this->endpoint = $endpoint;
+        $this->endpointObject = $endpointObject;
         $this->ensureRequiredArguments();
     }
     
@@ -42,13 +42,27 @@ abstract class AbstractEndpointRequest
      */
     protected function ensureRequiredArguments()
     {
-        $required = $this->endpoint->requiredArgs();
-        
-        foreach ($required as $key) {
+        foreach ($this->_requiredArgs as $key) {
             if (!array_key_exists($key, $this->_args)) {
                 throw new Exception("Missing required arguments detected.");
             }
         }
+    }
+
+    private $_requiredArgs = [];
+
+    /**
+     * Set an array with argument keys which must be provided trough {{setArgs()}}.
+     * 
+     * Assuming your endpoint request must provide an `id` inside the arguments list, you
+     * can require this by setting `setRequiredArgs(['id'])`. Now the EndpointRequest class
+     * will check if `id` is in the given `getArgs()` list.
+     */
+    public function setRequiredArgs(array $args)
+    {
+        $this->_requiredArgs = $args;
+
+        return $this;
     }
     
     private $_tokens;
@@ -86,9 +100,9 @@ abstract class AbstractEndpointRequest
     private $_endpoint;
     
     /**
+     * Setter method in order to extend or override the endpoint name from the {{endpointObject}}.
      * 
      * @param string $name The endpoint name, in order to extend the current endpointName from the endpoint defintion you can use {endpointName}/foobar.
-     * 
      * @return \luya\headless\base\AbstractEndpointRequest
      */
     public function setEndpoint($name)
@@ -105,8 +119,8 @@ abstract class AbstractEndpointRequest
     public function getEndpoint()
     {
         $tokens = $this->_tokens;
-        $tokens['{endpointName}'] = $this->endpoint->getEndpointName();
-        return $this->parseTokens($this->_endpoint ?: $this->endpoint->getEndpointName(), $tokens);
+        $tokens['{endpointName}'] = $this->endpointObject->getEndpointName();
+        return $this->parseTokens($this->_endpoint ?: $this->endpointObject->getEndpointName(), $tokens);
     }
 
     /**
@@ -121,6 +135,7 @@ abstract class AbstractEndpointRequest
     }
     
     /**
+     * Generate the current request object with the endpoint url from the {{getEndpoint()}}.
      * 
      * @param Client $client
      * @return \luya\headless\base\AbstractRequest

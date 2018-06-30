@@ -136,7 +136,7 @@ abstract class AbstractRequest
         $params[] = __CLASS__;
         $params[] = $url;
         
-        return implode("-", $params);
+        return implode(".", $params);
     }
     
     /**

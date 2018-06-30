@@ -12,13 +12,16 @@ use luya\headless\base\AbstractEndpoint;
  */
 class ApiCmsMenuItems extends AbstractEndpoint
 {
-    public function requiredArguments()
-    {
-        return ['langId', 'containerId'];
-    }
-    
     public function getEndpointName()
     {
         return 'admin/api-cms-menu/items';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function find()
+    {
+        return parent::find()->setRequiredArgs(['langId', 'containerId']);
     }
 }
