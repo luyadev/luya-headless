@@ -22,6 +22,6 @@ class DeleteEndpointRequest extends AbstractEndpointRequest
         $request = $this->generateRequest($client);
         $request->delete($this->getArgs() ?: []);
         
-        return (new EndpointResponse($request));
+        return (new EndpointResponse($request, $this->endpointObject));
     }
 }

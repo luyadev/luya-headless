@@ -43,6 +43,61 @@ use luya\headless\ActiveEndpointResponse;
 abstract class AbstractActiveEndpoint extends AbstractEndpoint
 {
     /**
+     * @var boolean Whether the current ActiveEndpoint model is a new record or not.
+     */
+    public $isNewRecord = true;
+    
+    /**
+     * @var array An array which can contain errors if validation for insert or update failes with invalud response status.
+     */
+    public $errors = [];
+    
+    /**
+     * An array with the primary key fields.
+     * 
+     * Im rare cases you have composite keys which are based on multiple fields.
+     * 
+     * @return array An array with the primary keys.
+     */
+    public function getPrimaryKeys()
+    {
+        return ['id'];
+    }
+    
+    /**
+     * Returns a scalar represent on the primary key based on {{getPrimaryKeys()}}.
+     * 
+     * If composite keys are required, the keys are seperated by a comma. Example
+     * 
+     * ```php
+     * ['userId' => 1, 'groupId' => 2];
+     * ```
+     * 
+     * if `userId` and `groupId` are set as primary keys, the return value would be `1,2`
+     * 
+     * @return string A scalar representation of the primary key value.
+     */
+    public function getPrimaryKeyValue()
+    {
+        $keys = [];
+        foreach ($this->getPrimaryKeys() as $key) {
+            $keys[] = $this->{$key};
+        }
+        
+        return implode(",", $keys);
+    }
+    
+    /**
+     * Whether current ActiveEndpoint has errors or not.
+     * 
+     * @return boolean
+     */
+    public function hasError()
+    {
+        return !empty($this->errors);    
+    }
+    
+    /**
      * Find object for the given id and returns the current active endpoint model attributes with the data.
      * 
      * @param integer $id
@@ -57,7 +112,9 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
             return false;
         }
         
-        return new static($response->getContent());
+        $model = new static($response->getContent());
+        $model->isNewRecord = false;
+        return $model;
     }
     
     /**
@@ -74,8 +131,41 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
             return [];
         }
         
-        $models = BaseIterator::create(get_called_class(), $response->getContent());
+        $models = BaseIterator::create(get_called_class(), $response->getContent(), $response->endpoint->getPrimaryKeys(), false);
         
         return new ActiveEndpointResponse($response, $models);
+    }
+    
+    /**
+     * Update or Insert model data.
+     * 
+     * Runs {{udpate()}} or {{insert()}} request command based on current {{$isNewRecord}} state.
+     * 
+     * @param Client $client
+     * @param array $attributes
+     * @return boolean
+     */
+    public function save(Client $client, array $attributes)
+    {
+        $values = [];
+        foreach ($attributes as $name) {
+            $values[$name] = $this->{$name};
+        }
+        
+        if ($this->isNewRecord) {
+            $request = self::insert($values);
+        } else {
+            $request = self::update($this->getPrimaryKeyValue(), $values);
+        }
+        
+        $response = $request->response($client);
+        
+        if ($response->isSuccess()) {
+            return true;
+        }
+        
+        $this->errors = $response->getContent();
+        
+        return false;
     }
 }

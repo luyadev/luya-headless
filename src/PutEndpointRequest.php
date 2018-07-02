@@ -22,6 +22,6 @@ class PutEndpointRequest extends AbstractEndpointRequest
         $request = $this->generateRequest($client);
         $request->put($this->getArgs() ?: []);
         
-        return (new EndpointResponse($request));
+        return (new EndpointResponse($request, $this->endpointObject));
     }
 }

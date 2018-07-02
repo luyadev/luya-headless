@@ -4,6 +4,7 @@ namespace luya\headless;
 
 use luya\headless\base\AbstractRequest;
 use luya\headless\base\PaginationInterface;
+use luya\headless\base\AbstractEndpoint;
 
 /**
  * EndpointResponse represents a response object from the AbstractRequest class
@@ -15,12 +16,15 @@ class EndpointResponse implements PaginationInterface
 {
     public $request;
     
+    public $endpoint;
+    
     /**
      * Create new endpoint response from an {{AbstratRequest}}.
      */
-    public function __construct(AbstractRequest $request)
+    public function __construct(AbstractRequest $request, AbstractEndpoint $endpoint)
     {
         $this->request = $request;
+        $this->endpoint = $endpoint;
     }
     
     public function getTotalCount()

@@ -22,6 +22,6 @@ class PostEndpointRequest extends AbstractEndpointRequest
         $request = $this->generateRequest($client);
         $request->post($this->getArgs() ?: []);
         
-        return (new EndpointResponse($request));
+        return (new EndpointResponse($request, $this->endpointObject));
     }
 }

@@ -12,6 +12,8 @@ class BaseIterator implements \Iterator, \Countable
 {
     protected $modelClass;
     
+    protected $isNewRecord = true;
+    
     protected $data = [];
     
     /**
@@ -19,10 +21,11 @@ class BaseIterator implements \Iterator, \Countable
      * @param array $items Iterate over the array with the items and generate an object for every entry.
      * @param string $keyColumn The column from the items array which should be token to generate the index column value.
      */
-    public static function create($modelClass, array $items, $keyColumn = null)
+    public static function create($modelClass, array $items, $keyColumn = null, $isNewRecord = null)
     {
         $object = new self();
         $object->modelClass = $modelClass;
+        $object->isNewRecord = $isNewRecord;
         $object->addItems($items, $keyColumn);
         return $object;
     }
@@ -30,7 +33,11 @@ class BaseIterator implements \Iterator, \Countable
     public function addItems(array $items, $keyColumn)
     {
         foreach ($items as $key => $item) {
-            $this->addItem($item, is_null($keyColumn) ? $key : $item[$keyColumn]);
+            $pkValues = [];
+            foreach ((array) $keyColumn as $columnValue) {
+                $pkValues[] = $item[$columnValue];
+            }
+            $this->addItem($item, is_null($keyColumn) ? $key : implode(",", $pkValues));
         }
     }
     
@@ -39,6 +46,11 @@ class BaseIterator implements \Iterator, \Countable
         $class = $this->modelClass;
         
         $model = new $class($item);
+        
+        // @TODO not sure if this should be part of every BaseModel or only AbstractActiveEndpoint
+        if ($model instanceof AbstractActiveEndpoint) {
+            $model->isNewRecord = $this->isNewRecord;
+        }
         
         $this->data[$key] = $model;
     }
