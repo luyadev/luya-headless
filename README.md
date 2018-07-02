@@ -4,7 +4,7 @@
 
 # LUYA Headless Client
 
-A client library to access content from the LUYA APIs.
+A client library to access content from the LUYA APIs (or any other REST API).
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
 [![Build Status](https://travis-ci.org/luyadev/luya-headless.svg?branch=master)](https://travis-ci.org/luyadev/luya-headless)
