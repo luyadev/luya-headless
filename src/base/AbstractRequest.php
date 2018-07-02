@@ -3,6 +3,7 @@
 namespace luya\headless\base;
 
 use luya\headless\Client;
+use luya\headless\exceptions\RequestException;
 
 /**
  * Base Request is used to make the Request to the API.
@@ -12,6 +13,10 @@ use luya\headless\Client;
  */
 abstract class AbstractRequest
 {
+    const STATUS_CODE_UNAUTHORIZED = 401;
+    
+    const STATUS_CODE_NOTFOUND = 404;
+    
     /**
      * @var \luya\headless\Client
      */
@@ -121,6 +126,15 @@ abstract class AbstractRequest
      */
     public function getParsedResponse()
     {
+        switch ($this->getResponseStatusCode()) {
+            // handle unauthorized request exception
+            case self::STATUS_CODE_UNAUTHORIZED:
+                throw new RequestException(sprintf('Invalid access token provided or insufficent permission to access API "%s"."', $this->getRequestUrl()));
+            // handle not found endpoint request exception
+            case self::STATUS_CODE_NOTFOUND:
+                throw new RequestException(sprintf('Unable to find API "%s". Invalid endpoint name or serverUrl.', $this->getRequestUrl()));
+        }
+        
         return json_decode($this->getResponseRawContent(), true);
     }
     

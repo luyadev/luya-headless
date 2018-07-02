@@ -2,8 +2,8 @@
 
 namespace luya\headless\base;
 
-use Exception;
 use luya\headless\Client;
+use luya\headless\exceptions\MissingArgumentsException;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -38,13 +38,13 @@ abstract class AbstractEndpointRequest
     
     /**
      * Ensure whether the required args are provided or not.
-     * @throws Exception
+     * @throws MissingArgumentsException
      */
     protected function ensureRequiredArguments()
     {
         foreach ($this->_requiredArgs as $key) {
             if (!array_key_exists($key, $this->_args)) {
-                throw new Exception("Missing required arguments detected.");
+                throw new MissingArgumentsException("Missing required arguments detected.");
             }
         }
     }
