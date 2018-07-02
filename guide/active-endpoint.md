@@ -28,10 +28,9 @@ class ApiUser extends AbstractActiveEndpoint
 Now you can use the `findOne()` and `findAll()` methods for the given Endpoint (ApiUser) in order to foreach all records as a model object or retrieve a single records.
 
 ```php
-
 $client = new Client($token, $url);
 
-foreach (ApiUser::findAll($client) as $user) {
+foreach (ApiUser::findAll($client)->getModels() as $user) {
     echo $user->firstname . ' ' . $user->lastname;
 }
 ```
@@ -39,7 +38,6 @@ foreach (ApiUser::findAll($client) as $user) {
 In order to retrieve a single object use
 
 ```php
-
 $client = new Client($token, $url);
 
 $model = ApiUser::findOne(1, $client);

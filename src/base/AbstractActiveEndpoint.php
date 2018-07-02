@@ -3,6 +3,7 @@
 namespace luya\headless\base;
 
 use luya\headless\Client;
+use luya\headless\ActiveEndpointResponse;
 
 /**
  * Abstract Active Endpoint class.
@@ -27,7 +28,6 @@ use luya\headless\Client;
  * Now you can find the model data for the current model:
  * 
  * ```php
- * 
  * $model = MyUserModel::findOne(1, $client);
  * if ($model) {
  *     echo $model->firstname . ' ' . $model->lastname;
@@ -51,7 +51,7 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
      */
     public static function findOne($id, Client $client)
     {
-        $response = self::view($id)->response($client);
+        $response = static::view($id)->response($client);
         
         if ($response->isError()) {
             return false;
@@ -68,12 +68,14 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
      */
     public static function findAll(Client $client)
     {
-        $response = self::find()->response($client);
+        $response = static::find()->response($client);
         
         if ($response->isError()) {
             return [];
         }
         
-        return BaseIterator::create(get_called_class(), $response->getContent());
+        $models = BaseIterator::create(get_called_class(), $response->getContent());
+        
+        return new ActiveEndpointResponse($response, $models);
     }
 }

@@ -27,7 +27,7 @@ abstract class AbstractEndpoint extends BaseModel
      */
     public static function find()
     {
-        return self::get();
+        return static::get();
     }
     
     /**
@@ -38,7 +38,7 @@ abstract class AbstractEndpoint extends BaseModel
      */
     public static function insert(array $values)
     {
-        return self::post()->setArgs($values);
+        return static::post()->setArgs($values);
     }
     
     /**
@@ -50,7 +50,7 @@ abstract class AbstractEndpoint extends BaseModel
      */
     public static function update($id, array $values)
     {
-        return self::put()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+        return static::put()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
     }
     
     /**
@@ -61,7 +61,7 @@ abstract class AbstractEndpoint extends BaseModel
      */
     public static function view($id)
     {
-        return self::get()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+        return static::get()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
     }
     
     /**
@@ -72,7 +72,7 @@ abstract class AbstractEndpoint extends BaseModel
      */
     public static function remove($id)
     {
-        return self::delete()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+        return static::delete()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
     }
     
     /**

@@ -1,4 +1,29 @@
-# Custom endpoint requests
+# Endpoint
+
+## Basic call methods
+
+Every endpoint has built in request methods for the current EndpointName defintion.
+
+The basic request methods are:
+
+|name|type|description
+|----|----|-------
+|get()|get|
+|post()|post|
+|put()|put|
+|delete()|delete|
+
+Which then are inherited by the already task specific request types like from the REST structure defintion [See general infomrations](README.md):
+
+|name|type|description
+|----|----|-------
+|find()|get|List all items `/users`.
+|view($id)|get|Get a specific item  `/users/$id`.
+|insert(array $data)|post|Create new record `/users`.
+|update($id, array $data)|put|Update an existing record `/users/$id`.
+|remove($id)|delete|Remove an existing record `/users/$id`.
+
+## Custom Endpoint Requests
 
 In order to make custom endpoint requests for a given custom url with paramters, whether is post get or patch use:
 
@@ -60,5 +85,25 @@ class UserController extends \luya\admin\ngrest\base\Api
         
         return $this->sendModelError($model);
     }
+}
+```
+
+## Expand
+
+Assumning you only want to expand for find() events you can also override the find method like this:
+
+```php
+public static function find()
+{
+    return parent::find()->setExpand(['users', 'image']);
+}
+```
+
+If you want to expand every get request you could also override `get()`:
+
+```php
+public static function get()
+{
+    return parent::get()->setExpand(['users', 'image']);
 }
 ```

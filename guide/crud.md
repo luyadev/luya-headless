@@ -1,5 +1,6 @@
 ## CRUD response
 
+Make pagination with CRUD.
 
 ```php
 use luya\headless\Client;

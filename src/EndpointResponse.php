@@ -3,6 +3,7 @@
 namespace luya\headless;
 
 use luya\headless\base\AbstractRequest;
+use luya\headless\base\PaginationInterface;
 
 /**
  * EndpointResponse represents a response object from the AbstractRequest class
@@ -10,7 +11,7 @@ use luya\headless\base\AbstractRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class EndpointResponse
+class EndpointResponse implements PaginationInterface
 {
     public $request;
     
