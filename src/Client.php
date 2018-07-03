@@ -75,4 +75,31 @@ class Client
     {
         return $this->_cache;
     }
+    
+    private $_requestCallback;
+    
+    /**
+     * A callable which runs after every request.
+     * 
+     * ```php
+     * setRequestCallback(function(AbstractRequest $request, $time) {
+     *     // do some logging in your application
+     * });
+     * ```
+     * 
+     * @param callable $fn
+     */
+    public function setRequestCallback(callable $fn)
+    {
+        $this->_requestCallback = $fn;      
+    }
+    
+    /**
+     * 
+     * @return callable|null
+     */
+    public function getRequestCallback()
+    {
+        return $this->_requestCallback;
+    }
 }

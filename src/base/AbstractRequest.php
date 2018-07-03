@@ -126,6 +126,10 @@ abstract class AbstractRequest
      */
     public function getParsedResponse()
     {
+        if ($this->client->getRequestCallback()) {
+            call_user_func_array($this->client->getRequestCallback(), [$this, microtime()]);    
+        }
+        
         switch ($this->getResponseStatusCode()) {
             // handle unauthorized request exception
             case self::STATUS_CODE_UNAUTHORIZED:
