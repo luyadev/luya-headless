@@ -4,6 +4,8 @@ namespace luya\headless\base;
 
 use luya\headless\Client;
 use luya\headless\ActiveEndpointResponse;
+use ReflectionClass;
+use ReflectionProperty;
 
 /**
  * Abstract Active Endpoint class.
@@ -42,15 +44,35 @@ use luya\headless\ActiveEndpointResponse;
  */
 abstract class AbstractActiveEndpoint extends AbstractEndpoint
 {
+    private $_isNewRecord = true;
+  
     /**
      * @var boolean Whether the current ActiveEndpoint model is a new record or not.
      */
-    public $isNewRecord = true;
+    public function getIsNewRecord()
+    {
+        return $this->_isNewRecord;
+    }
+    
+    public function setIsNewRecord($state)
+    {
+        $this->_isNewRecord = $state;
+    }
+    
+    private $_errors = [];
     
     /**
      * @var array An array which can contain errors if validation for insert or update failes with invalud response status.
      */
-    public $errors = [];
+    public function getErrors()
+    {
+        return $this->_errors;
+    }
+    
+    public function setErrors(array $errors)
+    {
+        $this->_errors = $errors;   
+    }
     
     /**
      * An array with the primary key fields.
@@ -94,7 +116,26 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
      */
     public function hasError()
     {
-        return !empty($this->errors);    
+        return !empty($this->getErrors());    
+    }
+    
+    /**
+     * Returns the list of attribute names.
+     * By default, this method returns all public non-static properties of the class.
+     * You may override this method to change the default behavior.
+     * @return array list of attribute names.
+     */
+    public function attributes()
+    {
+        $class = new ReflectionClass($this);
+        $names = [];
+        foreach ($class->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
+            if (!$property->isStatic()) {
+                $names[] = $property->getName();
+            }
+        }
+        
+        return $names;
     }
     
     /**
@@ -121,7 +162,7 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
      * Find all items and generate an iterator with the given models.
      * 
      * @param Client $client
-     * @return boolean|\luya\headless\base\BaseIterator
+     * @return boolean|\luya\headless\ActiveEndpointResponse
      */
     public static function findAll(Client $client)
     {
@@ -145,10 +186,12 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
      * @param array $attributes
      * @return boolean
      */
-    public function save(Client $client, array $attributes)
+    public function save(Client $client, array $attributes = [])
     {
         $values = [];
-        foreach ($attributes as $name) {
+        $attrs = empty($attributes) ? $this->attributes() : $attributes;
+        
+        foreach ($attrs as $name) {
             $values[$name] = $this->{$name};
         }
         
