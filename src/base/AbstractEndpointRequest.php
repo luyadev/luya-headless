@@ -191,6 +191,32 @@ abstract class AbstractEndpointRequest
     }
     
     /**
+     * Set a sort order for a given field.
+     * 
+     * ```php
+     * setSort(['id' => SORT_ASC]);
+     * ```
+     * 
+     * or the opposite way
+     * 
+     * ```php
+     * setSort(['id' => SORT_DESC]);
+     * ```
+     * 
+     * @param array $sort
+     */
+    public function setSort(array $sort)
+    {
+        $sortables = [];
+        
+        foreach ($sort as $field => $order) {
+            $sortables[] = $order == SORT_ASC ? $field : '-' . $field;
+        }
+        
+        return $this->setArgs(['sort', implode(",", $sortables)]);
+    }
+    
+    /**
      *
      * @param integer $rows
      * @return self
