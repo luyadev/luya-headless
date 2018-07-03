@@ -203,6 +203,9 @@ abstract class AbstractEndpointRequest
      * setSort(['id' => SORT_DESC]);
      * ```
      * 
+     * + SORT_ASC = 1,2,3
+     * + SORT_DESC = 3,2,1
+     * 
      * @param array $sort
      */
     public function setSort(array $sort)
@@ -213,7 +216,7 @@ abstract class AbstractEndpointRequest
             $sortables[] = $order == SORT_ASC ? $field : '-' . $field;
         }
         
-        return $this->setArgs(['sort', implode(",", $sortables)]);
+        return $this->setArgs(['sort' => implode(",", $sortables)]);
     }
     
     /**
