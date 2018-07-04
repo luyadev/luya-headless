@@ -3,11 +3,11 @@
 namespace luya\headless\modules\cms;
 
 use luya\headless\base\BaseModel;
-use luya\headless\cms\models\NavItem;
-use luya\headless\cms\models\Nav;
-use luya\headless\cms\models\NavItemPage;
-use luya\headless\cms\models\NavItemModule;
-use luya\headless\cms\models\NavItemRedirect;
+use luya\headless\modules\cms\models\NavItem;
+use luya\headless\modules\cms\models\Nav;
+use luya\headless\modules\cms\models\NavItemPage;
+use luya\headless\modules\cms\models\NavItemModule;
+use luya\headless\modules\cms\models\NavItemRedirect;
 use luya\headless\base\BaseIterator;
 
 /**

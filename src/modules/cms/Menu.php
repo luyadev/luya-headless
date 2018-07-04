@@ -4,7 +4,7 @@ namespace luya\headless\modules\cms;
 
 use luya\headless\Client;
 use luya\headless\base\BaseIterator;
-use luya\headless\cms\models\Nav;
+use luya\headless\modules\cms\models\Nav;
 
 /**
  * Generate menus trough the cms module.
@@ -60,7 +60,7 @@ class Menu
     /**
      * 
      * @param Client $client
-     * @return \luya\headless\cms\models\Nav
+     * @return \luya\headless\modules\cms\models\Nav
      */
     public function response(Client $client)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\cms\models;
+namespace luya\headless\modules\cms\models;
 
 use luya\headless\base\BaseModel;
 use luya\headless\base\BaseIterator;
