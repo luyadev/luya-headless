@@ -1,10 +1,11 @@
 <?php
 
-namespace luya\headless\api;
+namespace luya\headless;
 
-use luya\headless\Client;
 use ReflectionClass;
 use ReflectionProperty;
+use luya\headless\endpoint\ActiveEndpointResponse;
+use luya\headless\endpoint\ActiveEndpointRequest;
 
 /**
  * Abstract Active Endpoint class.
@@ -142,7 +143,7 @@ class ActiveEndpoint extends Endpoint
      * 
      * @param integer $id
      * @param Client $client
-     * @return boolean|\luya\headless\base\AbstractActiveEndpoint
+     * @return boolean|ActiveEndpoint
      */
     public static function findOne($id, Client $client)
     {
@@ -161,7 +162,7 @@ class ActiveEndpoint extends Endpoint
      * Find all items and generate an iterator with the given models.
      * 
      * @param Client $client
-     * @return  \luya\headless\ActiveEndpointQuery
+     * @return ActiveEndpointRequest
      */
     public static function findAll(Client $client)
     {
@@ -170,11 +171,11 @@ class ActiveEndpoint extends Endpoint
     
     /**
      * 
-     * @return \luya\headless\ActiveEndpointQuery
+     * @return ActiveEndpointRequest
      */
     public static function find()
     {
-        return (new ActiveEndpointQuery(new static));    
+        return (new ActiveEndpointRequest(new static));    
     }
     
     /**

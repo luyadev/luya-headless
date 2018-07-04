@@ -1,8 +1,7 @@
 <?php
 
-namespace luya\headless\cms;
+namespace luya\headless\modules\cms;
 
-use luya\headless\apis\ApiCmsNavitemNavLangItem;
 use luya\headless\Client;
 
 /**
@@ -37,7 +36,7 @@ class Page
     /**
      * 
      * @param Client $client
-     * @return \luya\headless\cms\PageResponse
+     * @return PageResponse
      */
     public function response(Client $client)
     {

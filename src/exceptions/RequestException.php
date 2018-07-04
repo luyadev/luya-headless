@@ -1,10 +1,10 @@
 <?php
 
-namespace luya\headless\exceptions;
+namespace luya\headless;
 
-use luya\headless\HeadlessException;
+use luya\headless\Exception;
 
-class RequestException extends HeadlessException
+class RequestException extends Exception
 {
     
 }

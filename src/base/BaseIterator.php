@@ -2,6 +2,8 @@
 
 namespace luya\headless\base;
 
+use luya\headless\ActiveEndpoint;
+
 /**
  * Generate an iterator object for a given model an array with data.
  * 
@@ -48,7 +50,7 @@ class BaseIterator implements \Iterator, \Countable
         $model = new $class($item);
         
         // @TODO not sure if this should be part of every BaseModel or only AbstractActiveEndpoint
-        if ($model instanceof AbstractActiveEndpoint) {
+        if ($model instanceof ActiveEndpoint) {
             $model->isNewRecord = $this->isNewRecord;
         }
         

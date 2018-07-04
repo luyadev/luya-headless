@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\api\response;
+namespace luya\headless\endpoint;;
 
 use luya\headless\base\AbstractRequest;
 use luya\headless\base\PaginationInterface;
@@ -20,7 +20,7 @@ class EndpointResponse implements PaginationInterface
     public $request;
     
     /**
-     * @var \luya\headless\api\Endpoint
+     * @var EndpointInterface
      */
     public $endpoint;
     

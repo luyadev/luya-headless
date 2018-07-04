@@ -4,7 +4,7 @@ namespace luya\headless\tests\data;
 
 use luya\headless\base\BaseModel;
 
-class TestModel extends BaseModel
+final class TestModel extends BaseModel
 {
     public $foo;
 

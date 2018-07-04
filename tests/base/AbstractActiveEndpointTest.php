@@ -3,9 +3,9 @@
 namespace luya\headless\tests\base;
 
 use luya\headless\tests\HeadlessTestCase;
-use luya\headless\base\AbstractActiveEndpoint;
+use luya\headless\ActiveEndpoint;
 
-class TestActiveEndpoint extends AbstractActiveEndpoint
+final class TestActiveEndpoint extends ActiveEndpoint
 {
     public $id;
     public $foo;

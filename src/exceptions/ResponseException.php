@@ -2,9 +2,9 @@
 
 namespace luya\headless\exceptions;
 
-use luya\headless\HeadlessException;
+use luya\headless\Exception;
 
-class ResponseException extends HeadlessException
+class ResponseException extends Exception
 {
     
 }

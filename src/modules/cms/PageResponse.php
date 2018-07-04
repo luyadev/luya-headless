@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\cms;
+namespace luya\headless\modules\cms;
 
 use luya\headless\base\BaseModel;
 use luya\headless\cms\models\NavItem;

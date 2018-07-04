@@ -6,7 +6,7 @@ use luya\headless\Client;
 use luya\headless\collectors\DummyRequest;
 use luya\testsuite\cases\WebApplicationTestCase;
 
-class HeadlessTestCase extends WebApplicationTestCase
+abstract class HeadlessTestCase extends WebApplicationTestCase
 {
     public function getConfigArray()
     {

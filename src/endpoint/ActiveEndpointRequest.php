@@ -1,9 +1,9 @@
 <?php
 
-namespace luya\headless\api\request;
+namespace luya\headless\endpoint;
 
-use luya\headless\base\AbstractEndpointRequest;
 use luya\headless\base\BaseIterator;
+use luya\headless\Client;
 
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
@@ -20,6 +20,11 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
         return (new EndpointResponse($request, $this->endpointObject));
     }
     
+    /**
+     * 
+     * @param Client $client
+     * @return \luya\headless\endpoint\ActiveEndpointResponse
+     */
     public function all(Client $client)
     {
         $response = $this->response($client);

@@ -1,9 +1,10 @@
 <?php
 
-namespace luya\headless\api\request;
+namespace luya\headless\endpoint;
 
 use luya\headless\Client;
-use luya\headless\exceptions\MissingArgumentsException;
+use luya\headless\MissingArgumentsException;
+use luya\headless\base\EndpointInterface;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -17,20 +18,20 @@ abstract class AbstractEndpointRequest
      * Create a response.
      * 
      * @param Client $client
-     * @return \luya\headless\api\response\EndpointResponse
+     * @return EndpointResponse
      */
     abstract public function response(Client $client);
     
     /**
-     * @var AbstractEndpoint
+     * @var EndpointInterface
      */
     protected $endpointObject;
     
     /**
      *
-     * @param AbstractEndpoint $endpoint
+     * @param EndpointInterface $endpoint
      */
-    public function __construct(AbstractEndpoint $endpointObject)
+    public function __construct(EndpointInterface $endpointObject)
     {
         $this->endpointObject = $endpointObject;
         $this->ensureRequiredArguments();
@@ -103,7 +104,7 @@ abstract class AbstractEndpointRequest
      * Setter method in order to extend or override the endpoint name from the {{endpointObject}}.
      * 
      * @param string $name The endpoint name, in order to extend the current endpointName from the endpoint defintion you can use {endpointName}/foobar.
-     * @return \luya\headless\base\AbstractEndpointRequest
+     * @return \luya\headless\base\EndpointInterface
      */
     public function setEndpoint($name)
     {

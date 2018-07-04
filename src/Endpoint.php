@@ -1,10 +1,14 @@
 <?php
 
-namespace luya\headless\api;
-
+namespace luya\headless;
 
 use luya\headless\base\BaseModel;
 use luya\headless\base\EndpointInterface;
+use luya\headless\endpoint\GetEndpointRequest;
+use luya\headless\endpoint\PostEndpointRequest;
+use luya\headless\endpoint\AbstractEndpointRequest;
+use luya\headless\endpoint\PutEndpointRequest;
+use luya\headless\endpoint\DeleteEndpointRequest;
 
 /**
  * Abstract Endpoint provides access to one endpoints based on the same endpoint node.
@@ -28,7 +32,7 @@ class Endpoint extends BaseModel implements EndpointInterface
     /**
      * Represents the CRUD index request. Listing of data.
      * 
-     * @return \luya\headless\GetEndpointRequest
+     * @return GetEndpointRequest
      */
     public static function index()
     {
@@ -39,7 +43,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      * Represents the CRUD insert request.
      * 
      * @param array $values
-     * @return \luya\headless\PostEndpointRequest
+     * @return PostEndpointRequest
      */
     public static function insert(array $values)
     {
@@ -51,7 +55,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      * 
      * @param integer $id
      * @param array $values
-     * @return \luya\headless\base\AbstractEndpointRequest
+     * @return PutEndpointRequest
      */
     public static function update($id, array $values)
     {
@@ -62,7 +66,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      * Represents the CRUD view request.
      * 
      * @param integer $id
-     * @return \luya\headless\base\AbstractEndpointRequest
+     * @return GetEndpointRequest
      */
     public static function view($id)
     {
@@ -73,7 +77,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      * Represents the CRUD remove/delete request.
      * 
      * @param integer $id
-     * @return \luya\headless\base\AbstractEndpointRequest
+     * @return DeleteEndpointRequest
      */
     public static function remove($id)
     {
@@ -82,7 +86,7 @@ class Endpoint extends BaseModel implements EndpointInterface
     
     /**
      * 
-     * @return \luya\headless\GetEndpointRequest
+     * @return GetEndpointRequest
      */
     public static function get()
     {
@@ -91,7 +95,7 @@ class Endpoint extends BaseModel implements EndpointInterface
     
     /**
      * 
-     * @return \luya\headless\PostEndpointRequest
+     * @return PostEndpointRequest
      */
     public static function post()
     {
@@ -100,7 +104,7 @@ class Endpoint extends BaseModel implements EndpointInterface
 
     /**
      * 
-     * @return \luya\headless\PutEndpointRequest
+     * @return PutEndpointRequest
      */
     public static function put()
     {
@@ -109,7 +113,7 @@ class Endpoint extends BaseModel implements EndpointInterface
     
     /**
      * 
-     * @return \luya\headless\DeleteEndpointRequest
+     * @return DeleteEndpointRequest
      */
     public static function delete()
     {

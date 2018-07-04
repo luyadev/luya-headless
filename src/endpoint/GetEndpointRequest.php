@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\headless\api\request;
+namespace luya\headless\endpoint;
 
-use luya\headless\base\AbstractEndpointRequest;
+use luya\headless\Client;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().

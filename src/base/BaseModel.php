@@ -2,7 +2,7 @@
 
 namespace luya\headless\base;
 
-use luya\headless\HeadlessException as Exception;
+use luya\headless\Exception;
 
 /**
  * Base Model.

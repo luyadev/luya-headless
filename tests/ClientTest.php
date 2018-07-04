@@ -3,9 +3,9 @@
 namespace luya\headless\tests;
 
 use luya\headless\Client;
-use luya\headless\endpoints\ApiAdminUser;
+use luya\headless\modules\admin\ApiAdminUser;
 
-class ClientTest extends HeadlessTestCase
+final class ClientTest extends HeadlessTestCase
 {
     public function testDefaultClientSettingsWithCurlRequest()
     {

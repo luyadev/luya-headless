@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\headless\apis;
+namespace luya\headless\modules\cms;
 
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\Endpoint;
 
 /**
  * Get the page content for a given language and nav.
@@ -10,7 +10,7 @@ use luya\headless\base\AbstractEndpoint;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ApiCmsNavitemNavLangItem extends AbstractEndpoint
+class ApiCmsNavitemNavLangItem extends Endpoint
 {
     public function getEndpointName()
     {

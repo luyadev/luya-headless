@@ -1,10 +1,11 @@
 <?php
 
-namespace luya\headless\apis;
+namespace luya\headless\modules\cms;
 
-use luya\headless\base\AbstractActiveEndpoint;
 
-class ApiCmsNavcontainer extends AbstractActiveEndpoint
+use luya\headless\ActiveEndpoint;
+
+class ApiCmsNavcontainer extends ActiveEndpoint
 {
     public $id;
     public $name;

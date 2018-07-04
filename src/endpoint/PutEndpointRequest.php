@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\api\request;
+namespace luya\headless\endpoint;
 
 use luya\headless\Client;
 

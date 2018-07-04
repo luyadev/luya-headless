@@ -3,9 +3,9 @@
 namespace luya\headless\tests\cms;
 
 use luya\headless\tests\HeadlessTestCase;
-use luya\headless\cms\Page;
+use luya\headless\modules\cms\Page;
 
-class PageTest extends HeadlessTestCase
+final class PageTest extends HeadlessTestCase
 {
     public function testGetPageContent()
     {

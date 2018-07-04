@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\headless\apis;
+namespace luya\headless\modules\cms;
 
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\Endpoint;
 
 /**
  * Endpoint `api-cms-menu/items` Query.
@@ -10,7 +10,7 @@ use luya\headless\base\AbstractEndpoint;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ApiCmsMenuItems extends AbstractEndpoint
+class ApiCmsMenuItems extends Endpoint
 {
     public function getEndpointName()
     {

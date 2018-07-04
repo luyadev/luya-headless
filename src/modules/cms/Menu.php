@@ -1,8 +1,7 @@
 <?php
 
-namespace luya\headless\cms;
+namespace luya\headless\modules\cms;
 
-use luya\headless\apis\ApiCmsMenuItems;
 use luya\headless\Client;
 use luya\headless\base\BaseIterator;
 use luya\headless\cms\models\Nav;

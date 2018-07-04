@@ -1,8 +1,9 @@
 <?php
 
-namespace luya\headless\apis;
+namespace luya\headless\modules\admin;
 
-use luya\headless\base\AbstractActiveEndpoint;
+
+use luya\headless\ActiveEndpoint;
 
 /**
  * Endpoint `api-admin-user` Query.
@@ -10,7 +11,7 @@ use luya\headless\base\AbstractActiveEndpoint;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class ApiAdminLang extends AbstractActiveEndpoint
+class ApiAdminLang extends ActiveEndpoint
 {
     public $id;
     public $name;
