@@ -10,7 +10,7 @@ use Exception;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class HeadlessException extends Exception
+class Exception extends Exception
 {
     
 }

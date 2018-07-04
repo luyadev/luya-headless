@@ -32,10 +32,10 @@ class CurlRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function get(array $data = [])
+    public function get(array $params = [])
     {
-        $this->curl = $this->getOrSetCache($this->generateCacheKey($this->getRequestUrl(), $data), 3600, function() use ($data) {
-            return $this->getCurl()->get($this->getRequestUrl(), $data);
+        $this->curl = $this->getOrSetCache($this->generateCacheKey($this->getRequestUrl(), $params), 3600, function() use ($params) {
+            return $this->getCurl()->get($this->getRequestUrl(), $params);
         });
         
         return $this;

@@ -1,11 +1,10 @@
 <?php
 
-namespace luya\headless\base;
+namespace luya\headless\api;
 
-use luya\headless\GetEndpointRequest;
-use luya\headless\PostEndpointRequest;
-use luya\headless\PutEndpointRequest;
-use luya\headless\DeleteEndpointRequest;
+
+use luya\headless\base\BaseModel;
+use luya\headless\base\EndpointInterface;
 
 /**
  * Abstract Endpoint provides access to one endpoints based on the same endpoint node.
@@ -16,16 +15,22 @@ use luya\headless\DeleteEndpointRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class AbstractEndpoint extends BaseModel
+class Endpoint extends BaseModel implements EndpointInterface
 {
-    abstract public function getEndpointName();
+    /**
+     * @inheritdoc
+     */
+    public function getEndpointName()
+    {
+        return mb_convert_case(get_called_class(), MB_CASE_TITLE, "UTF-8");
+    }
     
     /**
-     * Represents the CRUD find request.
+     * Represents the CRUD index request. Listing of data.
      * 
      * @return \luya\headless\GetEndpointRequest
      */
-    public static function find()
+    public static function index()
     {
         return static::get();
     }
@@ -81,7 +86,7 @@ abstract class AbstractEndpoint extends BaseModel
      */
     public static function get()
     {
-        return new GetEndpointRequest(new static);
+        return (new GetEndpointRequest(new static));
     }
     
     /**

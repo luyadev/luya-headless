@@ -19,7 +19,7 @@ class DummyRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function get(array $data = [])
+    public function get(array $params = [])
     {
         return $this;   
     }

@@ -48,3 +48,13 @@ if (!$model) {
 
 echo $model->firstname . ' ' . $model->lastname;
 ```
+
+## ActiveEndpointQuery
+
+In order to manipulate the sort, pagination or other request data you can also use:
+
+```php
+ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all(Yii::$app->api->client),
+```
+ 
+ as find() returns the ActiveQueryEndpoint Response object.

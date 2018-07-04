@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\api\response;
 
 use luya\headless\base\BaseIterator;
 use luya\headless\base\PaginationInterface;

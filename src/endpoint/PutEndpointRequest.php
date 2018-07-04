@@ -1,8 +1,8 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\api\request;
 
-use luya\headless\base\AbstractEndpointRequest;
+use luya\headless\Client;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -10,7 +10,7 @@ use luya\headless\base\AbstractEndpointRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class PostEndpointRequest extends AbstractEndpointRequest
+class PutEndpointRequest extends AbstractEndpointRequest
 {
     /**
      *
@@ -20,7 +20,7 @@ class PostEndpointRequest extends AbstractEndpointRequest
     public function response(Client $client)
     {
         $request = $this->generateRequest($client);
-        $request->post($this->getArgs() ?: []);
+        $request->put($this->getArgs() ?: []);
         
         return (new EndpointResponse($request, $this->endpointObject));
     }

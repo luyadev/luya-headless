@@ -17,7 +17,7 @@ Which then are inherited by the already task specific request types like from th
 
 |name|type|description
 |----|----|-------
-|find()|get|List all items `/users`.
+|index()|get|List all items `/users`.
 |view($id)|get|Get a specific item  `/users/$id`.
 |insert(array $data)|post|Create new record `/users`.
 |update($id, array $data)|put|Update an existing record `/users/$id`.
@@ -90,12 +90,12 @@ class UserController extends \luya\admin\ngrest\base\Api
 
 ## Expand
 
-Assumning you only want to expand for find() events you can also override the find method like this:
+Assumning you only want to expand for index() events you can also override the find method like this:
 
 ```php
-public static function find()
+public static function index()
 {
-    return parent::find()->setExpand(['users', 'image']);
+    return parent::index()->setExpand(['users', 'image']);
 }
 ```
 

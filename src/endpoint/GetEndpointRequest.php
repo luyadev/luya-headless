@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\api\request;
 
 use luya\headless\base\AbstractEndpointRequest;
 
@@ -10,7 +10,7 @@ use luya\headless\base\AbstractEndpointRequest;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class PutEndpointRequest extends AbstractEndpointRequest
+class GetEndpointRequest extends AbstractEndpointRequest
 {
     /**
      *
@@ -20,7 +20,7 @@ class PutEndpointRequest extends AbstractEndpointRequest
     public function response(Client $client)
     {
         $request = $this->generateRequest($client);
-        $request->put($this->getArgs() ?: []);
+        $request->get($this->getArgs() ?: []);
         
         return (new EndpointResponse($request, $this->endpointObject));
     }

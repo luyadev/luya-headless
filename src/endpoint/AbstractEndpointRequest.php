@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\base;
+namespace luya\headless\api\request;
 
 use luya\headless\Client;
 use luya\headless\exceptions\MissingArgumentsException;
@@ -17,7 +17,7 @@ abstract class AbstractEndpointRequest
      * Create a response.
      * 
      * @param Client $client
-     * @return \luya\headless\EndpointResponse
+     * @return \luya\headless\api\response\EndpointResponse
      */
     abstract public function response(Client $client);
     

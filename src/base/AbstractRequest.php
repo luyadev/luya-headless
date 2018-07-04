@@ -30,10 +30,10 @@ abstract class AbstractRequest
     /**
      * Get request
      *
-     * @param array $data
+     * @param array $params
      * @return \luya\headless\base\AbstractRequest
      */
-    abstract public function get(array $data = []);
+    abstract public function get(array $params = []);
     
     /**
      * Get request

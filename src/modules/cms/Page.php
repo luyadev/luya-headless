@@ -2,7 +2,7 @@
 
 namespace luya\headless\cms;
 
-use luya\headless\endpoints\ApiCmsNavitemNavLangItem;
+use luya\headless\apis\ApiCmsNavitemNavLangItem;
 use luya\headless\Client;
 
 /**
@@ -41,7 +41,7 @@ class Page
      */
     public function response(Client $client)
     {
-        $response = ApiCmsNavitemNavLangItem::find()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($client)->getContent();
+        $response = ApiCmsNavitemNavLangItem::index()->setArgs(['langId' => $this->_langId, 'navId' => $this->_navId])->response($client)->getContent();
         
         return new PageResponse($response);
     }

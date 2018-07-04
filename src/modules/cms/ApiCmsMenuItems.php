@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\endpoints;
+namespace luya\headless\apis;
 
 use luya\headless\base\AbstractEndpoint;
 
@@ -20,8 +20,8 @@ class ApiCmsMenuItems extends AbstractEndpoint
     /**
      * @inheritdoc
      */
-    public static function find()
+    public static function index()
     {
-        return parent::find()->setRequiredArgs(['langId', 'containerId']);
+        return parent::index()->setRequiredArgs(['langId', 'containerId']);
     }
 }

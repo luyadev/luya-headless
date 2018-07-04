@@ -1,9 +1,8 @@
 <?php
 
-namespace luya\headless\base;
+namespace luya\headless\api;
 
 use luya\headless\Client;
-use luya\headless\ActiveEndpointResponse;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -42,7 +41,7 @@ use ReflectionProperty;
  * 
  * @author Basil Suter <basil@nadar.io>
  */
-abstract class AbstractActiveEndpoint extends AbstractEndpoint
+class ActiveEndpoint extends Endpoint
 {
     private $_isNewRecord = true;
   
@@ -162,21 +161,20 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
      * Find all items and generate an iterator with the given models.
      * 
      * @param Client $client
-     * @return boolean|\luya\headless\ActiveEndpointResponse
+     * @return  \luya\headless\ActiveEndpointQuery
      */
     public static function findAll(Client $client)
     {
-        $response = static::find()->response($client);
-        
-        if ($response->isError()) {
-            $models = [];
-        } else {
-            $models = $response->getContent();
-        }
-        
-        $models = BaseIterator::create(get_called_class(), $models, $response->endpoint->getPrimaryKeys(), false);
-        
-        return new ActiveEndpointResponse($response, $models);
+        return self::find()->all($client);
+    }
+    
+    /**
+     * 
+     * @return \luya\headless\ActiveEndpointQuery
+     */
+    public static function find()
+    {
+        return (new ActiveEndpointQuery(new static));    
     }
     
     /**

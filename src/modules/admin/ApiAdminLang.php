@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\endpoints;
+namespace luya\headless\apis;
 
 use luya\headless\base\AbstractActiveEndpoint;
 

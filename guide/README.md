@@ -12,7 +12,7 @@ Table of contents
 The LUYA headless client is mainly though to connect to LUYA Admin APIs but you can also connect to any other REST Api. In order to use the endpoint predefined definitions the REST API should follow this architecture:
 
 |Method|Endpoint|Example|Description
-|------|--------|------------
+|------|--------|-------|----
 |GET|`/<ENDPOINT>`|/users|list all users page by page
 |HEAD|`/<ENDPOINT>`|/users|show the overview information of user listing
 |POST|`/<ENDPOINT>`|/users|create a new user

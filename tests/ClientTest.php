@@ -60,7 +60,7 @@ class ClientTest extends HeadlessTestCase
         $client = $this->getClient();
         $client->setRequest($this->getDummyRequest($client, '[{"id":1}]', true));
         
-        $query = ApiAdminUser::find()->response($client);
+        $query = ApiAdminUser::index()->response($client);
         
         $this->assertSame([
             ['id' => 1]

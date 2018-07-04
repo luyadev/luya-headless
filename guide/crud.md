@@ -10,7 +10,7 @@ use luya\headless\endpoints\ApiAdminLang;
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
 // run the pre-built EndpointRequest for the `admin/api-admin-lang` endpoint:
-$response = ApiAdminLang::find()->response($client);
+$response = ApiAdminLang::index()->response($client);
 
 // get the parsed content (will parse json into array)
 foreach ($reponse->getContent() as $item) {

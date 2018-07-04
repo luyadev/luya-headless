@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\endpoints;
+namespace luya\headless\apis;
 
 use luya\headless\base\AbstractEndpoint;
 
@@ -12,7 +12,6 @@ use luya\headless\base\AbstractEndpoint;
  */
 class ApiCmsNavitemNavLangItem extends AbstractEndpoint
 {
-
     public function getEndpointName()
     {
         return 'admin/api-cms-navitem/nav-lang-item';
@@ -21,8 +20,8 @@ class ApiCmsNavitemNavLangItem extends AbstractEndpoint
     /**
      * @inheritdoc
      */
-    public static function find()
+    public static function index()
     {
-        return parent::find()->setRequiredArgs(['langId', 'navId']);
+        return parent::index()->setRequiredArgs(['langId', 'navId']);
     }
 }

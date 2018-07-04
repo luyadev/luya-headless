@@ -2,7 +2,7 @@
 
 namespace luya\headless\cms;
 
-use luya\headless\endpoints\ApiCmsMenuItems;
+use luya\headless\apis\ApiCmsMenuItems;
 use luya\headless\Client;
 use luya\headless\base\BaseIterator;
 use luya\headless\cms\models\Nav;
@@ -52,7 +52,7 @@ class Menu
     protected function getData(Client $client)
     {
         if ($this->_data === null) {
-            $this->_data = ApiCmsMenuItems::find()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($client)->getContent();
+            $this->_data = ApiCmsMenuItems::index()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($client)->getContent();
         }
         
         return $this->_data;

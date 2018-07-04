@@ -1,10 +1,10 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\api\response;
 
 use luya\headless\base\AbstractRequest;
 use luya\headless\base\PaginationInterface;
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\base\EndpointInterface;
 
 /**
  * EndpointResponse represents a response object from the AbstractRequest class
@@ -14,14 +14,20 @@ use luya\headless\base\AbstractEndpoint;
  */
 class EndpointResponse implements PaginationInterface
 {
+    /**
+     * @var \luya\headless\base\AbstractRequest
+     */
     public $request;
     
+    /**
+     * @var \luya\headless\api\Endpoint
+     */
     public $endpoint;
     
     /**
      * Create new endpoint response from an {{AbstratRequest}}.
      */
-    public function __construct(AbstractRequest $request, AbstractEndpoint $endpoint)
+    public function __construct(AbstractRequest $request, EndpointInterface $endpoint)
     {
         $this->request = $request;
         $this->endpoint = $endpoint;
