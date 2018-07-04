@@ -130,6 +130,10 @@ abstract class AbstractRequest
             call_user_func_array($this->client->getRequestCallback(), [$this, microtime()]);    
         }
         
+        if ($this->getResponseStatusCode() >= 500) {
+            throw new RequestException(sprintf('API "%s" answered with a 500 server error. There must be a problem with the API server.', $this->getRequestUrl()));
+        }
+        
         switch ($this->getResponseStatusCode()) {
             // handle unauthorized request exception
             case self::STATUS_CODE_UNAUTHORIZED:

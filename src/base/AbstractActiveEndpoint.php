@@ -169,10 +169,12 @@ abstract class AbstractActiveEndpoint extends AbstractEndpoint
         $response = static::find()->response($client);
         
         if ($response->isError()) {
-            return [];
+            $models = [];
+        } else {
+            $models = $response->getContent();
         }
         
-        $models = BaseIterator::create(get_called_class(), $response->getContent(), $response->endpoint->getPrimaryKeys(), false);
+        $models = BaseIterator::create(get_called_class(), $models, $response->endpoint->getPrimaryKeys(), false);
         
         return new ActiveEndpointResponse($response, $models);
     }
