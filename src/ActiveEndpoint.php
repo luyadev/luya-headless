@@ -143,19 +143,11 @@ class ActiveEndpoint extends Endpoint
      * 
      * @param integer $id
      * @param Client $client
-     * @return boolean|ActiveEndpoint
+     * @return ActiveEndpointRequest
      */
     public static function findOne($id, Client $client)
     {
-        $response = static::view($id)->response($client);
-        
-        if ($response->isError()) {
-            return false;
-        }
-        
-        $model = new static($response->getContent());
-        $model->isNewRecord = false;
-        return $model;
+        return self::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}')->one($client);
     }
     
     /**

@@ -8,7 +8,8 @@ use luya\headless\Client;
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
     /**
-     *
+     * Generate the response object.
+     * 
      * @param Client $client
      * @return array|mixed
      */
@@ -21,7 +22,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     }
     
     /**
-     * 
+     * Iterates over the current response content and assignes every item to the active endpoint model.
      * @param Client $client
      * @return \luya\headless\endpoint\ActiveEndpointResponse
      */
@@ -38,5 +39,25 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
         $models = BaseIterator::create(get_class($this->endpointObject), $models, $response->endpoint->getPrimaryKeys(), false);
         
         return new ActiveEndpointResponse($response, $models);
+    }
+    
+    /**
+     * Takes the current response content into the active endpoint model.
+     * 
+     * @param Client $client
+     * @return boolean|\luya\headless\ActiveEndpoint
+     */
+    public function one(Client $client)
+    {
+        $response = $this->response($client);
+        
+        if ($response->isError()) {
+            return false;
+        }
+        
+        $className = get_class($this->endpointObject);
+        $model = new $className($response->getContent());
+        $model->isNewRecord = false;
+        return $model;
     }
 }

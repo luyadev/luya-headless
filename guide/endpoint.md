@@ -32,9 +32,9 @@ In order to make custom endpoint requests for a given custom url with paramters,
 
 namespace app\headless;
 
-use luya\headless\base\AbstractEndpoint;
+use luya\headless\Endpoint;
 
-class ApiMymoduleUser extends AbstractEndpoint
+class ApiMymoduleUser extends Endpoint
 {
     public function getEndpointName()
     {

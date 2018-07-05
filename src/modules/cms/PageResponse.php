@@ -3,12 +3,12 @@
 namespace luya\headless\modules\cms;
 
 use luya\headless\base\BaseModel;
-use luya\headless\modules\cms\models\NavItem;
-use luya\headless\modules\cms\models\Nav;
-use luya\headless\modules\cms\models\NavItemPage;
 use luya\headless\modules\cms\models\NavItemModule;
 use luya\headless\modules\cms\models\NavItemRedirect;
 use luya\headless\base\BaseIterator;
+use luya\headless\modules\cms\models\NavItem;
+use luya\headless\modules\cms\models\Nav;
+use luya\headless\modules\cms\models\NavItemPage;
 
 /**
  * Get the content of a page.

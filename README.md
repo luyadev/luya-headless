@@ -31,7 +31,7 @@ Quick intro about how to use the headless library with existing built in endpoin
 $client = new \luya\headless\Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
 // run the pre-built EndpointRequest for the `admin/api-admin-lang` endpoint with the created client config.
-$response = \luya\headless\endpoints\ApiAdminLang::find()->response($client);
+$response = ApiAdminLang::find()->response($client);
 
 // foreach trough the parsed json content from the api and dump the content.
 foreach ($reponse->getContent() as $item) {
@@ -39,11 +39,11 @@ foreach ($reponse->getContent() as $item) {
 }
 ```
 
-See the [full Documentation](guide/README.md) in order to see how to make put, delete or post request, handle pagination or access the cms blocks.
-
 ## Documentation
 
-[View the full Documentation](guide/README.md)
+See the [full Documentation](guide/README.md) in order to see how to make put, delete or post request, handle pagination or access the cms blocks.
+
++ [Documentation](guide/README.md)
 
 ## Development and Contribution
 

@@ -2,10 +2,10 @@
 
 Table of contents
 
-+ [CMS page content](cms.md)
-+ [Working with CRUD response content](crud.md)
-+ [Create a client Endpoint](endpoint.md)
-+ [Active Endpoint behavior](active-endpoint.md)
++ [Endpoint](endpoint.md)
++ [Active Endpoint](active-endpoint.md)
++ [Pagination](pagination.md)
++ [CMS APIs](cms.md)
 
 ## General information
 

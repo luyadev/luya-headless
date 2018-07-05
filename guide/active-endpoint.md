@@ -5,13 +5,9 @@ An Active endpoint is analog to Yii Frameworks ActiveRecord pattern. It extends 
 Example active endpoint with model attributes
 
 ```php
-<?php
+use luya\headless\ActiveEndpoint;
 
-namespace app\headless;
-
-use luya\headless\base\AbstractActiveEndpoint;
-
-class ApiUser extends AbstractActiveEndpoint
+class ApiUser extends ActiveEndpoint
 {
     public $id;
     public $email;
@@ -54,7 +50,62 @@ echo $model->firstname . ' ' . $model->lastname;
 In order to manipulate the sort, pagination or other request data you can also use:
 
 ```php
-ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all(Yii::$app->api->client),
+ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all($client);
 ```
  
- as find() returns the ActiveQueryEndpoint Response object.
+ as find() returns the ActiveEndpointResponse Response object.
+ 
+ ## Additional method
+ 
+ In order to extend an ActiveEndpoint by calling a custom action inside the api endpoint this could look like this:
+ 
+ ```php
+ class MyTestApi extends ActiveEndpoint
+ {
+     public $id;
+     public $username;
+     public $password;
+     public $is_deleted;
+     
+     public function getEndpointName()
+     {
+          return 'admin/api-mymodule-test';
+     }
+     
+     /**
+      * Call the custom `admin/api-mymodule-test/find-by-username` endpoint and assign the value into the MyTestApi model. 
+      */
+     public static function findUser($username, Client $client)
+     {
+          return self::find()->setEndpoint('{endpointName}/find-by-username')->setArgs(['username' => $username])->one($client);
+     }
+ }
+ ```
+ 
+ The above example of course assumes that the same model is returned with the same properties, otherwise the values could not be assigned in the ActiveEndpoint.
+ 
+ An example with iteration:
+ 
+  ```php
+ class MyTestApi extends ActiveEndpoint
+ {
+     public $id;
+     public $username;
+     public $password;
+     public $is_deleted;
+     
+     public function getEndpointName()
+     {
+          return 'admin/api-mymodule-test';
+     }
+     
+     /**
+      * Call the `admin/api-mymodule-test` endpoint and add a sort param.
+      */
+     public static function indexByUsernames($Client $client)
+     {
+          return self::find()->setSort(['username' => SORT_ASC])->all($client);
+     }
+ }
+ ```
+ 
