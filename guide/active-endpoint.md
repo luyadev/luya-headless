@@ -1,6 +1,6 @@
 ## Active Endpoint
 
-An Active endpoint is analog to Yii Frameworks ActiveRecord pattern. It extends the {{luya\headless\base\AbstractEndpoint}} by model loading ability in order to find single and multiple data sets for a given endpoint.
+An Active endpoint is similar to the ActiveRecord pattern. It extends the {{luya\headless\ActiveEndpoint}} by model loading ability in order to find single and multiple data sets for a given endpoint.
 
 Example active endpoint with model attributes
 
@@ -35,7 +35,6 @@ In order to retrieve a single object use
 
 ```php
 $client = new Client($token, $url);
-
 $model = ApiUser::findOne(1, $client);
 
 if (!$model) {
@@ -43,6 +42,48 @@ if (!$model) {
 }
 
 echo $model->firstname . ' ' . $model->lastname;
+```
+
+## Save / Update model
+
+The built int `save()` methods allows you to create a new object or update an existing:
+
+> Assuming the `getPrimaryKeys()` method is set correctly, by default its `id`.
+
+### Insert a new record
+
+```php
+$client = new Client($token, $url);
+$model = new ApiUser();
+$model->firstname = 'Basil';
+$model->username = 'nadar';
+
+if ($model->save($client)) {
+    echo "Its saved! nice!";
+} else {
+    // error while storing the model, output error messages
+    var_dump($model->getErrors());
+}
+```
+
+### Update existing record
+
+```php
+$model = ApiUser::findOne(1, $client);
+ 
+if ($model) {
+    // echo current username
+    echo $model->username;
+    
+    // change username and save
+    $model->username = 'foobar';
+    if ($model->save($client)) {
+        echo "Its saved! nice!";
+	} else {
+	    // error while storing the model, output error messages
+	    var_dump($model->getErrors());
+	}
+}
 ```
 
 ## ActiveEndpointQuery
@@ -56,6 +97,8 @@ ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all($client);
  as find() returns the ActiveEndpointResponse Response object.
  
  ## Additional method
+ 
+ ## Find One
  
  In order to extend an ActiveEndpoint by calling a custom action inside the api endpoint this could look like this:
  
@@ -82,7 +125,24 @@ ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all($client);
  }
  ```
  
- The above example of course assumes that the same model is returned with the same properties, otherwise the values could not be assigned in the ActiveEndpoint.
+ > The above example of course assumes that the same model is returned with the same properties, otherwise the values could not be assigned in the ActiveEndpoint.
+ 
+ Now you can access and update the given user:
+ 
+ ```php
+ $model = MyTestApi::findUser('nadar', $client);
+ 
+ if ($model) {
+     // echo current username
+     echo $model->username;
+     
+     // change username and save
+     $model->username = 'foobar';
+     $model->save($client);
+ }
+ ```
+ 
+ ### Iteration
  
  An example with iteration:
  
@@ -109,3 +169,12 @@ ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all($client);
  }
  ```
  
+ Using the method 
+ 
+ ```php
+$response = MyTestApi::indexByUsernames($client);
+ 
+foreach ($response->getModels() as $model) {
+    echo $model->username;
+}
+``` 
