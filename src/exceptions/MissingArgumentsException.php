@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless;
+namespace luya\headless\exceptions;
 
 use luya\headless\Exception;
 
