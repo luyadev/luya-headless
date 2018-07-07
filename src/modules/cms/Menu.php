@@ -64,8 +64,9 @@ class Menu
      */
     public function response(Client $client)
     {
-        $items = $this->getData($client)[$this->_parentNavId];
-        
+        $data = $this->getData($client);
+        $items = isset($data[$this->_parentNavId]) ? $data[$this->_parentNavId] : [];
+
         return BaseIterator::create(Nav::class, $items, 'id');
     }
 }
