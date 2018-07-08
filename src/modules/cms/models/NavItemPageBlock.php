@@ -26,7 +26,34 @@ class NavItemPageBlock extends BaseModel
     public $variation;
     public $is_dirty_dialog_enabled;
 
-    
+    public function getVarValue($varName)
+    {
+        return isset($this->values[$varName]) ? $this->values[$varName] : false;
+    }
+
+    /**
+     * @return NavItemPageRow
+     */
+    public function getRows()
+    {
+        $models = [];
+        foreach ($this->__placeholders as $rowId => $cols) {
+            $models[] = new NavItemPageRow(['index' => $rowId, 'cols' => $cols]);
+        }
+        
+        return $models;
+    }
+
+    public function getPlaceholder($name)
+    {
+        foreach ($this->__placeholders as $cols) {
+            foreach ($cols as $col) {
+                if ($col['var'] == $name) {
+                    return new NavItemPageBlockPlaceholder($col);
+                }
+            }
+        }
+    }
     /*
      * 
      * 'is_dirty' => true
