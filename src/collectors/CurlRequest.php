@@ -56,7 +56,7 @@ class CurlRequest extends AbstractRequest
      */
     public function put(array $data = [])
     {
-        $this->curl = $this->getCurl()->put($this->getRequestUrl(), $data);
+        $this->curl = $this->getCurl()->put($this->getRequestUrl(), $data, true);
         
         return $this;
     }

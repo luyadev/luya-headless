@@ -59,7 +59,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      */
     public static function update($id, array $values)
     {
-        return static::put()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+        return static::put()->setTokens(['{id}' => $id])->setArgs($values)->setEndpoint('{endpointName}/{id}');
     }
     
     /**

@@ -33,6 +33,11 @@ class PageResponse extends BaseModel
      */
     const TYPE_REDIRECT = 3;
     
+    /**
+     * @var boolean Whether current page response has an error or not.
+     */
+    public $error;
+    
     private $_item;
     
     /**

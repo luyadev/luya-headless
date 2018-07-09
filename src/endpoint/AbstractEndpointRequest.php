@@ -3,7 +3,7 @@
 namespace luya\headless\endpoint;
 
 use luya\headless\Client;
-use luya\headless\MissingArgumentsException;
+use luya\headless\exceptions\MissingArgumentsException;
 use luya\headless\base\EndpointInterface;
 
 /**
@@ -58,6 +58,8 @@ abstract class AbstractEndpointRequest
      * Assuming your endpoint request must provide an `id` inside the arguments list, you
      * can require this by setting `setRequiredArgs(['id'])`. Now the EndpointRequest class
      * will check if `id` is in the given `getArgs()` list.
+     * 
+     * @return AbstractEndpointRequest
      */
     public function setRequiredArgs(array $args)
     {
@@ -90,6 +92,7 @@ abstract class AbstractEndpointRequest
      * which would replace {id} with 1 from the tokens list.
      *
      * @param array $tokens
+     * @return AbstractEndpointRequest
      */
     public function setTokens(array $tokens)
     {
@@ -104,7 +107,7 @@ abstract class AbstractEndpointRequest
      * Setter method in order to extend or override the endpoint name from the {{endpointObject}}.
      * 
      * @param string $name The endpoint name, in order to extend the current endpointName from the endpoint defintion you can use {endpointName}/foobar.
-     * @return \luya\headless\base\EndpointInterface
+     * @return AbstractEndpointRequest
      */
     public function setEndpoint($name)
     {
@@ -114,8 +117,8 @@ abstract class AbstractEndpointRequest
     }
     
     /**
-     * 
-     * @return mixed
+     * Getter method for endpoint name
+     * @return string
      */
     public function getEndpoint()
     {
@@ -125,7 +128,7 @@ abstract class AbstractEndpointRequest
     }
 
     /**
-     * 
+     * Parse tokens from a string.
      * @param string $string
      * @param array $tokens
      * @return mixed
@@ -152,10 +155,10 @@ abstract class AbstractEndpointRequest
     private $_args = [];
     
     /**
-     * Setter method for arguments: paremters
+     * Setter method for arguments (params).
      *
      * @param array $args
-     * @return self
+     * @return AbstractEndpointRequest
      */
     public function setArgs(array $args)
     {
@@ -164,6 +167,7 @@ abstract class AbstractEndpointRequest
     }
     
     /**
+     * Getter method for arguments.
      * 
      * @return array
      */
@@ -175,6 +179,7 @@ abstract class AbstractEndpointRequest
     /**
      * 
      * @param array $extraFields
+     * @return AbstractEndpointRequest
      */
     public function setExpand(array $extraFields)
     {
@@ -184,7 +189,7 @@ abstract class AbstractEndpointRequest
     /**
      *
      * @param integer $id
-     * @return self
+     * @return AbstractEndpointRequest
      */
     public function setPage($id)
     {
@@ -208,6 +213,7 @@ abstract class AbstractEndpointRequest
      * + SORT_DESC = 3,2,1
      * 
      * @param array $sort
+     * @return AbstractEndpointRequest
      */
     public function setSort(array $sort)
     {
@@ -223,7 +229,7 @@ abstract class AbstractEndpointRequest
     /**
      *
      * @param integer $rows
-     * @return self
+     * @return AbstractEndpointRequest
      */
     public function setPerPage($rows)
     {
