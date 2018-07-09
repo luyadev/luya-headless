@@ -4,7 +4,6 @@ namespace luya\headless;
 
 use ReflectionClass;
 use ReflectionProperty;
-use luya\headless\endpoint\ActiveEndpointResponse;
 use luya\headless\endpoint\ActiveEndpointRequest;
 
 /**

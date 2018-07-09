@@ -4,6 +4,12 @@ namespace luya\headless\modules\cms\models;
 
 use luya\headless\base\BaseModel;
 
+/**
+ * Represents a data instance from a Block.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class NavItemPageBlock extends BaseModel
 {
     public $id;
@@ -26,11 +32,39 @@ class NavItemPageBlock extends BaseModel
     public $variation;
     public $is_dirty_dialog_enabled;
 
+    /**
+     * Get the content for a given var.
+     * 
+     * @param string $varName
+     * @return mixed|boolean
+     */
     public function getVarValue($varName)
     {
         return isset($this->values[$varName]) ? $this->values[$varName] : false;
     }
 
+    /**
+     * Get the content for a given cfg.
+     *
+     * @param string $varName
+     * @return mixed|boolean
+     */
+    public function getCfgValue($varName)
+    {
+        return isset($this->cfgs[$varName]) ? $this->cfgs[$varName] : false;
+    }
+    
+    /**
+     * Get the content for a given extra.
+     *
+     * @param string $varName
+     * @return mixed|boolean
+     */
+    public function getExtraValue($varName)
+    {
+        return isset($this->extras[$varName]) ? $this->extras[$varName] : false;
+    }
+    
     /**
      * @return NavItemPageRow
      */
@@ -44,6 +78,11 @@ class NavItemPageBlock extends BaseModel
         return $models;
     }
 
+    /**
+     * 
+     * @param string $name The name of the placeholder, like `left`, `sidebar` etc.
+     * @return NavItemPageBlockPlaceholder
+     */
     public function getPlaceholder($name)
     {
         foreach ($this->__placeholders as $cols) {
@@ -54,6 +93,7 @@ class NavItemPageBlock extends BaseModel
             }
         }
     }
+    
     /*
      * 
      * 'is_dirty' => true
