@@ -2,6 +2,7 @@
 
 namespace luya\headless;
 
+use ReflectionClass;
 use luya\headless\base\BaseModel;
 use luya\headless\base\EndpointInterface;
 use luya\headless\endpoint\GetEndpointRequest;
@@ -25,7 +26,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      */
     public function getEndpointName()
     {
-        return mb_convert_case(get_called_class(), MB_CASE_TITLE, "UTF-8");
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', (new ReflectionClass($this))->getShortName()));
     }
     
     /**

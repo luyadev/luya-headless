@@ -142,7 +142,7 @@ class ActiveEndpoint extends Endpoint
      * 
      * @param integer $id
      * @param Client $client
-     * @return ActiveEndpointRequest
+     * @return ActiveEndpoint
      */
     public static function findOne($id, Client $client)
     {
@@ -153,7 +153,7 @@ class ActiveEndpoint extends Endpoint
      * Find all items and generate an iterator with the given models.
      * 
      * @param Client $client
-     * @return ActiveEndpointRequest
+     * @return \luya\headless\endpoint\ActiveEndpointResponse
      */
     public static function findAll(Client $client)
     {

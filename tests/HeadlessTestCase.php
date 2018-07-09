@@ -35,12 +35,17 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
         return $this->getDummyRequest($this->getClient(), $content, $success);
     }
 
-    public function createDummyClient($content)
+    public function createDummyClient($content, $success = true, $statusCode = null)
     {
         $client = $this->getClient();
-        $client->setRequest($this->getDummyRequest($client, $content, true));
+        $request = $this->getDummyRequest($client, $content, $success);
+        
+        if ($statusCode) {
+            $request->statusCode = $statusCode;
+        }
+        
+        $client->setRequest($request);
 
         return $client;
-
     }
 }

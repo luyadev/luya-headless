@@ -56,12 +56,14 @@ class DummyRequest extends AbstractRequest
         return $this->success;
     }
     
+    public $statusCode;
+    
     /**
      * @inheritdoc
      */
     public function getResponseStatusCode()
     {
-        return $this->success ? 200 : 500;
+        return $this->success ? $this->statusCode ?: 200 : $this->statusCode ?: 500;
     }
     
     /**

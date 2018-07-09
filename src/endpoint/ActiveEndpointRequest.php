@@ -11,7 +11,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
      * Generate the response object.
      * 
      * @param Client $client
-     * @return array|mixed
+     * @return EndpointResponse
      */
     public function response(Client $client)
     {

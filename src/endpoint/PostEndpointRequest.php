@@ -16,7 +16,7 @@ class PostEndpointRequest extends AbstractEndpointRequest
     /**
      *
      * @param Client $client
-     * @return array|mixed
+     * @return EndpointResponse
      */
     public function response(Client $client)
     {
