@@ -6,7 +6,6 @@ use luya\headless\base\BaseModel;
 use luya\headless\base\EndpointInterface;
 use luya\headless\endpoint\GetEndpointRequest;
 use luya\headless\endpoint\PostEndpointRequest;
-use luya\headless\endpoint\AbstractEndpointRequest;
 use luya\headless\endpoint\PutEndpointRequest;
 use luya\headless\endpoint\DeleteEndpointRequest;
 
