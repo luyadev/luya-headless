@@ -4,6 +4,8 @@ namespace luya\headless\tests;
 
 use luya\headless\Client;
 use luya\headless\modules\admin\ApiAdminUser;
+use luya\headless\base\AbstractRequest;
+use luya\headless\collectors\DummyRequest;
 
 final class ClientTest extends HeadlessTestCase
 {
@@ -65,5 +67,16 @@ final class ClientTest extends HeadlessTestCase
         $this->assertSame([
             ['id' => 1]
         ], $query->getContent());
+    }
+    
+    public function testRequestCallback()
+    {
+        $client = new Client('token', 'url');
+        $client->setRequestCallback(function(AbstractRequest $request) {
+            $this->assertTrue($request->isSuccess());
+        });
+        $client->setRequest(new DummyRequest($client));
+        
+        $this->assertNull($client->getRequest()->get(['foo' => 'bar'])->getParsedResponse());
     }
 }

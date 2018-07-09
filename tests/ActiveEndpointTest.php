@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\tests\endpoint;
+namespace luya\headless\tests;
 
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\ActiveEndpoint;
@@ -68,6 +68,31 @@ class ActiveEndpointTest extends HeadlessTestCase
         $model->lastname = 'Doe';
         
         $this->assertTrue($model->save($this->createDummyClient('{}')));
+    }
+    
+    public function testAllWithError()
+    {
+        $model = TestingActiveEndpoint::find()->all($this->createDummyClient('[]', false));
+        
+        $this->assertInstanceOf('luya\headless\base\BaseIterator', $model->getModels());
+    }
+    
+    public function testFindOneWithError()
+    {
+        $model = TestingActiveEndpoint::findOne(1, $this->createDummyClient('[]', false));
+        
+        $this->assertFalse($model);
+    }
+    
+    public function testFindAllIterator()
+    {
+        $model = TestingActiveEndpoint::find()->all($this->createDummyClient('[{"firstname":"John", "lastname": "Doe"}]'));
+        
+        $this->assertSame(1, count($model->getModels()));
+        
+        foreach ($model->getModels() as $k => $v) {
+            $this->assertSame('John,Doe', $k); // composite primary key test
+        }
     }
 }
 
