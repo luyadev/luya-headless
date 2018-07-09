@@ -48,5 +48,5 @@ See the [full Documentation](guide/README.md) in order to see how to make put, d
 ## Development and Contribution
 
 + PSR Naming convention: https://www.php-fig.org/bylaws/psr-naming-conventions/
-+ Cache component require: https://www.php-fig.org/psr/psr-16/
++ Cache component require: https://www.php-fig.org/psr/psr-16/ (example implementation, use: https://github.com/apioo/psx-cache)
 + Unit tests `composer install` and run `./vendor/bin/phpunit tests`
