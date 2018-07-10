@@ -15,6 +15,8 @@ abstract class AbstractRequest
 {
     const STATUS_CODE_UNAUTHORIZED = 401;
     
+    const STATUS_CODE_FORBIDDEN = 403;
+    
     const STATUS_CODE_NOTFOUND = 404;
     
     /**
@@ -137,7 +139,10 @@ abstract class AbstractRequest
         switch ($this->getResponseStatusCode()) {
             // handle unauthorized request exception
             case self::STATUS_CODE_UNAUTHORIZED:
-                throw new RequestException(sprintf('Invalid access token provided or insufficent permission to access API "%s"."', $this->getRequestUrl()));
+                throw new RequestException(sprintf('Invalid access token provided or insufficient permission to access API "%s"."', $this->getRequestUrl()));
+            // handle forbidden request exception
+            case self::STATUS_CODE_FORBIDDEN:
+                throw new RequestException(sprintf('insufficient permissions in order to access API "%s"', $this->getRequestUrl()));
             // handle not found endpoint request exception
             case self::STATUS_CODE_NOTFOUND:
                 throw new RequestException(sprintf('Unable to find API "%s". Invalid endpoint name or serverUrl.', $this->getRequestUrl()));

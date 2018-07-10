@@ -46,13 +46,20 @@ class ActiveEndpoint extends Endpoint
     private $_isNewRecord = true;
   
     /**
-     * @var boolean Whether the current ActiveEndpoint model is a new record or not.
+     * Getter method for $isNewRecord.
+     * 
+     * @return boolean Whether the current ActiveEndpoint model is a new record or not.
      */
     public function getIsNewRecord()
     {
         return $this->_isNewRecord;
     }
     
+    /**
+     * Setter method for $isNewRecord.
+     * 
+     * @param boolean $state
+     */
     public function setIsNewRecord($state)
     {
         $this->_isNewRecord = $state;
@@ -78,7 +85,30 @@ class ActiveEndpoint extends Endpoint
     {
         return $this->_errors;
     }
+
+    /**
+     * Get all error messages for a given attribute.
+     * 
+     * This assumes the error response data is formtated as described in {{getErrors()}}.
+     * 
+     * @param string $attribute the error message for a given attribute, if null all attributes with the corresponding message is returned.
+     * @return array
+     */
+    public function getAttributeErrors($attribute = null)
+    {
+        $messages = [];
+        foreach ($this->getErrors() as $error) {
+            $messages[$error['field']][] = $error['message'];
+        }
+
+        return $attribute ? isset($messages[$attribute]) ? $messages[$attribute] : null : $messages;
+    }
     
+    /**
+     * Assign the errors from the request.
+     * 
+     * @param array $errors
+     */
     public function setErrors(array $errors)
     {
         $this->_errors = $errors;   
@@ -133,6 +163,7 @@ class ActiveEndpoint extends Endpoint
      * Returns the list of attribute names.
      * By default, this method returns all public non-static properties of the class.
      * You may override this method to change the default behavior.
+     * 
      * @return array list of attribute names.
      */
     public function attributes()
@@ -172,6 +203,7 @@ class ActiveEndpoint extends Endpoint
     }
     
     /**
+     * Create an {{ActiveEndpointRequest}} object.
      * 
      * @return ActiveEndpointRequest
      */
