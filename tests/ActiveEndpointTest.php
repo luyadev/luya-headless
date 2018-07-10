@@ -101,7 +101,7 @@ class TestingActiveEndpoint extends ActiveEndpoint
     public $firstname;
     public $lastname;
     
-    public function getPrimaryKeys()
+    public static function getPrimaryKeys()
     {
         return ['firstname', 'lastname'];
     }
