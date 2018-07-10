@@ -61,7 +61,18 @@ class ActiveEndpoint extends Endpoint
     private $_errors = [];
     
     /**
-     * @var array An array which can contain errors if validation for insert or update failes with invalud response status.
+     * Error response from the api.
+     * 
+     * In general the error response is an array with a field and message key like:
+     * 
+     * ```php
+     * [
+     *     ['field' => 'user_id', 'message' => 'The user id can not be empty.'],
+     *     ['field' => 'timestamp', 'message' => 'The timestamp must be bigger then current timestamp.'],
+     * ]
+     * ```
+     * 
+     * @return array An array which can contain errors if validation for insert or update failes with invalud response status.
      */
     public function getErrors()
     {
@@ -146,7 +157,7 @@ class ActiveEndpoint extends Endpoint
      */
     public static function findOne($id, Client $client)
     {
-        return self::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}')->one($client);
+        return static::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}')->one($client);
     }
     
     /**
@@ -157,7 +168,7 @@ class ActiveEndpoint extends Endpoint
      */
     public static function findAll(Client $client)
     {
-        return self::find()->all($client);
+        return static::find()->all($client);
     }
     
     /**
