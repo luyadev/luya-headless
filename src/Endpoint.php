@@ -9,6 +9,7 @@ use luya\headless\endpoint\GetEndpointRequest;
 use luya\headless\endpoint\PostEndpointRequest;
 use luya\headless\endpoint\PutEndpointRequest;
 use luya\headless\endpoint\DeleteEndpointRequest;
+use luya\headless\base\BaseIterator;
 
 /**
  * Abstract Endpoint provides access to one endpoints based on the same endpoint node.
@@ -118,5 +119,17 @@ class Endpoint extends BaseModel implements EndpointInterface
     public static function delete()
     {
         return (new DeleteEndpointRequest(new static));
+    }
+
+    /**
+     * Create an iterator of models for the current endpoint.
+     * 
+     * @param array $data
+     * @param string $keyColumn
+     * @return \luya\headless\base\BaseIterator
+     */
+    public static function iterator(array $data, $keyColumn = null)
+    {
+        return BaseIterator::create(get_called_class(), $data, $keyColumn);   
     }
 }

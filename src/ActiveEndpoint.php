@@ -80,7 +80,7 @@ class ActiveEndpoint extends Endpoint
      * 
      * @return array An array with the primary keys.
      */
-    public function getPrimaryKeys()
+    public static function getPrimaryKeys()
     {
         return ['id'];
     }
@@ -101,7 +101,7 @@ class ActiveEndpoint extends Endpoint
     public function getPrimaryKeyValue()
     {
         $keys = [];
-        foreach ($this->getPrimaryKeys() as $key) {
+        foreach (static::getPrimaryKeys() as $key) {
             $keys[] = $this->{$key};
         }
         
@@ -202,5 +202,16 @@ class ActiveEndpoint extends Endpoint
         $this->errors = $response->getContent();
         
         return false;
+    }
+    
+    /**
+     * Create an iterator of models for the current endpoint.
+     *
+     * @param array $data
+     * @return \luya\headless\base\BaseIterator
+     */
+    public static function iterator(array $data, $keyColumn = null)
+    {
+        return parent::iterator($data, $keyColumn ?: static::getPrimaryKeys());
     }
 }

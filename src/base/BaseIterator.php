@@ -21,7 +21,7 @@ class BaseIterator implements \Iterator, \Countable
     /**
      * @param string $modelClass The model class to create for the item.
      * @param array $items Iterate over the array with the items and generate an object for every entry.
-     * @param string $keyColumn The column from the items array which should be token to generate the index column value.
+     * @param string|array $keyColumn The column from the items array which should be token to generate the index column value.
      */
     public static function create($modelClass, array $items, $keyColumn = null, $isNewRecord = null)
     {
@@ -32,6 +32,11 @@ class BaseIterator implements \Iterator, \Countable
         return $object;
     }
     
+    /**
+     * 
+     * @param array $items
+     * @param string|array $keyColumn
+     */
     public function addItems(array $items, $keyColumn)
     {
         foreach ($items as $key => $item) {
