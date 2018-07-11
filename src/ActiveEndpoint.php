@@ -213,6 +213,61 @@ class ActiveEndpoint extends Endpoint
     }
     
     /**
+     * Represents the CRUD index request. Listing of data.
+     * 
+     * @return GetEndpointRequest
+     */
+    public static function index()
+    {
+        return static::get();
+    }
+    
+    /**
+     * Represents the CRUD insert request.
+     * 
+     * @param array $values
+     * @return PostEndpointRequest
+     */
+    public static function insert(array $values)
+    {
+        return static::post()->setArgs($values);
+    }
+    
+    /**
+     * Represents the CRUD update request.
+     * 
+     * @param integer $id
+     * @param array $values
+     * @return PutEndpointRequest
+     */
+    public static function update($id, array $values)
+    {
+        return static::put()->setTokens(['{id}' => $id])->setArgs($values)->setEndpoint('{endpointName}/{id}');
+    }
+    
+    /**
+     * Represents the CRUD view request.
+     * 
+     * @param integer $id
+     * @return GetEndpointRequest
+     */
+    public static function view($id)
+    {
+        return static::get()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+    }
+    
+    /**
+     * Represents the CRUD remove/delete request.
+     * 
+     * @param integer $id
+     * @return DeleteEndpointRequest
+     */
+    public static function remove($id)
+    {
+        return static::delete()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+    }
+    
+    /**
      * Update or Insert model data.
      * 
      * Runs {{udpate()}} or {{insert()}} request command based on current {{$isNewRecord}} state.
