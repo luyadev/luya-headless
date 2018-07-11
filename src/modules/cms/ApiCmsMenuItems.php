@@ -17,11 +17,8 @@ class ApiCmsMenuItems extends Endpoint
         return 'admin/api-cms-menu/items';
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function index()
     {
-        return parent::index()->setRequiredArgs(['langId', 'containerId']);
+        return parent::get()->setRequiredArgs(['langId', 'containerId']);
     }
 }

@@ -17,11 +17,8 @@ class ApiCmsNavitemNavLangItem extends Endpoint
         return 'admin/api-cms-navitem/nav-lang-item';
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function index()
     {
-        return parent::index()->setRequiredArgs(['langId', 'navId']);
+        return parent::get()->setRequiredArgs(['langId', 'navId']);
     }
 }
