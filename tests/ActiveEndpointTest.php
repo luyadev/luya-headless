@@ -94,6 +94,41 @@ class ActiveEndpointTest extends HeadlessTestCase
             $this->assertSame('John,Doe', $k); // composite primary key test
         }
     }
+    
+    public function testInsert()
+    {
+        $test = new TestingActiveEndpoint();
+        $response = $test->insert(['foo' => 'bar'])->response($this->createDummyClient('{"foo":"bar"}'));
+        $this->assertTrue($response->isSuccess());
+    }
+    
+    public function testUpdate()
+    {
+        $test = new TestingActiveEndpoint();
+        $request = $test->update(1, ['bar' => 'foo']);
+        $response = $request->response($this->createDummyClient('{"bar":"foo"}'));
+        $this->assertTrue($response->isSuccess());
+        $this->assertSame(['bar' => 'foo'], $request->getArgs());
+        $this->assertSame('testing-active-endpoint/1', $request->getEndpoint());
+    }
+    
+    public function testView()
+    {
+        $test = new TestingActiveEndpoint();
+        $request = $test->view(1);
+        $response = $request->response($this->createDummyClient('{"bar":"foo"}'));
+        $this->assertTrue($response->isSuccess());
+        $this->assertSame('testing-active-endpoint/1', $request->getEndpoint());
+    }
+    
+    public function testRemove()
+    {
+        $test = new TestingActiveEndpoint();
+        $request = $test->remove(1);
+        $response = $request->response($this->createDummyClient('{"bar":"foo"}'));
+        $this->assertTrue($response->isSuccess());
+        $this->assertSame('testing-active-endpoint/1', $request->getEndpoint());
+    }
 }
 
 class TestingActiveEndpoint extends ActiveEndpoint
