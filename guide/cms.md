@@ -1,4 +1,21 @@
-## Get CMS Content
+# LUYA CMS MODULE
+
+When you have installed the [luya-module-cms] on your API you can also retrieve menu data and render content of a given CMS Page.
+
+## Build a Menu (Navigation)
+
+A very basic example of how to iterate through the menu for a given container and language id:
+
+```php
+$items = Menu::find()->container(2)->language(1)->response($client);
+
+foreach ($items as $item) {
+    echo $item->item->title; // the title of the language corresponding item
+    echo $item->id; // the $navId
+}
+```
+
+## Render CMS Content
 
 In order to get the CMS content retrieve the page content for a given nav id and language:
 

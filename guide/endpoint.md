@@ -1,10 +1,8 @@
 # Endpoint
 
-## Basic call methods
-
 Every endpoint has built in request methods for the current EndpointName defintion.
 
-The basic request methods are:
+The basic request methods of an Endpoint are:
 
 |name|type|description
 |----|----|-------
@@ -12,16 +10,6 @@ The basic request methods are:
 |post()|post|
 |put()|put|
 |delete()|delete|
-
-Which then are inherited by the already task specific request types like from the REST structure defintion [See general infomrations](README.md):
-
-|name|type|description
-|----|----|-------
-|index()|get|List all items `/users`.
-|view($id)|get|Get a specific item  `/users/$id`.
-|insert(array $data)|post|Create new record `/users`.
-|update($id, array $data)|put|Update an existing record `/users/$id`.
-|remove($id)|delete|Remove an existing record `/users/$id`.
 
 ## Custom Endpoint Requests
 
@@ -90,16 +78,7 @@ class UserController extends \luya\admin\ngrest\base\Api
 
 ## Expand
 
-Assumning you only want to expand for index() events you can also override the find method like this:
-
-```php
-public static function index()
-{
-    return parent::index()->setExpand(['users', 'image']);
-}
-```
-
-If you want to expand every get request you could also override `get()`:
+If you want to expand every get request you can override the existing `get()` method:
 
 ```php
 public static function get()

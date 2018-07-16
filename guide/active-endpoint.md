@@ -1,4 +1,14 @@
-## Active Endpoint
+# Active Endpoint
+
+Active Endpoint takes the inherited get, post, put & delete reoureces and transforms them to a task specific request types like from the REST structure defintion [See general infomrations](README.md):
+
+|name|type|description
+|----|----|-------
+|index()|get|List all items `/users`.
+|view($id)|get|Get a specific item  `/users/$id`.
+|insert(array $data)|post|Create new record `/users`.
+|update($id, array $data)|put|Update an existing record `/users/$id`.
+|remove($id)|delete|Remove an existing record `/users/$id`.
 
 An Active endpoint is similar to the ActiveRecord pattern. It extends the {{luya\headless\ActiveEndpoint}} by model loading ability in order to find single and multiple data sets for a given endpoint.
 
@@ -20,6 +30,8 @@ class ApiUser extends ActiveEndpoint
     }
 }
 ```
+
+## Retrieve data
 
 Now you can use the `findOne()` and `findAll()` methods for the given Endpoint (ApiUser) in order to foreach all records as a model object or retrieve a single records.
 
