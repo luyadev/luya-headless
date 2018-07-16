@@ -46,12 +46,21 @@ class Menu
         return $this;
     }
     
+    private $_cache;
+    
+    public function cache($ttl)
+    {
+        $this->_cache = $ttl;
+        
+        return $this;
+    }
+    
     private $_data;
     
     protected function getData(Client $client)
     {
         if ($this->_data === null) {
-            $this->_data = ApiCmsMenuItems::index()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->response($client)->getContent();
+            $this->_data = ApiCmsMenuItems::index()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->setCache($this->_cache)->response($client)->getContent();
         }
         
         return $this->_data;
