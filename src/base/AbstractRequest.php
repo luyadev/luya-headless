@@ -20,6 +20,11 @@ abstract class AbstractRequest
     const STATUS_CODE_NOTFOUND = 404;
     
     /**
+     * @var array An array of get params which will be added as query to the requestUrl while creating.
+     */
+    protected $requestUrlParams = [];
+    
+    /**
      * @var \luya\headless\Client
      */
     protected $client;
@@ -35,7 +40,7 @@ abstract class AbstractRequest
      * @param array $params
      * @return \luya\headless\base\AbstractRequest
      */
-    abstract public function get(array $params = []);
+    abstract protected function internalGet();
     
     /**
      * Get request
@@ -43,7 +48,7 @@ abstract class AbstractRequest
      * @param array $data
      * @return \luya\headless\base\AbstractRequest
      */
-    abstract public function post(array $data = []);
+    abstract protected function internalPost(array $data = []);
     
     /**
      * Get request
@@ -51,7 +56,7 @@ abstract class AbstractRequest
      * @param array $data
      * @return \luya\headless\base\AbstractRequest
      */
-    abstract public function put(array $data = []);
+    abstract protected function internalPut(array $data = []);
     
     /**
      * Get request
@@ -59,43 +64,118 @@ abstract class AbstractRequest
      * @param array $data
      * @return \luya\headless\base\AbstractRequest
      */
-    abstract public function delete(array $data = []);
+    abstract protected function internalDelete(array $data = []);
     
     /**
      * Whether current request is sucessfull or not.
-     * 
+     *
      * @return boolean
      */
     abstract public function isSuccess();
     
     /**
      * Returns the RAW response content from the API.
-     * 
+     *
      * @return string
      */
     abstract public function getResponseRawContent();
     
     /**
      * Returns the status code of the current parsed response.
-     * 
+     *
      * @return integer
      */
     abstract public function getResponseStatusCode();
     
     /**
      * Return the value for a given response header.
-     * 
+     *
      * @param string $key
      */
     abstract public function getResponseHeader($key);
     
     /**
-     * 
+     *
      * @param Client $client
      */
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+    
+    /**
+     * 
+     * @param array $params
+     * @return \luya\headless\base\AbstractRequest
+     */
+    public function get(array $params = [])
+    {
+        $this->requestUrlParams = $params;
+        $this->callBeforeRequestEvent($params);
+        $this->internalGet();
+        $this->callAfterRequestEvent($params);
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param array $data
+     * @return \luya\headless\base\AbstractRequest
+     */
+    public function post(array $data = [])
+    {
+        $this->callBeforeRequestEvent($data);
+        $this->internalPost($data);  
+        $this->callAfterRequestEvent($data);
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param array $data
+     * @return \luya\headless\base\AbstractRequest
+     */
+    public function put(array $data = [])
+    {
+        $this->callBeforeRequestEvent($data);
+        $this->internalPut($data);
+        $this->callAfterRequestEvent($data);
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param array $data
+     * @return \luya\headless\base\AbstractRequest
+     */
+    public function delete(array $data = [])
+    {
+        $this->callBeforeRequestEvent($data);
+        $this->internalDelete($data);
+        $this->callAfterRequestEvent($data);
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param array $data
+     */
+    protected function callBeforeRequestEvent(array $data)
+    {
+        if ($this->client->getBeforeRequestEvent()) {
+            call_user_func_array($this->client->getBeforeRequestEvent(), [new BeforeRequestEvent($this->getRequestUrl(), $data)]);
+        }
+    }
+    
+    /**
+     * 
+     * @param array $data
+     */
+    protected function callAfterRequestEvent(array $data)
+    {
+        if ($this->client->getAfterRequestEvent()) {
+            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent())]);
+        }
     }
     
     /**
@@ -110,6 +190,8 @@ abstract class AbstractRequest
         return $this;
     }
     
+    
+    
     /**
      * Returns the full qualified request url from client serverUrl and endpoint.
      * @return string
@@ -118,7 +200,13 @@ abstract class AbstractRequest
     {
         $parts = [rtrim($this->client->serverUrl, '/'), $this->client->language, ltrim($this->endpoint, '/')];
         
-        return implode("/", array_filter($parts));
+        $url = implode("/", array_filter($parts));
+
+        if (!empty($this->requestUrlParams)) {
+            $url.= '?'.http_build_query($this->requestUrlParams);
+        }
+        
+        return $url;
     }
     
     /**
@@ -128,10 +216,6 @@ abstract class AbstractRequest
      */
     public function getParsedResponse()
     {
-        if ($this->client->getRequestCallback()) {
-            call_user_func_array($this->client->getRequestCallback(), [$this, microtime()]);    
-        }
-        
         if ($this->getResponseStatusCode() >= 500) {
             throw new RequestException(sprintf('API "%s" answered with a 500 server error. There must be a problem with the API server.', $this->getRequestUrl()));
         }
@@ -158,10 +242,9 @@ abstract class AbstractRequest
      * @param array $params
      * @return string
      */
-    protected function generateCacheKey($url, array $params)
+    protected function generateCacheKey(array $params)
     {
         $params[] = __CLASS__;
-        $params[] = $url;
         
         return implode(".", $params);
     }
@@ -169,18 +252,20 @@ abstract class AbstractRequest
     /**
      * Method to cache callable response content.
      *
-     * @param string $key
+     * @param array $key
      * @param string $ttl
      * @param callable $fn
      * @return mixed
      */
-    protected function getOrSetCache($key, $ttl, callable $fn)
+    public function getOrSetCache(array $key, $ttl, callable $fn)
     {
         $cache = $this->client->getCache();
         
         if (!$cache) {
             return call_user_func($fn);
         }
+        
+        $key = $this->generateCacheKey($key);
         
         if ($cache->has($key)) {
             return $cache->get($key);

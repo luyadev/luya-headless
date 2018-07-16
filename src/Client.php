@@ -76,30 +76,57 @@ class Client
         return $this->_cache;
     }
     
-    private $_requestCallback;
+    private $_beforeRequestEvent;
+    
+    /**
+     * A callable which runs before every request.
+     *
+     * ```php
+     * setBeforeRequestEvent(function(luya\headless\base\BeforeRequestEvent $event) {
+     *     // do some logging in your application
+     * });
+     * ```
+     *
+     * @param callable $fn
+     */
+    public function setBeforeRequestEvent(callable $fn)
+    {
+        $this->_beforeRequestEvent = $fn;
+    }
+    
+    /**
+     *
+     * @return callable|null
+     */
+    public function getBeforeRequestEvent()
+    {
+        return $this->_beforeRequestEvent;
+    }
+    
+    private $_afterRequestEvent;
     
     /**
      * A callable which runs after every request.
      * 
      * ```php
-     * setRequestCallback(function(AbstractRequest $request, $time) {
+     * setAfterRequestEvent(function(luya\headless\base\AfterRequestEvent $event) {
      *     // do some logging in your application
      * });
      * ```
      * 
      * @param callable $fn
      */
-    public function setRequestCallback(callable $fn)
+    public function setAfterRequestEvent(callable $fn)
     {
-        $this->_requestCallback = $fn;      
+        $this->_afterRequestEvent = $fn;      
     }
     
     /**
      * 
      * @return callable|null
      */
-    public function getRequestCallback()
+    public function getAfterRequestEvent()
     {
-        return $this->_requestCallback;
+        return $this->_afterRequestEvent;
     }
 }

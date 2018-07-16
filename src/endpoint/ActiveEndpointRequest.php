@@ -4,21 +4,19 @@ namespace luya\headless\endpoint;
 
 use luya\headless\base\BaseIterator;
 use luya\headless\Client;
+use luya\headless\base\AbstractRequest;
 
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
     /**
-     * Generate the response object.
-     * 
-     * @param Client $client
-     * @return EndpointResponse
+     * Response trough get request.
+     *
+     * {@inheritDoc}
+     * @see \luya\headless\endpoint\AbstractEndpointRequest::createResponse()
      */
-    public function response(Client $client)
+    public function createResponse(AbstractRequest $request)
     {
-        $request = $this->generateRequest($client);
-        $request->get($this->getArgs() ?: []);
-        
-        return (new EndpointResponse($request, $this->endpointObject));
+        return (new EndpointResponse($request->get($this->getArgs() ?: []), $this->endpointObject));
     }
     
     /**

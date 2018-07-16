@@ -32,11 +32,9 @@ class CurlRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function get(array $params = [])
+    public function internalGet()
     {
-        $this->curl = $this->getOrSetCache($this->generateCacheKey($this->getRequestUrl(), $params), 3600, function() use ($params) {
-            return $this->getCurl()->get($this->getRequestUrl(), $params);
-        });
+        $this->curl = $this->getCurl()->get($this->getRequestUrl());
         
         return $this;
     }
@@ -44,7 +42,7 @@ class CurlRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function post(array $data = [])
+    public function internalPost(array $data = [])
     {
         $this->curl = $this->getCurl()->post($this->getRequestUrl(), $data);
         
@@ -54,7 +52,7 @@ class CurlRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function put(array $data = [])
+    public function internalPut(array $data = [])
     {
         $this->curl = $this->getCurl()->put($this->getRequestUrl(), $data, true);
         
@@ -64,7 +62,7 @@ class CurlRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function delete(array $data = [])
+    public function internalDelete(array $data = [])
     {
         $this->curl = $this->getCurl()->delete($this->getRequestUrl(), $data);
         

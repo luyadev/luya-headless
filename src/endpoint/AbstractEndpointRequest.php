@@ -5,6 +5,7 @@ namespace luya\headless\endpoint;
 use luya\headless\Client;
 use luya\headless\exceptions\MissingArgumentsException;
 use luya\headless\base\EndpointInterface;
+use luya\headless\base\AbstractRequest;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -15,17 +16,17 @@ use luya\headless\base\EndpointInterface;
 abstract class AbstractEndpointRequest
 {
     /**
-     * Create a response.
-     * 
-     * @param Client $client
-     * @return EndpointResponse
-     */
-    abstract public function response(Client $client);
-    
-    /**
      * @var EndpointInterface
      */
     protected $endpointObject;
+    
+    /**
+     * Generate a reponse from a request.
+     * 
+     * @param AbstractRequest $request
+     * @return EndpointResponse
+     */
+    abstract public function createResponse(AbstractRequest $request);
     
     /**
      *
@@ -35,6 +36,40 @@ abstract class AbstractEndpointRequest
     {
         $this->endpointObject = $endpointObject;
         $this->ensureRequiredArguments();
+    }
+    
+    /**
+     * Create a response.
+     *
+     * @param Client $client
+     * @return EndpointResponse
+     */
+    public function response(Client $client)
+    {
+        $request = $client->getRequest();
+        $request->setEndpoint($this->getEndpoint());
+        
+        if ($this->getCache()) {
+            return $request->getOrSetCache([$this->getEndpoint(), get_called_class()], $this->getCache(), function() use ($request) {
+                return $this->createResponse($request);
+            });
+        }
+        
+        return $this->createResponse($request);
+    }
+    
+    private $_cache;
+    
+    public function setCache($ttl)
+    {
+        $this->_cache = $ttl;
+        
+        return $this;
+    }
+    
+    public function getCache()
+    {
+        return $this->_cache;
     }
     
     /**
@@ -138,19 +173,7 @@ abstract class AbstractEndpointRequest
         return str_replace(array_keys($tokens), array_values($tokens), $string);
     }
     
-    /**
-     * Generate the current request object with the endpoint url from the {{getEndpoint()}}.
-     * 
-     * @param Client $client
-     * @return \luya\headless\base\AbstractRequest
-     */
-    protected function generateRequest(Client $client)
-    {
-        $request = $client->getRequest();
-        $request->setEndpoint($this->getEndpoint());
-        
-        return $request;
-    }
+    
     
     private $_args = [];
     

@@ -19,7 +19,7 @@ class DummyRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function get(array $params = [])
+    public function internalGet()
     {
         return $this;   
     }
@@ -27,7 +27,7 @@ class DummyRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function post(array $data = [])
+    public function internalPost(array $data = [])
     {
         return $this;
     }
@@ -35,7 +35,7 @@ class DummyRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function put(array $data = [])
+    public function internalPut(array $data = [])
     {
         return $this;
     }
@@ -43,7 +43,7 @@ class DummyRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
-    public function delete(array $data = [])
+    public function internalDelete(array $data = [])
     {
         return $this;
     }

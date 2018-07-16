@@ -215,7 +215,7 @@ class ActiveEndpoint extends Endpoint
     /**
      * Represents the CRUD index request. Listing of data.
      * 
-     * @return GetEndpointRequest
+     * @return \luya\headless\endpoint\GetEndpointRequest
      */
     public static function index()
     {
@@ -226,7 +226,7 @@ class ActiveEndpoint extends Endpoint
      * Represents the CRUD insert request.
      * 
      * @param array $values
-     * @return PostEndpointRequest
+     * @return \luya\headless\endpoint\PostEndpointRequest
      */
     public static function insert(array $values)
     {
@@ -238,7 +238,7 @@ class ActiveEndpoint extends Endpoint
      * 
      * @param integer $id
      * @param array $values
-     * @return PutEndpointRequest
+     * @return \luya\headless\endpoint\PutEndpointRequest
      */
     public static function update($id, array $values)
     {
@@ -249,7 +249,7 @@ class ActiveEndpoint extends Endpoint
      * Represents the CRUD view request.
      * 
      * @param integer $id
-     * @return GetEndpointRequest
+     * @return \luya\headless\endpoint\GetEndpointRequest
      */
     public static function view($id)
     {
@@ -260,7 +260,7 @@ class ActiveEndpoint extends Endpoint
      * Represents the CRUD remove/delete request.
      * 
      * @param integer $id
-     * @return DeleteEndpointRequest
+     * @return \luya\headless\endpoint\DeleteEndpointRequest
      */
     public static function remove($id)
     {
