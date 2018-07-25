@@ -257,34 +257,59 @@ abstract class AbstractEndpointRequest
      * Example usage assuming filters are configured on api:
      * 
      * ```php
-     * setFilter(['lang_id' => 1]);
+     * setFilter(['lang_id' => 1]); // like a where condition lang_id=1
      * ```
      * 
-     * The json code for such a request would be:
+     * greather then, smaller then operators:
      * 
-     * ```json
-     * {
-     *     "or": [
-     *         {
-     *             "and": [
-     *                 {
-     *                     "name": "some name",
-     *                 },
-     *                 {
-     *                     "price": "25",
-     *                 }
-     *             ]
-     *         },
-     *         {
-     *             "id": {"in": [2, 5, 9]},
-     *             "price": {
-     *                 "gt": 10,
-     *                 "lt": 50
-     *             }
-     *         }
-     *     ]
-     * }
+     * ```php
+     * setFilter(['publication_date' => ['lt' => strtotime('tomorrow'), 'gt' => strtotime('yesterday')]);  //like >= and <= conditions for two fields.
      * ```
+     * 
+     * Example using the in condition for both languages:
+     * 
+     * ```php
+     * setFilter([
+     *     'lang_id' => ['in' => [1,2]]
+     * ]);
+     * ```
+     * 
+     * All posible operators:
+     * 
+     * + and (AND)
+     * + or (OR)
+     * + not (NOT)
+     * + lt (<)
+     * + gt (>)
+     * + lte (<=)
+     * + gte (>=)
+     * + eq (=)
+     * + neq (!=)
+     * + in (IN)
+     * + nin (NOT IN)
+     * + like (LIKE)
+     * 
+     * ## Conditions
+     * 
+     * combine two conditions with which are AND conditions:
+     * 
+     * ```php
+     * setFilter([
+     *     'publication_date' => ['lt' => strtotime('tomorrow'), 'gt' => strtotime('yesterday')],
+     *     'lang_id' => 2
+     * ]);
+     * ```
+     * 
+     * Two conditions but connected as OR condition:
+     * 
+     * ```php
+     * setFilter([
+     *    'or' => [
+     *       ['lang_id' => 1],
+     *       ['publication_date' => ['gt' => time()]],
+     *    ]
+     * ])
+     * ``` 
      * 
      * @see https://www.yiiframework.com/doc/api/2.0/yii-data-datafilter
      * @return AbstractEndpointRequest
