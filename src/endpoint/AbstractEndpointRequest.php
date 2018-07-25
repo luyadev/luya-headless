@@ -250,6 +250,51 @@ abstract class AbstractEndpointRequest
     }
     
     /**
+     * Set filter conditions.
+     * 
+     * The filters must be enabled on the api side, otherwise it wont have any effect.
+     * 
+     * Example usage assuming filters are configured on api:
+     * 
+     * ```php
+     * setFilter(['lang_id' => 1]);
+     * ```
+     * 
+     * The json code for such a request would be:
+     * 
+     * ```json
+     * {
+     *     "or": [
+     *         {
+     *             "and": [
+     *                 {
+     *                     "name": "some name",
+     *                 },
+     *                 {
+     *                     "price": "25",
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "id": {"in": [2, 5, 9]},
+     *             "price": {
+     *                 "gt": 10,
+     *                 "lt": 50
+     *             }
+     *         }
+     *     ]
+     * }
+     * ```
+     * 
+     * @see https://www.yiiframework.com/doc/api/2.0/yii-data-datafilter
+     * @return AbstractEndpointRequest
+     */
+    public function setFilter(array $filter)
+    {
+        return $this->setArgs(['filter' => $filter]);
+    }
+    
+    /**
      *
      * @param integer $rows
      * @return AbstractEndpointRequest
