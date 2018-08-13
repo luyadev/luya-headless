@@ -261,7 +261,7 @@ abstract class AbstractRequest
     {
         $cache = $this->client->getCache();
         
-        if (!$cache) {
+        if (!$cache || !$this->isSuccess()) {
             return call_user_func($fn);
         }
         
