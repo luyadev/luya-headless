@@ -3,6 +3,7 @@
 namespace luya\headless\base;
 
 use luya\headless\ActiveEndpoint;
+use luya\headless\Exception;
 
 /**
  * Generate an iterator object for a given model an array with data.
@@ -12,10 +13,19 @@ use luya\headless\ActiveEndpoint;
  */
 class BaseIterator implements \Iterator, \Countable
 {
+    /**
+     * @var string The full qualified class name for the given model to create an iteration.
+     */
     protected $modelClass;
     
+    /**
+     * @var boolean Whether the current row item is a new record or not. 
+     */
     protected $isNewRecord = true;
     
+    /**
+     * @var array Holds the array data for the Iterator interface.
+     */
     protected $data = [];
     
     /**
@@ -40,6 +50,11 @@ class BaseIterator implements \Iterator, \Countable
     public function addItems(array $items, $keyColumn)
     {
         foreach ($items as $key => $item) {
+
+            if (!is_array($item)) {
+                throw new Exception(sprintf('The given iterator item must be type of array in order to assign them to "%s" model.', $this->modelClass));
+            }
+
             $pkValues = [];
             foreach ((array) $keyColumn as $columnValue) {
                 $pkValues[] = $item[$columnValue];
@@ -48,6 +63,12 @@ class BaseIterator implements \Iterator, \Countable
         }
     }
     
+    /**
+     * Add new item to array of items.
+     * 
+     * @param array $item The array with key value pairing where key is the attribute name.
+     * @param string $key The value which is used for the indexing of the data array.
+     */
     public function addItem(array $item, $key)
     {
         $class = $this->modelClass;
