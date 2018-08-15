@@ -180,6 +180,8 @@ abstract class AbstractEndpointRequest
     /**
      * Setter method for arguments (params).
      *
+     * Arguments are url parameters with key value pairing.
+     *
      * @param array $args
      * @return AbstractEndpointRequest
      */
@@ -200,7 +202,9 @@ abstract class AbstractEndpointRequest
     }
     
     /**
+     * Expand a given field or relation.
      * 
+     * @see https://www.yiiframework.com/doc/guide/2.0/en/rest-resources#fields
      * @param array $extraFields
      * @return AbstractEndpointRequest
      */
@@ -210,7 +214,8 @@ abstract class AbstractEndpointRequest
     }
     
     /**
-     *
+     * Set the current page which should be used.
+     * 
      * @param integer $id
      * @return AbstractEndpointRequest
      */
@@ -218,6 +223,32 @@ abstract class AbstractEndpointRequest
     {
         return $this->setArgs(['page' => $id]);
     }
+    
+    /**
+     * Set a value of how many items to response for every page.
+     * 
+     * @param integer $rows
+     * @return AbstractEndpointRequest
+     */
+    public function setPerPage($rows)
+    {
+        return $this->setArgs(['per-page' => $rows]);
+    }
+
+    /**
+     * Provides the option to return only a certain amount of fields.
+     * 
+     * This can speed up the request and reduce the transfer amount of data.
+     * 
+     * @see https://www.yiiframework.com/doc/guide/2.0/en/rest-resources#fields
+     * @param array $fields
+     * @return \luya\headless\endpoint\AbstractEndpointRequest
+     */
+    public function setFields(array $fields)
+    {
+        return $this->setArgs(['fields' => implode(",", $fields)]);
+    }
+    
     
     /**
      * Set a sort order for a given field.
@@ -317,15 +348,5 @@ abstract class AbstractEndpointRequest
     public function setFilter(array $filter)
     {
         return $this->setArgs(['filter' => $filter]);
-    }
-    
-    /**
-     *
-     * @param integer $rows
-     * @return AbstractEndpointRequest
-     */
-    public function setPerPage($rows)
-    {
-        return $this->setArgs(['per-page' => $rows]);
     }
 }
