@@ -57,9 +57,15 @@ class BaseIterator implements \Iterator, \Countable
 
             $pkValues = [];
             foreach ((array) $keyColumn as $columnValue) {
-                $pkValues[] = $item[$columnValue];
+                // check if the column exists in the current query
+                if (isset($item[$columnValue])) {
+                    $pkValues[] = $item[$columnValue];
+                }
             }
-            $this->addItem($item, is_null($keyColumn) ? $key : implode(",", $pkValues));
+            
+            // if $pkValues is empty it means it could be that the primary key fields is not available in the current fields list (setFields()).
+            // therefore we just use the key
+            $this->addItem($item, (is_null($keyColumn) || empty($pkValues)) ? $key : implode(",", $pkValues));
         }
     }
     
