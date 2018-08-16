@@ -81,4 +81,20 @@ class DummyRequest extends AbstractRequest
     {
         return $key;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function hasConnectionError()
+    {
+        return false;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getConnectionErrorMessage()
+    {
+        return null;
+    }
 }

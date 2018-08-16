@@ -91,8 +91,21 @@ abstract class AbstractRequest
      * Return the value for a given response header.
      *
      * @param string $key
+     * @return string
      */
     abstract public function getResponseHeader($key);
+    
+    /**
+     * Whether the connection library (curl) has an error or not.
+     * 
+     * @return boolean
+     */
+    abstract public function hasConnectionError();
+    
+    /**
+     * If there is a connection error hasConnectionError() this method returns the message.
+     */
+    abstract public function getConnectionErrorMessage();
     
     /**
      *
@@ -216,23 +229,31 @@ abstract class AbstractRequest
      */
     public function getParsedResponse()
     {
-        if ($this->getResponseStatusCode() >= 500) {
+        if ($this->hasConnectionError()) {
+            throw new RequestException(sprintf('API request for "%s" could not resolved due to a connection error: "%s".', $this->getRequestUrl(), $this->getConnectionErrorMessage()));
+        }
+        $this->responseStatusCodeExceptionCheck($this->getResponseStatusCode());
+        
+        return json_decode($this->getResponseRawContent(), true);
+    }
+    
+    public function responseStatusCodeExceptionCheck($statusCode)
+    {
+        if ($statusCode >= 500) {
             throw new RequestException(sprintf('API "%s" answered with a 500 server error. There must be a problem with the API server.', $this->getRequestUrl()));
         }
         
-        switch ($this->getResponseStatusCode()) {
+        switch ($statusCode) {
             // handle unauthorized request exception
             case self::STATUS_CODE_UNAUTHORIZED:
                 throw new RequestException(sprintf('Invalid access token provided or insufficient permission to access API "%s".', $this->getRequestUrl()));
-            // handle forbidden request exception
+                // handle forbidden request exception
             case self::STATUS_CODE_FORBIDDEN:
                 throw new RequestException(sprintf('insufficient permissions in order to access API "%s".', $this->getRequestUrl()));
-            // handle not found endpoint request exception
+                // handle not found endpoint request exception
             case self::STATUS_CODE_NOTFOUND:
                 throw new RequestException(sprintf('Unable to find API "%s". Invalid endpoint name or serverUrl.', $this->getRequestUrl()));
         }
-        
-        return json_decode($this->getResponseRawContent(), true);
     }
     
     /**

@@ -96,6 +96,22 @@ class CurlRequest extends AbstractRequest
     /**
      * @inheritdoc
      */
+    public function hasConnectionError()
+    {
+        return $this->curl->curl_error;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getConnectionErrorMessage()
+    {
+        return $this->curl->curl_error_message;
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function getResponseRawContent()
     {
         $response = $this->curl->response;
