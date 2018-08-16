@@ -14,11 +14,26 @@ use Psr\SimpleCache\CacheInterface;
  */
 class Client
 {
+    /**
+     * @var string The access token which is used for the bearer authentification.
+     */
     public $accessToken;
     
+    /**
+     * @var string The base url for all requests.
+     */
     public $serverUrl;
     
+    /**
+     * @var string The language short code which will be prepend to the server Url.
+     */
     public $language;
+    
+    /**
+     * @var boolean If enabled certain find request wont throw an exception but returns false or empty arrays. Therefore in production
+     * you should disable debug (which is default).
+     */
+    public $debug = false;
     
     /**
      * 

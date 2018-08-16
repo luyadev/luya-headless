@@ -28,7 +28,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     {
         $response = $this->response($client);
         
-        if ($response->isError()) {
+        if ($response->isError() && !$client->debug) {
             $models = [];
         } else {
             $models = $response->getContent();
@@ -49,7 +49,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     {
         $response = $this->response($client);
         
-        if ($response->isError()) {
+        if ($response->isError() && !$client->debug) {
             return false;
         }
         
