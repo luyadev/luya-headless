@@ -217,7 +217,8 @@ class ActiveEndpoint extends Endpoint
         foreach($first->getModels() as $key => $model) {
             $data[$key] = $model;
         }
-        for ($i=$first->getCurrentPage(); $i<=$first->getPageCount(); $i++) {
+        
+        for ($i=$first->getNextPageId(); $i<=$first->getPageCount(); $i++) {
             $find = static::find()->setPage($i)->setCache($cacheTtl)->all($client);
             foreach ($find->getModels() as $key => $model) {
                 $data[$key] = $model;
