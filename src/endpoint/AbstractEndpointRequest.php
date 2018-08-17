@@ -60,6 +60,14 @@ abstract class AbstractEndpointRequest
     
     private $_cache;
     
+    /**
+     * Set caching time for the current request.
+     * 
+     * If not set in client this won't have any effect, but will also not throw an exception.
+     * 
+     * @param integer $ttl Caching life time in seconds.$this
+     * @return static
+     */
     public function setCache($ttl)
     {
         $this->_cache = $ttl;
@@ -67,6 +75,11 @@ abstract class AbstractEndpointRequest
         return $this;
     }
     
+    /**
+     * Getter method for caching time.
+     * 
+     * @return integer
+     */
     public function getCache()
     {
         return $this->_cache;
@@ -94,7 +107,7 @@ abstract class AbstractEndpointRequest
      * can require this by setting `setRequiredArgs(['id'])`. Now the EndpointRequest class
      * will check if `id` is in the given `getArgs()` list.
      * 
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setRequiredArgs(array $args)
     {
@@ -127,7 +140,7 @@ abstract class AbstractEndpointRequest
      * which would replace {id} with 1 from the tokens list.
      *
      * @param array $tokens
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setTokens(array $tokens)
     {
@@ -142,7 +155,7 @@ abstract class AbstractEndpointRequest
      * Setter method in order to extend or override the endpoint name from the {{endpointObject}}.
      * 
      * @param string $name The endpoint name, in order to extend the current endpointName from the endpoint defintion you can use {endpointName}/foobar.
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setEndpoint($name)
     {
@@ -173,8 +186,6 @@ abstract class AbstractEndpointRequest
         return str_replace(array_keys($tokens), array_values($tokens), $string);
     }
     
-    
-    
     private $_args = [];
     
     /**
@@ -183,7 +194,7 @@ abstract class AbstractEndpointRequest
      * Arguments are url parameters with key value pairing.
      *
      * @param array $args
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setArgs(array $args)
     {
@@ -206,7 +217,7 @@ abstract class AbstractEndpointRequest
      * 
      * @see https://www.yiiframework.com/doc/guide/2.0/en/rest-resources#fields
      * @param array $extraFields
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setExpand(array $extraFields)
     {
@@ -217,7 +228,7 @@ abstract class AbstractEndpointRequest
      * Set the current page which should be used.
      * 
      * @param integer $id
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setPage($id)
     {
@@ -228,7 +239,7 @@ abstract class AbstractEndpointRequest
      * Set a value of how many items to response for every page.
      * 
      * @param integer $rows
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setPerPage($rows)
     {
@@ -242,7 +253,7 @@ abstract class AbstractEndpointRequest
      * 
      * @see https://www.yiiframework.com/doc/guide/2.0/en/rest-resources#fields
      * @param array $fields
-     * @return \luya\headless\endpoint\AbstractEndpointRequest
+     * @return static
      */
     public function setFields(array $fields)
     {
@@ -267,7 +278,7 @@ abstract class AbstractEndpointRequest
      * + SORT_DESC = 3,2,1
      * 
      * @param array $sort
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setSort(array $sort)
     {
@@ -343,7 +354,7 @@ abstract class AbstractEndpointRequest
      * ``` 
      * 
      * @see https://www.yiiframework.com/doc/api/2.0/yii-data-datafilter
-     * @return AbstractEndpointRequest
+     * @return static
      */
     public function setFilter(array $filter)
     {
