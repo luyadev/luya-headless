@@ -95,6 +95,15 @@ class ActiveEndpointTest extends HeadlessTestCase
         }
     }
     
+    public function testFindAllPagesIterator()
+    {
+        $models = TestingActiveEndpoint::findAllPages($this->createDummyClient('[{"firstname":"John", "lastname": "Doe"}]', true, 200, ['X-Pagination-Current-Page' => 1, 'X-Pagination-Page-Count' => 3]));
+        
+        foreach ($models as $k => $v) {
+            $this->assertSame('John,Doe', $k); // composite primary key test
+        }
+    }
+    
     public function testInsert()
     {
         $test = new TestingActiveEndpoint();

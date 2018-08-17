@@ -16,6 +16,8 @@ class DummyRequest extends AbstractRequest
     
     public $success = true;
     
+    public $responseHeaderMapping = [];
+    
     /**
      * @inheritdoc
      */
@@ -79,7 +81,7 @@ class DummyRequest extends AbstractRequest
      */
     public function getResponseHeader($key)
     {
-        return $key;
+        return isset($this->responseHeaderMapping[$key]) ? $this->responseHeaderMapping[$key] : $key;
     }
     
     /**

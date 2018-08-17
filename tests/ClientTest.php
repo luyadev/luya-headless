@@ -4,7 +4,6 @@ namespace luya\headless\tests;
 
 use luya\headless\Client;
 use luya\headless\modules\admin\ApiAdminUser;
-use luya\headless\base\AbstractRequest;
 use luya\headless\collectors\DummyRequest;
 use luya\headless\base\BeforeRequestEvent;
 

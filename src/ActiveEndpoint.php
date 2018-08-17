@@ -184,7 +184,7 @@ class ActiveEndpoint extends Endpoint
      * 
      * @param integer $id
      * @param Client $client
-     * @return ActiveEndpoint
+     * @return static
      */
     public static function findOne($id, Client $client)
     {
@@ -195,11 +195,36 @@ class ActiveEndpoint extends Endpoint
      * Find all items and generate an iterator with the given models.
      * 
      * @param Client $client
+     * @param integer $cacheTtl The number of seconds to chache the result. Works only if caching is configured in the Client.
      * @return \luya\headless\endpoint\ActiveEndpointResponse
      */
-    public static function findAll(Client $client)
+    public static function findAll(Client $client, $cacheTtl = null)
     {
-        return static::find()->all($client);
+        return static::find()->setCache($cacheTtl)->all($client);
+    }
+    
+    /**
+     * Find all items over all pages, this can be very slow and produce huge memory load
+     * 
+     * @param Client $client
+     * @param integer $cache The number of seconds to chache the result. Works only if caching is configured in the Client.
+     * @return static
+     */
+    public static function findAllPages(Client $client, $cacheTtl = null)
+    {
+        $data = [];
+        $first = static::find()->setCache($cacheTtl)->all($client);
+        foreach($first->getModels() as $key => $model) {
+            $data[$key] = $model;
+        }
+        for ($i=$first->getCurrentPage(); $i<=$first->getPageCount(); $i++) {
+            $find = static::find()->setPage($i)->setCache($cacheTtl)->all($client);
+            foreach ($find->getModels() as $key => $model) {
+                $data[$key] = $model;
+            }
+        }
+        
+        return $data;
     }
     
     /**
