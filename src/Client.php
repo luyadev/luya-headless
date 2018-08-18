@@ -7,7 +7,12 @@ use luya\headless\base\AbstractRequest;
 use Psr\SimpleCache\CacheInterface;
 
 /**
- * Client provides Auth and Connection informations.
+ * Headless Client holds Configuration.
+ * 
+ * The Headless Client class holds the connection configuration as well as the headless configuration.
+ * 
+ * Every request to an API requeres an instance of Client, therefore for complex usage you should maybe store
+ * the Client instance in a singleton object of your application.
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
