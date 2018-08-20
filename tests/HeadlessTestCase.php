@@ -5,6 +5,7 @@ namespace luya\headless\tests;
 use luya\headless\Client;
 use luya\headless\collectors\DummyRequest;
 use luya\testsuite\cases\WebApplicationTestCase;
+use luya\headless\collectors\DummyRequestClient;
 
 abstract class HeadlessTestCase extends WebApplicationTestCase
 {
@@ -27,11 +28,11 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
      * @param string $content
      * @param integer $success
      * @param array $headers
-     * @return \luya\headless\collectors\DummyRequest
+     * @return \luya\headless\collectors\DummyRequestClient
      */
     public function getDummyRequest(Client $client, $content, $success, array $headers = [])
     {
-        $request = new DummyRequest($client);
+        $request = new DummyRequestClient($client);
         $request->response = $content;
         $request->success = $success;
         $request->responseHeaderMapping = $headers;
@@ -43,7 +44,7 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
      * 
      * @param string $content
      * @param boolean $success
-     * @return \luya\headless\collectors\DummyRequest
+     * @return \luya\headless\collectors\DummyRequestClient
      */
     public function getDummyClientRequest($content, $success = true)
     {
@@ -67,7 +68,7 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
             $request->statusCode = $statusCode;
         }
         
-        $client->setRequest($request);
+        $client->setRequestClient($request);
 
         return $client;
     }

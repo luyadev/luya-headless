@@ -2,8 +2,8 @@
 
 namespace luya\headless;
 
-use luya\headless\collectors\CurlRequest;
-use luya\headless\base\AbstractRequest;
+use luya\headless\collectors\CurlRequestClient;
+use luya\headless\base\AbstractRequestClient;
 use Psr\SimpleCache\CacheInterface;
 
 /**
@@ -53,27 +53,27 @@ class Client
         $this->language = $language;
     }
     
-    private $_request;
+    private $_requestClient;
     
     /**
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
-    public function getRequest()
+    public function getRequestClient()
     {
-        if ($this->_request === null) {
-            $this->_request = new CurlRequest($this);
+        if ($this->_requestClient === null) {
+            $this->_requestClient = new CurlRequestClient($this);
         }
 
-        return $this->_request;
+        return $this->_requestClient;
     }
     
     /**
      * 
-     * @param AbstractRequest $request
+     * @param AbstractRequestClient $request
      */
-    public function setRequest(AbstractRequest $request)
+    public function setRequestClient(AbstractRequestClient $request)
     {
-        $this->_request = $request;
+        $this->_requestClient = $request;
     }
     
     private $_cache;

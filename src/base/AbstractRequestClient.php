@@ -11,7 +11,7 @@ use luya\headless\exceptions\RequestException;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-abstract class AbstractRequest
+abstract class AbstractRequestClient
 {
     const STATUS_CODE_UNAUTHORIZED = 401;
     
@@ -38,7 +38,7 @@ abstract class AbstractRequest
      * Get request
      *
      * @param array $params
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     abstract protected function internalGet();
     
@@ -46,7 +46,7 @@ abstract class AbstractRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     abstract protected function internalPost(array $data = []);
     
@@ -54,7 +54,7 @@ abstract class AbstractRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     abstract protected function internalPut(array $data = []);
     
@@ -62,7 +62,7 @@ abstract class AbstractRequest
      * Get request
      *
      * @param array $data
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     abstract protected function internalDelete(array $data = []);
     
@@ -119,7 +119,7 @@ abstract class AbstractRequest
     /**
      * 
      * @param array $params
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     public function get(array $params = [])
     {
@@ -133,7 +133,7 @@ abstract class AbstractRequest
     /**
      * 
      * @param array $data
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     public function post(array $data = [])
     {
@@ -146,7 +146,7 @@ abstract class AbstractRequest
     /**
      * 
      * @param array $data
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     public function put(array $data = [])
     {
@@ -159,7 +159,7 @@ abstract class AbstractRequest
     /**
      * 
      * @param array $data
-     * @return \luya\headless\base\AbstractRequest
+     * @return \luya\headless\base\AbstractRequestClient
      */
     public function delete(array $data = [])
     {
@@ -203,8 +203,6 @@ abstract class AbstractRequest
         return $this;
     }
     
-    
-    
     /**
      * Returns the full qualified request url from client serverUrl and endpoint.
      * @return string
@@ -229,14 +227,23 @@ abstract class AbstractRequest
      */
     public function getParsedResponse()
     {
+        // check for request client connection errors
         if ($this->hasConnectionError()) {
             throw new RequestException(sprintf('API request for "%s" could not resolved due to a connection error: "%s".', $this->getRequestUrl(), $this->getConnectionErrorMessage()));
         }
+        
+        // transform given status code to exceptions if needed.
         $this->responseStatusCodeExceptionCheck($this->getResponseStatusCode());
         
         return json_decode($this->getResponseRawContent(), true);
     }
     
+    /**
+     * Convert the status code into an exception if needed.
+     * 
+     * @param integer $statusCode
+     * @throws RequestException
+     */
     public function responseStatusCodeExceptionCheck($statusCode)
     {
         if ($statusCode >= 500) {
@@ -271,10 +278,9 @@ abstract class AbstractRequest
     }
     
     /**
-     * Method to cache callable response content.
-     *
+     * 
      * @param array $key
-     * @param string $ttl
+     * @param integer $ttl
      * @param callable $fn
      * @return mixed
      */
@@ -282,7 +288,7 @@ abstract class AbstractRequest
     {
         $cache = $this->client->getCache();
         
-        if (!$cache || !$this->isSuccess()) {
+        if (!$cache) {
             return call_user_func($fn);
         }
         
@@ -294,7 +300,10 @@ abstract class AbstractRequest
         
         $content = call_user_func($fn);
         
-        $cache->set($key, $content, $ttl);
+        // only cache the response if the request was successfull
+        if ($this->isSuccess()) {
+            $cache->set($key, $content, $ttl);
+        }
         
         return $content;
     }

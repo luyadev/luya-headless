@@ -2,8 +2,7 @@
 
 namespace luya\headless\endpoint;
 
-
-use luya\headless\base\AbstractRequest;
+use luya\headless\base\AbstractRequestClient;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -19,7 +18,7 @@ class PostEndpointRequest extends AbstractEndpointRequest
      * {@inheritDoc}
      * @see \luya\headless\endpoint\AbstractEndpointRequest::createResponse()
      */
-    public function createResponse(AbstractRequest $request)
+    public function createResponse(AbstractRequestClient $request)
     {
         return (new EndpointResponse($request->post($this->getArgs() ?: []), $this->endpointObject));
     }

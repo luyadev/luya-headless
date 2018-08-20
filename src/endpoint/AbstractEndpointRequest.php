@@ -5,7 +5,7 @@ namespace luya\headless\endpoint;
 use luya\headless\Client;
 use luya\headless\exceptions\MissingArgumentsException;
 use luya\headless\base\EndpointInterface;
-use luya\headless\base\AbstractRequest;
+use luya\headless\base\AbstractRequestClient;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -23,10 +23,10 @@ abstract class AbstractEndpointRequest
     /**
      * Generate a reponse from a request.
      * 
-     * @param AbstractRequest $request
+     * @param AbstractRequestClient $request
      * @return EndpointResponse
      */
-    abstract public function createResponse(AbstractRequest $request);
+    abstract public function createResponse(AbstractRequestClient $request);
     
     /**
      *
@@ -46,16 +46,16 @@ abstract class AbstractEndpointRequest
      */
     public function response(Client $client)
     {
-        $request = $client->getRequest();
-        $request->setEndpoint($this->getEndpoint());
+        $requestClient = $client->getRequestClient();
+        $requestClient->setEndpoint($this->getEndpoint());
         
         if ($this->getCache()) {
-            return $request->getOrSetCache([$this->getEndpoint(), get_called_class()], $this->getCache(), function() use ($request) {
-                return $this->createResponse($request);
+            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class()], $this->getCache(), function() use ($requestClient) {
+                return $this->createResponse($requestClient);
             });
         }
         
-        return $this->createResponse($request);
+        return $this->createResponse($requestClient);
     }
     
     private $_cache;

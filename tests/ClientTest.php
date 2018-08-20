@@ -6,6 +6,7 @@ use luya\headless\Client;
 use luya\headless\modules\admin\ApiAdminUser;
 use luya\headless\collectors\DummyRequest;
 use luya\headless\base\BeforeRequestEvent;
+use luya\headless\collectors\DummyRequestClient;
 
 final class ClientTest extends HeadlessTestCase
 {
@@ -13,7 +14,7 @@ final class ClientTest extends HeadlessTestCase
     {
         $client = new Client('123', 'http://luya.io/foobar');
         
-        $request = $client->getRequest();
+        $request = $client->getRequestClient();
         $request->setEndpoint('admin-api-user');
         $request->get();
         
@@ -33,7 +34,7 @@ final class ClientTest extends HeadlessTestCase
     public function testRequestUrlWithLanguage()
     {
         $client = new Client('123', 'http://luya.io/barfoo', 'en');
-        $request = $client->getRequest();
+        $request = $client->getRequestClient();
         $request->setEndpoint('admin/admin-api-user');
         $this->assertSame('http://luya.io/barfoo/en/admin/admin-api-user', $request->getRequestUrl());
     }
@@ -41,7 +42,7 @@ final class ClientTest extends HeadlessTestCase
     public function testRequestUrl()
     {
         $client = new Client('123', 'http://luya.io/barfoo');
-        $request = $client->getRequest();
+        $request = $client->getRequestClient();
         $request->setEndpoint('admin/admin-api-user');
         $this->assertSame('http://luya.io/barfoo/admin/admin-api-user', $request->getRequestUrl());
     }
@@ -60,7 +61,7 @@ final class ClientTest extends HeadlessTestCase
     {
         // example localhost token
         $client = $this->getClient();
-        $client->setRequest($this->getDummyRequest($client, '[{"id":1}]', true));
+        $client->setRequestClient($this->getDummyRequest($client, '[{"id":1}]', true));
         
         $query = ApiAdminUser::index()->response($client);
         
@@ -75,8 +76,8 @@ final class ClientTest extends HeadlessTestCase
         $client->setBeforeRequestEvent(function(BeforeRequestEvent $event) {
             $this->assertSame('url?foo=bar', $event->url);
         });
-        $client->setRequest(new DummyRequest($client));
+        $client->setRequestClient(new DummyRequestClient($client));
         
-        $this->assertNull($client->getRequest()->get(['foo' => 'bar'])->getParsedResponse());
+        $this->assertNull($client->getRequestClient()->get(['foo' => 'bar'])->getParsedResponse());
     }
 }

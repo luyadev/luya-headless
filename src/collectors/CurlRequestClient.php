@@ -3,15 +3,15 @@
 namespace luya\headless\collectors;
 
 use Curl\Curl;
-use luya\headless\base\AbstractRequest;
+use luya\headless\base\AbstractRequestClient;
 
 /**
- * Request Object via Curl.
+ * Request Client Object via Curl.
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class CurlRequest extends AbstractRequest
+class CurlRequestClient extends AbstractRequestClient
 {
     /**
      * @var \Curl\Curl

@@ -2,15 +2,15 @@
 
 namespace luya\headless\collectors;
 
-use luya\headless\base\AbstractRequest;
+use luya\headless\base\AbstractRequestClient;
 
 /**
- * Dummy Request for UnitTests
+ * Dummy Request Client for UnitTests
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class DummyRequest extends AbstractRequest
+class DummyRequestClient extends AbstractRequestClient
 {
     public $response;
     

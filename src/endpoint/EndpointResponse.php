@@ -2,12 +2,12 @@
 
 namespace luya\headless\endpoint;;
 
-use luya\headless\base\AbstractRequest;
+use luya\headless\base\AbstractRequestClient;
 use luya\headless\base\PaginationInterface;
 use luya\headless\base\EndpointInterface;
 
 /**
- * EndpointResponse represents a response object from the AbstractRequest class
+ * EndpointResponse represents a response object from the AbstractRequestClient class
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -15,7 +15,7 @@ use luya\headless\base\EndpointInterface;
 class EndpointResponse implements PaginationInterface
 {
     /**
-     * @var \luya\headless\base\AbstractRequest
+     * @var \luya\headless\base\AbstractRequestClient
      */
     public $request;
     
@@ -27,7 +27,7 @@ class EndpointResponse implements PaginationInterface
     /**
      * Create new endpoint response from an {{AbstratRequest}}.
      */
-    public function __construct(AbstractRequest $request, EndpointInterface $endpoint)
+    public function __construct(AbstractRequestClient $request, EndpointInterface $endpoint)
     {
         $this->request = $request;
         $this->endpoint = $endpoint;
