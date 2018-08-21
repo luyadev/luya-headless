@@ -108,7 +108,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      * 
      * @param array $data
      * @param string $keyColumn
-     * @return \luya\headless\base\BaseIterator
+     * @return static
      */
     public static function iterator(array $data, $keyColumn = null)
     {
