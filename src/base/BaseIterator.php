@@ -2,6 +2,9 @@
 
 namespace luya\headless\base;
 
+use Iterator;
+use Countable;
+use ArrayAccess;
 use luya\headless\ActiveEndpoint;
 use luya\headless\Exception;
 
@@ -11,7 +14,7 @@ use luya\headless\Exception;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class BaseIterator implements \Iterator, \Countable
+class BaseIterator implements Iterator, Countable, ArrayAccess
 {
     /**
      * @var string The full qualified class name for the given model to create an iteration.
@@ -89,16 +92,32 @@ class BaseIterator implements \Iterator, \Countable
         $this->data[$key] = $model;
     }
     
+    // Countable
+    
+    /**
+     * {@inheritDoc}
+     * @see Countable::count()
+     */
     public function count()
     {
         return count($this->data);
     }
     
+    // Iterator
+    
+    /**
+     * {@inheritDoc}
+     * @see Iterator::rewind()
+     */
     public function rewind()
     {
         return reset($this->data);
     }
     
+    /**
+     * {@inheritDoc}
+     * @see Iterator::current()
+     */
     public function current()
     {
         return current($this->data);
@@ -109,13 +128,59 @@ class BaseIterator implements \Iterator, \Countable
         return key($this->data);
     }
     
+    /**
+     * {@inheritDoc}
+     * @see Iterator::next()
+     */
     public function next()
     {
         return next($this->data);
     }
     
+    /**
+     * {@inheritDoc}
+     * @see Iterator::valid()
+     */
     public function valid()
     {
         return key($this->data) !== null;
+    }
+    
+    // ArrayAcces
+    
+    /**
+     * {@inheritDoc}
+     * @see ArrayAccess::offsetSet()
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->data[$offset] = $value;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see ArrayAccess::offsetExists()
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see ArrayAccess::offsetUnset()
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->data[$offset]);
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see ArrayAccess::offsetGet()
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 }
