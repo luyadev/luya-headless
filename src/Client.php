@@ -40,6 +40,11 @@ class Client
      */
     public $debug = false;
 
+    /**
+     * @var string An option for prefix all endpoint names. By default it contains the name of the LUYA admin where apis are assigned to.
+     * In order to use the prefix an endpoint name must contain {{%my-api-endpoint}} this would be parsed to `admin/my-api-endpoint`. Endpoint
+     * prefix are also very usefull when working with different api versions. `$endpointPrefix = 'v1/`.
+     */
     public $endpointPrefix = 'admin/';
     
     /**
