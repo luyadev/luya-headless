@@ -198,7 +198,7 @@ abstract class AbstractRequestClient
      */
     public function setEndpoint($endpoint)
     {
-        $this->endpoint = $endpoint;
+        $this->endpoint = $this->client->replaceEndpointPrefix($endpoint);
 
         return $this;
     }

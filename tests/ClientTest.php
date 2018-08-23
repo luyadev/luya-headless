@@ -80,4 +80,19 @@ final class ClientTest extends HeadlessTestCase
         
         $this->assertNull($client->getRequestClient()->get(['foo' => 'bar'])->getParsedResponse());
     }
+    
+    public function testQuotePrefix()
+    {
+        $client = new Client('token', 'url');
+        $client->endpointPrefix = 'admin/';
+        
+        $this->assertSame('foobar', $client->replaceEndpointPrefix('foobar'));
+        $this->assertSame('foobar', $client->replaceEndpointPrefix('{{foobar}}'));
+        $this->assertSame('foo bar', $client->replaceEndpointPrefix('{{foo bar}}'));
+        $this->assertSame('Foo123Bar 123!', $client->replaceEndpointPrefix('{{Foo123Bar 123!}}'));
+        $this->assertSame('admin/foobar', $client->replaceEndpointPrefix('{{%foobar}}'));
+        $this->assertSame('{test}/foo/bar', $client->replaceEndpointPrefix('{test}/foo/{{bar}}'));
+        $this->assertSame('{tenestedst}', $client->replaceEndpointPrefix('{te{{nested}}st}'));
+        $this->assertSame('{aadmin/bc}', $client->replaceEndpointPrefix('{a{{%b}}c}'));
+    }
 }

@@ -10,8 +10,8 @@ class EndpointTest extends HeadlessTestCase
     public function testGetEndpointName()
     {
         $name = new Endpoint();
-        $this->assertSame('endpoint', $name->getEndpointName());
-        $this->assertSame('api-admin-user', (new ApiAdminUser())->getEndpointName());
+        $this->assertSame('{{%endpoint}}', $name->getEndpointName());
+        $this->assertSame('{{%api-admin-user}}', (new ApiAdminUser())->getEndpointName());
     }
 }
 

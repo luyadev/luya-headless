@@ -64,7 +64,7 @@ class Endpoint extends BaseModel implements EndpointInterface
      */
     public function getEndpointName()
     {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', (new ReflectionClass($this))->getShortName()));
+        return '{{%'.strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', (new ReflectionClass($this))->getShortName())).'}}';
     }
     
     /**

@@ -39,6 +39,8 @@ class Client
      * you should disable debug (which is default).
      */
     public $debug = false;
+
+    public $endpointPrefix = 'admin/';
     
     /**
      * 
@@ -52,6 +54,7 @@ class Client
         $this->serverUrl = $serverUrl;
         $this->language = $language;
     }
+    
     
     private $_requestClient;
     
@@ -74,6 +77,29 @@ class Client
     public function setRequestClient(AbstractRequestClient $request)
     {
         $this->_requestClient = $request;
+    }
+    
+    /**
+     * Replace endpoint Prefix with setting from client.
+     * 
+     * Its very common to have a prefix for every api endpoint. Therefore you can prefix your
+     * endpoint names with {{%my-api-endpoint}}. Assuming $endpointPrefix is `admin/` the result
+     * would be `admin/my-api-endpoint`.
+     * 
+     * @param string $endpointName The endpoint name to replace.
+     * @return mixed
+     */
+    public function replaceEndpointPrefix($endpointName)
+    {
+        return preg_replace_callback('/\{\{(.*)\}\}/', function($results) {
+            $name = $results[1];
+            
+            if ($this->endpointPrefix) {
+                $name = str_replace("%", $this->endpointPrefix, $name);
+            }
+            
+            return $name;
+        }, $endpointName);
     }
     
     private $_cache;

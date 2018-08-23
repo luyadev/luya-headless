@@ -118,7 +118,7 @@ class ActiveEndpointTest extends HeadlessTestCase
         $response = $request->response($this->createDummyClient('{"bar":"foo"}'));
         $this->assertTrue($response->isSuccess());
         $this->assertSame(['bar' => 'foo'], $request->getArgs());
-        $this->assertSame('testing-active-endpoint/1', $request->getEndpoint());
+        $this->assertSame('{{%testing-active-endpoint}}/1', $request->getEndpoint());
     }
     
     public function testView()
@@ -127,7 +127,7 @@ class ActiveEndpointTest extends HeadlessTestCase
         $request = $test->view(1);
         $response = $request->response($this->createDummyClient('{"bar":"foo"}'));
         $this->assertTrue($response->isSuccess());
-        $this->assertSame('testing-active-endpoint/1', $request->getEndpoint());
+        $this->assertSame('{{%testing-active-endpoint}}/1', $request->getEndpoint());
     }
     
     public function testRemove()
@@ -136,7 +136,7 @@ class ActiveEndpointTest extends HeadlessTestCase
         $request = $test->remove(1);
         $response = $request->response($this->createDummyClient('{"bar":"foo"}'));
         $this->assertTrue($response->isSuccess());
-        $this->assertSame('testing-active-endpoint/1', $request->getEndpoint());
+        $this->assertSame('{{%testing-active-endpoint}}/1', $request->getEndpoint());
     }
 }
 
