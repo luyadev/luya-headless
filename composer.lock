@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "curl/curl",
-            "version": "1.9.1",
+            "version": "1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "958363d1fed599aa24efb2221e2c1e6c61711464"
+                "reference": "8fa349f9f82f8d892137fe87239a70b0d358d160"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/958363d1fed599aa24efb2221e2c1e6c61711464",
-                "reference": "958363d1fed599aa24efb2221e2c1e6c61711464",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/8fa349f9f82f8d892137fe87239a70b0d358d160",
+                "reference": "8fa349f9f82f8d892137fe87239a70b0d358d160",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2018-05-23T20:32:06+00:00"
+            "time": "2018-08-18T15:32:01+00:00"
         },
         {
             "name": "psr/simple-cache",

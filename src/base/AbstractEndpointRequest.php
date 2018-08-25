@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\endpoint;
+namespace luya\headless\base;
 
 use luya\headless\Client;
 use luya\headless\exceptions\MissingArgumentsException;

@@ -3,6 +3,7 @@
 namespace luya\headless\endpoint;
 
 use luya\headless\base\AbstractRequestClient;
+use luya\headless\base\AbstractEndpointRequest;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -16,7 +17,7 @@ class DeleteEndpointRequest extends AbstractEndpointRequest
      * Response trough delete request.
      *
      * {@inheritDoc}
-     * @see \luya\headless\endpoint\AbstractEndpointRequest::createResponse()
+     * @see \luya\headless\base\AbstractEndpointRequest::createResponse()
      */
     public function createResponse(AbstractRequestClient $request)
     {

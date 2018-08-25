@@ -80,7 +80,7 @@ class EndpointResponse implements PaginationInterface
      */
     public function getContent()
     {
-        return $this->request->getParsedResponse();
+        return $this->endpoint->processContent($this->request->getParsedResponse());
     }
     
     public function isSuccess()

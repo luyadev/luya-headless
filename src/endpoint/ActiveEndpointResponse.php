@@ -8,6 +8,9 @@ use luya\headless\base\PaginationInterface;
 /**
  * ActiveEndpointResponse contains models getter and pagination informations.
  * 
+ * The ActiveEndpointResponse object is only accessing the data from {{EndpointResponse}}. Thefore
+ * if modification on content or pagination must be done, this can be done in {{EndpointResponse}}.
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

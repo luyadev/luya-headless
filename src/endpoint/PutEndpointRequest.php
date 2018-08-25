@@ -4,6 +4,7 @@ namespace luya\headless\endpoint;
 
 use luya\headless\Client;
 use luya\headless\base\AbstractRequestClient;
+use luya\headless\base\AbstractEndpointRequest;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -17,7 +18,7 @@ class PutEndpointRequest extends AbstractEndpointRequest
      * Response trough get request.
      *
      * {@inheritDoc}
-     * @see \luya\headless\endpoint\AbstractEndpointRequest::createResponse()
+     * @see \luya\headless\base\AbstractEndpointRequest::createResponse()
      */
     public function createResponse(AbstractRequestClient $request)
     {

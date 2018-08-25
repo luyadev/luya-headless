@@ -5,6 +5,7 @@ namespace luya\headless\endpoint;
 use luya\headless\base\BaseIterator;
 use luya\headless\Client;
 use luya\headless\base\AbstractRequestClient;
+use luya\headless\base\AbstractEndpointRequest;
 
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
@@ -12,7 +13,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
      * Response trough get request.
      *
      * {@inheritDoc}
-     * @see \luya\headless\endpoint\AbstractEndpointRequest::createResponse()
+     * @see \luya\headless\base\AbstractEndpointRequest::createResponse()
      */
     public function createResponse(AbstractRequestClient $request)
     {

@@ -138,6 +138,16 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertTrue($response->isSuccess());
         $this->assertSame('{{%testing-active-endpoint}}/1', $request->getEndpoint());
     }
+
+    public function testProccessContent()
+    {
+        $test = new TestingActiveEndpointProcess();
+        $response = $test->findAll($this->createDummyClient('{"items": [{"firstname":"John", "lastname":"Doe"}]}'));
+
+        foreach ($response->getModels() as $k => $v) {
+            $this->assertSame('John', $v->firstname);
+        }
+    }
 }
 
 class TestingActiveEndpoint extends ActiveEndpoint
@@ -148,5 +158,21 @@ class TestingActiveEndpoint extends ActiveEndpoint
     public static function getPrimaryKeys()
     {
         return ['firstname', 'lastname'];
+    }
+}
+
+class TestingActiveEndpointProcess extends ActiveEndpoint
+{
+    public $firstname;
+    public $lastname;
+    
+    public static function getPrimaryKeys()
+    {
+        return ['firstname', 'lastname'];
+    }
+
+    public function processContent(array $content)
+    {
+        return $content['items'];
     }
 }
