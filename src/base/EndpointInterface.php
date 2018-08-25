@@ -36,8 +36,6 @@ interface EndpointInterface
     
     /**
      * Create a get request.
-     * 
-     * @return GetEndpointRequest
      */
     public static function get();
     

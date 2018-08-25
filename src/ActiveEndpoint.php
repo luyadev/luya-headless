@@ -40,6 +40,7 @@ use luya\headless\endpoint\ActiveEndpointRequest;
  * create a new abstract active endpoint response.
  * 
  * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ActiveEndpoint extends Endpoint
 {

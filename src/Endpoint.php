@@ -67,12 +67,16 @@ class Endpoint extends BaseModel implements EndpointInterface
         return '{{%'.strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', (new ReflectionClass($this))->getShortName())).'}}';
     }
     
+    /**
+     * @inheritdoc
+     */
     public function processContent(array $content)
     {
         return $content;
     }
     
     /**
+     * Create a GET request.
      * 
      * @return GetEndpointRequest
      */
@@ -82,6 +86,7 @@ class Endpoint extends BaseModel implements EndpointInterface
     }
     
     /**
+     * Create a POST request.
      * 
      * @return PostEndpointRequest
      */
@@ -91,7 +96,8 @@ class Endpoint extends BaseModel implements EndpointInterface
     }
 
     /**
-     * 
+     * Create a PUT request.
+     *  
      * @return PutEndpointRequest
      */
     public static function put()
@@ -100,6 +106,7 @@ class Endpoint extends BaseModel implements EndpointInterface
     }
     
     /**
+     * Create a DELETE request.
      * 
      * @return DeleteEndpointRequest
      */
