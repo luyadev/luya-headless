@@ -19,6 +19,10 @@ class NavItemPage extends BaseModel
      */
     public function getRows()
     {
+        if (empty($this->contentAsArray['__placeholders'])) {
+            return [];
+        }
+        
         $models = [];
         foreach ($this->contentAsArray['__placeholders'] as $rowId => $cols) {
             $models[] = new NavItemPageRow(['index' => $rowId, 'cols' => $cols]);
