@@ -9,7 +9,6 @@ use luya\headless\endpoint\GetEndpointRequest;
 use luya\headless\endpoint\PostEndpointRequest;
 use luya\headless\endpoint\PutEndpointRequest;
 use luya\headless\endpoint\DeleteEndpointRequest;
-use luya\headless\base\BaseIterator;
 
 /**
  * Endpoint Object contains methods to make requests to an API Endpoint.
@@ -113,17 +112,5 @@ class Endpoint extends BaseModel implements EndpointInterface
     public static function delete()
     {
         return (new DeleteEndpointRequest(new static));
-    }
-
-    /**
-     * Create an iterator of models for the current endpoint.
-     * 
-     * @param array $data
-     * @param string $keyColumn
-     * @return static
-     */
-    public static function iterator(array $data, $keyColumn = null)
-    {
-        return BaseIterator::create(get_called_class(), $data, $keyColumn);   
     }
 }

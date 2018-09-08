@@ -37,6 +37,18 @@ class BaseModel
             }
         }
     }
+
+    /**
+     * Create an iterator of models for the current endpoint.
+     * 
+     * @param array $data
+     * @param string $keyColumn
+     * @return static
+     */
+    public static function iterator(array $data, $keyColumn = null)
+    {
+        return BaseIterator::create(get_called_class(), $data, $keyColumn);   
+    }
     
     /**
      * Returns the value of an object property.
