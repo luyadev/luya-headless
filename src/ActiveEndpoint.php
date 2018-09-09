@@ -2,8 +2,6 @@
 
 namespace luya\headless;
 
-use ReflectionClass;
-use ReflectionProperty;
 use luya\headless\endpoint\ActiveEndpointRequest;
 
 /**
@@ -161,26 +159,6 @@ class ActiveEndpoint extends Endpoint
     }
     
     /**
-     * Returns the list of attribute names.
-     * By default, this method returns all public non-static properties of the class.
-     * You may override this method to change the default behavior.
-     * 
-     * @return array list of attribute names.
-     */
-    public function attributes()
-    {
-        $class = new ReflectionClass($this);
-        $names = [];
-        foreach ($class->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
-            if (!$property->isStatic()) {
-                $names[] = $property->getName();
-            }
-        }
-        
-        return $names;
-    }
-    
-    /**
      * Find object for the given id and returns the current active endpoint model attributes with the data.
      * 
      * @param integer $id
@@ -191,7 +169,7 @@ class ActiveEndpoint extends Endpoint
     {
         return static::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}')->one($client);
     }
-    
+
     /**
      * Find all items and generate an iterator with the given models.
      * 

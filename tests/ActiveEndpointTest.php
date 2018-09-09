@@ -54,6 +54,16 @@ class ActiveEndpointTest extends HeadlessTestCase
         $model = new TestingActiveEndpoint();
         $this->assertSame(['firstname', 'lastname'], $model->attributes());
     }
+
+    public function testToArray()
+    {
+        $model = new TestingActiveEndpoint();
+        $model->firstname = 'foo';
+        $model->lastname = 'bar';
+
+        $this->assertSame(['firstname' => 'foo', 'lastname' => 'bar'], $model->toArray());
+        $this->assertSame(['firstname' => 'foo'], $model->toArray(['firstname']));
+    }
     
     public function testUpdateExistingModel()
     {

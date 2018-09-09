@@ -2,6 +2,8 @@
 
 namespace luya\headless\base;
 
+use ReflectionClass;
+use ReflectionProperty;
 use luya\headless\Exception;
 
 /**
@@ -48,6 +50,48 @@ class BaseModel
     public static function iterator(array $data, $keyColumn = null)
     {
         return BaseIterator::create(get_called_class(), $data, $keyColumn);   
+    }
+    
+    /**
+     * Returns the list of attribute names.
+     * By default, this method returns all public non-static properties of the class.
+     * You may override this method to change the default behavior.
+     * 
+     * @return array list of attribute names.
+     */
+    public function attributes()
+    {
+        $class = new ReflectionClass($this);
+        $names = [];
+        foreach ($class->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
+            if (!$property->isStatic()) {
+                $names[] = $property->getName();
+            }
+        }
+        
+        return $names;
+    }
+
+    /**
+     * Convert to current object into an array with attributes and getters.
+     * 
+     * @param array $attributes A list of arrays which should be covered, if empty array all attributes() are taken.
+     * @param array $getters An optional list of getter names which should be used to generate an array. Assuming `getUser` the
+     * name `user` needs to be taken.
+     * @return array
+     * @since 1.0.0
+     */
+    public function toArray(array $attributes = [], $getters = [])
+    {
+        $attributes = empty($attributes) ? $this->attributes() : $attributes;
+        $attributes = array_merge($attributes, $getters);
+
+        $array = [];
+        foreach ($attributes as $name) {
+            $array[$name] = $this->{$name};
+        }
+
+        return $array;
     }
     
     /**
