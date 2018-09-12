@@ -8,7 +8,7 @@ class ApiAdminStorage extends Endpoint
 {
     public function getEndpointName()
     {
-        return '{{%admin/api-admin-storage}}';
+        return '{{%api-admin-storage}}';
     }
 
     public static function getImage($id)

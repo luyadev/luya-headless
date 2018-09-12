@@ -13,6 +13,6 @@ class ApiCmsNavcontainer extends ActiveEndpoint
     
     public function getEndpointName()
     {
-        return 'admin/api-cms-navcontainer';
+        return '{{%api-cms-navcontainer}}';
     }
 }

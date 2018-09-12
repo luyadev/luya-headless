@@ -20,6 +20,6 @@ class ApiAdminUser extends ActiveEndpoint
     
     public function getEndpointName()
     {
-        return 'admin/api-admin-user';
+        return '{{%api-admin-user}}';
     }
 }

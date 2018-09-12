@@ -14,7 +14,7 @@ class ApiCmsNavitemNavLangItem extends Endpoint
 {
     public function getEndpointName()
     {
-        return 'admin/api-cms-navitem/nav-lang-item';
+        return '{{%api-cms-navitem/nav-lang-item}}';
     }
 
     public static function index()

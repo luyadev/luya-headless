@@ -14,7 +14,7 @@ class ApiCmsMenuItems extends Endpoint
 {
     public function getEndpointName()
     {
-        return 'admin/api-cms-menu/items';
+        return '{{%api-cms-menu/items}}';
     }
 
     public static function index()

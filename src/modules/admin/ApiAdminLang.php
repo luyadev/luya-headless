@@ -20,6 +20,6 @@ class ApiAdminLang extends ActiveEndpoint
     
     public function getEndpointName()
     {
-        return 'admin/api-admin-lang';
+        return '{{%api-admin-lang}}';
     }
 }
