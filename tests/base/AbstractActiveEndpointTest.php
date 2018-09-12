@@ -28,14 +28,23 @@ final class TestActiveEndpoint extends ActiveEndpoint
 
 class AbstractActiveEndpointTest extends HeadlessTestCase
 {
-    public function testFindOne()
+    public function testViewOne()
     {
         $client = $this->createDummyClient('{"id":1, "foo": "bar"}');
 
-        $model = TestActiveEndpoint::findOne(1, $client);
+        $model = TestActiveEndpoint::viewOne(1, $client);
 
         $this->assertSame(1, $model->id);
         $this->assertSame("bar", $model->foo);
+    }
+
+    public function testCustomViewOne()
+    {
+        $client = $this->createDummyClient('{"id":1, "foo": "bar"}');
+
+        $model = TestActiveEndpoint::view(1)->setPerPage(1)->one($client);
+
+        $this->assertSame('bar', $model->foo);
     }
 
     public function testFindAll()
@@ -49,6 +58,15 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
             $this->assertSame(1, $model->id);
             $this->assertSame("bar", $model->foo);
         }
+    }
+
+    public function testFindFirst()
+    {
+        $client = $this->createDummyClient('[{"id":1, "foo": "bar"}]');
+
+        $data = TestActiveEndpoint::find()->first($client);
+
+        $this->assertSame('bar', $data->foo);
     }
     
     public function testFindToken()

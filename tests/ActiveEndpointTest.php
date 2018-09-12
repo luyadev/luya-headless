@@ -67,7 +67,7 @@ class ActiveEndpointTest extends HeadlessTestCase
     
     public function testUpdateExistingModel()
     {
-        $model = TestingActiveEndpoint::findOne(1, $this->createDummyClient('{"firstname":"Baz", "lastname": "Qux"}'));
+        $model = TestingActiveEndpoint::viewOne(1, $this->createDummyClient('{"firstname":"Baz", "lastname": "Qux"}'));
         
         $this->assertSame('Baz', $model->firstname);
         $this->assertSame('Qux', $model->lastname);
@@ -87,9 +87,9 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertInstanceOf('luya\headless\base\BaseIterator', $model->getModels());
     }
     
-    public function testFindOneWithError()
+    public function testViewOneWithError()
     {
-        $model = TestingActiveEndpoint::findOne(1, $this->createDummyClient('[]', false));
+        $model = TestingActiveEndpoint::viewOne(1, $this->createDummyClient('[]', false));
         
         $this->assertFalse($model);
     }

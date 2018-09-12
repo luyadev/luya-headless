@@ -4,7 +4,7 @@ Active Endpoint takes the inherited get, post, put & delete reoureces and transf
 
 |name|type|description
 |----|----|-------
-|index()|get|List all items `/users`.
+|find()|get|List all items `/users`.
 |view($id)|get|Get a specific item  `/users/$id`.
 |insert(array $data)|post|Create new record `/users`.
 |update($id, array $data)|put|Update an existing record `/users/$id`.
@@ -33,7 +33,7 @@ class ApiUser extends ActiveEndpoint
 
 ## Retrieve data
 
-Now you can use the `findOne()` and `findAll()` methods for the given Endpoint (ApiUser) in order to foreach all records as a model object or retrieve a single records.
+Now you can use the `viewOne()` and `findAll()` methods for the given Endpoint (ApiUser) in order to foreach all records as a model object or retrieve a single records.
 
 ```php
 $client = new Client($token, $url);
@@ -47,7 +47,7 @@ In order to retrieve a single object use
 
 ```php
 $client = new Client($token, $url);
-$model = ApiUser::findOne(1, $client);
+$model = ApiUser::viewOne(1, $client);
 
 if (!$model) {
     throw new Exception("Unable to find the given user.");
@@ -81,7 +81,7 @@ if ($model->save($client)) {
 ### Update existing record
 
 ```php
-$model = ApiUser::findOne(1, $client);
+$model = ApiUser::viewOne(1, $client);
  
 if ($model) {
     // echo current username

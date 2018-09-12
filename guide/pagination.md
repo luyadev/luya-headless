@@ -8,7 +8,7 @@ A pagination example with `Endpoint`. Of course the API must support the Paginat
 
 ```php
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
-$response = ApiAdminLang::index()->setPage($_GET['page'])->response($client);
+$response = ApiAdminLang::find()->setPage($_GET['page'])->response($client);
 
 foreach ($reponse->getContent() as $item) {
     var_dump($item);

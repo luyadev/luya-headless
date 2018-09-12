@@ -27,7 +27,7 @@ use luya\headless\endpoint\ActiveEndpointRequest;
  * Now you can find the model data for the current model:
  * 
  * ```php
- * $model = MyUserModel::findOne(1, $client);
+ * $model = MyUserModel::viewOne(1, $client);
  * if ($model) {
  *     echo $model->firstname . ' ' . $model->lastname;
  * }
@@ -159,19 +159,23 @@ class ActiveEndpoint extends Endpoint
     }
     
     /**
-     * Find object for the given id and returns the current active endpoint model attributes with the data.
+     * Create an {{ActiveEndpointRequest}} object.
      * 
-     * @param integer $id
-     * @param Client $client
-     * @return static
+     * @return ActiveEndpointRequest
      */
-    public static function findOne($id, Client $client)
+    public static function find()
     {
-        return static::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}')->one($client);
+        return (new ActiveEndpointRequest(new static));    
     }
 
     /**
      * Find all items and generate an iterator with the given models.
+     * 
+     * This is the short form for
+     * 
+     * ```php
+     * $models = Api::find()->all($client);
+     * ```
      * 
      * @param Client $client
      * @param integer $cacheTtl The number of seconds to chache the result. Works only if caching is configured in the Client.
@@ -207,27 +211,56 @@ class ActiveEndpoint extends Endpoint
         
         return $data;
     }
+
+    /**
+     * Find object for the given id and returns the current active endpoint model attributes with the data.
+     * 
+     * @param integer $id
+     * @param Client $client
+     * @return static
+     */
+    public static function findOne($id, Client $client)
+    {
+        trigger_error('use viewOne() instead.', E_USER_DEPRECATED);
+
+        return static::viewOne($id, $client);
+    }
+
+    /**
+     * Find object for the given id and returns the current active endpoint model attributes with the data.
+     * 
+     * This is the short form of:
+     * 
+     * ```php
+     * $model = Api::view($id)->one($client);
+     * ```
+     * 
+     * @param integer $id
+     * @param Client $client
+     * @return static
+     */
+    public static function viewOne($id, Client $client)
+    {
+        return static::view($id)->one($client);
+    }
     
     /**
-     * Create an {{ActiveEndpointRequest}} object.
+     * Represents the CRUD view request.
      * 
+     * Generates a view endpoint based response on a single object.
+     * 
+     * ```php
+     * $model = Api::view($id)->setExpand(['images'])->one($client);
+     * ```
+     * 
+     * @param integer $id
      * @return ActiveEndpointRequest
      */
-    public static function find()
+    public static function view($id)
     {
-        return (new ActiveEndpointRequest(new static));    
+        return static::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
     }
-    
-    /**
-     * Represents the CRUD index request. Listing of data.
-     * 
-     * @return \luya\headless\endpoint\GetEndpointRequest
-     */
-    public static function index()
-    {
-        return static::get();
-    }
-    
+
     /**
      * Represents the CRUD insert request.
      * 
@@ -249,17 +282,6 @@ class ActiveEndpoint extends Endpoint
     public static function update($id, array $values)
     {
         return static::put()->setTokens(['{id}' => $id])->setArgs($values)->setEndpoint('{endpointName}/{id}');
-    }
-    
-    /**
-     * Represents the CRUD view request.
-     * 
-     * @param integer $id
-     * @return \luya\headless\endpoint\GetEndpointRequest
-     */
-    public static function view($id)
-    {
-        return static::get()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
     }
     
     /**
