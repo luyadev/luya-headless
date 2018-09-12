@@ -253,6 +253,15 @@ class ActiveEndpoint extends Endpoint
      * $model = Api::view($id)->setExpand(['images'])->one($client);
      * ```
      * 
+     * If you want to define another view endpoint in additions you can achieve this by doing:
+     * 
+     * ```php
+     * public static function userImage($id)
+     * {
+     *     return parent::view($id)->setEndpoint('{endpointName}/{id}/image');
+     * }
+     * ```
+     * 
      * @param integer $id
      * @return ActiveEndpointRequest
      */
