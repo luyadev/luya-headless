@@ -24,8 +24,12 @@ final class TestActiveEndpoint extends ActiveEndpoint
     {
         return self::find()->setTokens(['{id2}' => $id])->setEndpoint('{endpointName}/id/{id2}/name');
     }
-}
 
+    public static function testBraceLessTokenUrl()
+    {
+        return self::find()->setTokens(['{firstname}' => 'john', 'lastname' => 'doe'])->setEndpoint('{endpointName}/{firstname}/{lastname}');
+    }
+}
 class AbstractActiveEndpointTest extends HeadlessTestCase
 {
     public function testViewOne()
@@ -76,6 +80,9 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
         $data = TestActiveEndpoint::testTokenUrl(123)->response($client);
         
         $this->assertSame('MY_ADMIN_SERVER_URL/foo/bar/id/123/name', $data->request->getRequestUrl());
+
+        $url = TestActiveEndpoint::testBraceLessTokenUrl()->response($client);
+        $this->assertSame('MY_ADMIN_SERVER_URL/foo/bar/john/doe', $url->request->getRequestUrl());
     }
     
     public function testFindTokenWithCacheWhichIsDisabled()

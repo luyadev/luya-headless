@@ -50,7 +50,7 @@ abstract class AbstractEndpointRequest
         $requestClient->setEndpoint($this->getEndpoint());
         
         if ($this->getCache()) {
-            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class()], $this->getCache(), function() use ($requestClient) {
+            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class(), $this->_args], $this->getCache(), function() use ($requestClient) {
                 return $this->createResponse($requestClient);
             });
         }
@@ -122,11 +122,16 @@ abstract class AbstractEndpointRequest
      * A list of tokens which will be parsed while generating the endpointName. Example
      *
      * ```php
-     * 'tokens' => [
-     *     '{id}' => 1,
-     *     '{name}' => 'foobar',
-     * ];
+     * setTokens(['{id}' => 1, '{name}' => 'foobar']);
      * ```
+     * 
+     * equals to:
+     * 
+     * ```php
+     * setTokens(['id' => 1, 'name' => 'foobar']);
+     * ```
+     * 
+     * > The curly braces will be added automatically if missing.
      *
      * You can now use the tokens in curly braced in the endpoint string like:
      *
@@ -138,13 +143,25 @@ abstract class AbstractEndpointRequest
      * from the {{luya\headless\base\AbstractEndpoint::getEndpointName()}}.
      *
      * which would replace {id} with 1 from the tokens list.
-     *
+     * 
      * @param array $tokens
      * @return static
      */
     public function setTokens(array $tokens)
     {
-        $this->_tokens = $tokens;
+        $ensuredTokens = [];
+
+        foreach ($tokens as $name => $value) {
+            if (substr($name, 0, 1) !== '{') {
+                $name = '{'.$name;
+            }
+            if (substr($name, -1) !== '}') {
+                $name = $name .'}';
+            }
+            $ensuredTokens[$name] = $value;
+        }
+
+        $this->_tokens = $ensuredTokens;
         
         return $this;
     }

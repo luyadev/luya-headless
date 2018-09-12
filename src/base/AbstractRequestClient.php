@@ -272,7 +272,16 @@ abstract class AbstractRequestClient
      */
     protected function generateCacheKey(array $params)
     {
+        foreach ($params as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $k => $v) {
+                    $params[] = is_array($v) ? implode(".", array_keys($v)) : $v;
+                }
+                $params[$key] = implode(".", array_keys($value));
+            }
+        }
         $params[] = __CLASS__;
+        $params[] = get_called_class();
         
         return implode(".", $params);
     }

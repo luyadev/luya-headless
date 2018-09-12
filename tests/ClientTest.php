@@ -95,4 +95,13 @@ final class ClientTest extends HeadlessTestCase
         $this->assertSame('{tenestedst}', $client->replaceEndpointPrefix('{te{{nested}}st}'));
         $this->assertSame('{aadmin/bc}', $client->replaceEndpointPrefix('{a{{%b}}c}'));
     }
+
+    public function testGenerateCacheKey()
+    {
+        $client = new Client('token', 'url');
+        $object = $client->getRequestClient();
+        $this->assertSame('foo.bar.args.sort.0.0.1.y1.y2.hide1.luya\headless\base\AbstractRequestClient.luya\headless\collectors\CurlRequestClient', $this->invokeMethod($object, 'generateCacheKey', [
+            ['foo', 'bar', ['args' => ['x1', 'x2'], 'sort' => 'y1.y2', ['hide1' => ['hide2', ['hide2']]]]]
+        ]));
+    }
 }
