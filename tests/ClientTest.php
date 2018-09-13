@@ -78,7 +78,8 @@ final class ClientTest extends HeadlessTestCase
         });
         $client->setRequestClient(new DummyRequestClient($client));
         
-        $this->assertNull($client->getRequestClient()->get(['foo' => 'bar'])->getParsedResponse());
+        $this->expectException('luya\headless\exceptions\RequestException');
+        $client->getRequestClient()->get(['foo' => 'bar'])->getParsedResponse();
     }
     
     public function testQuotePrefix()
