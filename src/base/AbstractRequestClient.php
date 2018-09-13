@@ -18,7 +18,7 @@ abstract class AbstractRequestClient
     const STATUS_CODE_FORBIDDEN = 403;
     
     const STATUS_CODE_NOTFOUND = 404;
-    
+
     /**
      * @var array An array of get params which will be added as query to the requestUrl while creating.
      */
@@ -235,7 +235,46 @@ abstract class AbstractRequestClient
         // transform given status code to exceptions if needed.
         $this->responseStatusCodeExceptionCheck($this->getResponseStatusCode());
         
-        return json_decode($this->getResponseRawContent(), true);
+        return $this->jsonDecode($this->getResponseRawContent());
+    }
+    
+    /**
+     * Convert the raw json into an array and check for json errors.
+     * 
+     * @return array
+     * @throws RequestException
+     */
+    protected function jsonDecode($json)
+    {
+        if ($json === null || $json == '') {
+            throw new RequestException(sprintf('API "%s" responded with an empty response content.', $this->getRequestUrl()));
+        }
+
+        $decode = json_decode((string) $json, true);
+
+        switch(json_last_error()) {
+            case JSON_ERROR_NONE:
+                return $decode;
+            break;
+            case JSON_ERROR_DEPTH:
+                throw new RequestException(sprintf('API "%s" responded with invalid json: Maximum stack depth exceeded.', $this->getRequestUrl()));
+            break;
+            case JSON_ERROR_STATE_MISMATCH:
+                throw new RequestException(sprintf('API "%s" responded with invalid json: Underflow or the modes mismatch.', $this->getRequestUrl()));
+            break;
+            case JSON_ERROR_CTRL_CHAR:
+                throw new RequestException(sprintf('API "%s" responded with invalid json: Unexpected control character found.', $this->getRequestUrl()));
+            break;
+            case JSON_ERROR_SYNTAX:
+                throw new RequestException(sprintf('API "%s" responded with invalid json: Syntax error, malformed JSON.', $this->getRequestUrl()));
+            break;
+            case JSON_ERROR_UTF8:
+                throw new RequestException(sprintf('API "%s" responded with invalid json: Malformed UTF-8 characters, possibly incorrectly encoded.', $this->getRequestUrl()));
+            break;
+            default:
+                throw new RequestException(sprintf('API "%s" responded with invalid json: Unknown error.', $this->getRequestUrl()));
+            break;
+        }
     }
     
     /**

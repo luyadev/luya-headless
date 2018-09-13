@@ -45,6 +45,16 @@ class ActiveEndpointResponse implements PaginationInterface
     {
         return $this->models;
     }
+
+    /**
+     * Returns the json parsed content as array.
+     * 
+     * @return array Returns the parsed json content as array.
+     */
+    public function getContent()
+    {
+        return $this->response->getContent();
+    }
     
     // PaginationInterface
     
