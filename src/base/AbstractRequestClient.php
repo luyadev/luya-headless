@@ -313,16 +313,11 @@ abstract class AbstractRequestClient
     {
         foreach ($params as $key => $value) {
             if (is_array($value)) {
-                foreach ($value as $k => $v) {
-                    $params[] = is_array($v) ? implode(".", array_keys($v)) : $v;
-                }
-                $params[$key] = implode(".", array_keys($value));
+                $params[$key] = $this->generateCacheKey($value);
             }
         }
-        $params[] = __CLASS__;
-        $params[] = get_called_class();
         
-        return implode(".", $params);
+        return implode(".", array_keys($params)) . '-' . implode(".", array_values($params));
     }
     
     /**
