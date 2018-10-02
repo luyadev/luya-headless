@@ -1,8 +1,8 @@
-# Render a CMS Page with blocks and page rendere
+# Render a CMS Page with blocks
 
 The [previous section about CMS apis](cms.md) shows how architecture of headless cms items is done, in order to get a faster resulate you can use the PageRenderer class with blocks. Blocks are a visual representation of the data you get from the api.  
 
-## Create Blocks
+## Create Blocks
 
 Create a block class and render the view for this block including the variables from the API accessed trough `varValue()`, `cfgValue()` and `extraValue()`:
 
@@ -18,7 +18,7 @@ class TextBlock extends AbstractBlockView
 
 > Every block needs at least a render method in order to work. Take a look at the 
 
-## Connect Block with Page
+## Connect Block with Page
 
 Now as you have created all your blocks for the frontend, used in the administration you have to connect those blocks into the page rendere object.
 
