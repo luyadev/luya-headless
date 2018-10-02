@@ -215,20 +215,6 @@ class ActiveEndpoint extends Endpoint
     /**
      * Find object for the given id and returns the current active endpoint model attributes with the data.
      * 
-     * @param integer $id
-     * @param Client $client
-     * @return static
-     */
-    public static function findOne($id, Client $client)
-    {
-        trigger_error('use viewOne() instead.', E_USER_DEPRECATED);
-
-        return static::viewOne($id, $client);
-    }
-
-    /**
-     * Find object for the given id and returns the current active endpoint model attributes with the data.
-     * 
      * This is the short form of:
      * 
      * ```php

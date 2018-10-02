@@ -38,6 +38,9 @@ class ActiveEndpointTest extends HeadlessTestCase
             
         $this->assertTrue($model->hasError());
         $this->assertTrue($model->getIsNewRecord()); // its also a new model after saving
+
+        $this->assertSame(['firstname' => ['This name is just hilarious and therefore invalid!']], $model->getAttributeErrors());
+        $this->assertSame(['This name is just hilarious and therefore invalid!'], $model->getAttributeErrors('firstname'));
     }
     
     public function testGetPrimaryKeyValue()
@@ -154,6 +157,18 @@ class ActiveEndpointTest extends HeadlessTestCase
         foreach ($response->getModels() as $k => $v) {
             $this->assertSame('John', $v->firstname);
         }
+    }
+
+    public function testIterator()
+    {
+        $iteratorModel = TestingActiveEndpoint::iterator([
+            ['firstname' => 'foo', 'lastname' => 'bar'],
+        ]);
+
+        $this->assertInstanceOf('luya\headless\base\BaseIterator', $iteratorModel);
+
+        $this->assertSame(1, count($iteratorModel));
+        $this->assertSame(['firstname' => 'foo', 'lastname' => 'bar'], $iteratorModel['foo,bar']->toArray());
     }
 }
 

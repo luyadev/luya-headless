@@ -35,7 +35,6 @@ abstract class AbstractEndpointRequest
     public function __construct(EndpointInterface $endpointObject)
     {
         $this->endpointObject = $endpointObject;
-        $this->ensureRequiredArguments();
     }
     
     /**
@@ -46,6 +45,8 @@ abstract class AbstractEndpointRequest
      */
     public function response(Client $client)
     {
+        $this->ensureRequiredArguments();
+
         $requestClient = $client->getRequestClient();
         $requestClient->setEndpoint($this->getEndpoint());
         

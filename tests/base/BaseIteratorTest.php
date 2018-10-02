@@ -29,6 +29,20 @@ class BaseIteratorTeste extends HeadlessTestCase
             $this->assertSame('Bar', $value->lastname);
         }
     }
+
+    public function testArrayAccces()
+    {
+        $data = [['firstname' => 'Foo', 'lastname' => 'Bar']];
+
+        $object = BaseIterator::create(FooModel::class, $data);
+        $object['new'] = 'yes';
+        $this->assertSame('yes', $object['new']);
+        $this->assertTrue(isset($object['new'])); // works
+        $this->assertFalse(array_key_exists('new', $object)); // does not work with iterators
+        $this->assertFalse(array_key_exists('firstname', $object));
+        unset($object['new']);
+        $this->assertFalse(isset($object['new']));
+    }
 }
 
 class FooModel extends BaseModel

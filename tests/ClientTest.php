@@ -7,6 +7,7 @@ use luya\headless\modules\admin\ApiAdminUser;
 use luya\headless\collectors\DummyRequest;
 use luya\headless\base\BeforeRequestEvent;
 use luya\headless\collectors\DummyRequestClient;
+use luya\headless\base\AfterRequestEvent;
 
 final class ClientTest extends HeadlessTestCase
 {
@@ -75,6 +76,9 @@ final class ClientTest extends HeadlessTestCase
         $client = new Client('token', 'url');
         $client->setBeforeRequestEvent(function(BeforeRequestEvent $event) {
             $this->assertSame('url?foo=bar', $event->url);
+        });
+        $client->setAfterRequestEvent(function(AfterRequestEvent $event) {
+            $this->assertNull($event->content);
         });
         $client->setRequestClient(new DummyRequestClient($client));
         
