@@ -34,14 +34,9 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     public function all(Client $client)
     {
         $response = $this->response($client);
-        
-        if ($response->isError() && $client->debug) {
-            throw new ResponseException(sprintf("Response error for all items request. Response content: %s", var_export($response->getContent(), true)));
-        }
-
         $models = $response->getContent();
-
-        if (empty($models) || $response->isError()) {
+        
+        if (empty($models)) {
             $models = [];
         }
         
@@ -66,11 +61,6 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     public function first(Client $client)
     {
         $response = $this->response($client);
-        
-        if ($response->isError() && $client->debug) {
-            throw new ResponseException(sprintf("Response error for first item request. Response content: %s", var_export($response->getContent(), true)));
-        }
-
         $content = $this->responseToContent($response);
 
         if (!$content) {
@@ -93,11 +83,6 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     public function one(Client $client)
     {
         $response = $this->response($client);
-
-        if ($response->isError() && $client->debug) {
-            throw new ResponseException(sprintf("Response error for one item request. Response content: %s", var_export($response->getContent(), true)));
-        }
-
         $content = $this->responseToContent($response);
 
         if (!$content) {
@@ -115,9 +100,15 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
      */
     private function responseToContent(EndpointResponse $response)
     {
+        // the one api returns an error, therefore we do not handle this error but return false instead, this is the expected
+        // behavior when using one() inside your application, even when the api returns a 404.
+        if ($response->isError()) {
+            return false;
+        }
+
         $content = $response->getContent();
 
-        if (empty($content) || $response->isError()) {
+        if (empty($content)) {
             return false;
         }
 

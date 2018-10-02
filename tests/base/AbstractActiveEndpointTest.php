@@ -42,6 +42,18 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
         $this->assertSame("bar", $model->foo);
     }
 
+    public function testOneWithoutFindEndpontResourcesObject()
+    {
+        $client = $this->createDummyClient('{}');
+        $this->assertFalse(TestActiveEndpoint::viewOne(1, $client));
+    }
+
+    public function testOneBut404ResponseCauseObjectNotExists()
+    {
+        $client = $this->createDummyClient('{}', false, 404);
+        $this->assertFalse(TestActiveEndpoint::viewOne(1, $client));
+    }
+
     public function testCustomViewOne()
     {
         $client = $this->createDummyClient('{"id":1, "foo": "bar"}');
@@ -73,6 +85,13 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
         $this->assertSame('bar', $data->foo);
     }
     
+    public function testFindFirstWithEmptyArray()
+    {
+        $client = $this->createDummyClient('[]');
+
+        $this->assertFalse(TestActiveEndpoint::find()->first($client));
+    }
+
     public function testFindToken()
     {
         $client = $this->createDummyClient('[{"id":1, "foo": "bar"}]');
