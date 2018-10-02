@@ -4,6 +4,8 @@ namespace luya\headless\tests\cms;
 
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\modules\cms\Page;
+use luya\headless\modules\cms\Menu;
+use luya\headless\modules\cms\PageRenderer;
 
 final class PageTest extends HeadlessTestCase
 {
@@ -34,5 +36,35 @@ final class PageTest extends HeadlessTestCase
         }
 
         $this->assertEquals([1, 2, 5, 32, 6, 50, 49, 31, 4, 91, 44], $ids);
+
+        // render page
+
+        $renderer = new PageRenderer($page->getCurrentPageVersion());
+        
+        TestBlock::register(18, $renderer);
+        TestBlock::register(15, $renderer);
+        TestBlock::register(6, $renderer);
+        TestBlock::register(10, $renderer);
+        TestBlock::register(7, $renderer);
+        TestBlock::register(5, $renderer);
+
+        $this->assertNotNull($renderer->render());
+
+    }
+
+    public function testMenu()
+    {
+        $json = <<<'JSON'
+        [[{"id":"1","nav_container_id":"2","parent_nav_id":"0","sort_index":"1","is_deleted":"0","is_hidden":"0","is_home":"0","is_offline":"0","is_draft":"0","layout_file":null,"publish_from":null,"publish_till":null,"item":{"id":"1","nav_id":"1","lang_id":"1","nav_item_type":"1","nav_item_type_id":"1","create_user_id":"1","update_user_id":"1","timestamp_create":"1531071213","timestamp_update":"1536064989","title":"Test Page 1","alias":"test-page-1","description":null,"keywords":null,"title_tag":null}},{"id":"2","nav_container_id":"2","parent_nav_id":"0","sort_index":"2","is_deleted":"0","is_hidden":"0","is_home":"0","is_offline":"0","is_draft":"0","layout_file":null,"publish_from":null,"publish_till":null,"item":{"id":"2","nav_id":"2","lang_id":"1","nav_item_type":"1","nav_item_type_id":"2","create_user_id":"1","update_user_id":"1","timestamp_create":"1531075178","timestamp_update":"1536065316","title":"Seite mit layout block","alias":"seite-mit-layout-block","description":"","keywords":null,"title_tag":null}}]]    
+JSON;
+        $client = $this->createDummyClient($json);
+        
+        $items = Menu::find()->container(1)->language(1)->root()->response($client);
+
+        $first = $items[1];
+        
+        $this->assertSame('Test Page 1', $first->item->title);
+        $this->assertSame("0", $first->is_offline);
+
     }
 }

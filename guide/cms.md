@@ -1,6 +1,6 @@
 # LUYA CMS MODULE
 
-When you have installed the [luya-module-cms] on your API you can also retrieve menu data and render content of a given CMS Page.
+When you have installed the [luya-module-cms] on your API you can also retrieve menu data and render content of a given CMS Page. This guide sections explains how LUYA retrieves the data and how to iterate trough menus.
 
 ## Build a Menu (Navigation)
 
@@ -15,7 +15,7 @@ foreach ($items as $item) {
 }
 ```
 
-## Render CMS Content
+## Page Object
 
 In order to get the CMS content retrieve the page content for a given nav id and language:
 
@@ -34,6 +34,10 @@ if ($page->isRedirect()) {
 
 If the page type is a redirect maybe you want to redirect the page inside your controller logic, we will skip this now an proceed to block rendering.
 
+## Render the Page
+
+The below example shows you how you can iterate trough the rows and cols and access the block object, this is of course just a demonstration of how its done a not very usefull for a full and complex rendering of a page, there fore take a look at the [CMS Page and Block Rendering][cms-renderer.md] Section.
+
 An example of how a nested view could look like with bootstrap grid system (as its the same for the admin). Keep in mind we have a max amount of 12 cols per row.
 
 ```php
@@ -49,3 +53,5 @@ An example of how a nested view could look like with bootstrap grid system (as i
     </div>
 <?php endforeach; ?>
 ```
+
+> We recommend to use (Page & Block rendering)[cms-renderer.md] instead!

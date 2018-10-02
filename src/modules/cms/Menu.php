@@ -24,6 +24,12 @@ class Menu
     
     private $_containerId;
     
+    /**
+     * Undocumented function
+     *
+     * @param [type] $containerId
+     * @return static
+     */
     public function container($containerId)
     {
         $this->_containerId = $containerId;
@@ -32,6 +38,12 @@ class Menu
     
     private $_langId;
     
+    /**
+     * Undocumented function
+     *
+     * @param [type] $langId
+     * @return static
+     */
     public function language($langId)
     {
         $this->_langId = $langId;
@@ -40,6 +52,11 @@ class Menu
     
     private $_parentNavId = 0;
     
+    /**
+     * Undocumented function
+     *
+     * @return static
+     */
     public function root()
     {
         $this->_parentNavId = 0;    
@@ -48,6 +65,12 @@ class Menu
     
     private $_cache;
     
+    /**
+     * Undocumented function
+     *
+     * @param [type] $ttl
+     * @return static
+     */
     public function cache($ttl)
     {
         $this->_cache = $ttl;
@@ -57,10 +80,20 @@ class Menu
     
     private $_data;
     
+    /**
+     * Undocumented function
+     *
+     * @param Client $client
+     * @return array
+     */
     protected function getData(Client $client)
     {
         if ($this->_data === null) {
-            $this->_data = ApiCmsMenuItems::index()->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])->setCache($this->_cache)->response($client)->getContent();
+            $this->_data = ApiCmsMenuItems::index()
+                ->setArgs(['langId' => $this->_langId, 'containerId' => $this->_containerId])
+                ->setCache($this->_cache)
+                ->response($client)
+                ->getContent();
         }
         
         return $this->_data;
@@ -76,6 +109,6 @@ class Menu
         $data = $this->getData($client);
         $items = isset($data[$this->_parentNavId]) ? $data[$this->_parentNavId] : [];
 
-        return BaseIterator::create(Nav::class, $items, 'id');
+        return Nav::iterator($items, 'id');
     }
 }

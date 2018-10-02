@@ -6,6 +6,7 @@ use luya\headless\Client;
 use luya\headless\collectors\DummyRequest;
 use luya\testsuite\cases\WebApplicationTestCase;
 use luya\headless\collectors\DummyRequestClient;
+use luya\helpers\Json;
 
 abstract class HeadlessTestCase extends WebApplicationTestCase
 {
@@ -33,7 +34,7 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
     public function getDummyRequest(Client $client, $content, $success, array $headers = [])
     {
         $request = new DummyRequestClient($client);
-        $request->response = $content;
+        $request->response = is_array($content) ? Json::encode($content) : $content;
         $request->success = $success;
         $request->responseHeaderMapping = $headers;
         

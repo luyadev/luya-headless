@@ -5,7 +5,8 @@ Table of contents
 + [Endpoint](endpoint.md)
 + [Active Endpoint](active-endpoint.md)
 + [Pagination](pagination.md)
-+ [CMS APIs](cms.md)
++ [CMS Menu & page](cms.md)
++ [Render CMS Page & Blocks](cms-renderer.md)
 
 ## General information
 
