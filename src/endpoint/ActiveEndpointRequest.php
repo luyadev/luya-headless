@@ -6,6 +6,7 @@ use luya\headless\base\BaseIterator;
 use luya\headless\Client;
 use luya\headless\base\AbstractRequestClient;
 use luya\headless\base\AbstractEndpointRequest;
+use luya\headless\exceptions\ResponseException;
 
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
@@ -34,10 +35,14 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     {
         $response = $this->response($client);
         
-        if ($response->isError() && !$client->debug) {
+        if ($response->isError() && $client->debug) {
+            throw new ResponseException(sprintf("Response error for all items request. Response content: %s", var_export($response->getContent(), true)));
+        }
+
+        $models = $response->getContent();
+
+        if (empty($models) || $response->isError()) {
             $models = [];
-        } else {
-            $models = $response->getContent();
         }
         
         $models = BaseIterator::create(get_class($this->endpointObject), $models, $response->endpoint->getPrimaryKeys(), false);
@@ -62,17 +67,17 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     {
         $response = $this->response($client);
         
-        if ($response->isError() && !$client->debug) {
-            $models = [];
-        } else {
-            $models = $response->getContent();
+        if ($response->isError() && $client->debug) {
+            throw new ResponseException(sprintf("Response error for first item request. Response content: %s", var_export($response->getContent(), true)));
         }
 
-        $content = current($models);
-        $className = get_class($this->endpointObject);
-        $model = new $className($content);
-        $model->isNewRecord = false;
-        return $model;
+        $content = $this->responseToContent($response);
+
+        if (!$content) {
+            return false;
+        }
+
+        return $this->contentToModel(current($content));
     }
     
     /**
@@ -88,14 +93,49 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     public function one(Client $client)
     {
         $response = $this->response($client);
-        
-        if ($response->isError() && !$client->debug) {
+
+        if ($response->isError() && $client->debug) {
+            throw new ResponseException(sprintf("Response error for one item request. Response content: %s", var_export($response->getContent(), true)));
+        }
+
+        $content = $this->responseToContent($response);
+
+        if (!$content) {
             return false;
         }
         
+        return $this->contentToModel($content);
+    }
+
+    /**
+     * Parse the response object into content, if empty or response is error return false.
+     *
+     * @param EndpointResponse $response
+     * @return mixed
+     */
+    private function responseToContent(EndpointResponse $response)
+    {
+        $content = $response->getContent();
+
+        if (empty($content) || $response->isError()) {
+            return false;
+        }
+
+        return $content;
+    }
+
+    /**
+     * Create new model for the current request with the given content.
+     *
+     * @param mixed $content
+     * @return \luya\headless\ActiveEndpoint
+     */
+    private function contentToModel($content)
+    {
         $className = get_class($this->endpointObject);
-        $model = new $className($response->getContent());
+        $model = new $className($content);
         $model->isNewRecord = false;
+
         return $model;
     }
 }

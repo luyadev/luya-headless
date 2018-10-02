@@ -82,16 +82,19 @@ class ActiveEndpointTest extends HeadlessTestCase
     
     public function testAllWithError()
     {
+        $this->expectException('luya\headless\exceptions\RequestException');
         $model = TestingActiveEndpoint::find()->all($this->createDummyClient('[]', false));
+    }
+
+    public function testAllWithErrorAndDebuging()
+    {
         
-        $this->assertInstanceOf('luya\headless\base\BaseIterator', $model->getModels());
     }
     
     public function testViewOneWithError()
     {
+        $this->expectException('luya\headless\exceptions\RequestException');
         $model = TestingActiveEndpoint::viewOne(1, $this->createDummyClient('[]', false));
-        
-        $this->assertFalse($model);
     }
     
     public function testFindAllIterator()
