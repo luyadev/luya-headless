@@ -98,10 +98,10 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
         
         $data = TestActiveEndpoint::testTokenUrl(123)->response($client);
         
-        $this->assertSame('MY_ADMIN_SERVER_URL/foo/bar/id/123/name', $data->request->getRequestUrl());
+        $this->assertSame('MY_ADMIN_SERVER_URL/foo/bar/id/123/name', $data->requestClient->getRequestUrl());
 
         $url = TestActiveEndpoint::testBraceLessTokenUrl()->response($client);
-        $this->assertSame('MY_ADMIN_SERVER_URL/foo/bar/john/doe', $url->request->getRequestUrl());
+        $this->assertSame('MY_ADMIN_SERVER_URL/foo/bar/john/doe', $url->requestClient->getRequestUrl());
     }
     
     public function testFindTokenWithCacheWhichIsDisabled()

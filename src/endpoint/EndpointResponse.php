@@ -5,6 +5,7 @@ namespace luya\headless\endpoint;;
 use luya\headless\base\AbstractRequestClient;
 use luya\headless\base\PaginationInterface;
 use luya\headless\base\EndpointInterface;
+use luya\headless\base\AbstractEndpointRequest;
 
 /**
  * EndpointResponse represents a response object from the AbstractRequestClient class
@@ -17,40 +18,43 @@ class EndpointResponse implements PaginationInterface
     /**
      * @var \luya\headless\base\AbstractRequestClient
      */
-    public $request;
+    public $requestClient;
     
     /**
      * @var EndpointInterface
      */
     public $endpoint;
+
+    public $request;
     
     /**
      * Create new endpoint response from an {{AbstratRequest}}.
      */
-    public function __construct(AbstractRequestClient $request, EndpointInterface $endpoint)
+    public function __construct(AbstractRequestClient $requestClient, AbstractEndpointRequest $request)
     {
+        $this->requestClient = $requestClient;
         $this->request = $request;
-        $this->endpoint = $endpoint;
+        $this->endpoint = $request->getEndpointObject();
     }
     
     public function getTotalCount()
     {
-        return $this->request->getResponseHeader('X-Pagination-Total-Count');
+        return $this->requestClient->getResponseHeader('X-Pagination-Total-Count');
     }
     
     public function getPageCount()
     {
-        return $this->request->getResponseHeader('X-Pagination-Page-Count');
+        return $this->requestClient->getResponseHeader('X-Pagination-Page-Count');
     }
     
     public function getCurrentPage()
     {
-        return $this->request->getResponseHeader('X-Pagination-Current-Page');
+        return $this->requestClient->getResponseHeader('X-Pagination-Current-Page');
     }
     
     public function getPerPage()
     {
-        return $this->request->getResponseHeader('X-Pagination-Per-Page');
+        return $this->requestClient->getResponseHeader('X-Pagination-Per-Page');
     }
     
     public function isLastPage()
@@ -80,12 +84,12 @@ class EndpointResponse implements PaginationInterface
      */
     public function getContent()
     {
-        return $this->endpoint->processContent($this->request->getParsedResponse());
+        return $this->request->callContentProcessor($this->requestClient->getParsedResponse());
     }
     
     public function isSuccess()
     {
-        return $this->request->isSuccess();
+        return $this->requestClient->isSuccess();
     }
     
     public function isError()
@@ -95,6 +99,6 @@ class EndpointResponse implements PaginationInterface
     
     public function getStatusCode()
     {
-        return $this->request->getResponseStatusCode();
+        return $this->requestClient->getResponseStatusCode();
     }
 }

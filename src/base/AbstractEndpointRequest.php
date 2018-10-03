@@ -36,6 +36,11 @@ abstract class AbstractEndpointRequest
     {
         $this->endpointObject = $endpointObject;
     }
+
+    public function getEndpointObject()
+    {
+        return $this->endpointObject;
+    }
     
     /**
      * Create a response.
@@ -377,5 +382,49 @@ abstract class AbstractEndpointRequest
     public function setFilter(array $filter)
     {
         return $this->setArgs(['filter' => $filter]);
+    }
+
+    private $_contentProcessor;
+
+    /**
+     * Process the endpoint response content (array parsed value).
+     * 
+     * This allows you to interact with the content, for example if the models
+     * are wrapped into an enclosed array key like `'items' => []`. 
+     * 
+     * ```php
+     * public function setContentProcessor(function($content) {
+     *  return $content['items'];
+     * });
+     * ```
+     * 
+     * This allows you to either append the content process for a single request or for 
+     * all methods like find() view(). The below example will parsed all find calls:
+     * 
+     * ```php
+     * public static function find()
+     * {
+     *     return parent::find()->setContentProcessor(function($content) {
+     *         return $content['items'];
+     *     })->setExpand(['users']); // more default config for find commands
+     * }
+     * ```
+     * 
+     * @return array
+     */
+    public function setContentProcessor(callable $fn)
+    {
+        $this->_contentProcessor = $fn;
+
+        return $this;
+    }
+
+    public function callContentProcessor($content)
+    {
+        if ($this->_contentProcessor) {
+            return call_user_func($this->_contentProcessor, $content);
+        }
+
+        return $content;
     }
 }

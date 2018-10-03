@@ -193,8 +193,10 @@ class TestingActiveEndpointProcess extends ActiveEndpoint
         return ['firstname', 'lastname'];
     }
 
-    public function processContent(array $content)
+    public static function find()
     {
-        return $content['items'];
+        return parent::find()->setContentProcessor(function($content) {
+            return $content['items'];
+        });
     }
 }

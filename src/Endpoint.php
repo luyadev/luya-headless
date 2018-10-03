@@ -67,14 +67,6 @@ class Endpoint extends BaseModel implements EndpointInterface
     }
     
     /**
-     * @inheritdoc
-     */
-    public function processContent(array $content)
-    {
-        return $content;
-    }
-    
-    /**
      * Create a GET request.
      * 
      * @return GetEndpointRequest

@@ -51,11 +51,6 @@ class MyTestEndpoint implements EndpointInterface
     {
         return 'foobar';
     }
-
-    public function processContent(array $content)
-    {
-        return $cotent;
-    }
     
     public static function get()
     {

@@ -18,7 +18,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
      */
     public function createResponse(AbstractRequestClient $request)
     {
-        return (new EndpointResponse($request->get($this->getArgs() ?: []), $this->endpointObject));
+        return new EndpointResponse($request->get($this->getArgs() ?: []), $this);
     }
     
     /**
@@ -40,7 +40,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
             $models = [];
         }
         
-        $models = BaseIterator::create(get_class($this->endpointObject), $models, $response->endpoint->getPrimaryKeys(), false);
+        $models = BaseIterator::create(get_class($this->getEndpointObject()), $models, $response->endpoint->getPrimaryKeys(), false);
         
         return new ActiveEndpointResponse($response, $models);
     }

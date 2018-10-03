@@ -22,6 +22,6 @@ class PutEndpointRequest extends AbstractEndpointRequest
      */
     public function createResponse(AbstractRequestClient $request)
     {
-        return (new EndpointResponse($request->put($this->getArgs() ?: []), $this->endpointObject));
+        return new EndpointResponse($request->put($this->getArgs() ?: []), $this);
     }
 }
