@@ -31,6 +31,8 @@ class NavItemPageBlock extends BaseModel
     public $variations;
     public $variation;
     public $is_dirty_dialog_enabled;
+    public $block_class_name;
+    public $block_class;
 
     /**
      * Get the content for a given var.

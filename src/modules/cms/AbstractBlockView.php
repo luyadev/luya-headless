@@ -71,12 +71,12 @@ abstract class AbstractBlockView
     /**
      * Register the block into the renderer.
      * 
-     * @param integer $id
+     * @param integer $identifier The identifier can be either block_id, block_class or block_class_name
      * @param PageRenderer $rendere
      */
-    public static function register($id, PageRenderer $rendere)
+    public static function register($identifier, PageRenderer $renderer)
     {
-        $rendere->setBlockView($id, get_called_class());
+        $renderer->setBlockView($identifier, get_called_class());
     }
 
     /**
@@ -123,7 +123,7 @@ abstract class AbstractBlockView
         $c = null;
 
         foreach ($this->block->getPlaceholder($name)->getBlocks() as $block) {
-            $c.= $this->renderer->renderBlock($block->block_id, $block);
+            $c.= $this->renderer->renderBlock($block);
         }
 
         return $c;

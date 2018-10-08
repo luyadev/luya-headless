@@ -51,12 +51,13 @@ class PageRenderer
 
     /**
      * Map a given block view to an ID
-     * @param integer $id
+     * 
+     * @param integer $identifier Can be either block_id, block_class or block_class_name.
      * @param string $blockViewObject The class object path like `path\to\psr4\namespace\BlockView`
      */
-    public function setBlockView($id, $blockViewObject)
+    public function setBlockView($identifier, $blockViewObject)
     {
-        $this->_blockViews[$id] = $blockViewObject;
+        $this->_blockViews[$identifier] = $blockViewObject;
     }
 
     /**
@@ -66,13 +67,21 @@ class PageRenderer
      * @throws Exception
      * @return string
      */
-    public function renderBlock($id, NavItemPageBlock $block)
+    public function renderBlock(NavItemPageBlock $block)
     {
-        if (!isset($this->_blockViews[$id])) {
-            throw new Exception("Unable to find the given block view for id $id.");
+        if (isset($this->_blockViews[$block->block_id])) {
+            return $this->renderBlockView($this->_blockViews[$block->block_id], $block);
+        } elseif (isset($this->_blockViews[$block->block_class])) {
+            return $this->renderBlockView($this->_blockViews[$block->block_class], $block);
+        } elseif (isset($this->_blockViews[$block->block_class_name])) {
+            return $this->renderBlockView($this->_blockViews[$block->block_class_name], $block);
         }
-        $className = $this->_blockViews[$id];
-        
+
+        throw new Exception(sprintf('Unable to findet a registered block view for id "%s", class "%s" or class name "%s"', $block->block_id, $block->block_class, $block->block_class_name));
+    }
+
+    private function renderBlockView($className, NavItemPageBlock $block)
+    {
         $view = new $className($block, $this);
         return $view->render();
     }
@@ -109,7 +118,7 @@ class PageRenderer
     {
         $c = null;
         foreach ($col->getBlocks() as $block) {
-            $c.= $this->renderBlock($block->block_id, $block);
+            $c.= $this->renderBlock($block);
         }
 
         return $c;
