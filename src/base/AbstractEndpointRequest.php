@@ -52,7 +52,8 @@ abstract class AbstractEndpointRequest
     {
         $this->ensureRequiredArguments();
 
-        $requestClient = $client->getRequestClient();
+        // clone request client object in order to ensure late binding of object wont override the client
+        $requestClient = clone $client->getRequestClient();
         $requestClient->setEndpoint($this->getEndpoint());
         
         if ($this->getCache()) {

@@ -170,6 +170,16 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertSame(1, count($iteratorModel));
         $this->assertSame(['firstname' => 'foo', 'lastname' => 'bar'], $iteratorModel['foo,bar']->toArray());
     }
+
+    public function testLateStateBindingObject()
+    {
+        $providerOne = TestingActiveEndpoint::find()->all($this->createDummyClient('[{"firstname": "foo", "lastname": "bar"}]', true, 200, ['X-Pagination-Page-Count' => 1]));
+
+        $this->assertSame(1, $providerOne->getPageCount());
+        $providerTwo = TestingActiveEndpoint::find()->all($this->createDummyClient('[{"firstname": "foo", "lastname": "bar"}]', true, 200, ['X-Pagination-Page-Count' => 400]));
+        $this->assertSame(400, $providerTwo->getPageCount());
+        $this->assertSame(1, $providerOne->getPageCount());
+    }
 }
 
 class TestingActiveEndpoint extends ActiveEndpoint
