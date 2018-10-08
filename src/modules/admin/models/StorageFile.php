@@ -33,5 +33,12 @@ class StorageFile extends BaseModel
     public $passtrough_file_stats;
     public $caption;
     public $inline_disposition;
+
+    // expandable properties
     public $source;
+    public $sizeReadable;
+    public $user;
+    public $file;
+    public $images;
+    public $isImage;
 }
