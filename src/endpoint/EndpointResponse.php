@@ -39,22 +39,22 @@ class EndpointResponse implements PaginationInterface
     
     public function getTotalCount()
     {
-        return $this->requestClient->getResponseHeader('X-Pagination-Total-Count');
+        return (int) $this->requestClient->getResponseHeader('X-Pagination-Total-Count');
     }
     
     public function getPageCount()
     {
-        return $this->requestClient->getResponseHeader('X-Pagination-Page-Count');
+        return (int) $this->requestClient->getResponseHeader('X-Pagination-Page-Count');
     }
     
     public function getCurrentPage()
     {
-        return $this->requestClient->getResponseHeader('X-Pagination-Current-Page');
+        return (int) $this->requestClient->getResponseHeader('X-Pagination-Current-Page');
     }
     
     public function getPerPage()
     {
-        return $this->requestClient->getResponseHeader('X-Pagination-Per-Page');
+        return (int) $this->requestClient->getResponseHeader('X-Pagination-Per-Page');
     }
     
     public function isLastPage()
