@@ -313,10 +313,10 @@ class ActiveEndpoint extends Endpoint
         } else {
             $request = self::update($this->getPrimaryKeyValue(), $values);
         }
-        
         $response = $request->response($client);
-        
+
         if ($response->isSuccess()) {
+            $this->refresh($response->getContent());
             return true;
         }
         

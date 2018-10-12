@@ -7,6 +7,23 @@ use luya\headless\ActiveEndpoint;
 
 class ActiveEndpointTest extends HeadlessTestCase
 {
+
+
+    public function testNewModelWithFieldsNotAssignedWhileCreating()
+    {
+        $model = new TestingActiveEndpointWithEmptyId();
+        $model->firstname = 'John';
+        $model->lastname = 'Doe';
+        
+        $this->assertTrue($model->getIsNewRecord());
+        $response = $model->save($this->createDummyClient('{"firstname":"J", "lastname": "D", "id": 1}'));
+        $this->assertTrue($response);
+        $this->assertSame('John', $model->oldValue('firstname'));
+        $this->assertSame('J', $model->firstname);
+        $this->assertSame(1, $model->id);
+        $this->assertTrue($model->getIsNewRecord()); // its also a new model after saving
+    }
+
     public function testNewModel()
     {
         $model = new TestingActiveEndpoint();
@@ -14,7 +31,7 @@ class ActiveEndpointTest extends HeadlessTestCase
         $model->lastname = 'Doe';
         
         $this->assertTrue($model->getIsNewRecord());
-        $response = $model->save($this->createDummyClient('{"firstname":"J", "lastname": "D"}'));
+        $response = $model->save($this->createDummyClient('{"firstname":"John", "lastname": "Doe"}'));
         $this->assertTrue($response);
         $this->assertSame('John', $model->firstname); // response does not modify the current model value.
         $this->assertTrue($model->getIsNewRecord()); // its also a new model after saving
@@ -192,6 +209,14 @@ class TestingActiveEndpoint extends ActiveEndpoint
         return ['firstname', 'lastname'];
     }
 }
+
+class TestingActiveEndpointWithEmptyId extends ActiveEndpoint
+{
+    public $id;
+    public $firstname;
+    public $lastname;
+}
+
 
 class TestingActiveEndpointProcess extends ActiveEndpoint
 {

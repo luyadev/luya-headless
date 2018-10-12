@@ -40,6 +40,34 @@ class BaseModel
         }
     }
 
+    private $_oldValues = [];
+
+    /**
+     * Refresh attrivute values and store old values.
+     *
+     * @param array $data An array with key value parining which should override the existing value.
+     */
+    public function refresh(array $data)
+    {
+        foreach ($data as $attribute => $value) {
+            if ($this->canSetProperty($attribute)) {
+                $this->_oldValues[$attribute] = $this->{$attribute};
+                $this->{$attribute} = $value;
+            }
+        }
+    }
+
+    /**
+     * If refresh() is done, the old values can be accessed with oldValue($attribute).
+     *
+     * @param string $attribute
+     * @return mixed
+     */
+    public function oldValue($attribute)
+    {
+        return isset($this->_oldValues[$attribute]) ? $this->_oldValues[$attribute] : false;
+    }
+
     /**
      * Create an iterator of models for the current endpoint.
      * 
