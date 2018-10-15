@@ -12,7 +12,7 @@ use luya\headless\modules\cms\models\NavItemPage;
 
 /**
  * Represents a response object for a given Page.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -42,7 +42,7 @@ class PageResponse extends BaseModel
     
     /**
      * Set the item.
-     * 
+     *
      * @param array $item
      */
     public function setItem(array $item)
@@ -51,7 +51,7 @@ class PageResponse extends BaseModel
     }
     
     /**
-     * 
+     *
      * @return \luya\headless\modules\cms\models\NavItem
      */
     public function getItem()
@@ -63,7 +63,7 @@ class PageResponse extends BaseModel
     
     /**
      * Set the nav data.
-     * 
+     *
      * @param array $nav
      */
     public function setNav(array $nav)
@@ -72,7 +72,7 @@ class PageResponse extends BaseModel
     }
     
     /**
-     * 
+     *
      * @return \luya\headless\modules\cms\models\Nav
      */
     public function getNav()
@@ -83,7 +83,7 @@ class PageResponse extends BaseModel
     private $_typeData;
     
     /**
-     * 
+     *
      * @param array $data
      */
     public function setTypeData(array $data)
@@ -93,7 +93,7 @@ class PageResponse extends BaseModel
     
     /**
      * Whether current response is page.
-     * 
+     *
      * @return boolean
      */
     public function isPage()
@@ -103,7 +103,7 @@ class PageResponse extends BaseModel
     
     /**
      * Whether current response is a redirect.
-     * 
+     *
      * @return boolean
      */
     public function isRedirect()
@@ -113,7 +113,7 @@ class PageResponse extends BaseModel
     
     /**
      * Whether current response is a module.
-     * 
+     *
      * @return boolean
      */
     public function isModule()
@@ -123,7 +123,7 @@ class PageResponse extends BaseModel
     
     /**
      * Return an array with a NavItempages.
-     * 
+     *
      * @return \luya\headless\base\BaseIterator
      */
     public function getPageVersions()
@@ -133,7 +133,7 @@ class PageResponse extends BaseModel
     
     /**
      * Get the current active page version.
-     * 
+     *
      * @return NavItemPage
      */
     public function getCurrentPageVersion()
@@ -144,7 +144,7 @@ class PageResponse extends BaseModel
     }
     
     /**
-     * 
+     *
      * @return \luya\headless\modules\cms\models\NavItemRedirect
      */
     public function getRedirect()
@@ -153,7 +153,7 @@ class PageResponse extends BaseModel
     }
     
     /**
-     * 
+     *
      * @return \luya\headless\modules\cms\models\NavItemModule
      */
     public function getModule()

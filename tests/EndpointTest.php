@@ -17,5 +17,4 @@ class EndpointTest extends HeadlessTestCase
 
 class ApiAdminUser extends Endpoint
 {
-    
 }

@@ -6,5 +6,4 @@ use luya\headless\Exception;
 
 class MissingArgumentsException extends Exception
 {
-    
 }

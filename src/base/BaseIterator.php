@@ -10,7 +10,7 @@ use luya\headless\Exception;
 
 /**
  * Generate an iterator object for a given model an array with data.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -22,7 +22,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
     protected $modelClass;
     
     /**
-     * @var boolean Whether the current row item is a new record or not. 
+     * @var boolean Whether the current row item is a new record or not.
      */
     protected $isNewRecord = true;
     
@@ -46,14 +46,13 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
     }
     
     /**
-     * 
+     *
      * @param array $items
      * @param string|array $keyColumn
      */
     public function addItems(array $items, $keyColumn)
     {
         foreach ($items as $key => $item) {
-
             if (!is_array($item)) {
                 throw new Exception(sprintf('The given iterator item must be type of array in order to assign them to "%s" model.', $this->modelClass));
             }
@@ -74,7 +73,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
     
     /**
      * Add new item to array of items.
-     * 
+     *
      * @param array $item The array with key value pairing where key is the attribute name.
      * @param string $key The value which is used for the indexing of the data array.
      */

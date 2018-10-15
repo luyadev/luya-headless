@@ -74,10 +74,10 @@ final class ClientTest extends HeadlessTestCase
     public function testRequestCallback()
     {
         $client = new Client('token', 'url');
-        $client->setBeforeRequestEvent(function(BeforeRequestEvent $event) {
+        $client->setBeforeRequestEvent(function (BeforeRequestEvent $event) {
             $this->assertSame('url?foo=bar', $event->url);
         });
-        $client->setAfterRequestEvent(function(AfterRequestEvent $event) {
+        $client->setAfterRequestEvent(function (AfterRequestEvent $event) {
             $this->assertNull($event->content);
         });
         $client->setRequestClient(new DummyRequestClient($client));

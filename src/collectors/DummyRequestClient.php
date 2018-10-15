@@ -23,7 +23,7 @@ class DummyRequestClient extends AbstractRequestClient
      */
     public function internalGet()
     {
-        return $this;   
+        return $this;
     }
     
     /**
@@ -74,7 +74,7 @@ class DummyRequestClient extends AbstractRequestClient
     public function getResponseRawContent()
     {
         return $this->response;
-    }   
+    }
     
     /**
      * @inheritdoc

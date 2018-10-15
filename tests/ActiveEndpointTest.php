@@ -7,8 +7,6 @@ use luya\headless\ActiveEndpoint;
 
 class ActiveEndpointTest extends HeadlessTestCase
 {
-
-
     public function testNewModelWithFieldsNotAssignedWhileCreating()
     {
         $model = new TestingActiveEndpointWithEmptyId();
@@ -230,7 +228,7 @@ class TestingActiveEndpointProcess extends ActiveEndpoint
 
     public static function find()
     {
-        return parent::find()->setContentProcessor(function($content) {
+        return parent::find()->setContentProcessor(function ($content) {
             return $content['items'];
         });
     }

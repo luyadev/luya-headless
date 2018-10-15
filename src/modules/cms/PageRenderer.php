@@ -9,25 +9,25 @@ use luya\headless\Exception;
 
 /**
  * Render a given Page.
- * 
+ *
  * The page renderer helps you to render a given page by providing recursive blocks
  * and provide an option to register the block views.
- * 
+ *
  * An example usgae for rendering the current page version:
- * 
+ *
  * ```php
  * $pageResponse = Page::find(1, 1)->response($client);
  * $renderer = new PageRenderer($pageResponse->getCurrentPageVersion());
- * 
+ *
  * // assign the block views
  * HeadingBlock::register(4, $renderer);
  * TextBlock::register(6, $renderer);
  * LayoutBlock::register(11, $renderer);
- * 
+ *
  * // render the page
  * echo $renderer->render();
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -39,7 +39,7 @@ class PageRenderer
     public $navItemPage;
 
     /**
-     * 
+     *
      * @param NavItemPage $navItemPage
      */
     public function __construct(NavItemPage $navItemPage)
@@ -51,7 +51,7 @@ class PageRenderer
 
     /**
      * Map a given block view to an ID
-     * 
+     *
      * @param integer $identifier Can be either block_id, block_class or block_class_name.
      * @param string $blockViewObject The class object path like `path\to\psr4\namespace\BlockView`
      */
@@ -61,7 +61,7 @@ class PageRenderer
     }
 
     /**
-     * 
+     *
      * @param integer $id
      * @param NavItemPageBlock $block
      * @throws Exception
@@ -88,7 +88,7 @@ class PageRenderer
 
     /**
      * render the current page blocks including rows and cols.
-     * 
+     *
      * @return string
      */
     public function render()
@@ -97,11 +97,11 @@ class PageRenderer
 
         foreach ($this->navItemPage->getRows() as $row) {
             $c.= '<div class="row">';
-                foreach ($row->getCols() as $col) {
-                    $c.= '<div class="col-md-'.$col->getSize().'">';
-                        $c.= $this->blockRendering($col);
-                    $c.= '</div>';
-                }
+            foreach ($row->getCols() as $col) {
+                $c.= '<div class="col-md-'.$col->getSize().'">';
+                $c.= $this->blockRendering($col);
+                $c.= '</div>';
+            }
             $c.= '</div>';
         }
 
@@ -110,7 +110,7 @@ class PageRenderer
 
     /**
      * Render the blocks for a given col.
-     * 
+     *
      * @param NavItemPageRowCol $col
      * @return string
      */

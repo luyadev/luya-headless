@@ -48,5 +48,5 @@ class BaseIteratorTeste extends HeadlessTestCase
 class FooModel extends BaseModel
 {
     public $firstname;
-    public $lastname;   
+    public $lastname;
 }

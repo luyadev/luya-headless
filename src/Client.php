@@ -8,12 +8,12 @@ use Psr\SimpleCache\CacheInterface;
 
 /**
  * Headless Client holds Configuration.
- * 
+ *
  * The Headless Client class holds the connection configuration as well as the headless configuration.
- * 
+ *
  * Every request to an API requeres an instance of Client, therefore for complex usage you should maybe store
  * the Client instance in a singleton object of your application.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -48,7 +48,7 @@ class Client
     public $endpointPrefix = 'admin/';
     
     /**
-     * 
+     *
      * @param string $accessToken
      * @param string $serverUrl Path to the webserver WITHOUT `admin`. Assuming your admin is accessable under `https://luya.io/admin` then the serverUrl would be `https://luya.io`.
      * @param string $language
@@ -76,7 +76,7 @@ class Client
     }
     
     /**
-     * 
+     *
      * @param AbstractRequestClient $request
      */
     public function setRequestClient(AbstractRequestClient $request)
@@ -86,17 +86,17 @@ class Client
     
     /**
      * Replace endpoint Prefix with setting from client.
-     * 
+     *
      * Its very common to have a prefix for every api endpoint. Therefore you can prefix your
      * endpoint names with {{%my-api-endpoint}}. Assuming $endpointPrefix is `admin/` the result
      * would be `admin/my-api-endpoint`.
-     * 
+     *
      * @param string $endpointName The endpoint name to replace.
      * @return mixed
      */
     public function replaceEndpointPrefix($endpointName)
     {
-        return preg_replace_callback('/\{\{(.*)\}\}/', function($results) {
+        return preg_replace_callback('/\{\{(.*)\}\}/', function ($results) {
             $name = $results[1];
             
             if ($this->endpointPrefix) {
@@ -110,7 +110,7 @@ class Client
     private $_cache;
     
     /**
-     * 
+     *
      * @param CacheInterface $cache
      */
     public function setCache(CacheInterface $cache)
@@ -119,7 +119,7 @@ class Client
     }
     
     /**
-     * 
+     *
      * @return \Psr\SimpleCache\CacheInterface
      */
     public function getCache()
@@ -158,22 +158,22 @@ class Client
     
     /**
      * A callable which runs after every request.
-     * 
+     *
      * ```php
      * setAfterRequestEvent(function(luya\headless\base\AfterRequestEvent $event) {
      *     // do some logging in your application
      * });
      * ```
-     * 
+     *
      * @param callable $fn
      */
     public function setAfterRequestEvent(callable $fn)
     {
-        $this->_afterRequestEvent = $fn;      
+        $this->_afterRequestEvent = $fn;
     }
     
     /**
-     * 
+     *
      * @return callable|null
      */
     public function getAfterRequestEvent()

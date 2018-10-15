@@ -1,6 +1,8 @@
 <?php
 
-namespace luya\headless\endpoint;;
+namespace luya\headless\endpoint;
+
+;
 
 use luya\headless\base\AbstractRequestClient;
 use luya\headless\base\PaginationInterface;
@@ -9,7 +11,7 @@ use luya\headless\base\AbstractEndpointRequest;
 
 /**
  * EndpointResponse represents a response object from the AbstractRequestClient class
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -79,7 +81,7 @@ class EndpointResponse implements PaginationInterface
     
     /**
      * Returns the json parsed content as array.
-     * 
+     *
      * @return array Returns the parsed json content as array.
      */
     public function getContent()

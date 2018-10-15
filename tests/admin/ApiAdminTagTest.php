@@ -4,7 +4,6 @@ namespace luya\headless\tests\admin;
 
 use luya\headless\tests\ModuleActiveEndpointTestCase;
 
-
 class ApiAdminTagTest extends ModuleActiveEndpointTestCase
 {
     public $endpointModel = 'luya\headless\modules\admin\ApiAdminTag';

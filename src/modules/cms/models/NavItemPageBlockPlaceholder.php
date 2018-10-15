@@ -7,13 +7,13 @@ use luya\headless\base\BaseIterator;
 
 /**
  * Represents a placeholder inside a block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class NavItemPageBlockPlaceholder extends BaseModel
 {
-    public $var;    
+    public $var;
     public $label;
     public $cols;
     public $nav_item_page_id;

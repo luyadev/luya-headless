@@ -8,7 +8,7 @@ use luya\headless\base\AbstractEndpointRequest;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

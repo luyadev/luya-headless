@@ -16,7 +16,7 @@ class NavItemPageRowCol extends BaseModel
     
     public function getSize()
     {
-        return $this->cols;   
+        return $this->cols;
     }
     
     /**

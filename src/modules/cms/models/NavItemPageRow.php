@@ -13,11 +13,11 @@ class NavItemPageRow extends BaseModel
     
     public function setCols(array $cols)
     {
-        $this->_cols = $cols;    
+        $this->_cols = $cols;
     }
     
     /**
-     * 
+     *
      * @return NavItemPageRowCol
      */
     public function getCols()

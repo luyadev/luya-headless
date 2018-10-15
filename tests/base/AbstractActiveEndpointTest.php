@@ -16,7 +16,7 @@ final class TestActiveEndpoint extends ActiveEndpoint
     }
 
     /**
-     * 
+     *
      * @param unknown $id
      * @return \luya\headless\endpoint\AbstractEndpointRequest
      */
@@ -69,8 +69,7 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
 
         $data = TestActiveEndpoint::findAll($client);
 
-        foreach ($data->getModels() as $model)
-        {
+        foreach ($data->getModels() as $model) {
             $this->assertSame(1, $model->id);
             $this->assertSame("bar", $model->foo);
         }

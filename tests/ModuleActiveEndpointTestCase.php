@@ -5,7 +5,6 @@ namespace luya\headless\tests;
 use luya\helpers\Json;
 use yii\base\InvalidConfigException;
 
-
 abstract class ModuleActiveEndpointTestCase extends HeadlessTestCase
 {
     public $endpointModel;
@@ -20,7 +19,7 @@ abstract class ModuleActiveEndpointTestCase extends HeadlessTestCase
         ];
     }
     /**
-     *      
+     *
      *
      * @return \luya\headless\ActiveEndpoint
      */

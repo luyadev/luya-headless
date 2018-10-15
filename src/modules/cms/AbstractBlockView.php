@@ -6,13 +6,13 @@ use \luya\headless\modules\cms\models\NavItemPageBlock;
 
 /**
  * Abstract class for Block Views.
- * 
+ *
  * This class represents a view for a given block. You can access all the block related
  * context informations in order to render those blocks nicely.
- * 
+ *
  * A very basic example for a text block, assmuing the the var with the content of the block
  * is located in `content`:
- * 
+ *
  * ```php
  * class TextBlock extends \luya\headless\modules\cms\AbstractBlockView
  * {
@@ -22,21 +22,21 @@ use \luya\headless\modules\cms\models\NavItemPageBlock;
  *     }
  * }
  * ```
- * 
+ *
  * An example with a layout block which have two placeholders `left` and `right` which
  * can contain block recursions:
- * 
+ *
  * ```php
  * class LayoutBlock extends \luya\headless\modules\cms\AbstractBlockView
  * {
  *     public function render()
  *     {
  *         return '<div class="row"><div class="col-md-6">' . $this->getPlaceholder('left') . '</div><div class="col-md-6">'. $this->getPlaceholder('right') . '</div></div>';
- *         
+ *
  *     }
  * }
  * ```
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -45,7 +45,7 @@ abstract class AbstractBlockView
     /**
      * The render method must return a string with the rendered block content.
      */
-    public abstract function render();
+    abstract public function render();
     
     /**
      * @var NavItemPageBlock
@@ -58,7 +58,7 @@ abstract class AbstractBlockView
     public $renderer;
     
     /**
-     * 
+     *
      * @param NavItemPageBlock $block
      * @param PageRenderer $renderer
      */
@@ -70,7 +70,7 @@ abstract class AbstractBlockView
 
     /**
      * Register the block into the renderer.
-     * 
+     *
      * @param integer $identifier The identifier can be either block_id, block_class or block_class_name
      * @param PageRenderer $rendere
      */
@@ -80,7 +80,7 @@ abstract class AbstractBlockView
     }
 
     /**
-     * 
+     *
      * @param string $varName
      * @param mixed $defaultValue
      * @return string
@@ -91,7 +91,7 @@ abstract class AbstractBlockView
     }
 
     /**
-     * 
+     *
      * @param string $cfgName
      * @param string $defaultValue
      * @return string
@@ -102,7 +102,7 @@ abstract class AbstractBlockView
     }
 
     /**
-     * 
+     *
      * @param string $extraName
      * @param string $defaultValue
      * @return string
@@ -114,7 +114,7 @@ abstract class AbstractBlockView
     
     /**
      * Get the rendered content of a given placeholder.
-     * 
+     *
      * @param string $name
      * @return string
      */
@@ -131,7 +131,7 @@ abstract class AbstractBlockView
 
     /**
      * Get an array with all rows in order to perform the rows, cols, blocks while.
-     * 
+     *
      * @return \luya\headless\modules\cms\models\NavItemPageRow
      */
     public function getPlaceholderRows()

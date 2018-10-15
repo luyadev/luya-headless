@@ -7,9 +7,9 @@ use luya\headless\Client;
 
 /**
  * Get admin tags.
- * 
+ *
  * Get all tags for a given relation table name:
- * 
+ *
  * $tags = ApiAdminTag::table('table_name')->all($client);
  */
 class ApiAdminTag extends ActiveEndpoint

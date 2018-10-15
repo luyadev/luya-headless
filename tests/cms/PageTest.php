@@ -13,7 +13,7 @@ final class PageTest extends HeadlessTestCase
     {
         $client = $this->createDummyClient('{"item":{"id":1},"nav":{"id":1},"error": 0}');
 
-        $page = Page::find(1,1)->response($client);
+        $page = Page::find(1, 1)->response($client);
 
         $this->assertSame(1, $page->item->id);
         $this->assertSame(1, $page->nav->id);
@@ -28,9 +28,9 @@ final class PageTest extends HeadlessTestCase
 
         $ids = [];
         foreach ($page->getCurrentPageVersion()->getRows() as $row) {
-            foreach($row->getCols() as $col) {
+            foreach ($row->getCols() as $col) {
                 foreach ($col->getBlocks() as $block) {
-                        $ids[] = $block->id;
+                    $ids[] = $block->id;
                 }
             }
         }
@@ -49,7 +49,6 @@ final class PageTest extends HeadlessTestCase
         TestBlock::register(5, $renderer);
 
         $this->assertNotNull($renderer->render());
-
     }
 
     public function testMenu()
@@ -65,6 +64,5 @@ JSON;
         
         $this->assertSame('Test Page 1', $first->item->title);
         $this->assertSame("0", $first->is_offline);
-
     }
 }

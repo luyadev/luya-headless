@@ -8,7 +8,7 @@ use luya\headless\modules\cms\models\Nav;
 
 /**
  * Generate menus trough the cms module.
- * 
+ *
  * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */
@@ -59,7 +59,7 @@ class Menu
      */
     public function root()
     {
-        $this->_parentNavId = 0;    
+        $this->_parentNavId = 0;
         return $this;
     }
     
@@ -100,7 +100,7 @@ class Menu
     }
     
     /**
-     * 
+     *
      * @param Client $client
      * @return \luya\headless\modules\cms\models\Nav
      */

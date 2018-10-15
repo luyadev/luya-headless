@@ -6,10 +6,10 @@ use luya\headless\base\BaseModel;
 
 /**
  * Admin Storage Image Model.
- * 
+ *
  * Expands:
  * + source
- * 
+ *
  * @since 1.0.0
  */
 class StorageImage extends BaseModel

@@ -34,7 +34,7 @@ class Page
     }
 
     /**
-     * 
+     *
      * @param Client $client
      * @return PageResponse
      */

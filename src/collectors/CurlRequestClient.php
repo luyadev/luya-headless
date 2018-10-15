@@ -7,7 +7,7 @@ use luya\headless\base\AbstractRequestClient;
 
 /**
  * Request Client Object via Curl.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -19,7 +19,7 @@ class CurlRequestClient extends AbstractRequestClient
     protected $curl;
     
     /**
-     * 
+     *
      * @return \Curl\Curl
      */
     private function getCurl()

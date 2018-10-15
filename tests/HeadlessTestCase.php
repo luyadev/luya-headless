@@ -24,7 +24,7 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
     }
     
     /**
-     * 
+     *
      * @param Client $client
      * @param string $content
      * @param integer $success
@@ -42,7 +42,7 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
     }
     
     /**
-     * 
+     *
      * @param string $content
      * @param boolean $success
      * @return \luya\headless\collectors\DummyRequestClient
@@ -53,7 +53,7 @@ abstract class HeadlessTestCase extends WebApplicationTestCase
     }
 
     /**
-     * 
+     *
      * @param string $content
      * @param boolean $success
      * @param integer $statusCode

@@ -23,11 +23,11 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     
     /**
      * Iterates over the current response content and assignes every item to the active endpoint model.
-     * 
+     *
      * ```php
      * $models = APi::find()->all($client);
      * ```
-     * 
+     *
      * @param Client $client
      * @return \luya\headless\endpoint\ActiveEndpointResponse
      */
@@ -47,13 +47,13 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
 
     /**
      * Takes the first row from an an array into an active endpoint model.
-     * 
+     *
      * This is comonoly used when retrieving data from find but return only the first record.
-     * 
+     *
      * ```php
      * $model = Api::find()->setPerPage(1)->first($client);
      * ```
-     * 
+     *
      * @param Client $client
      * @since 1.0.0
      * @return static
@@ -72,11 +72,11 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     
     /**
      * Takes the current response content into the active endpoint model.
-     * 
+     *
      * ```php
      * $model = Api::view($id)->setExpand(['images'])->one($client);
      * ```
-     * 
+     *
      * @param Client $client
      * @return static
      */

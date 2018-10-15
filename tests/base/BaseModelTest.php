@@ -36,16 +36,13 @@ class MyTestModel extends BaseModel
 
     public function getRead()
     {
-
     }
 
     public function getWriteAndRead()
     {
-
     }
 
     public function setWriteAndRead()
     {
-
     }
 }

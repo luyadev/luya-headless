@@ -6,7 +6,7 @@ use luya\headless\base\BaseModel;
 
 /**
  * Represents a data instance from a Block.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ class NavItemPageBlock extends BaseModel
 
     /**
      * Get the content for a given var.
-     * 
+     *
      * @param string $varName
      * @return mixed|boolean
      */
@@ -81,7 +81,7 @@ class NavItemPageBlock extends BaseModel
     }
 
     /**
-     * 
+     *
      * @param string $name The name of the placeholder, like `left`, `sidebar` etc.
      * @return NavItemPageBlockPlaceholder
      */
@@ -97,7 +97,7 @@ class NavItemPageBlock extends BaseModel
     }
     
     /*
-     * 
+     *
      * 'is_dirty' => true
                         'is_container' => 0
                         'id' => '9'

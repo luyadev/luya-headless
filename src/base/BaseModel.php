@@ -8,17 +8,17 @@ use luya\headless\Exception;
 
 /**
  * Base Model.
- * 
+ *
  * Getter/Setter methods logic from Yii Framework BaseObject. In addition you can load data into
  * the class property in order to have a model similar behavior.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class BaseModel
 {
     /**
-     * Initial the 
+     * Initial the
      * @param array $data
      */
     public function __construct(array $data = [])
@@ -28,7 +28,7 @@ class BaseModel
     
     /**
      * Load the attribute data into the model, where array key is the property of the class object.
-     * 
+     *
      * @param array $data The data where key is the object property and the value, the value to assign.
      */
     public function load(array $data)
@@ -70,21 +70,21 @@ class BaseModel
 
     /**
      * Create an iterator of models for the current endpoint.
-     * 
+     *
      * @param array $data
      * @param string $keyColumn
      * @return static
      */
     public static function iterator(array $data, $keyColumn = null)
     {
-        return BaseIterator::create(get_called_class(), $data, $keyColumn);   
+        return BaseIterator::create(get_called_class(), $data, $keyColumn);
     }
     
     /**
      * Returns the list of attribute names.
      * By default, this method returns all public non-static properties of the class.
      * You may override this method to change the default behavior.
-     * 
+     *
      * @return array list of attribute names.
      */
     public function attributes()
@@ -102,7 +102,7 @@ class BaseModel
 
     /**
      * Convert to current object into an array with attributes and getters.
-     * 
+     *
      * @param array $attributes A list of arrays which should be covered, if empty array all attributes() are taken.
      * @param array $getters An optional list of getter names which should be used to generate an array. Assuming `getUser` the
      * name `user` needs to be taken.

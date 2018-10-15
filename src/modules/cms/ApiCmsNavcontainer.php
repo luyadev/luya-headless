@@ -2,7 +2,6 @@
 
 namespace luya\headless\modules\cms;
 
-
 use luya\headless\ActiveEndpoint;
 
 class ApiCmsNavcontainer extends ActiveEndpoint

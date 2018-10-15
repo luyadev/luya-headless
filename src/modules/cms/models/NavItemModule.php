@@ -6,5 +6,4 @@ use luya\headless\base\BaseModel;
 
 class NavItemModule extends BaseModel
 {
-    
 }

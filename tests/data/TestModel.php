@@ -12,7 +12,7 @@ final class TestModel extends BaseModel
 
     public function setBar($bar)
     {
-            $this->_bar = $bar;
+        $this->_bar = $bar;
     }
 
     public function getBar()

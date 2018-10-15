@@ -2,7 +2,6 @@
 
 namespace luya\headless\modules\admin;
 
-
 use luya\headless\ActiveEndpoint;
 
 /**

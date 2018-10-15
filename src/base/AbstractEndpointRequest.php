@@ -22,7 +22,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Generate a reponse from a request.
-     * 
+     *
      * @param AbstractRequestClient $request
      * @return EndpointResponse
      */
@@ -57,7 +57,7 @@ abstract class AbstractEndpointRequest
         $requestClient->setEndpoint($this->getEndpoint());
         
         if ($this->getCache()) {
-            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class(), $this->_args], $this->getCache(), function() use ($requestClient) {
+            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class(), $this->_args], $this->getCache(), function () use ($requestClient) {
                 return $this->createResponse($requestClient);
             });
         }
@@ -69,9 +69,9 @@ abstract class AbstractEndpointRequest
     
     /**
      * Set caching time for the current request.
-     * 
+     *
      * If not set in client this won't have any effect, but will also not throw an exception.
-     * 
+     *
      * @param integer $ttl Caching life time in seconds.$this
      * @return static
      */
@@ -84,7 +84,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Getter method for caching time.
-     * 
+     *
      * @return integer
      */
     public function getCache()
@@ -109,11 +109,11 @@ abstract class AbstractEndpointRequest
 
     /**
      * Set an array with argument keys which must be provided trough {{setArgs()}}.
-     * 
+     *
      * Assuming your endpoint request must provide an `id` inside the arguments list, you
      * can require this by setting `setRequiredArgs(['id'])`. Now the EndpointRequest class
      * will check if `id` is in the given `getArgs()` list.
-     * 
+     *
      * @return static
      */
     public function setRequiredArgs(array $args)
@@ -131,13 +131,13 @@ abstract class AbstractEndpointRequest
      * ```php
      * setTokens(['{id}' => 1, '{name}' => 'foobar']);
      * ```
-     * 
+     *
      * equals to:
-     * 
+     *
      * ```php
      * setTokens(['id' => 1, 'name' => 'foobar']);
      * ```
-     * 
+     *
      * > The curly braces will be added automatically if missing.
      *
      * You can now use the tokens in curly braced in the endpoint string like:
@@ -145,12 +145,12 @@ abstract class AbstractEndpointRequest
      * ```php
      * setEndpoint('admin/api-user-login/{id}')
      * ```
-     * 
+     *
      * There is also a predifend token {{endpointName}} which will represent the endpoint name
      * from the {{luya\headless\base\AbstractEndpoint::getEndpointName()}}.
      *
      * which would replace {id} with 1 from the tokens list.
-     * 
+     *
      * @param array $tokens
      * @return static
      */
@@ -177,7 +177,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Setter method in order to extend or override the endpoint name from the {{endpointObject}}.
-     * 
+     *
      * @param string $name The endpoint name, in order to extend the current endpointName from the endpoint defintion you can use {endpointName}/foobar.
      * @return static
      */
@@ -228,7 +228,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Getter method for arguments.
-     * 
+     *
      * @return array
      */
     public function getArgs()
@@ -238,7 +238,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Expand a given field or relation.
-     * 
+     *
      * @see https://www.yiiframework.com/doc/guide/2.0/en/rest-resources#fields
      * @param array $extraFields
      * @return static
@@ -250,7 +250,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Set the current page which should be used.
-     * 
+     *
      * @param integer $id
      * @return static
      */
@@ -261,7 +261,7 @@ abstract class AbstractEndpointRequest
     
     /**
      * Set a value of how many items to response for every page.
-     * 
+     *
      * @param integer $rows
      * @return static
      */
@@ -272,9 +272,9 @@ abstract class AbstractEndpointRequest
 
     /**
      * Provides the option to return only a certain amount of fields.
-     * 
+     *
      * This can speed up the request and reduce the transfer amount of data.
-     * 
+     *
      * @see https://www.yiiframework.com/doc/guide/2.0/en/rest-resources#fields
      * @param array $fields
      * @return static
@@ -287,20 +287,20 @@ abstract class AbstractEndpointRequest
     
     /**
      * Set a sort order for a given field.
-     * 
+     *
      * ```php
      * setSort(['id' => SORT_ASC]);
      * ```
-     * 
+     *
      * or the opposite way
-     * 
+     *
      * ```php
      * setSort(['id' => SORT_DESC]);
      * ```
-     * 
+     *
      * + SORT_ASC = 1,2,3
      * + SORT_DESC = 3,2,1
-     * 
+     *
      * @param array $sort
      * @return static
      */
@@ -317,31 +317,31 @@ abstract class AbstractEndpointRequest
     
     /**
      * Set filter conditions.
-     * 
+     *
      * The filters must be enabled on the api side, otherwise it wont have any effect.
-     * 
+     *
      * Example usage assuming filters are configured on api:
-     * 
+     *
      * ```php
      * setFilter(['lang_id' => 1]); // like a where condition lang_id=1
      * ```
-     * 
+     *
      * greather then, smaller then operators:
-     * 
+     *
      * ```php
      * setFilter(['publication_date' => ['lt' => strtotime('tomorrow'), 'gt' => strtotime('yesterday')]);  //like >= and <= conditions for two fields.
      * ```
-     * 
+     *
      * Example using the in condition for both languages:
-     * 
+     *
      * ```php
      * setFilter([
      *     'lang_id' => ['in' => [1,2]]
      * ]);
      * ```
-     * 
+     *
      * All posible operators:
-     * 
+     *
      * + and (AND)
      * + or (OR)
      * + not (NOT)
@@ -354,20 +354,20 @@ abstract class AbstractEndpointRequest
      * + in (IN)
      * + nin (NOT IN)
      * + like (LIKE)
-     * 
+     *
      * ## Conditions
-     * 
+     *
      * combine two conditions with which are AND conditions:
-     * 
+     *
      * ```php
      * setFilter([
      *     'publication_date' => ['lt' => strtotime('tomorrow'), 'gt' => strtotime('yesterday')],
      *     'lang_id' => 2
      * ]);
      * ```
-     * 
+     *
      * Two conditions but connected as OR condition:
-     * 
+     *
      * ```php
      * setFilter([
      *    'or' => [
@@ -375,8 +375,8 @@ abstract class AbstractEndpointRequest
      *       ['publication_date' => ['gt' => time()]],
      *    ]
      * ])
-     * ``` 
-     * 
+     * ```
+     *
      * @see https://www.yiiframework.com/doc/api/2.0/yii-data-datafilter
      * @return static
      */
@@ -389,19 +389,19 @@ abstract class AbstractEndpointRequest
 
     /**
      * Process the endpoint response content (array parsed value).
-     * 
+     *
      * This allows you to interact with the content, for example if the models
-     * are wrapped into an enclosed array key like `'items' => []`. 
-     * 
+     * are wrapped into an enclosed array key like `'items' => []`.
+     *
      * ```php
      * public function setContentProcessor(function($content) {
      *  return $content['items'];
      * });
      * ```
-     * 
-     * This allows you to either append the content process for a single request or for 
+     *
+     * This allows you to either append the content process for a single request or for
      * all methods like find() view(). The below example will parsed all find calls:
-     * 
+     *
      * ```php
      * public static function find()
      * {
@@ -410,7 +410,7 @@ abstract class AbstractEndpointRequest
      *     })->setExpand(['users']); // more default config for find commands
      * }
      * ```
-     * 
+     *
      * @return array
      */
     public function setContentProcessor(callable $fn)

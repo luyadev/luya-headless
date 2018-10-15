@@ -97,7 +97,7 @@ abstract class AbstractRequestClient
     
     /**
      * Whether the connection library (curl) has an error or not.
-     * 
+     *
      * @return boolean
      */
     abstract public function hasConnectionError();
@@ -117,7 +117,7 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * 
+     *
      * @param array $params
      * @return \luya\headless\base\AbstractRequestClient
      */
@@ -131,20 +131,20 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * 
+     *
      * @param array $data
      * @return \luya\headless\base\AbstractRequestClient
      */
     public function post(array $data = [])
     {
         $this->callBeforeRequestEvent($data);
-        $this->internalPost($data);  
+        $this->internalPost($data);
         $this->callAfterRequestEvent($data);
         return $this;
     }
     
     /**
-     * 
+     *
      * @param array $data
      * @return \luya\headless\base\AbstractRequestClient
      */
@@ -157,7 +157,7 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * 
+     *
      * @param array $data
      * @return \luya\headless\base\AbstractRequestClient
      */
@@ -170,7 +170,7 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * 
+     *
      * @param array $data
      */
     protected function callBeforeRequestEvent(array $data)
@@ -181,7 +181,7 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * 
+     *
      * @param array $data
      */
     protected function callAfterRequestEvent(array $data)
@@ -193,7 +193,7 @@ abstract class AbstractRequestClient
     
     /**
      * Setter method for endpoint.
-     * 
+     *
      * @param string $endpoint
      */
     public function setEndpoint($endpoint)
@@ -222,7 +222,7 @@ abstract class AbstractRequestClient
     
     /**
      * Parse and return the RAW content from {{getResponseRawContent()}} into an array structure.
-     * 
+     *
      * @return array
      */
     public function getParsedResponse()
@@ -240,7 +240,7 @@ abstract class AbstractRequestClient
     
     /**
      * Convert the raw json into an array and check for json errors.
-     * 
+     *
      * @return array
      * @throws RequestException
      */
@@ -252,7 +252,7 @@ abstract class AbstractRequestClient
 
         $decode = json_decode((string) $json, true);
 
-        switch(json_last_error()) {
+        switch (json_last_error()) {
             case JSON_ERROR_NONE:
                 return $decode;
             break;
@@ -279,7 +279,7 @@ abstract class AbstractRequestClient
     
     /**
      * Convert the status code into an exception if needed.
-     * 
+     *
      * @param integer $statusCode
      * @throws RequestException
      */
@@ -321,7 +321,7 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * 
+     *
      * @param array $key
      * @param integer $ttl
      * @param callable $fn
