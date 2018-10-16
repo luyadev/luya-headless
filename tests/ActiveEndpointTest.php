@@ -19,7 +19,7 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertSame('John', $model->oldValue('firstname'));
         $this->assertSame('J', $model->firstname);
         $this->assertSame(1, $model->id);
-        $this->assertTrue($model->getIsNewRecord()); // its also a new model after saving
+        $this->assertFalse($model->getIsNewRecord()); // its not a new model aftersaving anaymore
     }
 
     public function testNewModel()
@@ -32,7 +32,7 @@ class ActiveEndpointTest extends HeadlessTestCase
         $response = $model->save($this->createDummyClient('{"firstname":"John", "lastname": "Doe"}'));
         $this->assertTrue($response);
         $this->assertSame('John', $model->firstname); // response does not modify the current model value.
-        $this->assertTrue($model->getIsNewRecord()); // its also a new model after saving
+        $this->assertFalse($model->getIsNewRecord()); // its not a new model anymore
     }
     
     public function testNewModelWithError()

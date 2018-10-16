@@ -124,9 +124,9 @@ abstract class AbstractRequestClient
     public function get(array $params = [])
     {
         $this->requestUrlParams = $params;
-        $this->callBeforeRequestEvent($params);
+        $this->callBeforeRequestEvent($params, 'get');
         $this->internalGet();
-        $this->callAfterRequestEvent($params);
+        $this->callAfterRequestEvent($params, 'get');
         return $this;
     }
     
@@ -137,9 +137,9 @@ abstract class AbstractRequestClient
      */
     public function post(array $data = [])
     {
-        $this->callBeforeRequestEvent($data);
+        $this->callBeforeRequestEvent($data, 'post');
         $this->internalPost($data);
-        $this->callAfterRequestEvent($data);
+        $this->callAfterRequestEvent($data, 'post');
         return $this;
     }
     
@@ -150,9 +150,9 @@ abstract class AbstractRequestClient
      */
     public function put(array $data = [])
     {
-        $this->callBeforeRequestEvent($data);
+        $this->callBeforeRequestEvent($data, 'put');
         $this->internalPut($data);
-        $this->callAfterRequestEvent($data);
+        $this->callAfterRequestEvent($data, 'put');
         return $this;
     }
     
@@ -163,9 +163,9 @@ abstract class AbstractRequestClient
      */
     public function delete(array $data = [])
     {
-        $this->callBeforeRequestEvent($data);
+        $this->callBeforeRequestEvent($data, 'delete');
         $this->internalDelete($data);
-        $this->callAfterRequestEvent($data);
+        $this->callAfterRequestEvent($data, 'delete');
         return $this;
     }
     
@@ -173,10 +173,10 @@ abstract class AbstractRequestClient
      *
      * @param array $data
      */
-    protected function callBeforeRequestEvent(array $data)
+    protected function callBeforeRequestEvent(array $data, $type)
     {
         if ($this->client->getBeforeRequestEvent()) {
-            call_user_func_array($this->client->getBeforeRequestEvent(), [new BeforeRequestEvent($this->getRequestUrl(), $data)]);
+            call_user_func_array($this->client->getBeforeRequestEvent(), [new BeforeRequestEvent($this->getRequestUrl(), $data, $type)]);
         }
     }
     
@@ -184,10 +184,10 @@ abstract class AbstractRequestClient
      *
      * @param array $data
      */
-    protected function callAfterRequestEvent(array $data)
+    protected function callAfterRequestEvent(array $data, $type)
     {
         if ($this->client->getAfterRequestEvent()) {
-            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent())]);
+            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent(), $type)]);
         }
     }
     

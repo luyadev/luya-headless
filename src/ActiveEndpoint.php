@@ -317,6 +317,7 @@ class ActiveEndpoint extends Endpoint
 
         if ($response->isSuccess()) {
             $this->refresh($response->getContent());
+            $this->setIsNewRecord(false);
             return true;
         }
         

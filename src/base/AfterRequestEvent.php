@@ -8,12 +8,14 @@ class AfterRequestEvent
     public $data;
     public $statusCode;
     public $content;
-    
-    public function __construct($url, array $data, $statusCode, $content)
+    public $type;
+
+    public function __construct($url, array $data, $statusCode, $content, $type)
     {
         $this->url = $url;
         $this->data = $data;
         $this->statusCode = $statusCode;
         $this->content = $content;
+        $this->type = $type;
     }
 }
