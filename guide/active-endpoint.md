@@ -72,13 +72,13 @@ $model->username = 'nadar';
 
 if ($model->save($client)) {
     echo "Its saved! nice!";
-} else {
+} else {
     // error while storing the model, output error messages
     var_dump($model->getErrors());
 }
 ```
 
-### Update existing record
+### Update existing record
 
 ```php
 $model = ApiUser::viewOne(1, $client);
@@ -91,10 +91,10 @@ if ($model) {
     $model->username = 'foobar';
     if ($model->save($client)) {
         echo "Its saved! nice!";
-	} else {
-	    // error while storing the model, output error messages
-	    var_dump($model->getErrors());
-	}
+    } else {
+        // error while storing the model, output error messages
+        var_dump($model->getErrors());
+    }
 }
 ```
 
@@ -106,86 +106,82 @@ In order to manipulate the sort, pagination or other request data you can also u
 ApiUser::find()->setSort(['create_timestamp' => SORT_DESC])->all($client);
 ```
  
- as find() returns the ActiveEndpointResponse Response object.
+as find() returns the ActiveEndpointResponse Response object.
  
- ## Additional method
+In order to extend an ActiveEndpoint by calling a custom action inside the api endpoint this could look like this:
  
- ## Find One
- 
- In order to extend an ActiveEndpoint by calling a custom action inside the api endpoint this could look like this:
- 
- ```php
- class MyTestApi extends ActiveEndpoint
- {
-     public $id;
-     public $username;
-     public $password;
-     public $is_deleted;
-     
-     public function getEndpointName()
-     {
-          return 'admin/api-mymodule-test';
-     }
-     
-     /**
-      * Call the custom `admin/api-mymodule-test/find-by-username` endpoint and assign the value into the MyTestApi model. 
-      */
-     public static function findUser($username, Client $client)
-     {
-          return self::find()->setEndpoint('{endpointName}/find-by-username')->setArgs(['username' => $username])->one($client);
-     }
+```php
+class MyTestApi extends ActiveEndpoint
+{
+    public $id;
+    public $username;
+    public $password;
+    public $is_deleted;
+    
+    public function getEndpointName()
+    {
+        return 'admin/api-mymodule-test';
+    }
+    
+    /**
+     * Call the custom `admin/api-mymodule-test/find-by-username` endpoint and assign the value into the MyTestApi model. 
+    */
+    public static function findUser($username, Client $client)
+    {
+        return self::find()->setEndpoint('{endpointName}/find-by-username')->setArgs(['username' => $username])->one($client);
+    }
  }
- ```
+```
  
- > The above example of course assumes that the same model is returned with the same properties, otherwise the values could not be assigned in the ActiveEndpoint.
- 
- Now you can access and update the given user:
- 
- ```php
- $model = MyTestApi::findUser('nadar', $client);
- 
- if ($model) {
-     // echo current username
-     echo $model->username;
-     
-     // change username and save
-     $model->username = 'foobar';
-     $model->save($client);
- }
- ```
- 
- ### Iteration
- 
- An example with iteration:
- 
-  ```php
- class MyTestApi extends ActiveEndpoint
- {
-     public $id;
-     public $username;
-     public $password;
-     public $is_deleted;
-     
-     public function getEndpointName()
-     {
-          return 'admin/api-mymodule-test';
-     }
-     
-     /**
-      * Call the `admin/api-mymodule-test` endpoint and add a sort param.
-      */
-     public static function indexByUsernames($Client $client)
-     {
-          return self::find()->setSort(['username' => SORT_ASC])->all($client);
-     }
- }
- ```
- 
- Using the method 
- 
- ```php
+> The above example of course assumes that the same model is returned with the same properties, otherwise the values could not be assigned in the ActiveEndpoint.
+
+Now you can access and update the given user:
+
+```php
+$model = MyTestApi::findUser('nadar', $client);
+
+if ($model) {
+    // echo current username
+    echo $model->username;
+    
+    // change username and save
+    $model->username = 'foobar';
+    $model->save($client);
+}
+```
+
+### Iteration
+
+An example with iteration:
+
+```php
+class MyTestApi extends ActiveEndpoint
+{
+    public $id;
+    public $username;
+    public $password;
+    public $is_deleted;
+    
+    public function getEndpointName()
+    {
+        return 'admin/api-mymodule-test';
+    }
+    
+    /**
+     * Call the `admin/api-mymodule-test` endpoint and add a sort param.
+    */
+    public static function indexByUsernames($Client $client)
+    {
+        return self::find()->setSort(['username' => SORT_ASC])->all($client);
+    }
+}
+```
+
+Using the method 
+
+```php
 $response = MyTestApi::indexByUsernames($client);
- 
+
 foreach ($response->getModels() as $model) {
     echo $model->username;
 }

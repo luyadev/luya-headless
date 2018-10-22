@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "884a83f4a2cc240f2f6462d3d8919c95",
+    "content-hash": "0466eeacdf7fc4f384f85293f9534d4c",
     "packages": [
         {
             "name": "curl/curl",
@@ -883,6 +883,61 @@
                 "object graph"
             ],
             "time": "2018-06-11T23:09:50+00:00"
+        },
+        {
+            "name": "nadar/github-markdown-fixer",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nadar/github-markdown-fixer.git",
+                "reference": "01cb3d636fd3b509262705e430747d110512cdf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nadar/github-markdown-fixer/zipball/01cb3d636fd3b509262705e430747d110512cdf8",
+                "reference": "01cb3d636fd3b509262705e430747d110512cdf8",
+                "shasum": ""
+            },
+            "require": {
+                "luyadev/luya-core": "~1.0.0"
+            },
+            "require-dev": {
+                "luyadev/luya-testsuite": "~1.0.0"
+            },
+            "bin": [
+                "src/gmf"
+            ],
+            "type": "project",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "gmf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Basil Suter",
+                    "email": "git@nadar.io",
+                    "homepage": "https://github.com/nadar"
+                }
+            ],
+            "description": "github markdown fixer",
+            "homepage": "https://github.com/nadar",
+            "keywords": [
+                "fixer",
+                "gfm",
+                "github",
+                "markdown"
+            ],
+            "time": "2018-01-01T12:07:44+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

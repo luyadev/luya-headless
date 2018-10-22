@@ -2,7 +2,7 @@
 
 An API Response can contain pagination informations in order to only a certain amount of items for a page. The API must return the Pagination headers `X-Pagination-Total-Count`, `X-Pagination-Page-Count`, `X-Pagination-Current-Page` and `X-Pagination-Per-Page`.
 
-## Endpoint
+## Endpoint
 
 A pagination example with `Endpoint`. Of course the API must support the Pagination X-Header data which is the default behavior for Yii Rest APIS:
 
@@ -20,7 +20,7 @@ echo $response->getCurrentPage(); // the current page
 echo $response->getPageCount(); // the number of pages
 ```
 
-## Active Endpoint
+## Active Endpoint
 
 A pagination example with `ActiveEndpoint`:
 
