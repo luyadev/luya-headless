@@ -7,9 +7,6 @@ use luya\headless\base\BaseModel;
 /**
  * Admin Storage File Model.
  *
- * Expands:
- * + source
- *
  * @since 1.0.0
  */
 class StorageFile extends BaseModel
@@ -31,7 +28,6 @@ class StorageFile extends BaseModel
     public $passtrough_file;
     public $passtrough_file_password;
     public $passtrough_file_stats;
-    public $caption;
     public $inline_disposition;
 
     // expandable properties
@@ -41,4 +37,5 @@ class StorageFile extends BaseModel
     public $file;
     public $images;
     public $isImage;
+    public $caption;
 }
