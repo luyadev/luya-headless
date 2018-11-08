@@ -57,7 +57,7 @@ abstract class AbstractEndpointRequest
         $requestClient->setEndpoint($this->getEndpoint());
         
         if ($this->getCache()) {
-            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class(), $this->_args], $this->getCache(), function () use ($requestClient) {
+            return $requestClient->getOrSetCache([$this->getEndpoint(), get_called_class(), $this->_args, $client->language], $this->getCache(), function () use ($requestClient) {
                 return $this->createResponse($requestClient);
             });
         }
