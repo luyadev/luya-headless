@@ -27,6 +27,16 @@ class BaseModelTest extends HeadlessTestCase
 
         $this->assertTrue($model->hasMethod('getRead'));
     }
+
+    public function testEmptyGetter()
+    {
+        $model = new MyTestModel();
+        $model->setText('a');
+        $this->assertSame('a', $model->getText());
+
+        $this->assertFalse(empty($model->getText()));
+        $this->assertFalse(empty($model->text));
+    }
 }
 
 class MyTestModel extends BaseModel
@@ -44,5 +54,17 @@ class MyTestModel extends BaseModel
 
     public function setWriteAndRead()
     {
+    }
+
+    private $_text;
+
+    public function setText($text)
+    {
+        $this->_text = $text;
+    }
+
+    public function getText()
+    {
+        return $this->_text;
     }
 }

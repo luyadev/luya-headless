@@ -165,6 +165,26 @@ class BaseModel
             throw new Exception('Setting unknown property: ' . get_class($this) . '::' . $name);
         }
     }
+
+    /**
+     * Checks if a property is set, i.e. defined and not null.
+     *
+     * Do not call this method directly as it is a PHP magic method that
+     * will be implicitly called when executing `isset($object->property)`.
+     *
+     * Note that if the property is not defined, false will be returned.
+     * @param string $name the property name or the event name
+     * @return bool whether the named property is set (not null).
+     * @see http://php.net/manual/en/function.isset.php
+     */
+    public function __isset($name)
+    {
+        $getter = 'get' . $name;
+        if (method_exists($this, $getter)) {
+            return $this->$getter() !== null;
+        }
+        return false;
+    }
     
     /**
      * Returns a value indicating whether a property is defined.
