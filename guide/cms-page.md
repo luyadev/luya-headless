@@ -75,11 +75,12 @@ Create a new renderer
 $renderer = new PageRenderer($page->getCurrentPageVersion());
 ```
 
-Register the blocks for the page renderer, where the id is the id of the block from the cms:
+Register the blocks for the page renderer, using the id, class or full qualified class name:
 
 ```php
-TextBlock::register(1, $renderer);
-HeadingBlock::register(2, $renderer);
+TextBlock::register(1, $renderer); // block id 1 on admin side
+HeadingBlock::register('HeadingBlock', $renderer); // assuming the block class name is HeadingBlock on admin side
+TableBlock::register('app\blocks\TableBlock', $renderer); // full qualified class name on admin side.
 ```
 
 Render the page
