@@ -590,16 +590,16 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.11",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "b3b65043a8ec02c5263d8359671b96d560b43c0e"
+                "reference": "ac920503016031b39a24ef998d2267ce543031ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/b3b65043a8ec02c5263d8359671b96d560b43c0e",
-                "reference": "b3b65043a8ec02c5263d8359671b96d560b43c0e",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/ac920503016031b39a24ef998d2267ce543031ba",
+                "reference": "ac920503016031b39a24ef998d2267ce543031ba",
                 "shasum": ""
             },
             "require": {
@@ -643,20 +643,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-09-05T08:59:30+00:00"
+            "time": "2018-10-30T11:06:56+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.2.2",
+            "version": "1.2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "69ddd37bfaea64ac2ecd3f6c8d853604bb7ac6ce"
+                "reference": "4889d1a0c81a2ddbe50508ce5a4e8b5251381028"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/69ddd37bfaea64ac2ecd3f6c8d853604bb7ac6ce",
-                "reference": "69ddd37bfaea64ac2ecd3f6c8d853604bb7ac6ce",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/4889d1a0c81a2ddbe50508ce5a4e8b5251381028",
+                "reference": "4889d1a0c81a2ddbe50508ce5a4e8b5251381028",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
                 "bower-asset/ng-wig": "~3.0.0",
                 "bower-asset/twigjs-bower": "~0.10.5",
                 "bower-asset/ui-router": "~0.4.0",
-                "luyadev/luya-testsuite": "~1.0.0",
+                "luyadev/luya-testsuite": "~1.0.11",
                 "php-coveralls/php-coveralls": "^1.0",
                 "twbs/bootstrap": "v4.0.0-beta"
             },
@@ -717,20 +717,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-09-03T13:32:44+00:00"
+            "time": "2018-10-08T14:52:50+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
-            "version": "1.0.6",
+            "version": "1.0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-cms.git",
-                "reference": "4a547473c63af224d7137691679e97762536ec14"
+                "reference": "4b57893b2d847c0cbddf4796332c225188f7c6ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/4a547473c63af224d7137691679e97762536ec14",
-                "reference": "4a547473c63af224d7137691679e97762536ec14",
+                "url": "https://api.github.com/repos/luyadev/luya-module-cms/zipball/4b57893b2d847c0cbddf4796332c225188f7c6ca",
+                "reference": "4b57893b2d847c0cbddf4796332c225188f7c6ca",
                 "shasum": ""
             },
             "require-dev": {
@@ -781,36 +781,31 @@
                 "yii2",
                 "yii2-cms"
             ],
-            "time": "2018-09-03T13:34:40+00:00"
+            "time": "2018-10-17T19:22:23+00:00"
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.11",
+            "version": "1.0.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "0fb63f6192458f42b4bd0546d9f9f1a3fb9e40e9"
+                "reference": "941544dd0d46e1ac6df818bc42dfd291fba62f12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/0fb63f6192458f42b4bd0546d9f9f1a3fb9e40e9",
-                "reference": "0fb63f6192458f42b4bd0546d9f9f1a3fb9e40e9",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/941544dd0d46e1ac6df818bc42dfd291fba62f12",
+                "reference": "941544dd0d46e1ac6df818bc42dfd291fba62f12",
                 "shasum": ""
             },
             "require": {
                 "curl/curl": "^1.0",
-                "luyadev/luya-core": "~1.0",
-                "luyadev/luya-module-admin": "~1.0",
-                "luyadev/luya-module-cms": "~1.0",
+                "luyadev/luya-core": "^1.0",
+                "luyadev/luya-module-admin": "^1.0",
+                "luyadev/luya-module-cms": "^1.0",
                 "phpunit/phpunit": "~6.0.0",
                 "twig/twig": "^1.0"
             },
             "type": "luya-core",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "luya\\testsuite\\": "src/"
@@ -834,7 +829,7 @@
                 "module",
                 "php"
             ],
-            "time": "2018-07-18T14:21:43+00:00"
+            "time": "2018-10-25T21:44:20+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2172,7 +2167,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",

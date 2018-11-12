@@ -30,5 +30,8 @@
             "luya\\headless\\" : "src/",
             "luya\\headless\\tests\\" : "tests/"
         }
+    },
+    "suggest": {
+        "symfony/cache" : "A very fast PSR-16 caching library easy to setup for caching API responses."
     }
 }
