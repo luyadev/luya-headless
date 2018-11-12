@@ -336,7 +336,7 @@ abstract class AbstractRequestClient
         }
         
         $key = $this->generateCacheKey($key);
-        
+        $key = md5($key);
         if ($cache->has($key)) {
             return $cache->get($key);
         }

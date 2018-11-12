@@ -105,7 +105,8 @@ final class ClientTest extends HeadlessTestCase
     {
         $client = new Client('token', 'url');
         $object = $client->getRequestClient();
-        $this->assertSame('0.1.2-foo.bar.args.sort.0-0.1-x1.x2.y1.y2.hide1-0.1-hide2.0-hide2', $this->invokeMethod($object, 'generateCacheKey', [
+        $cacheKey = '0.1.2-foo.bar.args.sort.0-0.1-x1.x2.y1.y2.hide1-0.1-hide2.0-hide2';
+        $this->assertSame($cacheKey, $this->invokeMethod($object, 'generateCacheKey', [
             ['foo', 'bar', ['args' => ['x1', 'x2'], 'sort' => 'y1.y2', ['hide1' => ['hide2', ['hide2']]]]]
         ]));
     }
