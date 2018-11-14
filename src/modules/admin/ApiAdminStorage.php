@@ -26,4 +26,18 @@ class ApiAdminStorage extends Endpoint
     {
         return self::get()->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
     }
+
+    public static function fileUpload($source, $folderId = 0, $isHidden = true)
+    {
+        // ensure file exists and is file
+        if (!file_exists($source) || !is_file($source)) {
+            return false;
+        }
+        
+        return self::post()->setEndpoint('{endpointName}/files-upload')->setArgs([
+            'file' => file_get_contents($source),
+            'folderId' => 0,
+            'isHidden' => $isHidden,
+        ]);
+    }
 }
