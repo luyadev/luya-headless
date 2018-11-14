@@ -52,6 +52,31 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
     }
 
     /**
+     * Iteratrs trough all pages and returns an arry with the models.
+     *
+     * @param Client $client
+     * @return static
+     */
+    public function allPages(Client $client)
+    {
+        $data = [];
+        $first = $this->setPerPage(50)->all($client);
+        foreach ($first->getModels() as $key => $model) {
+            $data[$key] = $model;
+        }
+        
+        $start = $first->getCurrentPage() + 1;
+        for ($i=$start; $i<=$first->getPageCount(); $i++) {
+            $find = $this->setPage($i)->setPerPage(50)->all($client);
+            foreach ($find->getModels() as $key => $model) {
+                $data[$key] = $model;
+            }
+        }
+        
+        return $data;
+    }
+
+    /**
      * Takes the first row from an an array into an active endpoint model.
      *
      * This is comonoly used when retrieving data from find but return only the first record.

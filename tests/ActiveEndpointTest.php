@@ -122,11 +122,18 @@ class ActiveEndpointTest extends HeadlessTestCase
     
     public function testFindAllPagesIterator()
     {
-        $models = TestingActiveEndpoint::findAllPages($this->createDummyClient('[{"firstname":"John", "lastname": "Doe"}]', true, 200, ['X-Pagination-Current-Page' => 1, 'X-Pagination-Page-Count' => 3]));
+        $client = $this->createDummyClient('[{"name":"John"},{"name":"Jane"},{"name":"Foe"}]', true, 200, ['X-Pagination-Current-Page' => 1, 'X-Pagination-Page-Count' => 3]);
+        $models = TestingDynamicPkEndpoint::findAllPages($client);
         
-        foreach ($models as $k => $v) {
-            $this->assertSame('John,Doe', $k); // composite primary key test
-        }
+        $this->assertSame(3, count($models));
+    }
+
+    public function testFindAllPagesWithSetters()
+    {
+        $client = $this->createDummyClient('[{"name":"John"},{"name":"Jane"},{"name":"Foe"}]', true, 200, ['X-Pagination-Current-Page' => 1, 'X-Pagination-Page-Count' => 3]);
+        $models = TestingDynamicPkEndpoint::find()->setPerPage(1)->setExpand(['barfoo'])->setFields(['foobar'])->allPages($client);
+
+        $this->assertSame(3, count($models));
     }
     
     public function testInsert()
@@ -206,6 +213,11 @@ class TestingActiveEndpoint extends ActiveEndpoint
     {
         return ['firstname', 'lastname'];
     }
+}
+
+class TestingDynamicPkEndpoint extends ActiveEndpoint
+{
+    public $name;
 }
 
 class TestingActiveEndpointWithEmptyId extends ActiveEndpoint

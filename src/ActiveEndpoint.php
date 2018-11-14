@@ -195,21 +195,7 @@ class ActiveEndpoint extends Endpoint
      */
     public static function findAllPages(Client $client, $cacheTtl = null)
     {
-        $data = [];
-        $first = static::find()->setCache($cacheTtl)->setPerPage(50)->all($client);
-        foreach ($first->getModels() as $key => $model) {
-            $data[$key] = $model;
-        }
-        
-        $start = $first->getCurrentPage() + 1;
-        for ($i=$start; $i<=$first->getPageCount(); $i++) {
-            $find = static::find()->setPage($i)->setPerPage(50)->setCache($cacheTtl)->all($client);
-            foreach ($find->getModels() as $key => $model) {
-                $data[$key] = $model;
-            }
-        }
-        
-        return $data;
+        return static::find()->setCache($cacheTtl)->allPages($client);
     }
 
     /**
