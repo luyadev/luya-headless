@@ -6,7 +6,7 @@ use luya\headless\base\BaseModel;
 
 /**
  * Nav Item Redirect.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

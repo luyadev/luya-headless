@@ -4,7 +4,7 @@ namespace luya\headless\base;
 
 /**
  * After Request Event.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

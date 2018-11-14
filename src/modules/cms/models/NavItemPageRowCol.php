@@ -7,7 +7,7 @@ use luya\headless\base\BaseIterator;
 
 /**
  * Nav Item Page Row Col.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

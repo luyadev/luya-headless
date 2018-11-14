@@ -6,7 +6,7 @@ use luya\headless\Endpoint;
 
 /**
  * Api Admin Storage.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

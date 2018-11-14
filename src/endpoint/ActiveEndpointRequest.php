@@ -10,7 +10,7 @@ use luya\headless\exceptions\ResponseException;
 
 /**
  * Active Endpoint Request.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

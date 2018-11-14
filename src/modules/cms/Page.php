@@ -6,7 +6,7 @@ use luya\headless\Client;
 
 /**
  * Get the content of a page.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */

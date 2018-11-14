@@ -6,7 +6,7 @@ use luya\headless\Exception;
 
 /**
  * Missing Argument Exception.
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
