@@ -5,6 +5,7 @@ namespace luya\headless\base;
  * Endpoint Interface.
  *
  * Every endpoint defintion must implement this interface.
+ * 
  * @since 1.0.0
  * @author Basil Suter <basil@nadar.io>
  */

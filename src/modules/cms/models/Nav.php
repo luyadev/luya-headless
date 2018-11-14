@@ -4,6 +4,12 @@ namespace luya\headless\modules\cms\models;
 
 use luya\headless\base\BaseModel;
 
+/**
+ * Nav.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class Nav extends BaseModel
 {
     public $id;

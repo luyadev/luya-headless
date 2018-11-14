@@ -7,6 +7,7 @@ use luya\headless\base\BaseModel;
 /**
  * Admin Storage File Model.
  *
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class StorageFile extends BaseModel

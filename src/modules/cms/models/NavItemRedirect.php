@@ -4,6 +4,12 @@ namespace luya\headless\modules\cms\models;
 
 use luya\headless\base\BaseModel;
 
+/**
+ * Nav Item Redirect.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class NavItemRedirect extends BaseModel
 {
     const TYPE_INTERNAL_PAGE = 1;

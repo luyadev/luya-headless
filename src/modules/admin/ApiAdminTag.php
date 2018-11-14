@@ -11,6 +11,9 @@ use luya\headless\Client;
  * Get all tags for a given relation table name:
  *
  * $tags = ApiAdminTag::table('table_name')->all($client);
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
  */
 class ApiAdminTag extends ActiveEndpoint
 {

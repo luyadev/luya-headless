@@ -5,6 +5,12 @@ namespace luya\headless\modules\cms\models;
 use luya\headless\base\BaseModel;
 use luya\headless\base\BaseIterator;
 
+/**
+ * Nav Item Page Row.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class NavItemPageRow extends BaseModel
 {
     public $index;

@@ -2,6 +2,12 @@
 
 namespace luya\headless\base;
 
+/**
+ * Pagination Interface.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 interface PaginationInterface
 {
     public function getTotalCount();

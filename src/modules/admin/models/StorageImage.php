@@ -10,6 +10,7 @@ use luya\headless\base\BaseModel;
  * Expands:
  * + source
  *
+ * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
 class StorageImage extends BaseModel

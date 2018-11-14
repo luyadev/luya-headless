@@ -8,6 +8,12 @@ use luya\headless\base\AbstractRequestClient;
 use luya\headless\base\AbstractEndpointRequest;
 use luya\headless\exceptions\ResponseException;
 
+/**
+ * Active Endpoint Request.
+ * 
+ * @author Basil Suter <basil@nadar.io>
+ * @since 1.0.0
+ */
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
     /**
