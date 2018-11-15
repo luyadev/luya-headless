@@ -27,17 +27,39 @@ class ApiAdminStorage extends Endpoint
         return self::get()->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
     }
 
-    public static function fileUpload($source, $folderId = 0, $isHidden = true)
+    /**
+     * Upload file into storage system.
+     * 
+     * Upload example with Yii `UploadedFile`:
+     * 
+     * ```php
+     * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
+     * $upload = ApiAdminStorage::fileUpload($file->tempName, $file->type, $file->name)
+     *      ->response($client);
+     * 
+     * var_dump($upload->getResponse());
+     * ```
+     *
+     * @param string $source
+     * @param string $type
+     * @param string $name
+     * @param integer $folderId
+     * @param boolean $isHidden
+     * @return void
+     */
+    public static function fileUpload($source, $type, $name, $folderId = 0, $isHidden = true)
     {
         // ensure file exists and is file
         if (!file_exists($source) || !is_file($source)) {
             return false;
         }
         
-        return self::post()->setEndpoint('{endpointName}/files-upload')->setArgs([
-            'file' => file_get_contents($source),
-            'folderId' => 0,
+        $file = [
+            'file' => new \CurlFile($source, $type, $name),
             'isHidden' => $isHidden,
-        ]);
+            'folderId' => $folderId,
+        ];
+
+        return self::post()->setEndpoint('{endpointName}/files-upload')->setArgs($file);
     }
 }
