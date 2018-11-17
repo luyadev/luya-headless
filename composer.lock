@@ -4,28 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0466eeacdf7fc4f384f85293f9534d4c",
+    "content-hash": "96c6368ae6078344dcbc665ce1ec36f0",
     "packages": [
         {
             "name": "curl/curl",
-            "version": "1.9.3",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "43436a604b18c2a985cbc3f983be817fbe500e99"
+                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/43436a604b18c2a985cbc3f983be817fbe500e99",
-                "reference": "43436a604b18c2a985cbc3f983be817fbe500e99",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
+                "reference": "63ef7e7ba7b37c909886f7ca0bbf99bfb0dfaad6",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3.0"
+                "php": "^5.6 | ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*",
+                "phpunit/phpunit": "^5.7",
                 "squizlabs/php_codesniffer": "~2.1"
             },
             "type": "library",
@@ -59,7 +59,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2018-09-05T17:16:47+00:00"
+            "time": "2018-11-17T10:32:36+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -590,20 +590,20 @@
         },
         {
             "name": "luyadev/luya-core",
-            "version": "1.0.13",
+            "version": "1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-core.git",
-                "reference": "ac920503016031b39a24ef998d2267ce543031ba"
+                "reference": "80fe9192b66b1cf80ff49637403db61884859ef3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/ac920503016031b39a24ef998d2267ce543031ba",
-                "reference": "ac920503016031b39a24ef998d2267ce543031ba",
+                "url": "https://api.github.com/repos/luyadev/luya-core/zipball/80fe9192b66b1cf80ff49637403db61884859ef3",
+                "reference": "80fe9192b66b1cf80ff49637403db61884859ef3",
                 "shasum": ""
             },
             "require": {
-                "curl/curl": "~1.0",
+                "curl/curl": "^2.0 || ^1.0",
                 "luyadev/luya-composer": "~1.0.0",
                 "phpmailer/phpmailer": "^6.0",
                 "yiisoft/yii2": "~2.0.15"
@@ -643,7 +643,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-10-30T11:06:56+00:00"
+            "time": "2018-11-17T11:49:53+00:00"
         },
         {
             "name": "luyadev/luya-module-admin",
@@ -785,20 +785,20 @@
         },
         {
             "name": "luyadev/luya-testsuite",
-            "version": "1.0.13.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-testsuite.git",
-                "reference": "941544dd0d46e1ac6df818bc42dfd291fba62f12"
+                "reference": "bd254b354f7ee6cb773b6551c268f4418b4cb1bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/941544dd0d46e1ac6df818bc42dfd291fba62f12",
-                "reference": "941544dd0d46e1ac6df818bc42dfd291fba62f12",
+                "url": "https://api.github.com/repos/luyadev/luya-testsuite/zipball/bd254b354f7ee6cb773b6551c268f4418b4cb1bd",
+                "reference": "bd254b354f7ee6cb773b6551c268f4418b4cb1bd",
                 "shasum": ""
             },
             "require": {
-                "curl/curl": "^1.0",
+                "curl/curl": "^2.0 || ^1.0",
                 "luyadev/luya-core": "^1.0",
                 "luyadev/luya-module-admin": "^1.0",
                 "luyadev/luya-module-cms": "^1.0",
@@ -829,7 +829,7 @@
                 "module",
                 "php"
             ],
-            "time": "2018-10-25T21:44:20+00:00"
+            "time": "2018-11-17T11:20:25+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1088,16 +1088,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.5",
+            "version": "v6.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/8190d73eb5def11a43cfb020b7f36db65330698c",
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c",
                 "shasum": ""
             },
             "require": {
@@ -1150,7 +1150,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-03-27T13:49:45+00:00"
+            "time": "2018-11-16T00:41:32+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -2584,7 +2584,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "luyadev/luya-testsuite": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

@@ -13,11 +13,11 @@
         }
     ],
     "require" : {
-         "curl/curl": "^1.0",
+         "curl/curl": "^2.0",
          "psr/simple-cache" : "^1.0"
     },
     "require-dev" : {
-       "luyadev/luya-testsuite" : "~1.0.0",
+       "luyadev/luya-testsuite" : "dev-master",
         "nadar/github-markdown-fixer": "^1.0"
     },
     "extra": {
