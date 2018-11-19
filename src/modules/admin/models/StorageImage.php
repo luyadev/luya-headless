@@ -3,6 +3,8 @@
 namespace luya\headless\modules\admin\models;
 
 use luya\headless\base\BaseModel;
+use luya\headless\ActiveEndpoint;
+use luya\headless\Exception;
 
 /**
  * Admin Storage Image Model.
@@ -12,13 +14,8 @@ use luya\headless\base\BaseModel;
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
+ * @deprecated use ApiStorageImage
  */
-class StorageImage extends BaseModel
+class StorageImage extends ApiStorageImage
 {
-    public $id;
-    public $file_id;
-    public $filter_id;
-    public $resolution_width;
-    public $resolution_height;
-    public $source;
 }

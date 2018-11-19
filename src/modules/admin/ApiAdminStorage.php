@@ -19,11 +19,15 @@ class ApiAdminStorage extends Endpoint
 
     public static function getImage($id)
     {
+        trigger_error("Use ApiStorageImage::viewOne()", E_USER_DEPRECATED);
+
         return self::get()->setEndpoint('{endpointName}/image-info')->setArgs(['id' => $id]);
     }
 
     public static function getFile($id)
     {
+        trigger_error("Use ApiStorageFile::viewOne()", E_USER_DEPRECATED);
+
         return self::get()->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
     }
 
