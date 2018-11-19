@@ -5,6 +5,7 @@ namespace luya\headless\modules\admin\models;
 use luya\headless\base\BaseModel;
 use luya\headless\ActiveEndpoint;
 use luya\headless\Exception;
+use luya\headless\endpoint\ActiveEndpointRequest;
 
 /**
  * Admin Storage File Model.
@@ -54,6 +55,6 @@ class ApiStorageFile extends ActiveEndpoint
 
     public static function view($id)
     {
-        return self::get()->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
+        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
     }
 }
