@@ -6,6 +6,7 @@ use luya\headless\base\BaseModel;
 use luya\headless\ActiveEndpoint;
 use luya\headless\Exception;
 use luya\headless\endpoint\ActiveEndpointRequest;
+use luya\headless\tests\ApiAdminUser;
 
 /**
  * Admin Storage File Model.
@@ -33,15 +34,12 @@ class ApiStorageFile extends ActiveEndpoint
     public $passtrough_file_password;
     public $passtrough_file_stats;
     public $inline_disposition;
-
-    // expandable properties
     public $source;
-    public $sizeReadable;
-    public $user;
-    public $file;
-    public $images;
-    public $isImage;
     public $caption;
+
+    // expand
+    public $sizeReadable;
+    public $isImage;
 
     public function getEndpointName()
     {
@@ -55,6 +53,30 @@ class ApiStorageFile extends ActiveEndpoint
 
     public static function view($id)
     {
-        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
+        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file')->setArgs(['id' => $id]);
+    }
+
+    private $_images = [];
+
+    public function setImages($images)
+    {
+        $this->_images = (array) $images;
+    }
+
+    public function getImage()
+    {
+        return ApiStorageImage::iterator($this->_images);
+    }
+
+    private $_user;
+
+    public function setUser($user)
+    {
+        $this->_user = $user;
+    }
+
+    public function getUser()
+    {
+        return new ApiAdminUser($this->_user);
     }
 }

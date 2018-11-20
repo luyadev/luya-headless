@@ -25,6 +25,11 @@ class ApiStorageImage extends ActiveEndpoint
     public $resolution_height;
     public $source;
 
+    // expand
+    public $thumbnail;
+    public $tinyCropImage;
+    public $mediumThumbnailImage;
+
     public function getEndpointName()
     {
         return '{{%api-admin-storage}}';
@@ -37,6 +42,18 @@ class ApiStorageImage extends ActiveEndpoint
 
     public static function view($id)
     {
-        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/image-info')->setArgs(['id' => $id]);
+        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/image')->setArgs(['id' => $id]);
+    }
+
+    private $_file;
+
+    public function getFile($file)
+    {
+        return new ApiStorageFile($this->_file);
+    }
+
+    public function setFile($file)
+    {
+        $this->_file = $file;
     }
 }
