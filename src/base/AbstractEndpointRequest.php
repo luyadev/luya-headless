@@ -236,6 +236,23 @@ abstract class AbstractEndpointRequest
         return $this->_args;
     }
     
+    private $_defaultExpand = [];
+
+    /**
+     * Set a default expand values.
+     * 
+     * This should only used inside view, get, find methods in order to ensure a given expand is allways set.
+     *
+     * @param array $extraFields
+     * @return static
+     */
+    public function setDefaultExpand(array $extraFields)
+    {
+        $this->_defaultExpand = $extraFields;
+
+        return $this->setExpand([]);
+    }
+
     /**
      * Expand a given field or relation.
      *
@@ -245,6 +262,8 @@ abstract class AbstractEndpointRequest
      */
     public function setExpand(array $extraFields)
     {
+        $extraFields = array_merge($this->_defaultExpand, $extraFields);
+
         return $this->setArgs(['expand' => implode(",", $extraFields)]);
     }
     

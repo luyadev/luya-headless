@@ -35,6 +35,38 @@ class AbstractEndpointRequestTest extends HeadlessTestCase
             ]
         ], $request->getArgs());
     }
+
+    public function testExpandDefault()
+    {
+        $endpoint = new MyTestEndpoint();
+        $request = new MyEndpointRequest($endpoint);
+        $request->setDefaultExpand(['foo', 'bar']);
+
+        $this->assertSame([
+            'expand' => 'foo,bar',
+        ], $request->getArgs());
+
+        $request = new MyEndpointRequest($endpoint);
+        $request->setDefaultExpand(['foo', 'bar']);
+        $request->setExpand(['john', 'doe']);
+        $this->assertSame([
+            'expand' => 'foo,bar,john,doe',
+        ], $request->getArgs());  
+        
+        $request = new MyEndpointRequest($endpoint);
+        $request->setDefaultExpand(['foo', 'bar']);
+        $request->setExpand([]);
+        $this->assertSame([
+            'expand' => 'foo,bar',
+        ], $request->getArgs());  
+
+        $request = new MyEndpointRequest($endpoint);
+        $request->setExpand(['test']); // this won't have any effect as it must be defined after set default expand.
+        $request->setDefaultExpand(['foo', 'bar']);
+        $this->assertSame([
+            'expand' => 'foo,bar',
+        ], $request->getArgs());  
+    }
 }
 
 class MyEndpointRequest extends AbstractEndpointRequest

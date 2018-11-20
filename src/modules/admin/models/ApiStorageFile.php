@@ -53,7 +53,7 @@ class ApiStorageFile extends ActiveEndpoint
 
     public static function view($id)
     {
-        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file')->setArgs(['id' => $id]);
+        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file')->setDefaultExpand(['source', 'caption'])->setArgs(['id' => $id]);
     }
 
     private $_images = [];
