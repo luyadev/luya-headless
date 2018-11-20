@@ -44,12 +44,12 @@ class ApiAdminStorage extends Endpoint
      * var_dump($upload->getResponse());
      * ```
      *
-     * @param string $source
-     * @param string $type
-     * @param string $name
-     * @param integer $folderId
-     * @param boolean $isHidden
-     * @return void
+     * @param string $source The path to the file (typical tmp_name from $_FILES)
+     * @param string $type The file mime type (typical type from $_FILES)
+     * @param string $name The name of the file (typicali name from $_FILES)
+     * @param integer $folderId The folder id, if not given 0 is root directory.
+     * @param boolean $isHidden Whether the file should be hidden in admin storage system or not.
+     * @return luya\headless\endpoint\PostEndpointRequest
      */
     public static function fileUpload($source, $type, $name, $folderId = 0, $isHidden = true)
     {
@@ -65,5 +65,41 @@ class ApiAdminStorage extends Endpoint
         ];
 
         return self::post()->setEndpoint('{endpointName}/files-upload')->setArgs($file);
+    }
+
+    /**
+     * Image Upload
+     * 
+     * Upload example with Yii `UploadedFile`:
+     * 
+     * ```php
+     * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
+     * $upload = ApiAdminStorage::imageUpload($file->tempName, $file->type, $file->name)
+     *      ->response($client);
+     * 
+     * var_dump($upload->getResponse());
+     * ```
+     *
+     * @param string $source The path to the file (typical tmp_name from $_FILES)
+     * @param string $type The file mime type (typical type from $_FILES)
+     * @param string $name The name of the file (typicali name from $_FILES)
+     * @param integer $folderId The folder id, if not given 0 is root directory.
+     * @param boolean $isHidden Whether the file should be hidden in admin storage system or not.
+     * @return luya\headless\endpoint\PostEndpointRequest
+     */
+    public static function imageUpload($source, $type, $name, $folderId = 0, $isHidden = true)
+    {
+        // ensure file exists and is file
+        if (!file_exists($source) || !is_file($source)) {
+            return false;
+        }
+        
+        $file = [
+            'file' => new \CurlFile($source, $type, $name),
+            'isHidden' => $isHidden,
+            'folderId' => $folderId,
+        ];
+
+        return self::post()->setEndpoint('{endpointName}/images-upload')->setArgs($file);
     }
 }
