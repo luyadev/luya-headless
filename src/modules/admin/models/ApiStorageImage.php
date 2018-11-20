@@ -47,7 +47,7 @@ class ApiStorageImage extends ActiveEndpoint
 
     private $_file;
 
-    public function getFile($file)
+    public function getFile()
     {
         return new ApiStorageFile($this->_file);
     }
