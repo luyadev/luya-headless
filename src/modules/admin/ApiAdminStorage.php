@@ -33,14 +33,14 @@ class ApiAdminStorage extends Endpoint
 
     /**
      * Upload file into storage system.
-     * 
+     *
      * Upload example with Yii `UploadedFile`:
-     * 
+     *
      * ```php
      * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
      * $upload = ApiAdminStorage::fileUpload($file->tempName, $file->type, $file->name)
      *      ->response($client);
-     * 
+     *
      * var_dump($upload->getResponse());
      * ```
      *
@@ -69,14 +69,14 @@ class ApiAdminStorage extends Endpoint
 
     /**
      * Image Upload
-     * 
+     *
      * Upload example with Yii `UploadedFile`:
-     * 
+     *
      * ```php
      * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
      * $upload = ApiAdminStorage::imageUpload($file->tempName, $file->type, $file->name)
      *      ->response($client);
-     * 
+     *
      * var_dump($upload->getResponse());
      * ```
      *

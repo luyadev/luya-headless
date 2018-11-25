@@ -202,6 +202,26 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertSame(400, $providerTwo->getPageCount());
         $this->assertSame(1, $providerOne->getPageCount());
     }
+
+    public function testActiveEndpointResponse()
+    {
+        $providerOne = TestingActiveEndpoint::find()->all($this->createDummyClient('[{"firstname": "foo", "lastname": "bar"}]', true, 200, [
+            'X-Pagination-Total-Count' => 100,
+            'X-Pagination-Page-Count' => 10,
+            'X-Pagination-Current-Page' => 1,
+            'X-Pagination-Per-Page' => 10,
+        ]));
+
+
+        $this->assertSame(10, $providerOne->getPageCount());
+        $this->assertSame(10, $providerOne->getPageCount());
+        $this->assertSame(100, $providerOne->getTotalCount());
+        $this->assertSame(10, $providerOne->getPerPage());
+        $this->assertSame(2, $providerOne->getNextPageId());
+        $this->assertSame(1, $providerOne->getPreviousPageId());
+        $this->assertTrue($providerOne->isFirstPage());
+        $this->assertFalse($providerOne->isLastPage());
+    }
 }
 
 class TestingActiveEndpoint extends ActiveEndpoint

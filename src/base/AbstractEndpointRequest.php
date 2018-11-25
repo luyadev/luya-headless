@@ -240,7 +240,7 @@ abstract class AbstractEndpointRequest
 
     /**
      * Set a default expand values.
-     * 
+     *
      * This should only used inside view, get, find methods in order to ensure a given expand is allways set.
      *
      * @param array $extraFields

@@ -647,16 +647,16 @@
         },
         {
             "name": "luyadev/luya-module-admin",
-            "version": "1.2.2.1",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luyadev/luya-module-admin.git",
-                "reference": "4889d1a0c81a2ddbe50508ce5a4e8b5251381028"
+                "reference": "dc7031e7c994cd76881c16049b2b60b2d1f78f73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/4889d1a0c81a2ddbe50508ce5a4e8b5251381028",
-                "reference": "4889d1a0c81a2ddbe50508ce5a4e8b5251381028",
+                "url": "https://api.github.com/repos/luyadev/luya-module-admin/zipball/dc7031e7c994cd76881c16049b2b60b2d1f78f73",
+                "reference": "dc7031e7c994cd76881c16049b2b60b2d1f78f73",
                 "shasum": ""
             },
             "require": {
@@ -717,7 +717,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2018-10-08T14:52:50+00:00"
+            "time": "2018-11-21T21:00:04+00:00"
         },
         {
             "name": "luyadev/luya-module-cms",
