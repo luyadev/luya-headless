@@ -36,6 +36,7 @@ class ApiStorageFile extends ActiveEndpoint
     public $inline_disposition;
     public $source;
     public $caption;
+    public $captions; // an array with caption for a given language key as array.
 
     // expand
     public $sizeReadable;
@@ -53,7 +54,7 @@ class ApiStorageFile extends ActiveEndpoint
 
     public static function view($id)
     {
-        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file')->setDefaultExpand(['source', 'caption'])->setArgs(['id' => $id]);
+        return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file')->setDefaultExpand(['source'])->setArgs(['id' => $id]);
     }
 
     private $_images = [];
