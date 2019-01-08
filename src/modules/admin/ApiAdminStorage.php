@@ -41,7 +41,7 @@ class ApiAdminStorage extends Endpoint
      * $upload = ApiAdminStorage::fileUpload($file->tempName, $file->type, $file->name)
      *      ->response($client);
      *
-     * var_dump($upload->getResponse());
+     * var_dump($upload->getContent());
      * ```
      *
      * @param string $source The path to the file (typical tmp_name from $_FILES)
@@ -77,7 +77,7 @@ class ApiAdminStorage extends Endpoint
      * $upload = ApiAdminStorage::imageUpload($file->tempName, $file->type, $file->name)
      *      ->response($client);
      *
-     * var_dump($upload->getResponse());
+     * var_dump($upload->getContent());
      * ```
      *
      * @param string $source The path to the file (typical tmp_name from $_FILES)
