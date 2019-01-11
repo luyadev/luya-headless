@@ -150,6 +150,23 @@ if ($model) {
 }
 ```
 
+## Custom View Endpoint
+
+Assuming you have a view endpoint which is `blog/preview/<ID>` which is different to the default view configuration `blog/<ID>` then you can create a customized view method:
+
+```php
+public static function preview($id)
+{
+    return parent::view($id)->setEndpoint('{endpointName}/preview/{id}');
+}
+```
+
+This allows you to make calls for a `one` item with customized endpoint:
+
+```php
+$blog = Blog::preview($id)->one($client);
+```
+
 ### Iteration
 
 An example with iteration:
