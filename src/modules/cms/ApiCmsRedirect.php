@@ -33,6 +33,13 @@ class ApiCmsRedirect extends ActiveEndpoint
         return '{{%api-cms-redirect}}';
     }
 
+    /**
+     * Find a redirect for a certain path
+     *
+     * @param string $path The path to catch
+     * @param Client $client
+     * @return static
+     */
     public static function catch($path, Client $client)
     {
         return self::find()->setEndpoint('{endpointName}/catch')->setArgs(['path' => $path])->one($client);
