@@ -3,6 +3,7 @@
 namespace luya\headless\modules\cms;
 
 use luya\headless\ActiveEndpoint;
+use luya\headless\Client;
 
 /**
  * Find redirect pages defined in redirects menu.
