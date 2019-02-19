@@ -21,23 +21,27 @@ A client library to access content from the LUYA APIs (or any other REST API).
 Add the LUYA headless client library to your composer.json:
 
 ```sh
-composer require luyadev/luya-headless:^1.0-rc
+composer require luyadev/luya-headless
 ```
 
 ## Intro
 
-Quick intro about how to use the headless library with existing built in endpoints.
+Quick intro about how to use the headless library with existing built in active endpoints:
 
 ```php
+use luya\headless\Client;
+use luya\headless\modules\admin\ApiAdminUser;
+
 // build client object with token and server infos
 $client = new \luya\headless\Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
-// run the pre-built EndpointRequest for the `admin/api-admin-lang` endpoint with the created client config.
-$response = ApiAdminLang::find()->response($client);
+// find a given user by its ID
+$user = ApiAdminUser::findOne(1, $client);
 
-// foreach trough the parsed json content from the api and dump the content.
-foreach ($reponse->getContent() as $item) {
-    var_dump($item);
+// iterate all users
+$users = ApiAdminUser::find()->setSort(['id' => SORT_ASC])->all($client);
+foreach ($users->getModels() as $user) {
+      echo $user->firstname . ' ' . $user->lastname;
 }
 ```
 

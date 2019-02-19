@@ -303,7 +303,6 @@ abstract class AbstractEndpointRequest
         return $this->setArgs(['fields' => implode(",", $fields)]);
     }
     
-    
     /**
      * Set a sort order for a given field.
      *
@@ -439,6 +438,12 @@ abstract class AbstractEndpointRequest
         return $this;
     }
 
+    /**
+     * Call the content process with the given content.
+     *
+     * @param string $content The content to process.
+     * @return string
+     */
     public function callContentProcessor($content)
     {
         if ($this->_contentProcessor) {
