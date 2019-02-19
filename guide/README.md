@@ -4,7 +4,7 @@ Table of contents
 
 + [Endpoint](endpoint.md) - Basic request without Model.
 + [Active Endpoint](active-endpoint.md) - An ActiveRecord similar pattern making requests with a model in order to do update and insert operations.
-+ [Request Options](request-options.md) - Order, Filter, Expand, Fields
++ [Request Options](request-options.md) - Sort, Filter
 + [Pagination](pagination.md) - How to make paginations.
 + [CMS Menu](cms-menu.md) - Build menus.
 + [CMS Page & Blocks](cms-page.md) - Render the page with blocks.
