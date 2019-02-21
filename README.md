@@ -33,7 +33,7 @@ use luya\headless\Client;
 use luya\headless\modules\admin\ApiAdminUser;
 
 // build client object with token and server infos
-$client = new \luya\headless\Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
+$client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
 // find a given user by its ID
 $user = ApiAdminUser::findOne(1, $client);
