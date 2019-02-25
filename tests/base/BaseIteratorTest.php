@@ -23,11 +23,20 @@ class BaseIteratorTeste extends HeadlessTestCase
         $object = BaseIterator::create(FooModel::class, $data);
 
         $this->assertSame(1, count($object));
+        $this->assertFalse(empty($object));
 
         foreach ($object as $value) {
             $this->assertSame('Foo', $value->firstname);
             $this->assertSame('Bar', $value->lastname);
         }
+    }
+
+    public function testEmptyIterator()
+    {
+        $object = BaseIterator::create(FooModel::class, []);
+
+        $this->assertSame(0, count($object));
+        $this->assertFalse(empty($object)); // its not true, because $object contains an object which is not empty by definition.
     }
 
     public function testArrayAccces()
