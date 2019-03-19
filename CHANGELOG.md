@@ -6,7 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.0
 
-+ Remove deprecated classes in `luya\headless\modules\models\*` folder.
++ **[BC BREAK] Changed signature and response of ApiAdminStorage::fileUpload() and ApiAdminStorage::imageUpload().** The methods return now the desired object instead of a PostResponse object.
++ Removed deprecated methods in ApiAdminStorage
++ Removed deprecated classes in `luya\headless\modules\models\*` folder.
 
 ## 1.2.0 (19. March 2019)
 

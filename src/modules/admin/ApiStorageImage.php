@@ -2,10 +2,10 @@
 
 namespace luya\headless\modules\admin;
 
+use luya\headless\Client;
 use luya\headless\ActiveEndpoint;
 use luya\headless\Exception;
 use luya\headless\endpoint\ActiveEndpointRequest;
-use luya\headless\Client;
 
 /**
  * Admin Storage Image Model.

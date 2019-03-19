@@ -5,7 +5,7 @@ namespace luya\headless\modules\admin;
 use luya\headless\Client;
 use luya\headless\ActiveEndpoint;
 use luya\headless\endpoint\ActiveEndpointRequest;
-use luya\headless\modules\admin\models\ApiStorageImage;
+use luya\headless\modules\admin\ApiStorageImage;
 
 /**
  * Admin Storage File Model.

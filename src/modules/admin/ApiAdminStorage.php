@@ -3,6 +3,7 @@
 namespace luya\headless\modules\admin;
 
 use luya\headless\Endpoint;
+use luya\headless\Client;
 
 /**
  * Api Admin Storage.
@@ -12,37 +13,12 @@ use luya\headless\Endpoint;
  */
 class ApiAdminStorage extends Endpoint
 {
+    /**
+     * @inheritDoc
+     */
     public function getEndpointName()
     {
         return '{{%api-admin-storage}}';
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param [type] $id
-     * @return void
-     * @deprecated Will be removed in 2.0
-     */
-    public static function getImage($id)
-    {
-        trigger_error("Use ApiStorageImage::viewOne()", E_USER_DEPRECATED);
-
-        return self::get()->setEndpoint('{endpointName}/image-info')->setArgs(['id' => $id]);
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param [type] $id
-     * @return void
-     * @deprecated Will be removed in 2.0
-     */
-    public static function getFile($id)
-    {
-        trigger_error("Use ApiStorageFile::viewOne()", E_USER_DEPRECATED);
-
-        return self::get()->setEndpoint('{endpointName}/file-info')->setArgs(['id' => $id]);
     }
 
     /**
@@ -52,20 +28,22 @@ class ApiAdminStorage extends Endpoint
      *
      * ```php
      * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
-     * $upload = ApiAdminStorage::fileUpload($file->tempName, $file->type, $file->name)
-     *      ->response($client);
-     *
-     * var_dump($upload->getContent());
+     * $model = ApiAdminStorage::fileUpload($client, $file->tempName, $file->type, $file->name);
+     * 
+     * if ($model) {
+     *     var_dump($model);
+     * }
      * ```
      *
+     * @param Client $client The client object.
      * @param string $source The path to the file (typical tmp_name from $_FILES)
      * @param string $type The file mime type (typical type from $_FILES)
      * @param string $name The name of the file (typicali name from $_FILES)
      * @param integer $folderId The folder id, if not given 0 is root directory.
      * @param boolean $isHidden Whether the file should be hidden in admin storage system or not.
-     * @return luya\headless\endpoint\PostEndpointRequest
+     * @return ApiStorageFile
      */
-    public static function fileUpload($source, $type, $name, $folderId = 0, $isHidden = true)
+    public static function fileUpload(Client $client, $source, $type, $name, $folderId = 0, $isHidden = true)
     {
         // ensure file exists and is file
         if (!file_exists($source) || !is_file($source)) {
@@ -78,7 +56,16 @@ class ApiAdminStorage extends Endpoint
             'folderId' => $folderId,
         ];
 
-        return self::post()->setEndpoint('{endpointName}/files-upload')->setArgs($file);
+        $upload = self::post()
+            ->setEndpoint('{endpointName}/files-upload')
+            ->setArgs($file)
+            ->response($client);
+
+        if (!$upload || $upload->isError()) {
+            return false;
+        }
+
+        return new ApiStorageFile($upload->getContent()['file']);
     }
 
     /**
@@ -88,20 +75,22 @@ class ApiAdminStorage extends Endpoint
      *
      * ```php
      * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
-     * $upload = ApiAdminStorage::imageUpload($file->tempName, $file->type, $file->name)
-     *      ->response($client);
-     *
-     * var_dump($upload->getContent());
+     * $model = ApiAdminStorage::fileUpload($client, $file->tempName, $file->type, $file->name);
+     * 
+     * if ($model) {
+     *     var_dump($model);
+     * }
      * ```
      *
+     * @param Client $client The client object.
      * @param string $source The path to the file (typical tmp_name from $_FILES) /path/to/image.jpg
      * @param string $type The file mime type (typical type from $_FILES). e.g. image/jpg
      * @param string $name The name of the file (typicali name from $_FILES). e.g. MyFile.jpg
      * @param integer $folderId The folder id, if not given 0 is root directory.
      * @param boolean $isHidden Whether the file should be hidden in admin storage system or not.
-     * @return luya\headless\endpoint\PostEndpointRequest
+     * @return ApiSotrageImage
      */
-    public static function imageUpload($source, $type, $name, $folderId = 0, $isHidden = true)
+    public static function imageUpload(Client $client, $source, $type, $name, $folderId = 0, $isHidden = true)
     {
         // ensure file exists and is file
         if (!file_exists($source) || !is_file($source)) {
@@ -114,6 +103,15 @@ class ApiAdminStorage extends Endpoint
             'folderId' => $folderId,
         ];
 
-        return self::post()->setEndpoint('{endpointName}/images-upload')->setArgs($file);
+        $upload = self::post()
+            ->setEndpoint('{endpointName}/images-upload')
+            ->setArgs($file)
+            ->response($client);
+
+        if (!$upload || $upload->isError()) {
+            return false;
+        }
+
+        return new ApiStorageImage($upload->getContent()['image']);
     }
 }
