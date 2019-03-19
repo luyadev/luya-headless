@@ -97,6 +97,14 @@ class ActiveEndpointTest extends HeadlessTestCase
         
         $this->assertTrue($model->save($this->createDummyClient('{}')));
     }
+
+    public function testReloadModel()
+    {
+        $model = TestingActiveEndpoint::viewOne(1, $this->createDummyClient('{"firstname":"Baz"}'));
+        $this->assertSame('Baz', $model->firstname);
+        $model->reload($this->createDummyClient('{"firstname":"Bar"}'));
+        $this->assertSame('Bar', $model->firstname);
+    }
     
     public function testAllWithError()
     {

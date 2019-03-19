@@ -322,4 +322,22 @@ class ActiveEndpoint extends Endpoint
     {
         return parent::iterator($data, $keyColumn ?: static::getPrimaryKeys());
     }
+
+    /**
+     * Reload the current model with another call.
+     * 
+     * This will reassign the values of the model with another call without any response on this function.
+     * 
+     * In addition you can provided epxand parameters to re-load certain expand.
+     *
+     * @param Client $client
+     * @param array $expand An array with expand params.
+     * @since 1.2.0
+     */
+    public function reload(Client $client, array $expand = [])
+    {
+        $reload = self::view($this->getPrimaryKeyValue())->setExpand($expand)->response($client);
+
+        $this->refresh($reload->getContent());
+    }
 }

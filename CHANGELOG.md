@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.2.0
 
++ Added new reload() method for ActiveEndpoints
 + Moved ApiStorageFile into admin module root folder as its now more then just a model.
 + Add file find() method to iterate trough files.
 + Added new methods for handling image filters.

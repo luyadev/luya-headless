@@ -43,7 +43,7 @@ class BaseModel
     private $_oldValues = [];
 
     /**
-     * Refresh attrivute values and store old values.
+     * Refresh attribute values and store old values.
      *
      * @param array $data An array with key value parining which should override the existing value.
      */
