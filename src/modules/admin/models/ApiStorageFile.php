@@ -83,7 +83,7 @@ class ApiStorageFile extends ActiveEndpoint
      */
     public function createImage($filterId, Client $client)
     {
-        return ApiStorageImage::createImage($this->id, $filterId, $client);
+        return ApiStorageImage::imageFilter($this->id, $filterId, $client);
     }
 
     private $_images = [];
