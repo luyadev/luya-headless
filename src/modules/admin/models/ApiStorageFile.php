@@ -14,6 +14,7 @@ use luya\headless\Client;
  *
  * @property ApiSotrageImage $images An array with image objects.
  * @property ApiAdminUser $user The user object
+ * @property boolean $isImage
  * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
@@ -45,6 +46,8 @@ class ApiStorageFile extends ActiveEndpoint
     // expand
     public $sizeReadable;
     public $isImage;
+
+    private $_imageMimeTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
 
     /**
      * @inheritDoc
@@ -126,5 +129,29 @@ class ApiStorageFile extends ActiveEndpoint
     public function getUser()
     {
         return new ApiAdminUser($this->_user);
+    }
+
+    
+
+        /**
+     * Whether the file is of type image or not.
+     *
+     * If the mime type of the files is equals to:
+     *
+     * + `image/gif`
+     * + `image/jpeg`
+     * + `image/jpg`
+     * + `image/png`
+     * + `image/bmp`
+     * + `image/tiff`
+     *
+     * The file indicates to be an image and return value is true.
+     *
+     * @return boolean Whether the file is of type image or not.
+     * @since 1.2.0
+     */
+    public function getIsImage()
+    {
+        return in_array($this->mime_type, $this->_imageMimeTypes);
     }
 }
