@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\tests\admin;
+namespace luya\headless\tests\modules\admin;
 
 use luya\headless\tests\ModuleActiveEndpointTestCase;
 

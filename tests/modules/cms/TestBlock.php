@@ -1,6 +1,6 @@
 <?php
 
-namespace luya\headless\tests\cms;
+namespace luya\headless\tests\modules\cms;
 
 use luya\headless\modules\cms\AbstractBlockView;
 

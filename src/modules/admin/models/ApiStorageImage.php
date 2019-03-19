@@ -45,7 +45,7 @@ class ApiStorageImage extends ActiveEndpoint
      */
     public static function find()
     {
-        throw new Exception("find() is not supported.");
+        throw new Exception("find() is not supported for images, use ApiStorageFile instead.");
     }
 
     /**
@@ -103,7 +103,7 @@ class ApiStorageImage extends ActiveEndpoint
     public static function imageFilter($fileId, $filterId, Client $client)
     {
         $response = self::post()
-            ->setEndpoint('{endPointName}/image-filter')
+            ->setEndpoint('{endpointName}/image-filter')
             ->setArgs(['fileId' => $fileId, 'filterId' => $filterId])
             ->response($client);
 

@@ -18,6 +18,18 @@ abstract class ModuleActiveEndpointTestCase extends HeadlessTestCase
             $this->getOneResponse(2),
         ];
     }
+
+    public function getInnerClient(array $data, $status = 200)
+    {
+        return $this->createDummyClient(Json::encode($data), true, $status);
+    }
+
+    protected function getOne()
+    {
+        $client = $this->getInnerClient($this->getOneResponse(1));
+        return $this->getActiveEndpoint()->viewOne(1, $client);
+    }
+
     /**
      *
      *
@@ -34,15 +46,14 @@ abstract class ModuleActiveEndpointTestCase extends HeadlessTestCase
 
     public function testOne()
     {
-        $client = $this->createDummyClient(Json::encode($this->getOneResponse(1)), true, 200);
-        $response = $this->getActiveEndpoint()->viewOne(1, $client);
+        $response = $this->getOne();
         $array = $response->toArray();
         $this->assertSame($this->getOneResponse(1), $array);
     }
 
     public function testAll()
     {
-        $client = $this->createDummyClient(Json::encode($this->getAllResponse()), true, 200);
+        $client = $this->getInnerClient($this->getAllResponse());
         $response = $this->getActiveEndpoint()->findAll($client);
         $array = $response->getContent();
         $this->assertSame($this->getAllResponse(), $array);
