@@ -7,10 +7,14 @@ use luya\headless\ActiveEndpoint;
 use luya\headless\Exception;
 use luya\headless\endpoint\ActiveEndpointRequest;
 use luya\headless\tests\ApiAdminUser;
+use luya\headless\Client;
 
 /**
  * Admin Storage File Model.
  *
+ * @property ApiSotrageImage $images An array with image objects.
+ * @property ApiAdminUser $user The user object
+ * 
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
@@ -42,40 +46,83 @@ class ApiStorageFile extends ActiveEndpoint
     public $sizeReadable;
     public $isImage;
 
+    /**
+     * @inheritDoc
+     */
     public function getEndpointName()
     {
         return '{{%api-admin-storage}}';
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function find()
     {
         throw new Exception("find() is not supported.");
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function view($id)
     {
         return (new ActiveEndpointRequest(new static))->setEndpoint('{endpointName}/file')->setDefaultExpand(['source'])->setArgs(['id' => $id]);
     }
 
+    /**
+     * Create an image version of a file.
+     *
+     * @param integer $filterId
+     * @param Client $client
+     * @return ApiStorageImage|boolean False if unable to create
+     * @since 1.2.0
+     */
+    public function createImage($filterId, Client $client)
+    {
+        return ApiStorageImage::createImage($this->id, $filterId, $client);
+    }
+
     private $_images = [];
 
+    /**
+     * Setter methods for images
+     *
+     * @param array $images
+     */
     public function setImages($images)
     {
         $this->_images = (array) $images;
     }
 
-    public function getImage()
+    /**
+     * Getter methods for images
+     * 
+     * @return ApiStorageImage
+     * @since 1.2.0
+     */
+    public function getImages()
     {
         return ApiStorageImage::iterator($this->_images);
     }
 
     private $_user;
 
+    /**
+     * Setter image for user
+     *
+     * @param array $user
+     */
     public function setUser($user)
     {
         $this->_user = $user;
     }
 
+    /**
+     * Getter method for user
+     * 
+     * @return ApiAdminUser
+     */
     public function getUser()
     {
         return new ApiAdminUser($this->_user);
