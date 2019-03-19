@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 1.2.0
+## 1.2.0 (19. March 2019)
 
 + Added new reload() method for ActiveEndpoints
 + Moved ApiStorageFile into admin module root folder as its now more then just a model.

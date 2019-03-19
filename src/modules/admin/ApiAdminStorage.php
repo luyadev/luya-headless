@@ -94,9 +94,9 @@ class ApiAdminStorage extends Endpoint
      * var_dump($upload->getContent());
      * ```
      *
-     * @param string $source The path to the file (typical tmp_name from $_FILES)
-     * @param string $type The file mime type (typical type from $_FILES)
-     * @param string $name The name of the file (typicali name from $_FILES)
+     * @param string $source The path to the file (typical tmp_name from $_FILES) /path/to/image.jpg
+     * @param string $type The file mime type (typical type from $_FILES). e.g. image/jpg
+     * @param string $name The name of the file (typicali name from $_FILES). e.g. MyFile.jpg
      * @param integer $folderId The folder id, if not given 0 is root directory.
      * @param boolean $isHidden Whether the file should be hidden in admin storage system or not.
      * @return luya\headless\endpoint\PostEndpointRequest
