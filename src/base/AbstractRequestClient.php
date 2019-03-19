@@ -286,17 +286,17 @@ abstract class AbstractRequestClient
     public function responseStatusCodeExceptionCheck($statusCode)
     {
         if ($statusCode >= 500) {
-            throw new RequestException(sprintf('API "%s" answered with a 500 server error. There must be a problem with the API server.', $this->getRequestUrl()));
+            throw new RequestException(sprintf('API "%s" answered with a 500 server error. There must be a problem with the API server. Answer: %s', $this->getRequestUrl(), $this->getResponseRawContent()));
         }
         
         switch ($statusCode) {
             // handle unauthorized request exception
             case self::STATUS_CODE_UNAUTHORIZED:
                 throw new RequestException(sprintf('Invalid access token provided or insufficient permission to access API "%s".', $this->getRequestUrl()));
-                // handle forbidden request exception
+            // handle forbidden request exception
             case self::STATUS_CODE_FORBIDDEN:
-                throw new RequestException(sprintf('insufficient permissions in order to access API "%s".', $this->getRequestUrl()));
-                // handle not found endpoint request exception
+                throw new RequestException(sprintf('Insufficient permissions in order to access API "%s".', $this->getRequestUrl()));
+            // handle not found endpoint request exception
             case self::STATUS_CODE_NOTFOUND:
                 throw new RequestException(sprintf('Unable to find API "%s". Invalid endpoint name or serverUrl.', $this->getRequestUrl()));
         }

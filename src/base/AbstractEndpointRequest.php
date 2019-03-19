@@ -6,6 +6,7 @@ use luya\headless\Client;
 use luya\headless\exceptions\MissingArgumentsException;
 use luya\headless\base\EndpointInterface;
 use luya\headless\base\AbstractRequestClient;
+use luya\headless\endpoint\EndpointResponse;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().

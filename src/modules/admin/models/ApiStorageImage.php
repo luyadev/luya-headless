@@ -2,7 +2,6 @@
 
 namespace luya\headless\modules\admin\models;
 
-use luya\headless\base\BaseModel;
 use luya\headless\ActiveEndpoint;
 use luya\headless\Exception;
 use luya\headless\endpoint\ActiveEndpointRequest;
@@ -107,7 +106,7 @@ class ApiStorageImage extends ActiveEndpoint
             ->setArgs(['fileId' => $fileId, 'filterId' => $filterId])
             ->response($client);
 
-        if (!$response) {
+        if (!$response || $response->isError()) {
             return false;
         }
 

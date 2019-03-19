@@ -7,7 +7,7 @@ namespace luya\headless\modules\admin\models;
  *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
- * @deprecated use ApiStorageFile
+ * @deprecated use luya\headless\modules\admin\ApiStorageFile instead. Will be removed in 2.0
  */
 class StorageFile extends ApiStorageFile
 {

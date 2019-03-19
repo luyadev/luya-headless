@@ -17,6 +17,13 @@ class ApiAdminStorage extends Endpoint
         return '{{%api-admin-storage}}';
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     * @deprecated Will be removed in 2.0
+     */
     public static function getImage($id)
     {
         trigger_error("Use ApiStorageImage::viewOne()", E_USER_DEPRECATED);
@@ -24,6 +31,13 @@ class ApiAdminStorage extends Endpoint
         return self::get()->setEndpoint('{endpointName}/image-info')->setArgs(['id' => $id]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     * @deprecated Will be removed in 2.0
+     */
     public static function getFile($id)
     {
         trigger_error("Use ApiStorageFile::viewOne()", E_USER_DEPRECATED);

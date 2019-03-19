@@ -14,7 +14,7 @@ use luya\headless\modules\admin\models\ApiStorageImage;
  * @property ApiAdminUser $user The user object
  * 
  * @author Basil Suter <basil@nadar.io>
- * @since 1.0.0
+ * @since 1.2.0
  */
 class ApiStorageFile extends ActiveEndpoint
 {
