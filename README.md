@@ -26,22 +26,49 @@ composer require luyadev/luya-headless
 
 ## Intro
 
-Quick intro about how to use the headless library with existing built in active endpoints:
+Quick intro about how to use the headless library with a custom Endpoint: Create the Api Class (this very similar to Active Record pattern):
+
+```php
+class ApiCars extends \luya\headless\ActiveEdnpoint
+{
+    public $id;
+    public $name;
+    public $year;
+
+    public function getEndpointName()
+    {
+        return '{{api-cars}}';
+    }
+}
+```
+
+With the new ApiCars class you can now insert, update or fetch data:
 
 ```php
 use luya\headless\Client;
-use luya\headless\modules\admin\ApiAdminUser;
 
 // build client object with token and server infos
 $client = new Client('API_TOKEN', 'http://localhost/luya-kickstarter/public_html');
 
-// find a given user by its ID
-$user = ApiAdminUser::findOne(1, $client);
+// create new value
+$car = new ApiCars();
+$car->name = 'BMW';
+$car->year = 2019;
+$car->save($client);
 
-// iterate all users
-$users = ApiAdminUser::find()->setSort(['id' => SORT_ASC])->all($client);
-foreach ($users->getModels() as $user) {
-      echo $user->firstname . ' ' . $user->lastname;
+// find a given user by its ID
+$car = ApiCars::findOne(1, $client);
+echo $car->name; // BMW
+echo $car->year; // 2019
+
+// update an existing value
+$car->year = '2018';
+$car->save($client);
+
+// iterate all cars
+$users = ApiCars::find()->setSort(['id' => SORT_ASC])->all($client);
+foreach ($users->getModels() as $car) {
+      echo $car->name;
 }
 ```
 
