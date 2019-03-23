@@ -21,7 +21,7 @@ use luya\headless\endpoint\DeleteEndpointRequest;
  * {
  *     public function getEndpointName()
  *     {
- *         retunr 'my-endpoint';
+ *         retunr '{{%my-endpoint}}';
  *     }
  * }
  * ```

@@ -17,6 +17,20 @@ class AbstractEndpointRequestTest extends HeadlessTestCase
         $request->response($this->getClient());
     }
 
+    public function testOverrideEndpointName()
+    {
+        $endpoint = new MyTestEndpoint();
+        $request = new MyEndpointRequest($endpoint);
+
+        $this->assertSame('foobar', $request->getEndpoint());
+
+        $request->setTokens(['endpointName' => 'barfoo']);
+        $this->assertSame('barfoo', $request->getEndpoint());
+
+        $request->setTokens(['endpointName' => '{{%xyz}}']);
+        $this->assertSame('{{%xyz}}', $request->getEndpoint());
+    }
+
     public function testExpandFieldsSortFilter()
     {
         $endpoint = new MyTestEndpoint();

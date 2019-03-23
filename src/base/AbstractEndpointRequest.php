@@ -124,7 +124,7 @@ abstract class AbstractEndpointRequest
         return $this;
     }
     
-    private $_tokens;
+    private $_tokens = [];
     
     /**
      * A list of tokens which will be parsed while generating the endpointName. Example
@@ -174,7 +174,7 @@ abstract class AbstractEndpointRequest
         return $this;
     }
     
-    private $_endpoint;
+    private $_endpoint = '{endpointName}';
     
     /**
      * Setter method in order to extend or override the endpoint name from the {{endpointObject}}.
@@ -195,9 +195,8 @@ abstract class AbstractEndpointRequest
      */
     public function getEndpoint()
     {
-        $tokens = $this->_tokens;
-        $tokens['{endpointName}'] = $this->endpointObject->getEndpointName();
-        return $this->parseTokens($this->_endpoint ?: $this->endpointObject->getEndpointName(), $tokens);
+        $tokens = ['{endpointName}' => $this->endpointObject->getEndpointName()];
+        return $this->parseTokens($this->_endpoint, array_merge($tokens, $this->_tokens));
     }
 
     /**
