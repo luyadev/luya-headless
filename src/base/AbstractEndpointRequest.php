@@ -169,7 +169,7 @@ abstract class AbstractEndpointRequest
             $ensuredTokens[$name] = $value;
         }
 
-        $this->_tokens = $ensuredTokens;
+        $this->_tokens = array_merge($this->_tokens, $ensuredTokens);
         
         return $this;
     }
