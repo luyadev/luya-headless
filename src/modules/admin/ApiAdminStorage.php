@@ -88,7 +88,7 @@ class ApiAdminStorage extends Endpoint
      * @param string $name The name of the file (typicali name from $_FILES). e.g. MyFile.jpg
      * @param integer $folderId The folder id, if not given 0 is root directory.
      * @param boolean $isHidden Whether the file should be hidden in admin storage system or not.
-     * @return ApiSotrageImage
+     * @return ApiStorageImage
      */
     public static function imageUpload(Client $client, $source, $type, $name, $folderId = 0, $isHidden = true)
     {

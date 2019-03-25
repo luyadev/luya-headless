@@ -10,7 +10,7 @@ use luya\headless\modules\admin\ApiStorageImage;
 /**
  * Admin Storage File Model.
  *
- * @property ApiSotrageImage $images An array with image objects.
+ * @property ApiStorageImage $images An array with image objects.
  * @property ApiAdminUser $user The user object
  * 
  * @author Basil Suter <basil@nadar.io>
