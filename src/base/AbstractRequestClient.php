@@ -4,6 +4,7 @@ namespace luya\headless\base;
 
 use luya\headless\Client;
 use luya\headless\exceptions\RequestException;
+use luya\headless\Exception;
 
 /**
  * Base Request is used to make the Request to the API.
@@ -33,7 +34,7 @@ abstract class AbstractRequestClient
      * @var string The endpoint to request.
      */
     protected $endpoint;
-    
+
     /**
      * Get request
      *
@@ -337,15 +338,20 @@ abstract class AbstractRequestClient
         
         $key = $this->generateCacheKey($key);
         $key = md5($key);
-        if ($cache->has($key)) {
-            return $cache->get($key);
+
+        $content = $cache->get($key, false);
+
+        if ($content !== false) {
+            return $content;
         }
         
         $content = call_user_func($fn);
         
         // only cache the response if the request was successfull
         if ($this->isSuccess()) {
-            $cache->set($key, $content, $ttl);
+            if (!$cache->set($key, $content, $ttl)) {
+                throw new Exception("Unable to store the cache content for key '{$key}'.");
+            }
         }
         
         return $content;
