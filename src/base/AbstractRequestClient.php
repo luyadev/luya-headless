@@ -5,6 +5,7 @@ namespace luya\headless\base;
 use luya\headless\Client;
 use luya\headless\exceptions\RequestException;
 use luya\headless\Exception;
+use luya\headless\cache\DynamicValue;
 
 /**
  * Base Request is used to make the Request to the API.
@@ -313,7 +314,9 @@ abstract class AbstractRequestClient
     protected function generateCacheKey(array $params)
     {
         foreach ($params as $key => $value) {
-            if (is_array($value)) {
+            if ($value instanceof DynamicValue) {
+                $params[$key] = $value->getKey();
+            } elseif (is_array($value)) {
                 $params[$key] = $this->generateCacheKey($value);
             }
         }
