@@ -129,5 +129,11 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
             ],
             'param' => 123,
         ], $r->request->getArgs());
+
+
+        $object = $client->getRequestClient();
+        $this->assertSame('0.foo.sub-foo.3.0-4', $this->invokeMethod($object, 'generateCacheKey', [
+            ['foo', 'foo' => new DynamicValue(123), 'sub' => [new DynamicValue('1234')]]
+        ]));
     }
 }
