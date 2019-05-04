@@ -237,6 +237,13 @@ abstract class AbstractEndpointRequest
         return $this->noramlizeArgs($this->_args);
     }
 
+    /**
+     * Find DynamicValue objects in arguments list and return the value for those objects.
+     * 
+     * @param array $values The arguments values to normalize.
+     * @since 2.1.0
+     * @return array
+     */
     private function noramlizeArgs(array $values)
     {
         foreach ($values as $k => $v) {

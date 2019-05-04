@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.0
+
++ [#18](https://github.com/luyadev/luya-headless/issues/18) Added dynamic value object in order to prevent cache keys with arguments which changes (like time expressions).
+
 ## 2.0.0 (19. April 2019)
 
 + **[BC BREAK] Changed signature and response of ApiAdminStorage::fileUpload() and ApiAdminStorage::imageUpload().** The methods return now the desired object instead of a PostResponse object.

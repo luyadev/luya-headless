@@ -31,16 +31,31 @@ class DynamicValue
         $this->_key = $key;
     }
 
+    /**
+     * Get the value of the dynamic argument.
+     * 
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->_value;
     }
 
+    /**
+     * Get the cache key for this dynamic value argument. If not defined the length of the value string is returned.
+     * 
+     * @return string
+     */
     public function getKey()
     {
         return $this->_key ?? strlen($this->_value);
     }
 
+    /**
+     * If the object is forced to echo, the value is returned.
+     * 
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->_value;
