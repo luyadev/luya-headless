@@ -50,14 +50,4 @@ class DynamicValue
     {
         return $this->_key ?? strlen($this->_value);
     }
-
-    /**
-     * If the object is forced to echo, the value is returned.
-     * 
-     * @return mixed
-     */
-    public function __toString()
-    {
-        return $this->_value;
-    }
 }
