@@ -4,6 +4,7 @@ namespace luya\headless\tests\base;
 
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\ActiveEndpoint;
+use luya\headless\cache\DynamicValue;
 
 final class TestActiveEndpoint extends ActiveEndpoint
 {
@@ -110,5 +111,29 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
         $data = TestActiveEndpoint::testTokenUrl(123)->setCache(3600)->response($client);
         
         $this->assertSame(['id' => 1], $data->getContent());
+    }
+
+    public function testCacheWithDynamicValue()
+    {
+        $client = $this->createDummyClient('{"id":1}');
+
+        $r = TestActiveEndpoint::find()
+            ->setCache(3600)
+            ->setFilter(['xyz' => new DynamicValue('123')])
+            ->setArgs(['param' => new DynamicValue(123)])
+            ->response($client);
+
+        $this->assertSame([
+            'filter' => [
+                'xyz' => '123',
+            ],
+            'param' => 123,
+        ], $r->request->getArgs());
+
+
+        $object = $client->getRequestClient();
+        $this->assertSame('0.foo.sub-foo.3.0-4', $this->invokeMethod($object, 'generateCacheKey', [
+            ['foo', 'foo' => new DynamicValue(123), 'sub' => [new DynamicValue('1234')]]
+        ]));
     }
 }

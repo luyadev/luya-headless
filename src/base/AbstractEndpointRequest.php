@@ -7,6 +7,7 @@ use luya\headless\exceptions\MissingArgumentsException;
 use luya\headless\base\EndpointInterface;
 use luya\headless\base\AbstractRequestClient;
 use luya\headless\endpoint\EndpointResponse;
+use luya\headless\cache\DynamicValue;
 
 /**
  * EndpointRequest represents a request to a class with a response object in response().
@@ -233,7 +234,27 @@ abstract class AbstractEndpointRequest
      */
     public function getArgs()
     {
-        return $this->_args;
+        return $this->noramlizeArgs($this->_args);
+    }
+
+    /**
+     * Find DynamicValue objects in arguments list and return the value for those objects.
+     * 
+     * @param array $values The arguments values to normalize.
+     * @since 2.1.0
+     * @return array
+     */
+    private function noramlizeArgs(array $values)
+    {
+        foreach ($values as $k => $v) {
+            if ($v instanceof DynamicValue) {
+                $values[$k] = $v->getValue();
+            } elseif (is_array($v)) {
+                $values[$k] = $this->noramlizeArgs($v);
+            }
+        }
+
+        return $values;
     }
     
     private $_defaultExpand = [];
