@@ -245,7 +245,7 @@ abstract class AbstractEndpointRequest
 
     /**
      * Find DynamicValue objects in arguments list and return the value for those objects.
-     * 
+     *
      * @param array $values The arguments values to normalize.
      * @since 2.1.0
      * @return array

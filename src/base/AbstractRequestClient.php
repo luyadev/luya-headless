@@ -306,7 +306,7 @@ abstract class AbstractRequestClient
     
     /**
      * Get an existing key, or set a new value for the given cache key.
-     * 
+     *
      * @param array|string $key The cache key. If an array is given it will be parsed and md5 encoded, therefore it won't be possible to encode.
      * @param integer $ttl The number of seconds to store, its common that 0 is infinite.
      * @param callable $fn The function which evaluates the content.

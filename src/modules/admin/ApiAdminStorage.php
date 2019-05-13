@@ -29,7 +29,7 @@ class ApiAdminStorage extends Endpoint
      * ```php
      * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
      * $model = ApiAdminStorage::fileUpload($client, $file->tempName, $file->type, $file->name);
-     * 
+     *
      * if ($model) {
      *     var_dump($model);
      * }
@@ -76,7 +76,7 @@ class ApiAdminStorage extends Endpoint
      * ```php
      * $file = \yii\web\UploadedFile::getInstance($model, 'ad_image_id');
      * $model = ApiAdminStorage::fileUpload($client, $file->tempName, $file->type, $file->name);
-     * 
+     *
      * if ($model) {
      *     var_dump($model);
      * }

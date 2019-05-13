@@ -7,16 +7,16 @@ use luya\headless\Client;
 
 /**
  * Find redirect pages defined in redirects menu.
- * 
+ *
  * ```php
  * $find = ApiCmsRediect('find/path', $client);
- * 
+ *
  * if ($find) {
  *     // redirect to:
  *     header("Location: " .$find->redirect_path);
  * }
  * ```
- * 
+ *
  * @since 1.1.0
  * @author Basil Suter <basil@nadar.io>
  */

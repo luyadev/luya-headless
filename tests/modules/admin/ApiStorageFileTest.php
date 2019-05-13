@@ -4,7 +4,6 @@ namespace luya\headless\tests\modules\admin;
 
 use luya\headless\tests\ModuleActiveEndpointTestCase;
 
-
 class ApiStorageFileTest extends ModuleActiveEndpointTestCase
 {
     public $endpointModel = 'luya\headless\modules\admin\ApiStorageFile';
@@ -51,6 +50,4 @@ class ApiStorageFileTest extends ModuleActiveEndpointTestCase
             'isImage' => true,
         ];
     }
-
-
 }

@@ -69,7 +69,7 @@ class DummySimpleCache implements CacheInterface
      */
     public function clear()
     {
-        $this->_cache = [];        
+        $this->_cache = [];
     }
 
     /**
@@ -86,7 +86,6 @@ class DummySimpleCache implements CacheInterface
      */
     public function getMultiple($keys, $default = null)
     {
-
     }
 
     /**
@@ -106,7 +105,6 @@ class DummySimpleCache implements CacheInterface
      */
     public function setMultiple($values, $ttl = null)
     {
-
     }
     /**
      * Deletes multiple cache items in a single operation.
@@ -121,7 +119,6 @@ class DummySimpleCache implements CacheInterface
      */
     public function deleteMultiple($keys)
     {
-
     }
 
     /**

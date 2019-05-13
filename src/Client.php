@@ -54,9 +54,9 @@ class Client
      * that caches are not unloaded together and rebuilt toghether which can slow down the application. So assuming 10 cachable request with ttl of 3600 seconds
      * would unload and rebuild all together after 3600 seconds. If cache time anomly is enabled there is a chance that the cache distraction between the keys
      * changes overtime and unload and loading is not done together.
-     * 
+     *
      * > By default a value between 1 and 20 seconds will be randomly added to TTL. If TTL is 0 no random time will be added as it generally indicates an infinite cache.
-     * 
+     *
      * @since 2.2.0
      */
     public $cacheTimeAnomaly = true;
@@ -125,7 +125,7 @@ class Client
     
     /**
      * Setter method for CacheInterface.
-     * 
+     *
      * @param CacheInterface $cache
      */
     public function setCache(CacheInterface $cache)
@@ -135,7 +135,7 @@ class Client
     
     /**
      * Getter method for Cache.
-     * 
+     *
      * @return \Psr\SimpleCache\CacheInterface
      */
     public function getCache()
@@ -199,13 +199,13 @@ class Client
 
     /**
      * Generate a reproducable cache key based on input.
-     * 
+     *
      * + If the key is a scalar value, this will be taken as key.
      * + If not a the array will be striped down into a scalar key which gets md5 encoded.
      *
      * This method is internally used to generate the cache key identifier in {{setCache()}} when no identifier
      * is given.
-     * 
+     *
      * @param string|array $key An array with values or a scalar input type like a string or number.
      * @return string A scalar cache key
      * @since 2.2.0

@@ -325,9 +325,9 @@ class ActiveEndpoint extends Endpoint
 
     /**
      * Reload the current model with another call.
-     * 
+     *
      * This will reassign the values of the model with another call without any response on this function.
-     * 
+     *
      * In addition you can provided epxand parameters to re-load certain expand.
      *
      * @param Client $client

@@ -12,7 +12,7 @@ use luya\headless\modules\admin\ApiStorageImage;
  *
  * @property ApiStorageImage $images An array with image objects.
  * @property ApiAdminUser $user The user object
- * 
+ *
  * @author Basil Suter <basil@nadar.io>
  * @since 1.2.0
  */
@@ -95,7 +95,7 @@ class ApiStorageFile extends ActiveEndpoint
 
     /**
      * Getter methods for images
-     * 
+     *
      * @return ApiStorageImage
      * @since 1.2.0
      */
@@ -118,7 +118,7 @@ class ApiStorageFile extends ActiveEndpoint
 
     /**
      * Getter method for user
-     * 
+     *
      * @return ApiAdminUser
      */
     public function getUser()
