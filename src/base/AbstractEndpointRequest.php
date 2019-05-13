@@ -78,7 +78,7 @@ abstract class AbstractEndpointRequest
      * If not set in client this won't have any effect, but will also not throw an exception.
      *
      * @param integer $ttl Caching life time in seconds. If 0 is used this is mostly an "infinte" value, like store the value until the whole cache or the key gets flushed.
-     * @param string $identifier {since 2.2.} An optional identifier to use as cache key. Keep in mind that for language specific context you have to take by yourself. Its general recommend to avoid special chars
+     * @param string $identifier {@since 2.2.0} An optional identifier to use as cache key. Keep in mind that for language specific context you have to take by yourself. Its general recommend to avoid special chars
      * is it can lead into problems (for example symfony cache does not allow: {}()/\@). In order to use complex array keys to work with you can also use {{Client::cacheKey(['foo', 123, 'bar'])}} to generate unique
      * keys based on arrays.
      * @return static
