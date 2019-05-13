@@ -58,8 +58,9 @@ abstract class AbstractEndpointRequest
         $requestClient = clone $client->getRequestClient();
         $requestClient->setEndpoint($this->getEndpoint());
         
-        if ($this->getCache()) {
-            return $requestClient->getOrSetCache([$this->getEndpoint(), $this->_args, $client->language], $this->getCache(), function () use ($requestClient) {
+        if ($this->getCache() !== false) {
+            $cacheKey = $this->_cacheIdentifier ? $this->_cacheIdentifier : Client::cacheKey([$this->getEndpoint(), $this->_args, $client->language]);
+            return $requestClient->getOrSetCache($cacheKey, $this->getCache(), function () use ($requestClient) {
                 return $this->createResponse($requestClient);
             });
         }
@@ -67,20 +68,25 @@ abstract class AbstractEndpointRequest
         return $this->createResponse($requestClient);
     }
     
-    private $_cache;
+    private $_cache = false;
+
+    private $_cacheIdentifier;
     
     /**
      * Set caching time for the current request.
      *
      * If not set in client this won't have any effect, but will also not throw an exception.
      *
-     * @param integer $ttl Caching life time in seconds.$this
+     * @param integer $ttl Caching life time in seconds. If 0 is used this is mostly an "infinte" value, like store the value until the whole cache or the key gets flushed.
+     * @param string $identifier {since 2.2.} An optional identifier to use as cache key. Keep in mind that for language specific context you have to take by yourself. Its general recommend to avoid special chars
+     * is it can lead into problems (for example symfony cache does not allow: {}()/\@). In order to use complex array keys to work with you can also use {{Client::cacheKey(['foo', 123, 'bar'])}} to generate unique
+     * ,eys based on arrays.
      * @return static
      */
-    public function setCache($ttl)
+    public function setCache($ttl, $identifier = null)
     {
         $this->_cache = $ttl;
-        
+        $this->_cacheIdentifier = $identifier;
         return $this;
     }
     

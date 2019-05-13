@@ -305,42 +305,20 @@ abstract class AbstractRequestClient
     }
     
     /**
-     * Generate a cache key.
-     *
-     * @param string $url
-     * @param array $params
-     * @return string
-     */
-    protected function generateCacheKey(array $params)
-    {
-        foreach ($params as $key => $value) {
-            if ($value instanceof DynamicValue) {
-                $params[$key] = $value->getKey();
-            } elseif (is_array($value)) {
-                $params[$key] = $this->generateCacheKey($value);
-            }
-        }
-        
-        return implode(".", array_keys($params)) . '-' . implode(".", array_values($params));
-    }
-    
-    /**
-     *
-     * @param array $key
-     * @param integer $ttl
-     * @param callable $fn
+     * Get an existing key, or set a new value for the given cache key.
+     * 
+     * @param array|string $key The cache key. If an array is given it will be parsed and md5 encoded, therefore it won't be possible to encode.
+     * @param integer $ttl The number of seconds to store, its common that 0 is infinite.
+     * @param callable $fn The function which evaluates the content.
      * @return mixed
      */
-    public function getOrSetCache(array $key, $ttl, callable $fn)
+    public function getOrSetCache($key, $ttl, callable $fn)
     {
         $cache = $this->client->getCache();
         
         if (!$cache) {
             return call_user_func($fn);
         }
-        
-        $key = $this->generateCacheKey($key);
-        $key = md5($key);
 
         $content = $cache->get($key, false);
 

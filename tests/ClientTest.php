@@ -106,8 +106,16 @@ final class ClientTest extends HeadlessTestCase
         $client = new Client('token', 'url');
         $object = $client->getRequestClient();
         $cacheKey = '0.1.2-foo.bar.args.sort.0-0.1-x1.x2.y1.y2.hide1-0.1-hide2.0-hide2';
-        $this->assertSame($cacheKey, $this->invokeMethod($object, 'generateCacheKey', [
+        $this->assertSame($cacheKey, $this->invokeMethod($client, 'generateCacheKey', [
             ['foo', 'bar', ['args' => ['x1', 'x2'], 'sort' => 'y1.y2', ['hide1' => ['hide2', ['hide2']]]]]
         ]));
+    }
+
+    public function testCacheKey()
+    {
+        $this->assertSame(123, CLient::cacheKey(123));
+        $this->assertSame('abc', CLient::cacheKey('abc'));
+        $this->assertSame(false, CLient::cacheKey(false));
+        $this->assertSame('b88eb48e1b1dd1d02bcbe2403ce20f2b', CLient::cacheKey([1,2,3]));
     }
 }

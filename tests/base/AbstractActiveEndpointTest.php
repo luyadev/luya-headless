@@ -107,10 +107,27 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
     public function testFindTokenWithCacheWhichIsDisabled()
     {
         $client = $this->createDummyClient('{"id":1}');
-        
         $data = TestActiveEndpoint::testTokenUrl(123)->setCache(3600)->response($client);
-        
         $this->assertSame(['id' => 1], $data->getContent());
+    }
+
+    public function testSetCacheWithFixCacheKey()
+    {
+        $client = $this->createDummyClient('{"id":1}');
+        $data = TestActiveEndpoint::testTokenUrl(123)->setCache(3600, 'foobar')->response($client);
+        $this->assertSame(['id' => 1], $data->getContent());
+    }
+
+    public function testIfCacheCanBe0()
+    {
+        $client = $this->createDummyClient('{"id":1}');
+        $request = TestActiveEndpoint::testTokenUrl(123)->setCache(0);
+        $data = $request->response($client);
+        $this->assertSame(['id' => 1], $data->getContent());
+
+        $this->assertSame(0, $request->getCache());
+
+        $this->assertFalse(TestActiveEndpoint::testTokenUrl(123)->getCache());
     }
 
     public function testCacheWithDynamicValue()
@@ -132,7 +149,7 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
 
 
         $object = $client->getRequestClient();
-        $this->assertSame('0.foo.sub-foo.3.0-4', $this->invokeMethod($object, 'generateCacheKey', [
+        $this->assertSame('0.foo.sub-foo.3.0-4', $this->invokeMethod($client, 'generateCacheKey', [
             ['foo', 'foo' => new DynamicValue(123), 'sub' => [new DynamicValue('1234')]]
         ]));
     }

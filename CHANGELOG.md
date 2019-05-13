@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.2.0
+
++ [#19](https://github.com/luyadev/luya-headless/issues/19) Add new parameter for `setCache($ttl, 'name')` in order to provide a cache name instead of an automatically generated one.
+
 ## 2.1.0 (5. May 2019)
 
 + [#18](https://github.com/luyadev/luya-headless/issues/18) Added dynamic value object in order to prevent cache keys with arguments which changes (like time expressions).

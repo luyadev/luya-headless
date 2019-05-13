@@ -5,6 +5,7 @@ namespace luya\headless;
 use luya\headless\collectors\CurlRequestClient;
 use luya\headless\base\AbstractRequestClient;
 use Psr\SimpleCache\CacheInterface;
+use luya\headless\cache\DynamicValue;
 
 /**
  * Headless Client holds Configuration.
@@ -110,7 +111,8 @@ class Client
     private $_cache;
     
     /**
-     *
+     * Setter method for CacheInterface.
+     * 
      * @param CacheInterface $cache
      */
     public function setCache(CacheInterface $cache)
@@ -119,7 +121,8 @@ class Client
     }
     
     /**
-     *
+     * Getter method for Cache.
+     * 
      * @return \Psr\SimpleCache\CacheInterface
      */
     public function getCache()
@@ -179,5 +182,46 @@ class Client
     public function getAfterRequestEvent()
     {
         return $this->_afterRequestEvent;
+    }
+
+    /**
+     * Generate a reproducable cache key based on input.
+     * 
+     * + If the key is a scalar value, this will be taken as key.
+     * + If not a the array will be striped down into a scalar key which gets md5 encoded.
+     *
+     * This method is internally used to generate the cache key identifier in {{setCache()}} when no identifier
+     * is given.
+     * 
+     * @param string|array $key An array with values or a scalar input type like a string or number.
+     * @return string A scalar cache key
+     * @since 2.2.0
+     */
+    public static function cacheKey($key)
+    {
+        return is_scalar($key) ? $key : md5(self::generateCacheKey($key));
+    }
+    
+    /**
+     * Generate a cache key.
+     *
+     * @param string $url
+     * @param array $params
+     * @return string The cache key string
+     * @since 2.2.0
+     */
+    protected static function generateCacheKey(array $params)
+    {
+        foreach ($params as $key => $value) {
+            if ($value instanceof DynamicValue) {
+                $params[$key] = $value->getKey();
+            } elseif (is_object($value)) {
+                $params[$key] = get_class($value);
+            } elseif (is_array($value)) {
+                $params[$key] = static::generateCacheKey($value);
+            }
+        }
+        
+        return implode(".", array_keys($params)) . '-' . implode(".", array_values($params));
     }
 }
