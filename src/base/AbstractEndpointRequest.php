@@ -60,7 +60,7 @@ abstract class AbstractEndpointRequest
         
         if ($this->getCache() !== false) {
             $cacheKey = $this->_cacheIdentifier ? $this->_cacheIdentifier : Client::cacheKey([$this->getEndpoint(), $this->_args, $client->language]);
-            return $requestClient->getOrSetCache($cacheKey, $this->getCache(), function () use ($requestClient) {
+            return $requestClient->getOrSetCache($cacheKey, $client->applyCacheTimeAnomaly($this->getCache()), function () use ($requestClient) {
                 return $this->createResponse($requestClient);
             });
         }

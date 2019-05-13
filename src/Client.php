@@ -49,6 +49,19 @@ class Client
     public $endpointPrefix = 'admin/';
     
     /**
+     * @var boolean Whether the cache ttl should be added by a default small time anomaly. This means that the cache ttl will recieve a random value of
+     * seconds to be added. This is mostly usefull when working with large websites with a lot of requests and caching times are the same. So it makes sure
+     * that caches are not unloaded together and rebuilt toghether which can slow down the application. So assuming 10 cachable request with ttl of 3600 seconds
+     * would unload and rebuild all together after 3600 seconds. If cache time anomly is enabled there is a chance that the cache distraction between the keys
+     * changes overtime and unload and loading is not done together.
+     * 
+     * > By default a value between 1 and 20 seconds will be randomly added to TTL. If TTL is 0 no random time will be added as it generally indicates an infinite cache.
+     * 
+     * @since 2.2.0
+     */
+    public $cacheTimeAnomaly = true;
+
+    /**
      *
      * @param string $accessToken
      * @param string $serverUrl Path to the webserver WITHOUT `admin`. Assuming your admin is accessable under `https://luya.io/admin` then the serverUrl would be `https://luya.io`.
@@ -202,6 +215,18 @@ class Client
         return is_scalar($key) ? $key : md5(self::generateCacheKey($key));
     }
     
+    /**
+     * Return a cache ttl based on whether {{$cacheTimeAnomaly}} is enabled and ttl is not 0.
+     *
+     * @param integer $ttl The TTL which should be extended by a random number of seconds.
+     * @return integer
+     * @since 2.2.0
+     */
+    public function applyCacheTimeAnomaly($ttl)
+    {
+        return $ttl === 0 || !$this->cacheTimeAnomaly ? $ttl : rand(1, 30) + $ttl;
+    }
+
     /**
      * Generate a cache key.
      *

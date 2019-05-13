@@ -118,4 +118,19 @@ final class ClientTest extends HeadlessTestCase
         $this->assertSame(false, CLient::cacheKey(false));
         $this->assertSame('b88eb48e1b1dd1d02bcbe2403ce20f2b', CLient::cacheKey([1,2,3]));
     }
+
+    public function testApplyCacheTimeAnomaly()
+    {
+        $client = new Client('token', 'url');
+        $this->assertGreaterThan(1, $client->applyCacheTimeAnomaly(1));
+        $this->assertSame(0, $client->applyCacheTimeAnomaly(0));
+    }
+
+    public function testDisabledApplyCacheTimeAnomaly()
+    {
+        $client = new Client('token', 'url');
+        $client->cacheTimeAnomaly = false;
+        $this->assertSame(1, $client->applyCacheTimeAnomaly(1));
+        $this->assertSame(0, $client->applyCacheTimeAnomaly(0));
+    }
 }

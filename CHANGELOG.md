@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.2.0
 
++ [#21](https://github.com/luyadev/luya-headless/issues/21) Added new `$cacheTimeAnomaly` property on the client in order to make sure multiple requests with same TTL settings won't unload & load together. This reduce the server load.
 + [#19](https://github.com/luyadev/luya-headless/issues/19) Add new parameter for `setCache($ttl, 'name')` in order to provide a cache name instead of an automatically generated one.
 
 ## 2.1.0 (5. May 2019)
