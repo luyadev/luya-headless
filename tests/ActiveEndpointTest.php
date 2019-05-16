@@ -34,6 +34,21 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertSame('John', $model->firstname); // response does not modify the current model value.
         $this->assertFalse($model->getIsNewRecord()); // its not a new model anymore
     }
+
+    public function testErase()
+    {
+        $model = new TestingActiveEndpoint();
+        $model->firstname = 'John';
+        $model->lastname = 'Doe';
+        
+        $this->assertTrue($model->getIsNewRecord());
+        $response = $model->save($this->createDummyClient('{"firstname":"John", "lastname": "Doe"}'));
+        $this->assertTrue($response);
+        $this->assertSame('John', $model->firstname); // response does not modify the current model value.
+        $this->assertFalse($model->getIsNewRecord()); // its not a new model anymore
+
+        $this->assertTrue($model->erase($this->createDummyClient('{}')));
+    }
     
     public function testNewModelWithError()
     {
