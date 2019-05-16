@@ -84,6 +84,13 @@ class AbstractActiveEndpointTest extends HeadlessTestCase
 
         $this->assertSame('bar', $data->foo);
     }
+
+    public function testFindFirstEmpty()
+    {
+        $client = $this->createDummyClient('[]');
+
+        $this->assertFalse(TestActiveEndpoint::find()->first($client));
+    }
     
     public function testFindFirstWithEmptyArray()
     {
