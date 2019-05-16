@@ -118,6 +118,9 @@ class ActiveEndpoint extends Endpoint
      *
      * Im rare cases you have composite keys which are based on multiple fields.
      *
+     * > Keep in mind to make sure to use the same order for the primary key fields as on the API. For example ['user_id', 'event_id'] would
+     * > not generate the same composite key as ['event_id', 'user_id'].
+     * 
      * @return array An array with the primary keys.
      */
     public static function getPrimaryKeys()
@@ -134,7 +137,7 @@ class ActiveEndpoint extends Endpoint
      * ['userId' => 1, 'groupId' => 2];
      * ```
      *
-     * if `userId` and `groupId` are set as primary keys, the return value would be `1,2`
+     * if `userId` and `groupId` are set as primary keys, the return value would be `1,2`.
      *
      * @return string A scalar representation of the primary key value.
      */
@@ -207,7 +210,7 @@ class ActiveEndpoint extends Endpoint
      * $model = Api::view($id)->one($client);
      * ```
      *
-     * @param integer $id
+     * @param integer|array $id The id to view. If an array is given it will be convereted to a composite key format like `1,4`.
      * @param Client $client
      * @return static
      */
@@ -234,12 +237,12 @@ class ActiveEndpoint extends Endpoint
      * }
      * ```
      *
-     * @param integer $id
+     * @param integer|array $id The id to view. If an array is given it will be convereted to a composite key format like `1,4`.
      * @return ActiveEndpointRequest
      */
     public static function view($id)
     {
-        return static::find()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+        return static::find()->setTokens(['{id}' => implode(",", (array) $id)])->setEndpoint('{endpointName}/{id}');
     }
 
     /**
@@ -256,24 +259,24 @@ class ActiveEndpoint extends Endpoint
     /**
      * Represents the CRUD update request.
      *
-     * @param integer $id
+     * @param integer|array $id The id to update. If an array is given it will be convereted to a composite key format like `1,4`.
      * @param array $values
      * @return \luya\headless\endpoint\PutEndpointRequest
      */
     public static function update($id, array $values)
     {
-        return static::put()->setTokens(['{id}' => $id])->setArgs($values)->setEndpoint('{endpointName}/{id}');
+        return static::put()->setTokens(['{id}' => implode(",", (array) $id)])->setArgs($values)->setEndpoint('{endpointName}/{id}');
     }
     
     /**
      * Represents the CRUD remove/delete request.
      *
-     * @param integer $id
+     * @param integer|array $id The id to remove. If an array is given it will be convereted to a composite key format like `1,4`.
      * @return \luya\headless\endpoint\DeleteEndpointRequest
      */
     public static function remove($id)
     {
-        return static::delete()->setTokens(['{id}' => $id])->setEndpoint('{endpointName}/{id}');
+        return static::delete()->setTokens(['{id}' => implode(",", (array) $id)])->setEndpoint('{endpointName}/{id}');
     }
     
     /**
@@ -311,6 +314,20 @@ class ActiveEndpoint extends Endpoint
         
         return false;
     }
+
+    /**
+     * Delete a given model.
+     * 
+     * > delete() is used for delete requests, this method is named erase()
+     *
+     * @param Client $client
+     * @return boolean Whether delete was successfull or not.
+     * @since 2.3.0
+     */
+    public function erase(Client $client)
+    {
+        return self::remove($this->getPrimaryKeyValue())->response($client)->isSuccess();
+    }    
     
     /**
      * Create an iterator of models for the current endpoint.

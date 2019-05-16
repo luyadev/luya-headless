@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.3.0 (16. May 2019)
+
++ [#23](https://github.com/luyadev/luya-headless/issues/23) Add delete method with name `erase()` to delete an item from object context.
++ [#22](https://github.com/luyadev/luya-headless/issues/22) Make sure view(), update() and remove() works with composite keys provided as array.
+
 ## 2.2.0 (13. May 2019)
 
 + [#21](https://github.com/luyadev/luya-headless/issues/21) Added new `$cacheTimeAnomaly` property on the client in order to make sure multiple requests with same TTL settings won't unload & load together. This reduce the server load.
