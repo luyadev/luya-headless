@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.4.0
 
-+ [#]() Added new cache prefix key for Client objects.
++ [#26](https://github.com/luyadev/luya-headless/pull/26) Added new cache prefix key for Client objects.
 
 ## 2.3.0 (16. May 2019)
 
