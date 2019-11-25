@@ -3,13 +3,13 @@ env:
     - CC_TEST_REPORTER_ID=1e3ec5811ac302fdb07f45ebaaf056eb3e9d673bbc0e0b7b3891730d9831b427
 language: php
 php:
-  - '7.1'
   - '7.2'
   - '7.3'
   - hhvm # on Trusty only
   - nightly
 matrix:
   allow_failures:
+      - php: 7.1
       - php: nightly
       - php: hhvm
 before_script:
