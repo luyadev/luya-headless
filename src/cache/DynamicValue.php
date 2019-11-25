@@ -5,7 +5,7 @@ namespace luya\headless\cache;
 /**
  * Generate Dynamic Value expression.
  *
- * When cache keys are generated based on arugments and filters or parameters,
+ * When cache keys are generated based on arguments and filters or parameters,
  * a dynamic value like timestamp would always regenerate a cache key. Therefore
  * you can use `new DynamicValue(time())` for arguments or filters in order to fix
  * this problem.

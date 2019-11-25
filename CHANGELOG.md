@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.4.0
+
++ [#]() Added new cache prefix key for Client objects.
+
 ## 2.3.0 (16. May 2019)
 
 + [#23](https://github.com/luyadev/luya-headless/issues/23) Add delete method with name `erase()` to delete an item from object context.

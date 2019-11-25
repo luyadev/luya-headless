@@ -5,7 +5,6 @@ namespace luya\headless\base;
 use luya\headless\Client;
 use luya\headless\exceptions\RequestException;
 use luya\headless\Exception;
-use luya\headless\cache\DynamicValue;
 
 /**
  * Base Request is used to make the Request to the API.

@@ -62,6 +62,14 @@ class Client
     public $cacheTimeAnomaly = true;
 
     /**
+     * @var string A prefix for all caches, this can be very usefull when working with the same caching server but multiple websites. When an identifier is used for caching
+     * the prefix will **not be added**.
+     * 
+     * @since 2.4.0
+     */
+    public $cachePrefix;
+
+    /**
      *
      * @param string $accessToken
      * @param string $serverUrl Path to the webserver WITHOUT `admin`. Assuming your admin is accessable under `https://luya.io/admin` then the serverUrl would be `https://luya.io`.
@@ -212,7 +220,7 @@ class Client
      */
     public static function cacheKey($key)
     {
-        return is_scalar($key) ? $key : md5(self::generateCacheKey($key));
+        return is_scalar($key) ? $key : md5(self::generateCacheKey(array_filter($key)));
     }
     
     /**
