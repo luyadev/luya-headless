@@ -14,8 +14,6 @@ A client library to access content from the LUYA APIs (or any other REST API).
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-headless/downloads)](https://packagist.org/packages/luyadev/luya-headless)
 [![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
-> Compared to the other LUYA packages, this package adheres to [Semantic Versioning](http://semver.org/)!
-
 ## Installation
 
 Add the LUYA headless client library to your composer.json:
