@@ -5,11 +5,13 @@ language: php
 php:
   - '7.2'
   - '7.3'
+  - '7.4'
   - hhvm # on Trusty only
   - nightly
 matrix:
   allow_failures:
       - php: 7.1
+      - php: 7.4
       - php: nightly
       - php: hhvm
 before_script:
