@@ -70,6 +70,29 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
             $this->addItem($item, (is_null($keyColumn) || empty($pkValues)) ? $key : implode(",", $pkValues));
         }
     }
+
+    /**
+     * A callable which can be run to sort the data array.
+     * 
+     * The first parameter of the function is the array containing the data.
+     * 
+     * ```php
+     * $model->sort(function(array $data) {
+     *    ArrayHelper::multisort($data, 'firstname', SORT_DESC);
+     * 
+     *    return $data;
+     * });
+     * ```
+     * 
+     * The sort callable must return the new sorted array data.
+     *
+     * @param callable $fn
+     * @since 2.5.0
+     */
+    public function sort(callable $fn)
+    {
+        $this->data = call_user_func_array($fn, [$this->data]);
+    }
     
     /**
      * Add new item to array of items.

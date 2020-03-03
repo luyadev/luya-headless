@@ -5,6 +5,7 @@ namespace luya\headless\tests\base;
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\base\BaseIterator;
 use luya\headless\base\BaseModel;
+use luya\helpers\ArrayHelper;
 
 class BaseIteratorTeste extends HeadlessTestCase
 {
@@ -51,6 +52,32 @@ class BaseIteratorTeste extends HeadlessTestCase
         $this->assertFalse(array_key_exists('firstname', $object));
         unset($object['new']);
         $this->assertFalse(isset($object['new']));
+    }
+
+    public function testSorting()
+    {
+        $data = [
+            ['firstname' => 'A', 'lastname' => 'A'],
+            ['firstname' => 'B', 'lastname' => 'B'],
+        ];
+
+        $object = BaseIterator::create(FooModel::class, $data);
+
+        $this->assertSame($object[0]->firstname, 'A');
+        $this->assertSame($object[1]->firstname, 'B');
+
+        $object->rewind();
+        $this->assertSame($object[0]->firstname, 'A');
+        $this->assertSame($object[1]->firstname, 'B');
+
+        $object->rewind();
+        $object->sort(function($data) {
+            ArrayHelper::multisort($data, 'firstname', SORT_DESC);
+            return $data;
+        });
+        
+        $this->assertSame($object[0]->firstname, 'B');
+        $this->assertSame($object[1]->firstname, 'A');
     }
 }
 
