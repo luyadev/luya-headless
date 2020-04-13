@@ -222,7 +222,7 @@ abstract class AbstractEndpointRequest
     /**
      * Setter method for arguments (params).
      *
-     * Arguments are url parameters with key value pairing.
+     * In GET context those are Url Parameters, in POST context its sent als POST fields.
      *
      * @param array $args
      * @return static
