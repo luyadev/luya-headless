@@ -20,7 +20,6 @@ class AbstractActiveEndpointCachingFailuresTest extends HeadlessTestCase
     public function testFindTokenWithCacheWhichIsDisabled()
     {
         $client = $this->createDummyClient('{"id":1}');
-        $this->expectException('luya\headless\Exception');
         $data = TestActiveEndpoint::testTokenUrl(123)->setCache(3600)->response($client);
         $this->assertSame(['id' => 1], $data->getContent());
     }
