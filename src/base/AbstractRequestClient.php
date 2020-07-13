@@ -317,11 +317,23 @@ abstract class AbstractRequestClient
         $this->_cacheConfig = [$key, $ttl];
     }
 
+    /**
+     * Returns the key for the caching.
+     *
+     * @return string|boolean If caching is enabled, the key which will be used to cache will be returned.
+     * @since 2.6.0
+     */
     public function getCacheKey()
     {
         return $this->isCachingEnabled() ? $this->_cacheConfig[0] : false;
     }
 
+    /**
+     * Returns the time to life for the caching.
+     *
+     * @return integer|boolean If caching is enabled, the TTL value is returned.
+     * @since 2.6.0
+     */
     public function getCacheTtl()
     {
         return $this->isCachingEnabled() ? $this->_cacheConfig[1] : false;
