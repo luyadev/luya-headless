@@ -4,7 +4,6 @@ namespace luya\headless\tests\base;
 
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\ActiveEndpoint;
-use luya\headless\cache\DynamicValue;
 
 final class TestActiveEndpoint extends ActiveEndpoint
 {
