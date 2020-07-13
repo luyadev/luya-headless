@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.6.0
 
-+ [#]()
++ [#29](https://github.com/luyadev/luya-headless/pull/29)
 
 ## 2.5.0 (3. March 2020)
 
