@@ -5,6 +5,8 @@ namespace luya\headless\tests\base;
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\tests\data\DummySimpleCache;
 use luya\headless\cache\DynamicValue;
+use luya\headless\Client;
+use luya\headless\Endpoint;
 
 class AbstractActiveEndpointCachingTest extends HeadlessTestCase
 {
@@ -71,4 +73,32 @@ class AbstractActiveEndpointCachingTest extends HeadlessTestCase
             ['foo', 'foo' => new DynamicValue(123), 'sub' => [new DynamicValue('1234')]]
         ]));
     }
-}
+
+    public function testRequestWithDummyCachingEnabled()
+    {
+        $client = new Client(null, 'https://jsonplaceholder.typicode.com');
+        $client->setCache(new DummySimpleCache());
+        
+        $class = new class() extends Endpoint {
+            public function getEndpointName()
+            {
+                return 'todos/1';
+            }
+        };
+
+        $run1 = $class->get()->setCache(30)->response($client);
+
+        $this->assertSame([
+            'userId' => 1,
+            'id' => 1,
+            'title' => 'delectus aut autem',
+            'completed' => false,
+        ], $run1->getContent());
+
+        $this->assertFalse($run1->requestClient->getIsCached());
+
+        $run2 = $class->get()->setCache(30)->response($client);
+
+        $this->assertTrue($run2->requestClient->getIsCached());
+    }
+} 
