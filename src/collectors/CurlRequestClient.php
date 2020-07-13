@@ -34,8 +34,27 @@ class CurlRequestClient extends AbstractRequestClient
      */
     public function internalGet()
     {
-        $this->curl = $this->getCurl()->get($this->getRequestUrl());
-        
+        if ($this->allowCaching()) {
+            $json = $this->getOrSetCache($this->getCacheKey(), $this->getCacheTtl(), function() {
+                $curl = $this->getCurl()->get($this->getRequestUrl());
+                return json_encode([
+                    'http_status_code' => $curl->http_status_code,
+                    'request_headers' => $curl->request_headers,
+                    'response_headers' => $curl->response_headers,
+                    'response' => $curl->response
+                ]);
+            });
+
+            $jsonArray = json_decode($json, true);
+
+            $this->curl = new Curl;
+            $this->curl->http_status_code = $jsonArray['http_status_code'];
+            $this->curl->request_headers = $jsonArray['request_headers'];
+            $this->curl->response_headers = $jsonArray['response_headers'];
+            $this->curl->response = $jsonArray['response'];
+        } else {
+            $this->curl = $this->getCurl()->get($this->getRequestUrl());
+        }
         return $this;
     }
     

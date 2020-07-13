@@ -16,12 +16,18 @@ class AfterRequestEvent
     public $content;
     public $type;
 
-    public function __construct($url, array $data, $statusCode, $content, $type)
+    /**
+     * @var AbstractRequestClient
+     */
+    public $requestClient;
+
+    public function __construct($url, array $data, $statusCode, $content, $type, AbstractRequestClient $requestClient)
     {
         $this->url = $url;
         $this->data = $data;
         $this->statusCode = $statusCode;
         $this->content = $content;
         $this->type = $type;
+        $this->requestClient = $requestClient;
     }
 }

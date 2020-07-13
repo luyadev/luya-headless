@@ -188,7 +188,7 @@ abstract class AbstractRequestClient
     protected function callAfterRequestEvent(array $data, $type)
     {
         if ($this->client->getAfterRequestEvent()) {
-            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent(), $type)]);
+            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent(), $type, $this)]);
         }
     }
     
@@ -302,6 +302,40 @@ abstract class AbstractRequestClient
                 throw new RequestException(sprintf('Unable to find API "%s". Invalid endpoint name or serverUrl.', $this->getRequestUrl()));
         }
     }
+
+    private $_cacheConfig = false;
+
+    public function cacheContent($key, $ttl)
+    {
+        $this->_cacheConfig = [$key, $ttl];
+    }
+
+    public function allowCaching()
+    {
+        return $this->_cacheConfig !== false;
+    }
+
+    private $_isCached = false;
+
+    public function getIsCached()
+    {
+        return $this->_isCached;
+    }
+    
+    public function setIsCached()
+    {
+        $this->_isCached = true;
+    }
+
+    public function getCacheKey()
+    {
+        return $this->_cacheConfig[0];
+    }
+
+    public function getCacheTtl()
+    {
+        return $this->_cacheConfig[1];
+    }
     
     /**
      * Get an existing key, or set a new value for the given cache key.
@@ -322,16 +356,14 @@ abstract class AbstractRequestClient
         $content = $cache->get($key, false);
 
         if ($content !== false) {
+            $this->setIsCached();
             return $content;
         }
         
         $content = call_user_func($fn);
         
-        // only cache the response if the request was successfull
-        if ($this->isSuccess()) {
-            if (!$cache->set($key, $content, $ttl)) {
-                throw new Exception("Unable to store the cache content for key '{$key}'.");
-            }
+        if (!$cache->set($key, $content, $ttl)) {
+            throw new Exception("Unable to store the cache content for key '{$key}'.");
         }
         
         return $content;
