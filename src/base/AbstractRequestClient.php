@@ -305,36 +305,60 @@ abstract class AbstractRequestClient
 
     private $_cacheConfig = false;
 
-    public function cacheContent($key, $ttl)
+    /**
+     * Enable caching for this request with a given key and ttl.
+     *
+     * @param string $key
+     * @param initeger $ttl
+     * @since 2.6.0
+     */
+    public function enableCaching($key, $ttl)
     {
         $this->_cacheConfig = [$key, $ttl];
     }
 
-    public function allowCaching()
+    public function getCacheKey()
+    {
+        return $this->isCachingEnabled() ? $this->_cacheConfig[0] : false;
+    }
+
+    public function getCacheTtl()
+    {
+        return $this->isCachingEnabled() ? $this->_cacheConfig[1] : false;
+    }
+
+    /**
+     * Determines whether the current request can be cached or not
+     *
+     * @return boolean
+     * @since 2.6.0
+     */
+    public function isCachingEnabled()
     {
         return $this->_cacheConfig !== false;
     }
 
     private $_isCached = false;
 
+    /**
+     * Returns the status whether the current request has been cached or not
+     *
+     * @return integer
+     * @since 2.6.0
+     */
     public function getIsCached()
     {
         return $this->_isCached;
     }
     
+    /**
+     * Set the status of this request as cached.
+     *
+     * @since 2.6.0
+     */
     public function setIsCached()
     {
         $this->_isCached = true;
-    }
-
-    public function getCacheKey()
-    {
-        return $this->_cacheConfig[0];
-    }
-
-    public function getCacheTtl()
-    {
-        return $this->_cacheConfig[1];
     }
     
     /**

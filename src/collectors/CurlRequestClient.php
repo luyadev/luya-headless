@@ -34,7 +34,7 @@ class CurlRequestClient extends AbstractRequestClient
      */
     public function internalGet()
     {
-        if ($this->allowCaching()) {
+        if ($this->isCachingEnabled()) {
             $json = $this->getOrSetCache($this->getCacheKey(), $this->getCacheTtl(), function() {
                 $curl = $this->getCurl()->get($this->getRequestUrl());
                 return json_encode([

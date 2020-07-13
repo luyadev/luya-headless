@@ -62,7 +62,7 @@ abstract class AbstractEndpointRequest
             $cacheKey = $this->_cacheIdentifier ? $this->_cacheIdentifier : Client::cacheKey([$client->cachePrefix, $this->getEndpoint(), $this->_args, $client->language]);
            
             // set the information to the request client that caching is enabled for the given ttl with this key
-            $requestClient->cacheContent($cacheKey, $client->applyCacheTimeAnomaly($this->getCache()));
+            $requestClient->enableCaching($cacheKey, $client->applyCacheTimeAnomaly($this->getCache()));
         }
         
         return $this->createResponse($requestClient);

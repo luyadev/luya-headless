@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.6.0
+
++ [#]()
+
 ## 2.5.0 (3. March 2020)
 
 + [#27](https://github.com/luyadev/luya-headless/issues/27) New sort() method for BaseIterator objects.
