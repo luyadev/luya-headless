@@ -7,7 +7,7 @@
 A client library to access content from the LUYA APIs (or any other REST API).
 
 [![LUYA](https://img.shields.io/badge/Powered%20by-LUYA-brightgreen.svg)](https://luya.io)
-[![Build Status](https://travis-ci.org/luyadev/luya-headless.svg?branch=master)](https://travis-ci.org/luyadev/luya-headless)
+![Tests](https://github.com/luyadev/luya-headless/workflows/Tests/badge.svg)
 [![Latest Stable Version](https://poser.pugx.org/luyadev/luya-headless/v/stable)](https://packagist.org/packages/luyadev/luya-headless)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c83c8a7c8d69f46a5e88/maintainability)](https://codeclimate.com/github/luyadev/luya-headless/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c83c8a7c8d69f46a5e88/test_coverage)](https://codeclimate.com/github/luyadev/luya-headless/test_coverage)
