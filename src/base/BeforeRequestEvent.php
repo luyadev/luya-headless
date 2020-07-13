@@ -14,6 +14,13 @@ class BeforeRequestEvent
     public $data;
     public $type;
 
+    /**
+     * Constructor
+     *
+     * @param string $url
+     * @param array $data
+     * @param string $type
+     */
     public function __construct($url, array $data, $type)
     {
         $this->url = $url;

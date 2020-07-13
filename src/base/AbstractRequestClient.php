@@ -188,7 +188,7 @@ abstract class AbstractRequestClient
     protected function callAfterRequestEvent(array $data, $type)
     {
         if ($this->client->getAfterRequestEvent()) {
-            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent(), $type)]);
+            call_user_func_array($this->client->getAfterRequestEvent(), [new AfterRequestEvent($this->getRequestUrl(), $data, $this->getResponseStatusCode(), $this->getResponseRawContent(), $type, $this)]);
         }
     }
     
@@ -302,6 +302,76 @@ abstract class AbstractRequestClient
                 throw new RequestException(sprintf('Unable to find API "%s". Invalid endpoint name or serverUrl.', $this->getRequestUrl()));
         }
     }
+
+    private $_cacheConfig = false;
+
+    /**
+     * Enable caching for this request with a given key and ttl.
+     *
+     * @param string $key
+     * @param initeger $ttl
+     * @since 2.6.0
+     */
+    public function enableCaching($key, $ttl)
+    {
+        $this->_cacheConfig = [$key, $ttl];
+    }
+
+    /**
+     * Returns the key for the caching.
+     *
+     * @return string|boolean If caching is enabled, the key which will be used to cache will be returned.
+     * @since 2.6.0
+     */
+    public function getCacheKey()
+    {
+        return $this->isCachingEnabled() ? $this->_cacheConfig[0] : false;
+    }
+
+    /**
+     * Returns the time to life for the caching.
+     *
+     * @return integer|boolean If caching is enabled, the TTL value is returned.
+     * @since 2.6.0
+     */
+    public function getCacheTtl()
+    {
+        return $this->isCachingEnabled() ? $this->_cacheConfig[1] : false;
+    }
+
+    /**
+     * Determines whether the current request can be cached or not
+     *
+     * @return boolean
+     * @since 2.6.0
+     */
+    public function isCachingEnabled()
+    {
+        return $this->_cacheConfig !== false;
+    }
+
+    private $_isCached = false;
+
+    /**
+     * Returns the status whether the current request has been cached or not
+     *
+     * @return integer
+     * @since 2.6.0
+     */
+    public function getIsCached()
+    {
+        return $this->_isCached;
+    }
+    
+    /**
+     * Set the status of this request as cached.
+     *
+     * @since 2.6.0
+     */
+    public function setIsCached()
+    {
+        $this->_isCached = true;
+    }
     
     /**
      * Get an existing key, or set a new value for the given cache key.
@@ -322,16 +392,14 @@ abstract class AbstractRequestClient
         $content = $cache->get($key, false);
 
         if ($content !== false) {
+            $this->setIsCached();
             return $content;
         }
         
         $content = call_user_func($fn);
         
-        // only cache the response if the request was successfull
-        if ($this->isSuccess()) {
-            if (!$cache->set($key, $content, $ttl)) {
-                throw new Exception("Unable to store the cache content for key '{$key}'.");
-            }
+        if (!$cache->set($key, $content, $ttl)) {
+            throw new Exception("Unable to store the cache content for key '{$key}'.");
         }
         
         return $content;
