@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.6.0
+## 2.6.0 (14. July 2020)
 
-+ [#29](https://github.com/luyadev/luya-headless/pull/29) Refactoring of the caching system. The CURL collection class serializes the response into a json and stores this information in the cache. The previous version stored the full PHP class object which might lead into errors when working with memcached servers. 
++ [#29](https://github.com/luyadev/luya-headless/pull/29) Refactoring of the caching system. The CURL collection class serializes the response into a json and stores this information in the cache. The previous version stored the full PHP class object which can lead into errors when working with memcached servers or other PSR16 cache implementations.
 
 ## 2.5.0 (3. March 2020)
 
