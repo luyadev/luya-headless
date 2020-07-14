@@ -12,7 +12,6 @@ A client library to access content from the LUYA APIs (or any other REST API).
 [![Maintainability](https://api.codeclimate.com/v1/badges/c83c8a7c8d69f46a5e88/maintainability)](https://codeclimate.com/github/luyadev/luya-headless/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c83c8a7c8d69f46a5e88/test_coverage)](https://codeclimate.com/github/luyadev/luya-headless/test_coverage)
 [![Total Downloads](https://poser.pugx.org/luyadev/luya-headless/downloads)](https://packagist.org/packages/luyadev/luya-headless)
-[![Slack Support](https://img.shields.io/badge/Slack-luyadev-yellowgreen.svg)](https://slack.luya.io/)
 
 ## Installation
 
