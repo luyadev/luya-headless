@@ -22,8 +22,8 @@ class ApiStorageFile extends ActiveEndpoint
     public $is_hidden;
     public $folder_id;
     public $name_original;
-    public $new_new;
-    public $new_new_compound;
+    public $name_new;
+    public $name_new_compound;
     public $mime_type;
     public $extension;
     public $hash_file;
