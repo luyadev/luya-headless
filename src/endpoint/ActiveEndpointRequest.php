@@ -23,7 +23,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
      * By default the data will be indexed by the {{luya\headless\ActiveEndpoint::getPrimaryKeys()}}. In order to index by another
      * column its possible to provide `indexBy(attributeName)` where attributeName is a propertie inside the requested ActiveEndpoint Model.
      *
-     * @param string $attributeName
+     * @param string $attributeName The attribute name which should be taken as index (assoc key) for the array.
      * @return static
      * @since 2.7.0
      */
