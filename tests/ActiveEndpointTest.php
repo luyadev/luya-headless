@@ -4,6 +4,8 @@ namespace luya\headless\tests;
 
 use luya\headless\tests\HeadlessTestCase;
 use luya\headless\ActiveEndpoint;
+use luya\headless\Client;
+use luya\headless\tests\data\DummyJsonplaceholderUsers;
 
 class ActiveEndpointTest extends HeadlessTestCase
 {
@@ -244,6 +246,21 @@ class ActiveEndpointTest extends HeadlessTestCase
         $this->assertSame(1, $providerOne->getPreviousPageId());
         $this->assertTrue($providerOne->isFirstPage());
         $this->assertFalse($providerOne->isLastPage());
+    }
+
+    public function testIndexBy()
+    {   
+        $client = new Client(null, 'https://jsonplaceholder.typicode.com');
+
+        $data = DummyJsonplaceholderUsers::findAll($client);
+
+        $this->assertArrayHasKey(9, iterator_to_array($data->getModels()));
+
+        $indexBy = DummyJsonplaceholderUsers::find()->indexBy('username')->all($client);
+
+        $keys = iterator_to_array($indexBy->getModels());
+
+        $this->assertArrayHasKey('Moriah.Stanton', $keys);
     }
 }
 

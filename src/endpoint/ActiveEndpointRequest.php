@@ -6,7 +6,6 @@ use luya\headless\base\BaseIterator;
 use luya\headless\Client;
 use luya\headless\base\AbstractRequestClient;
 use luya\headless\base\AbstractEndpointRequest;
-use luya\headless\exceptions\ResponseException;
 
 /**
  * Active Endpoint Request.
@@ -16,6 +15,24 @@ use luya\headless\exceptions\ResponseException;
  */
 class ActiveEndpointRequest extends AbstractEndpointRequest
 {
+    private $_indexBy;
+
+    /**
+     * Index by Colum Name
+     * 
+     * By default the data will be indexed by the {{luya\headless\ActiveEndpoint::getPrimaryKeys()}}. In order to index by another
+     * column its possible to provide `indexBy(attributeName)` where attributeName is a propertie inside the requested ActiveEndpoint Model.
+     *
+     * @param string $attributeName
+     * @return static
+     * @since 2.7.0
+     */
+    public function indexBy($attributeName)
+    {
+        $this->_indexBy = $attributeName;
+        return $this;
+    }
+    
     /**
      * Response trough get request.
      *
@@ -46,7 +63,7 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
             $models = [];
         }
         
-        $models = BaseIterator::create(get_class($this->getEndpointObject()), $models, $response->endpoint->getPrimaryKeys(), false);
+        $models = BaseIterator::create(get_class($this->getEndpointObject()), $models, $this->_indexBy ? $this->_indexBy : $response->endpoint->getPrimaryKeys(), false);
         
         return new ActiveEndpointResponse($response, $models);
     }
