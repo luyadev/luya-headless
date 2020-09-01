@@ -150,6 +150,10 @@ if ($model) {
 }
 ```
 
+## Index By
+
+When workin with the Active Endpoint the data is index by its primary key column defintion stored in {{luya\headless\ActiveEndpoint::getPrimaryKeys()}} in order to override the attribute which should be index by use `indexBy()`.
+
 ## Custom View Endpoint
 
 Assuming you have a view endpoint which is `blog/preview/<ID>` which is different to the default view configuration `blog/<ID>` then you can create a customized view method:
