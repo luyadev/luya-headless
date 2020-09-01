@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.7.0 (1. September 2020)
+
++ [#30](https://github.com/luyadev/luya-headless/pull/30) Added new `indexBy()` method to override primary key defintion while query data.
+
 ## 2.6.1 (13. August 2020)
 
 + Fixed an issue where storage file attributes where wrong declared `new_new` instead of `new_file` and `new_new_compound` instead of `name_new_compound`.
