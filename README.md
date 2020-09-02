@@ -54,7 +54,7 @@ $car->year = 2019;
 $car->save($client);
 
 // find a given user by its ID
-$car = ApiCars::findOne(1, $client);
+$car = ApiCars::viewOne(1, $client);
 echo $car->name; // BMW
 echo $car->year; // 2019
 
