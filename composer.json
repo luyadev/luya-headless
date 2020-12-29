@@ -28,5 +28,16 @@
     },
     "suggest": {
         "symfony/cache" : "A very fast PSR-16 caching library easy to setup for caching API responses."
-    }
+    },
+    "config": {
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

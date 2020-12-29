@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.8.0
+
++ [#32](https://github.com/luyadev/luya-headless/pull/32) Unit tests for PHP 8.0 and 7.0
+
 ## 2.7.0 (1. September 2020)
 
 + [#30](https://github.com/luyadev/luya-headless/pull/30) Added new `indexBy()` method to override primary key defintion while query data.
