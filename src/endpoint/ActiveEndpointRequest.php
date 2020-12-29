@@ -72,19 +72,21 @@ class ActiveEndpointRequest extends AbstractEndpointRequest
      * Iteratrs trough all pages and returns an arry with the models.
      *
      * @param Client $client
+     * @param integer $perPage The amount of items which can be loaded per requests, this is commonly limited on the api side. If you are
+     * aware of the max limit this value can be increased.
      * @return static
      */
-    public function allPages(Client $client)
+    public function allPages(Client $client, $perPage = 50)
     {
         $data = [];
-        $first = $this->setPerPage(50)->all($client);
+        $first = $this->setPerPage($perPage)->all($client);
         foreach ($first->getModels() as $key => $model) {
             $data[$key] = $model;
         }
         
         $start = $first->getCurrentPage() + 1;
         for ($i=$start; $i<=$first->getPageCount(); $i++) {
-            $find = $this->setPage($i)->setPerPage(50)->all($client);
+            $find = $this->setPage($i)->setPerPage($perPage)->all($client);
             foreach ($find->getModels() as $key => $model) {
                 $data[$key] = $model;
             }
