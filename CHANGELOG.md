@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.8.0
+## 2.8.0 (29. December 2020)
 
 + [#33](https://github.com/luyadev/luya-headless/pull/33) Option to provide the `per-page` value when retrieving all pages with method `allPages(Client $client, $perPage = 50)`.
 + [#32](https://github.com/luyadev/luya-headless/pull/32) Prepared unit tests for PHP 8.0 and 7.0
