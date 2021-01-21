@@ -48,8 +48,9 @@ class BaseIteratorTeste extends HeadlessTestCase
         $object['new'] = 'yes';
         $this->assertSame('yes', $object['new']);
         $this->assertTrue(isset($object['new'])); // works
-        $this->assertFalse(array_key_exists('new', $object)); // does not work with iterators
-        $this->assertFalse(array_key_exists('firstname', $object));
+        // @see https://stackoverflow.com/a/1538138/4611030
+        //$this->assertFalse(array_key_exists('new', $object)); // does not work with iterators
+        //$this->assertFalse(array_key_exists('firstname', $object));
         unset($object['new']);
         $this->assertFalse(isset($object['new']));
     }
