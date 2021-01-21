@@ -65,7 +65,11 @@ class DummyRequestClient extends AbstractRequestClient
      */
     public function getResponseStatusCode()
     {
-        return $this->success ? $this->statusCode ?: 200 : $this->statusCode ?: 500;
+        if ($this->success) {
+            return $this->statusCode ?: 200;
+        }
+        
+        return $this->statusCode ?: 500;
     }
     
     /**
