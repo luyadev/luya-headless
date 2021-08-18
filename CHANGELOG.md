@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.8.1 (18. August 2021)
+
++ Replace static calls with `static` instead of `self` in order to override the default behavior in final classes.
+
 ## 2.8.0 (29. December 2020)
 
 + [#33](https://github.com/luyadev/luya-headless/pull/33) Option to provide the `per-page` value when retrieving all pages with method `allPages(Client $client, $perPage = 50)`.
