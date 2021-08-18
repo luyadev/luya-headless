@@ -298,9 +298,9 @@ class ActiveEndpoint extends Endpoint
         }
         
         if ($this->isNewRecord) {
-            $request = self::insert($values);
+            $request = static::insert($values);
         } else {
-            $request = self::update($this->getPrimaryKeyValue(), $values);
+            $request = static::update($this->getPrimaryKeyValue(), $values);
         }
         $response = $request->response($client);
 
@@ -326,7 +326,7 @@ class ActiveEndpoint extends Endpoint
      */
     public function erase(Client $client)
     {
-        return self::remove($this->getPrimaryKeyValue())->response($client)->isSuccess();
+        return static::remove($this->getPrimaryKeyValue())->response($client)->isSuccess();
     }    
     
     /**
@@ -353,7 +353,7 @@ class ActiveEndpoint extends Endpoint
      */
     public function reload(Client $client, array $expand = [])
     {
-        $reload = self::view($this->getPrimaryKeyValue())->setExpand($expand)->response($client);
+        $reload = static::view($this->getPrimaryKeyValue())->setExpand($expand)->response($client);
 
         $this->refresh($reload->getContent());
     }
