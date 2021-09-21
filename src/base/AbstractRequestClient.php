@@ -404,4 +404,19 @@ abstract class AbstractRequestClient
         
         return $content;
     }
+
+    /**
+     * Delete certain key fro mcache
+     *
+     * @param string $key
+     * @since 2.9.0
+     */
+    public function deleteCache($key)
+    {
+        $cache = $this->client->getCache();
+
+        if ($cache) {
+            $cache->delete($key);
+        }
+    }
 }
