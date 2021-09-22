@@ -97,8 +97,10 @@ class AbstractActiveEndpointCachingTest extends HeadlessTestCase
 
         $this->assertFalse($run1->requestClient->getIsCached());
 
-        $run2 = $class->get()->setCache(30)->response($client);
+        $run2 = $class->get()->setCache(30, 'foobar')->response($client);
 
         $this->assertTrue($run2->requestClient->getIsCached());
+
+        $run2->requestClient->deleteCache('foobar');
     }
 } 

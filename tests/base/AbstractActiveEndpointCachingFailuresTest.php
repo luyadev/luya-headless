@@ -26,8 +26,7 @@ class AbstractActiveEndpointCachingFailuresTest extends HeadlessTestCase
         $cache->setReturn = false;
         $client->setCache($cache);
         $this->expectException(Exception::class);
-        $data = TestActiveEndpoint::testTokenUrl(123)->setCache(3600, 'foobar')->response($client);
+        $data = TestActiveEndpoint::testTokenUrl(123)->setCache(3600)->response($client);
         $this->assertSame(['id' => 1], $data->getContent());
-        $delete = $data->response->requestClient->deleteCache('foobar');
     }
 }
