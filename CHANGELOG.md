@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.9.0 (22. September 2021)
+
++ [#35](https://github.com/luyadev/luya-headless/pull/35) Added strict caching property which is by default enabled. Strict cache will only cache data which are from status 200 response code.
+
 ## 2.8.1 (18. August 2021)
 
 + Replace static calls with `static` instead of `self` in order to override the default behavior in final classes.
