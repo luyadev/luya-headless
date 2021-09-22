@@ -45,7 +45,7 @@ class CurlRequestClient extends AbstractRequestClient
                 ];
             });
 
-            $jsonArray = is_array($json) ? $json: json_decode($json, true);
+            $jsonArray = is_array($json) ? $json : json_decode($json, true);
 
             $this->curl = new Curl;
             $this->curl->http_status_code = $jsonArray['http_status_code'];
