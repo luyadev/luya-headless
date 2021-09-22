@@ -37,14 +37,6 @@ class CurlRequestClient extends AbstractRequestClient
         if ($this->isCachingEnabled()) {
             $json = $this->getOrSetCache($this->getCacheKey(), $this->getCacheTtl(), function() {
                 $curl = $this->getCurl()->get($this->getRequestUrl());
-
-                if (!$curl->isSuccess()) {
-                    // remove the cache value for the given key if status is not 200
-                    // otherwise it can happen that 404 api requests are cached, or
-                    // event 500 status code response
-                    $this->deleteCache($this->getCacheKey());
-                }
-                
                 return json_encode([
                     'http_status_code' => $curl->http_status_code,
                     'request_headers' => $curl->request_headers,
