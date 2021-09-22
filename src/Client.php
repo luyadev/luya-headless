@@ -70,10 +70,10 @@ class Client
     public $cachePrefix;
 
     /**
-     * @var boolean If enabled only requests with status code <= 200 && >= 300 are cached.
+     * @var boolean If enabled only requests with status code 200 are cached. Anything else won't be cached!
      * @since 2.9.0
      */
-    public $cacheOnlySuccess = true;
+    public $strictCache = true;
 
     /**
      *

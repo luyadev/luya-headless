@@ -401,7 +401,7 @@ abstract class AbstractRequestClient
         
         // if status code is not 200, the response will not be cached if enaled.
         // otherwise it can happen that errors from the api will be cached for a long time.
-        if ($this->client->cacheOnlySuccess && $content['http_status_code'] !== 200) {
+        if ($this->client->strictCache && $content['http_status_code'] !== 200) {
             return $content;
         }
 
