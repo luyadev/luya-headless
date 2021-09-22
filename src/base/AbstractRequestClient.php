@@ -381,7 +381,7 @@ abstract class AbstractRequestClient
      * @param callable $fn The function which evaluates the content. The callable must return an array with: http_status_code, request_headers, response_headers, response
      * @return mixed
      */
-    public function getOrSetCache($key, $ttl, callable $fn)
+    protected function getOrSetCache($key, $ttl, callable $fn)
     {
         $cache = $this->client->getCache();
         
@@ -405,7 +405,7 @@ abstract class AbstractRequestClient
             return $content;
         }
 
-        if (!$cache->set($key, $content, $ttl)) {
+        if (!$cache->set($key, json_encode($content), $ttl)) {
             throw new Exception("Unable to store the cache content for key '{$key}'.");
         }
         
