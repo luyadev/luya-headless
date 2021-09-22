@@ -70,6 +70,12 @@ class Client
     public $cachePrefix;
 
     /**
+     * @var boolean If enabled only requests with status code 200 are cached. Anything else won't be cached!
+     * @since 2.9.0
+     */
+    public $strictCache = true;
+
+    /**
      *
      * @param string $accessToken
      * @param string $serverUrl Path to the webserver WITHOUT `admin`. Assuming your admin is accessable under `https://luya.io/admin` then the serverUrl would be `https://luya.io`.

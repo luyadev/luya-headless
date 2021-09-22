@@ -378,10 +378,10 @@ abstract class AbstractRequestClient
      *
      * @param array|string $key The cache key. If an array is given it will be parsed and md5 encoded, therefore it won't be possible to encode.
      * @param integer $ttl The number of seconds to store, its common that 0 is infinite.
-     * @param callable $fn The function which evaluates the content.
+     * @param callable $fn The function which evaluates the content. The callable must return an array with: http_status_code, request_headers, response_headers, response
      * @return mixed
      */
-    public function getOrSetCache($key, $ttl, callable $fn)
+    protected function getOrSetCache($key, $ttl, callable $fn)
     {
         $cache = $this->client->getCache();
         
@@ -396,12 +396,34 @@ abstract class AbstractRequestClient
             return $content;
         }
         
+        /** @var array $content The content is always an array with: http_status_code, request_headers, response_headers, response */
         $content = call_user_func($fn);
         
-        if (!$cache->set($key, $content, $ttl)) {
+        // if status code is not 200, the response will not be cached if enaled.
+        // otherwise it can happen that errors from the api will be cached for a long time.
+        if ($this->client->strictCache && $content['http_status_code'] !== 200) {
+            return $content;
+        }
+
+        if (!$cache->set($key, json_encode($content), $ttl)) {
             throw new Exception("Unable to store the cache content for key '{$key}'.");
         }
         
         return $content;
+    }
+
+    /**
+     * Delete certain key fro mcache
+     *
+     * @param string $key
+     * @since 2.9.0
+     */
+    public function deleteCache($key)
+    {
+        $cache = $this->client->getCache();
+
+        if ($cache) {
+            $cache->delete($key);
+        }
     }
 }

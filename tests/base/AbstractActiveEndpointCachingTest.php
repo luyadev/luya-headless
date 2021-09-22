@@ -100,5 +100,57 @@ class AbstractActiveEndpointCachingTest extends HeadlessTestCase
         $run2 = $class->get()->setCache(30)->response($client);
 
         $this->assertTrue($run2->requestClient->getIsCached());
+
+        $run2->requestClient->deleteCache('foobar');
+    }
+
+    public function testCachingOf404Request()
+    {
+        $client = new Client(null, 'https://jsonplaceholder.typicode.com');
+        $client->strictCache = false;
+        $client->setCache(new DummySimpleCache());
+        
+        $class = new class() extends Endpoint {
+            public function getEndpointName()
+            {
+                return 'thisdoesnotexists/1';
+            }
+        };
+
+        try {
+            $run1 = $class->get()->setCache(30)->response($client);
+        } catch (\Exception $e) {
+
+        }
+        $this->assertFalse($run1->requestClient->getIsCached());
+
+        $run2 = $class->get()->setCache(30)->response($client);
+
+        $this->assertTrue($run2->requestClient->getIsCached());
+    }
+
+    public function testCachingOf404RequestWithEnabledDoNotCacheBehavior()
+    {
+        $client = new Client(null, 'https://jsonplaceholder.typicode.com');
+        $client->strictCache = true;
+        $client->setCache(new DummySimpleCache());
+        
+        $class = new class() extends Endpoint {
+            public function getEndpointName()
+            {
+                return 'thisdoesnotexistseither/1';
+            }
+        };
+
+        try {
+            $run1 = $class->get()->setCache(30)->response($client);
+        } catch (\Exception $e) {
+
+        }
+        $this->assertFalse($run1->requestClient->getIsCached());
+
+        $run2 = $class->get()->setCache(30)->response($client);
+
+        $this->assertFalse($run2->requestClient->getIsCached());
     }
 } 
