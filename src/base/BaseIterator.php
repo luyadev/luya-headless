@@ -120,6 +120,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see Countable::count()
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->data);
@@ -131,6 +132,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see Iterator::rewind()
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         return reset($this->data);
@@ -140,11 +142,16 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see Iterator::current()
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->data);
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->data);
@@ -154,6 +161,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see Iterator::next()
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->data);
@@ -163,6 +171,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see Iterator::valid()
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return key($this->data) !== null;
@@ -174,6 +183,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see ArrayAccess::offsetSet()
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->data[$offset] = $value;
@@ -183,6 +193,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see ArrayAccess::offsetExists()
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->data[$offset]);
@@ -192,6 +203,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see ArrayAccess::offsetUnset()
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
@@ -201,6 +213,7 @@ class BaseIterator implements Iterator, Countable, ArrayAccess
      * {@inheritDoc}
      * @see ArrayAccess::offsetGet()
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->data[$offset]) ? $this->data[$offset] : null;

@@ -210,7 +210,7 @@ abstract class AbstractRequestClient
      */
     public function getRequestUrl()
     {
-        $parts = [rtrim($this->client->serverUrl, '/'), $this->client->language, ltrim($this->endpoint, '/')];
+        $parts = [rtrim($this->client->serverUrl, '/'), $this->client->language, ltrim((string) $this->endpoint, '/')];
         
         $url = implode("/", array_filter($parts));
 
