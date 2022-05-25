@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.9.1 (25. May 2022)
+
++ [#38](https://github.com/luyadev/luya-headless/pull/38) PHP 8.1 compatibility
+
 ## 2.9.0 (22. September 2021)
 
 + [#35](https://github.com/luyadev/luya-headless/pull/35) Added strict caching property which is by default enabled. Strict cache will only cache data which are from status 200 response code.
