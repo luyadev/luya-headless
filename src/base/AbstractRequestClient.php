@@ -5,6 +5,7 @@ namespace luya\headless\base;
 use luya\headless\Client;
 use luya\headless\exceptions\RequestException;
 use luya\headless\Exception;
+use luya\helpers\Json;
 
 /**
  * Base Request is used to make the Request to the API.
@@ -405,7 +406,7 @@ abstract class AbstractRequestClient
             return $content;
         }
 
-        if (!$cache->set($key, json_encode($content), $ttl)) {
+        if (!$cache->set($key, Json::encode($content, JSON_INVALID_UTF8_IGNORE | JSON_UNESCAPED_UNICODE), $ttl)) {
             throw new Exception("Unable to store the cache content for key '{$key}'.");
         }
         
