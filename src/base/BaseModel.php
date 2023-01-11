@@ -175,7 +175,7 @@ class BaseModel
      * Note that if the property is not defined, false will be returned.
      * @param string $name the property name or the event name
      * @return bool whether the named property is set (not null).
-     * @see http://php.net/manual/en/function.isset.php
+     * @see https://php.net/manual/en/function.isset.php
      */
     public function __isset($name)
     {

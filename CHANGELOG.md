@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-This project adheres to [Semantic Versioning](http://semver.org/).
+This project adheres to [Semantic Versioning](https://semver.org/).
+
+## 2.10.0 (11. January 2023)
+
++ Dropped support for php 7.0 and 7.1
++ Added json encoding when storing data in cache
 
 ## 2.9.1 (25. May 2022)
 
