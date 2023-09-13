@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## 2.10.1 (13. September 2023)
+
++ Add php 8.3 to testing case
++ Ensure null is not provided in client request url (php 8.1 issue)
+
 ## 2.10.0 (11. January 2023)
 
 + Dropped support for php 7.0 and 7.1
